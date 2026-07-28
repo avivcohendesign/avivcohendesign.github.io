@@ -6,7 +6,7 @@
 <title>Aviv Cohen — Graphic Designer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=Familjen+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=Familjen+Grotesk:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500&display=swap" rel="stylesheet">
 <style>
   @font-face{
     font-family:'Coffee Tea Demo';
@@ -24,6 +24,8 @@
     --blob-a:#4b54e8;   /* blue  */
     --blob-b:#ff4d4d;   /* red   */
     --blob-c:#8a7bff;   /* violet*/
+    --brown:#3c2415;    /* elegant hero ink */
+    --serif:'Playfair Display', serif;
     --display:'Hanken Grotesk', sans-serif;
     --body:'Familjen Grotesk', sans-serif;
     --ease:cubic-bezier(.22,.61,.36,1);
@@ -36,74 +38,31 @@
     min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;
   }
 
-  /* ---------- BLOBS: anchored per-section, scroll WITH the page, gentle drift ---------- */
   .sec-bg{position:absolute;inset:0;z-index:0;pointer-events:none}
   #project .sec-bg{position:fixed;overflow:hidden}
-  .blob{position:absolute;border-radius:50%;filter:blur(80px);will-change:transform}
-
-  .mesh-gradient{position:fixed;inset:-20%;z-index:0;pointer-events:none;
-    background:
-      radial-gradient(at 15% 20%, #eef0ff 0px, transparent 55%),
-      radial-gradient(at 85% 10%, #e6e8fc 0px, transparent 50%),
-      radial-gradient(at 80% 85%, #c7cbf7 0px, transparent 55%),
-      radial-gradient(at 10% 80%, #dadcfa 0px, transparent 55%),
-      radial-gradient(at 50% 50%, #f4f2ee 0px, transparent 60%);
-    background-size:220% 220%;
-    background-repeat:no-repeat;
-    filter:blur(70px) saturate(1.05);
-    opacity:.6;
-    animation:meshMove 9s ease-in-out infinite;
-    will-change:background-position;}
-  @keyframes meshMove{
-    0%{background-position:0% 0%, 100% 0%, 100% 100%, 0% 100%, 50% 50%}
-    20%{background-position:60% 40%, 30% 70%, 40% 20%, 70% 30%, 30% 70%}
-    40%{background-position:100% 70%, 0% 30%, 10% 90%, 90% 10%, 70% 20%}
-    60%{background-position:20% 100%, 80% 60%, 70% 0%, 20% 80%, 10% 60%}
-    80%{background-position:80% 20%, 40% 90%, 90% 50%, 10% 40%, 60% 90%}
-    100%{background-position:0% 0%, 100% 0%, 100% 100%, 0% 100%, 50% 50%}
-  }
-
-  #home .blob.pink{width:34vw;height:34vw;left:-12%;bottom:8%;
-    background:radial-gradient(circle at 50% 50%, var(--blob-b) 0%, rgba(255,77,77,0) 62%);
-    opacity:.55;animation:driftB 30s ease-in-out infinite;}
-
-  #works .blob.blue{width:32vw;height:32vw;right:-8%;top:2%;
-    background:radial-gradient(circle at 50% 50%, var(--blob-a) 0%, rgba(75,84,232,0) 62%);
-    opacity:.45;animation:driftA 30s ease-in-out infinite;}
-  #works .blob.red{width:40vw;height:40vw;left:-6%;top:-14%;
-    background:radial-gradient(circle at 50% 50%, var(--blob-b) 0%, rgba(255,77,77,0) 60%);
-    opacity:.8;animation:driftB 28s ease-in-out infinite;}
-  #works .blob.pink{width:34vw;height:34vw;left:-8%;top:14%;
-    background:radial-gradient(circle at 50% 50%, var(--blob-b) 0%, rgba(255,77,77,0) 62%);
-    opacity:.45;animation:driftB 34s ease-in-out infinite;}
-
-  #project .blob.violet{width:36vw;height:36vw;right:-10%;top:5%;
-    background:radial-gradient(circle at 50% 50%, var(--blob-c) 0%, rgba(138,123,255,0) 62%);
-    opacity:.38;animation:driftA 32s ease-in-out infinite;}
-  #project .blob.pink{width:30vw;height:30vw;left:-6%;top:-8%;
-    background:radial-gradient(circle at 50% 50%, var(--blob-b) 0%, rgba(255,77,77,0) 62%);
-    opacity:.4;animation:driftTitle 7s ease-in-out infinite;}
-  @keyframes driftTitle{0%,100%{transform:translateX(0) scale(1)}
-    50%{transform:translateX(-4%) scale(1.32)}}
-
-  @keyframes driftA{0%,100%{transform:translate(0,0) scale(1)}
-    33%{transform:translate(-3%,2.5%) scale(1.18)}66%{transform:translate(2.5%,-2%) scale(.85)}}
-  @keyframes driftB{0%,100%{transform:translate(0,0) scale(1)}
-    50%{transform:translate(3.5%,-3%) scale(1.22)}}
 
   /* ---------- CHROME (fixed nav + corner labels) ---------- */
   .chrome{transition:opacity .4s var(--ease)}
   body.project-open .chrome{opacity:0;pointer-events:none}
 
-  nav{position:fixed;top:0;left:0;right:0;z-index:30;
-    display:flex;align-items:center;justify-content:space-between;gap:2.1rem;padding:1.4rem 2rem;
-    font-size:1.02rem;letter-spacing:.01em;}
-  nav .links{display:flex;gap:2.1rem}
-  nav a{color:var(--blob-a);text-decoration:none;position:relative;cursor:pointer;transition:opacity .25s;}
-  nav a::after{content:"";position:absolute;left:0;bottom:-4px;height:1.5px;width:0;
-    background:var(--blob-a);transition:width .3s var(--ease);}
-  nav a:hover::after, nav a.active::after{width:100%}
+  nav{position:fixed;top:2.2rem;right:4.6rem;left:auto;z-index:30;
+    display:flex;align-items:flex-start;gap:.9rem;font-family:var(--serif);font-size:1.15rem;letter-spacing:0;}
+  nav .links{display:flex;flex-direction:column;align-items:flex-end;gap:.3rem}
+  nav a{color:var(--ink);text-decoration:none;position:relative;cursor:pointer;
+    transition:opacity .25s;font-style:italic}
+  nav a.active{font-style:normal;font-weight:600}
   nav a:not(.active):hover{opacity:.6}
+  #themeToggle{background:none;border:none;color:var(--ink);cursor:pointer;
+    display:flex;align-items:center;justify-content:center;padding:.3rem;opacity:.85;transition:opacity .2s}
+  #themeToggle:hover{opacity:1}
+  #themeToggle svg{width:19px;height:19px}
+  #themeToggle .icon-moon{display:none}
+  body[data-home-theme="dark"] #themeToggle .icon-sun{display:none}
+  body[data-home-theme="dark"] #themeToggle .icon-moon{display:block}
+  body[data-home-theme="dark"][data-section="home"] nav a,
+  body[data-home-theme="dark"][data-section="works"] nav a,
+  body[data-home-theme="dark"][data-section="home"] #themeToggle,
+  body[data-home-theme="dark"][data-section="works"] #themeToggle{color:#f1efed}
 
 
   body[data-theme="dark"]{
@@ -116,6 +75,15 @@
   body[data-theme="dark"] .card{background:#2a2a2e}
   body[data-theme="dark"] .chrome{transition:opacity .4s var(--ease), color .4s var(--ease)}
 
+  body[data-home-theme="dark"] #home,
+  body[data-home-theme="dark"] #works{
+    --bg:#19191c;
+    --ink:#f1efed;
+    --ink-soft:#b6b6bc;
+    --ink-faint:#7c7c82;
+    --line:rgba(255,255,255,.14);
+  }
+
 
   /* ---------- SECTIONS (one continuous scroll) ---------- */
   main{position:relative;z-index:10;overflow:clip}
@@ -123,53 +91,60 @@
   .sec-inner{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto}
 
   /* HOME */
-  #home{display:flex;align-items:center;justify-content:center;min-height:77vh}
-  .hero-content{position:absolute;top:58%;left:50%;transform:translate(-50%,-50%);
-    z-index:0;text-align:center;pointer-events:none;width:min(680px,92vw)}
-  .hero-title{font-family:'Coffee Tea Demo', var(--display);font-weight:400;color:var(--blob-a);
-    font-size:clamp(2.2rem,6.4vw,5.8rem);white-space:nowrap;letter-spacing:-.01em}
-  .hero-sub{margin-top:1.2rem;font-size:.92rem;line-height:1.55;color:var(--blob-a);
-    max-width:56ch;margin-left:auto;margin-right:auto;opacity:.75}
+  #home{min-height:100vh;padding:4rem 3.5vw 3rem;display:flex;flex-direction:column;justify-content:space-between;
+    background:var(--bg)}
+  .hero-elegant{width:100%;height:100%;display:flex;flex-direction:column;justify-content:space-between;flex:1}
+  .hero-top{position:relative}
+  .hero-serif-title{font-family:var(--serif);font-weight:400;color:var(--ink);
+    font-size:clamp(3.6rem,9.2vw,8.2rem);line-height:1.18;letter-spacing:.01em;margin-left:2.5rem}
+  .hero-icons{position:absolute;top:4.2rem;left:clamp(340px,36vw,620px);
+    display:flex;gap:.6rem;padding:.7rem .9rem}
+  .hero-icons a{color:var(--ink);display:flex;opacity:.85;transition:opacity .2s}
+  .hero-icons a:hover{opacity:1}
+  .hero-icons svg{width:20px;height:20px}
+  .hero-bottom{position:relative;display:flex;align-items:flex-end;justify-content:flex-end;gap:0;margin-top:8rem;width:100%}
+  .hero-portrait{width:min(460px,46vw);height:auto;object-fit:contain;
+    flex:none;margin-bottom:2.2rem;position:relative;z-index:1}
+  .hero-tagline{margin-left:-1.5rem;padding-bottom:2.4rem;position:relative;z-index:2}
+  .tagline-script{display:block;font-family:var(--serif);font-style:italic;font-weight:500;
+    color:var(--ink);font-size:clamp(2rem,4.4vw,3.8rem);letter-spacing:-.01em;margin-bottom:-1rem;margin-left:2rem;
+    transition:opacity .5s var(--ease), transform .5s var(--ease)}
+  .tagline-script.fade{opacity:0;transform:translateY(10px)}
+  .tagline-serif{display:block;font-family:var(--serif);font-weight:700;color:var(--ink);
+    font-size:clamp(4rem,10.5vw,9.5rem);letter-spacing:-.02em;line-height:.9}
+  @media(max-width:880px){
+    #home{padding:6.5rem 1.4rem 3rem}
+    .hero-icons{position:static;margin-top:1rem;width:fit-content}
+    .hero-bottom{flex-direction:column;align-items:flex-start;gap:1rem}
+    .hero-portrait{width:70vw;height:80vw}
+    .hero-tagline{margin-left:0}
+    .tagline-script{margin-left:.5rem}
+  }
 
   /* WORKS */
-  #works .sec-inner{padding:9.8rem 1.5vw 7rem;min-height:100vh;max-width:none;width:auto;margin:0}
-  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-  .card{position:relative;border-radius:10px;overflow:hidden;cursor:pointer;
-    background:#ddd;isolation:isolate;}
-  .card.wide{grid-column:1/-1;aspect-ratio:2/1}
-  .card.sq{aspect-ratio:1/1}
-  .card .thumb{position:absolute;inset:0;transition:transform .9s var(--ease)}
-  video.card-thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-    transition:transform .9s var(--ease)}
-  .card:hover video.card-thumb{transform:scale(1.04)}
-  .card:hover .thumb{transform:scale(1.04)}
-  .card .overlay{position:absolute;top:0;left:0;z-index:2;display:flex;flex-direction:column;
-    padding:1.1rem 1.2rem}
-  .card .cat{color:rgba(255,255,255,.75);font-size:.7rem;letter-spacing:.08em;
-    text-transform:uppercase;margin-bottom:.2rem;text-shadow:0 1px 10px rgba(0,0,0,.4)}
-  .card .title{color:#fff;font-family:var(--body);font-weight:400;font-size:.92rem;
-    text-shadow:0 1px 10px rgba(0,0,0,.4)}
-  .card .yr{position:absolute;top:1.1rem;right:1.2rem;z-index:2;color:rgba(255,255,255,.85);
-    font-size:.78rem;text-shadow:0 1px 10px rgba(0,0,0,.4)}
-
-  /* CONTACT */
-  #contact{min-height:70vh}
-  #contact .blob.blue{width:44vw;height:44vw;left:50%;top:30%;transform:translate(-50%,-50%);
-    background:radial-gradient(circle at 50% 50%, var(--blob-a) 0%, rgba(75,84,232,0) 64%);
-    opacity:.55;animation:breatheContact 8s ease-in-out infinite}
-  @keyframes breatheContact{0%,100%{transform:translate(-50%,-50%) scale(1)}
-    50%{transform:translate(-50%,-50%) scale(1.28)}}
-  #contact .sec-inner{min-height:70vh;display:flex;flex-direction:column;
-    align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 9rem}
-  .contact-title{font-family:var(--display);font-weight:400;color:var(--ink);
-    font-size:clamp(1.8rem,3.6vw,2.8rem);letter-spacing:-.02em;margin-bottom:.9rem}
-  .contact-sub{color:var(--ink-soft);font-size:1.02rem;max-width:40ch;margin-bottom:2.6rem}
-  .contact-icons{display:flex;align-items:center;gap:1.4rem}
-  .contact-icons a{display:flex;align-items:center;justify-content:center;
-    width:58px;height:58px;border-radius:50%;border:1px solid var(--line);
-    color:var(--ink);transition:.3s var(--ease);background:rgba(241,239,237,.6)}
-  .contact-icons a:hover{background:var(--ink);color:var(--bg);border-color:var(--ink);transform:translateY(-3px)}
-  .contact-icons svg{width:22px;height:22px}
+  #works{margin-top:-15rem}
+  #works{background:var(--bg)}
+  #works .sec-inner{padding:9.8rem 1.5vw 7rem;min-height:100vh;max-width:var(--maxw);width:auto;margin:0 auto}
+  .work-list{width:calc(100% + 4vw);margin-left:-2vw;border-top:1px solid var(--ink)}
+  .work-row{position:relative;display:flex;align-items:baseline;gap:2.2rem;color:var(--ink);
+    padding:.65rem 2vw;border-bottom:1px solid var(--ink);cursor:pointer;}
+  .work-cat{font-family:var(--serif);font-style:italic;font-size:1.02rem;
+    color:var(--ink-faint);width:170px;flex:none;text-transform:lowercase;
+    align-self:flex-start;margin-top:-.3rem}
+  .work-title{font-family:var(--serif);font-weight:400;
+    font-size:clamp(1.7rem,3.8vw,3.1rem);letter-spacing:-.01em;transition:opacity .2s var(--ease)}
+  .work-row:hover .work-title{font-style:italic}
+  .work-preview{position:fixed;z-index:40;right:2rem;bottom:2rem;
+    max-width:min(34vw,480px);max-height:min(34vw,460px);width:auto;height:auto;
+    pointer-events:none;display:block;object-fit:contain;opacity:0;
+    transform:translateY(16px);transition:opacity .35s var(--ease), transform .35s var(--ease);
+    box-shadow:0 -10px 50px rgba(20,20,25,.18)}
+  .work-preview.show{opacity:1;transform:translateY(0)}
+  @media(max-width:880px){
+    .work-preview{display:none}
+    .work-cat{width:110px;font-size:.72rem}
+    .work-row{gap:1rem}
+  }
 
   /* ---------- PROJECT OVERLAY ---------- */
   .project-overlay{position:fixed;inset:0;z-index:50;background:var(--bg);
@@ -185,26 +160,26 @@
   .proj-head{margin-bottom:1.6rem}
   .proj-head .cat{color:var(--ink-soft);letter-spacing:.1em;text-transform:uppercase;
     font-size:.82rem;margin-top:.6rem}
-  .proj-head h1{font-family:var(--display);font-weight:500;
+  .proj-head h1{font-family:var(--serif);font-weight:500;
     font-size:clamp(1.3rem,2.2vw,1.9rem);line-height:.98;letter-spacing:-.025em}
 
   /* two-column layout: left text is static, only the right image column scrolls */
   .proj-layout{display:grid;grid-template-columns:minmax(220px,0.8fr) 1.8fr;gap:3rem;
     flex:1;min-height:0}
   .proj-left{display:flex;flex-direction:column;gap:1.6rem;height:100%;
-    overflow-y:auto;padding-bottom:2rem;border-right:1px solid var(--line);padding-right:2.4rem}
+    overflow-y:auto;padding-bottom:2rem;border-right:1px solid var(--ink);padding-right:2.4rem}
   .proj-desc p{font-size:.82rem;line-height:1.5;color:var(--ink);margin-bottom:.9rem;max-width:34ch}
   .proj-desc p.lead{font-family:var(--display);font-size:.95rem;font-weight:400}
   .proj-right{display:flex;flex-direction:column;gap:1.3rem;height:100%;
     overflow-y:auto;padding-bottom:6rem;scrollbar-width:thin;scrollbar-color:var(--ink-faint) transparent}
   .proj-right::-webkit-scrollbar{width:6px}
   .proj-right::-webkit-scrollbar-thumb{background:var(--ink-faint);border-radius:3px}
-  .proj-img{width:100%;border-radius:14px;position:relative;overflow:hidden;flex:none}
+  .proj-img{width:100%;border-radius:0;position:relative;overflow:hidden;flex:none}
   .proj-img.grad{min-height:280px;background-size:cover;background-position:center}
   .proj-img img,.proj-img video{display:block;width:100%;height:auto;
-    object-fit:contain;border-radius:14px}
+    object-fit:contain;border-radius:0}
   .proj-img .compact-video-wrap{display:block;width:fit-content;max-width:100%;
-    margin:0 auto;border-radius:26px;overflow:hidden}
+    margin:0 auto;border-radius:0;overflow:hidden}
   .proj-img .compact-video-wrap video{display:block;width:auto;max-height:72vh;
     height:auto;border-radius:0}
 
@@ -218,40 +193,41 @@
     border-radius:18px;padding:.9rem;scroll-snap-align:start;
     transition:transform .3s var(--ease)}
   .proj-strip img:hover{transform:translateY(-4px) rotate(-2deg)}
-  .next{border-top:1px solid var(--line);padding-top:1.6rem;cursor:pointer;
+  .next{border-top:1px solid var(--ink);padding-top:1.6rem;cursor:pointer;
     display:flex;flex-direction:column;gap:.3rem;transition:.3s;margin-top:auto;flex:none}
   .next:hover{padding-left:.6rem}
   .next .lbl{color:var(--ink-faint);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase}
-  .next .nm{font-family:var(--display);font-weight:500;font-size:clamp(1rem,1.8vw,1.4rem);letter-spacing:-.02em}
+  .next .nm{font-family:var(--serif);font-weight:500;font-size:clamp(1rem,1.8vw,1.4rem);letter-spacing:-.02em}
 
 
   @media(max-width:880px){
-    nav{gap:1.1rem;padding:1.1rem 1.4rem;font-size:.95rem;flex-wrap:wrap}
-    nav .links{gap:1.3rem}
+    nav{top:1.2rem;right:1.4rem;font-size:.9rem}
+    nav .links{gap:.2rem}
     .grid{grid-template-columns:1fr}
     .card.wide,.card.sq{grid-column:1/-1;aspect-ratio:4/3}
     #project .sec-inner{height:auto;overflow-y:auto}
     .project-overlay{overflow-y:auto}
     .proj-layout{grid-template-columns:1fr;gap:1.8rem;height:auto}
     .proj-left,.proj-right{height:auto;overflow-y:visible}
-    .proj-left{border-right:none;padding-right:0;border-bottom:1px solid var(--line);padding-bottom:1.6rem}
+    .proj-left{border-right:none;padding-right:0;border-bottom:1px solid var(--ink);padding-bottom:1.6rem}
     #works .sec-inner,#project .sec-inner{padding-left:1.4rem;padding-right:1.4rem}
   }
 </style>
 </head>
 <body data-section="home">
 
-  <div class="mesh-gradient"></div>
-
   <!-- fixed chrome -->
   <div class="chrome">
     <nav>
       <div class="links">
         <a data-go="home" class="active">Home</a>
-        <a data-go="works">Works</a>
         <a href="about.html">About</a>
-        <a data-go="contact">Contact</a>
+        <a data-go="works">Works</a>
       </div>
+      <button id="themeToggle" aria-label="Toggle dark mode" type="button">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.5M12 19v2.5M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2.5 12H5M19 12h2.5M4.2 19.8l1.8-1.8M18 6l1.8-1.8"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.4A8.5 8.5 0 1 1 9.6 3.5a7 7 0 0 0 10.9 10.9z"/></svg>
+      </button>
     </nav>
   </div>
 
@@ -259,53 +235,44 @@
     <!-- HOME -->
     <section class="section" id="home">
       <div class="sec-bg"></div>
-      <div class="hero-content">
-        <h1 class="hero-title">Hey, I&rsquo;m Aviv :)</h1>
-        <p class="hero-sub">My name is Aviv, a third-year Visual Communication student at Bezalel Academy. With a lifelong foundation in art and illustration, I&rsquo;ve developed a keen eye for visual language &ndash; now channeling that creative background into Product Design to transform passion into functional, impactful digital experiences.</p>
+      <div class="hero-elegant">
+        <div class="hero-top">
+          <h1 class="hero-serif-title">Hi! I&rsquo;m<br>Aviv Cohen :)</h1>
+          <div class="hero-icons">
+            <a href="about.html" aria-label="CV / Resume">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg>
+            </a>
+            <a href="https://instagram.com/aviv_arts" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://wa.me/972549482244" target="_blank" rel="noopener" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.1-1.1L3.5 20.5l1.2-4.3a8.4 8.4 0 0 1-1.2-4.3c0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5z"/><path d="M8.5 8.8c.1-.5.6-.9 1.1-.9.2 0 .5 0 .7.1.2 0 .4.1.5.4l.7 1.7c.1.2 0 .5-.1.7l-.5.6c-.1.2-.1.4 0 .6.4.8 1.5 1.9 2.3 2.3.2.1.4.1.6 0l.6-.5c.2-.1.5-.2.7-.1l1.7.7c.2.1.4.3.4.5 0 .2.1.5.1.7 0 .5-.4 1-.9 1.1-.4.1-.9.2-1.5 0-1.3-.3-2.7-1.2-3.8-2.3-1.1-1.1-2-2.5-2.3-3.8-.2-.6-.1-1.1 0-1.5z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="hero-bottom">
+          <img class="hero-portrait" id="heroPortrait" src="hero-portrait-light.png" data-light="hero-portrait-light.png" data-dark="hero-portrait-dark.png" alt="Aviv Cohen">
+          <div class="hero-tagline">
+            <span class="tagline-script" id="taglineLoop">Graphic</span>
+            <span class="tagline-serif">designer</span>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- WORKS -->
     <section class="section" id="works">
-      <div class="sec-bg"><div class="blob blue"></div></div>
+      <div class="sec-bg"></div>
       <div class="sec-inner">
-        <div class="grid" id="grid"></div>
+        <div class="work-list" id="grid"></div>
       </div>
     </section>
-
-    <!-- CONTACT -->
-    <section class="section" id="contact">
-      <div class="sec-bg"><div class="blob blue"></div></div>
-      <div class="sec-inner">
-        <div class="contact-title">Let&rsquo;s talk</div>
-        <p class="contact-sub">Got a project in mind, or just want to say hi? Reach out through any of these.</p>
-        <div class="contact-icons">
-          <a href="https://instagram.com/aviv_arts" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="18" height="18" rx="5"/>
-              <circle cx="12" cy="12" r="4.2"/>
-              <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/>
-            </svg>
-          </a>
-          <a href="mailto:avivcohn5467@gmail.com" aria-label="Email">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="5" width="18" height="14" rx="3"/>
-              <path d="M4 7l8 6 8-6"/>
-            </svg>
-          </a>
-          <a href="tel:+972549482244" aria-label="Phone">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M6.6 3.5c.6 0 1.1.4 1.3.9l1 2.7c.2.5 0 1.1-.4 1.5l-1.3 1.2c1 2.2 2.8 4 5 5l1.2-1.3c.4-.4 1-.6 1.5-.4l2.7 1c.5.2.9.7.9 1.3v2.4c0 1-.8 1.8-1.8 1.7-7-.5-12.6-6.1-13.1-13.1C3.5 5.3 4.5 3.5 5.5 3.5z"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-    </section>
+    <img class="work-preview" id="workPreview" alt="">
   </main>
 
   <!-- PROJECT OVERLAY -->
   <div class="project-overlay" id="project">
-    <div class="sec-bg"><div class="blob violet"></div><div class="blob pink"></div></div>
+    <div class="sec-bg"></div>
     <div class="sec-inner">
       <span class="back" id="back">&larr; Back to works</span>
       <div class="proj-layout">
@@ -330,11 +297,6 @@ function thumb(p){
   if(p.img) return `url('${p.img}') center/cover no-repeat`;
   return `linear-gradient(${p.ang||135}deg, ${p.c1}, ${p.c2})`;
 }
-function cardMedia(p){
-  if(p.video) return `<video class="card-thumb" src="${p.video}" poster="${p.img||''}" autoplay muted loop playsinline></video>`;
-  return `<div class="thumb" style="background:${thumb(p)}"></div>`;
-}
-
 const body = document.body;
 document.querySelectorAll('nav a[data-go]').forEach(a=>{
   a.addEventListener('click',()=>{
@@ -353,7 +315,7 @@ const obs = new IntersectionObserver((entries)=>{
     }
   });
 },{rootMargin:'-45% 0px -45% 0px', threshold:0});
-['home','works','contact'].forEach(id=>obs.observe(document.getElementById(id)));
+['home','works'].forEach(id=>obs.observe(document.getElementById(id)));
 
 function setProjImg(el, src, gradient, alt, compact){
   if(src){
@@ -418,7 +380,7 @@ function openProject(id, list){
   overlay.querySelector('.proj-left')?.scrollTo({top:0});
   body.classList.add('project-open');
   body.style.overflow='hidden';
-  if(p.title === 'Prism'){
+  if(p.title === 'Prism' || p.title === 'Maskit.code'){
     body.dataset.theme = 'dark';
   } else {
     delete body.dataset.theme;
@@ -467,17 +429,61 @@ const ALLWORKS = [
    body:['A bold, cropped wordmark letter anchors each issue, printed on a rotating set of loud fluorescent covers.','The stripped-down, photocopy-zine energy carries through typography, layout and the choice of paper stock.']},
 ];
 
+const taglineWords = ['Graphic','UI/UX','Branding','Illustrator'];
+const taglineEl = document.getElementById('taglineLoop');
+if(taglineEl){
+  let taglineIndex = 0;
+  setInterval(()=>{
+    taglineEl.classList.add('fade');
+    setTimeout(()=>{
+      taglineIndex = (taglineIndex + 1) % taglineWords.length;
+      taglineEl.textContent = taglineWords[taglineIndex];
+      taglineEl.classList.remove('fade');
+    }, 500);
+  }, 2200);
+}
+
+/* ---------- HOME THEME TOGGLE (affects only the home page) ---------- */
+let homeTheme = localStorage.getItem('homeTheme');
+const heroPortraitImg = document.getElementById('heroPortrait');
+function applyHeroPortrait(){
+  if(!heroPortraitImg) return;
+  heroPortraitImg.src = homeTheme === 'dark' ? heroPortraitImg.dataset.dark : heroPortraitImg.dataset.light;
+}
+if(homeTheme === 'dark'){ document.body.dataset.homeTheme = 'dark'; }
+applyHeroPortrait();
+const themeToggleBtn = document.getElementById('themeToggle');
+if(themeToggleBtn){
+  themeToggleBtn.addEventListener('click', ()=>{
+    if(document.body.dataset.homeTheme === 'dark'){
+      delete document.body.dataset.homeTheme;
+      homeTheme = 'light';
+    } else {
+      document.body.dataset.homeTheme = 'dark';
+      homeTheme = 'dark';
+    }
+    localStorage.setItem('homeTheme', homeTheme);
+    applyHeroPortrait();
+  });
+}
+
 const grid = document.getElementById('grid');
-const AW_PATTERN = ['wide','sq','sq'];
+const workPreview = document.getElementById('workPreview');
 ALLWORKS.forEach((p,i)=>{
-  const card = document.createElement('div');
-  card.className = 'card '+AW_PATTERN[i % AW_PATTERN.length];
-  card.innerHTML = `
-    ${cardMedia(p)}
-    <span class="yr">${p.year}</span>
-    <div class="overlay"><div class="cat">${p.cat}</div><div class="title">${p.title}</div></div>`;
-  card.addEventListener('click',()=>openProject(i, ALLWORKS));
-  grid.appendChild(card);
+  const row = document.createElement('div');
+  row.className = 'work-row';
+  row.innerHTML = `<span class="work-cat">${p.cat}</span><span class="work-title">${p.title}</span>`;
+  row.addEventListener('click', ()=>openProject(i, ALLWORKS));
+  row.addEventListener('mouseenter', ()=>{
+    if(workPreview && p.img){
+      workPreview.src = p.img;
+      workPreview.classList.add('show');
+    }
+  });
+  row.addEventListener('mouseleave', ()=>{
+    if(workPreview) workPreview.classList.remove('show');
+  });
+  grid.appendChild(row);
 });
 </script>
 </body>

@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=Familjen+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#f1efed;
+    --bg:#ffffff;
     --ink:#2c2c30;
     --ink-soft:#5a5a60;
     --ink-faint:#9a9a9f;
@@ -39,17 +39,6 @@
   nav a:not(.active):hover{opacity:.6}
 
   .sec-bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-  .blob{position:absolute;border-radius:50%;filter:blur(80px);will-change:transform}
-  .blob.red{width:38vw;height:38vw;left:-6%;top:-2%;
-    background:radial-gradient(circle at 50% 50%, var(--blob-b) 0%, rgba(255,77,77,0) 60%);
-    opacity:.8;animation:driftB 28s ease-in-out infinite;}
-  .blob.blue{width:36vw;height:28vh;left:34%;top:-12%;
-    background:radial-gradient(circle at 50% 50%, var(--blob-a) 0%, rgba(75,84,232,0) 64%);
-    opacity:.6;animation:driftA 32s ease-in-out infinite;}
-  @keyframes driftA{0%,100%{transform:translate(0,0) scale(1)}
-    33%{transform:translate(-3%,2.5%) scale(1.18)}66%{transform:translate(2.5%,-2%) scale(.85)}}
-  @keyframes driftB{0%,100%{transform:translate(0,0) scale(1)}
-    50%{transform:translate(3.5%,-3%) scale(1.22)}}
 
   main{position:relative;z-index:10}
   .section{position:relative;min-height:100vh}
@@ -61,7 +50,7 @@
     font-size:clamp(1.8rem,3.6vw,2.8rem);letter-spacing:-.02em;margin-bottom:1.4rem}
   .about-text{font-size:1.02rem;line-height:1.6;color:var(--ink);max-width:46ch}
   .about-text-wrap{display:flex;align-items:flex-start;gap:1.6rem}
-  .about-photo{width:104px;height:130px;object-fit:cover;border-radius:12px;flex:none;
+  .about-photo{width:104px;height:130px;object-fit:cover;border-radius:0;flex:none;
     box-shadow:0 10px 26px rgba(40,40,45,.16);transform:rotate(-3deg);
     transition:transform .4s var(--ease)}
   .about-photo:hover{transform:rotate(0deg) scale(1.03)}
@@ -81,13 +70,13 @@
       <a href="index.html">Home</a>
       <a href="index.html#works">Works</a>
       <a class="active">About</a>
-      <a href="index.html#contact">Contact</a>
+      <a href="index.html">Contact</a>
     </div>
   </nav>
 
   <main>
     <section class="section" id="about">
-      <div class="sec-bg"><div class="blob red"></div><div class="blob blue"></div></div>
+      <div class="sec-bg"></div>
       <div class="sec-inner">
         <div class="about-grid">
           <div>
