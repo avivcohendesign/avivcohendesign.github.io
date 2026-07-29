@@ -16,7 +16,7 @@
     font-display:swap;
   }
   :root{
-    --bg:#f1efed;
+    --bg:#F3F3F3;
     --ink:#2c2c30;
     --ink-soft:#5a5a60;
     --ink-faint:#9a9a9f;
@@ -181,7 +181,13 @@
   .proj-img .compact-video-wrap{display:block;width:fit-content;max-width:100%;
     margin:0 auto;border-radius:0;overflow:hidden}
   .proj-img .compact-video-wrap video{display:block;width:auto;max-height:72vh;
-    height:auto;border-radius:0}
+    height:auto;max-width:100%;border-radius:0}
+  .proj-row.row-mode{display:flex;gap:1rem}
+  .proj-row.row-mode .proj-img{flex:none;width:calc(33.333% - .67rem);min-width:0}
+  @media(max-width:880px){
+    .proj-row.row-mode{flex-direction:column}
+    .proj-row.row-mode .proj-img{width:100%}
+  }
 
   /* cute horizontal-scroll strip of illustrations */
   .proj-strip{display:flex;gap:1.1rem;overflow-x:auto;padding:.6rem .2rem 1.6rem;
@@ -283,9 +289,16 @@
         </div>
         <div class="proj-right">
           <div class="proj-img" id="pHero"></div>
-          <div class="proj-img" id="pg1"></div>
-          <div class="proj-img" id="pg2"></div>
-          <div class="proj-img" id="pg3"></div>
+          <div class="proj-row" id="pRow">
+            <div class="proj-img" id="pg1"></div>
+            <div class="proj-img" id="pg2"></div>
+            <div class="proj-img" id="pg3"></div>
+          </div>
+          <div class="proj-row" id="pRow2">
+            <div class="proj-img" id="pg4"></div>
+            <div class="proj-img" id="pg5"></div>
+            <div class="proj-img" id="pg6"></div>
+          </div>
           <div class="proj-strip" id="pStrip"></div>
         </div>
       </div>
@@ -363,13 +376,31 @@ function openProject(id, list){
   } else if(p.heroImg){
     heroEl.classList.remove('grad');
     heroEl.style.background = 'none';
-    heroEl.innerHTML = `<img src="${p.heroImg}" alt="${p.title}">`;
+    const heroImgStyle = p.heroImgWidth ? ` style="width:${p.heroImgWidth};margin:0 auto"` : '';
+    heroEl.innerHTML = `<img src="${p.heroImg}" alt="${p.title}"${heroImgStyle}>`;
   } else {
     setProjImg(heroEl, p.img, thumb(p), p.title);
   }
   setProjImg(document.getElementById('pg1'), p.img1, `linear-gradient(${(p.ang+40)}deg, ${p.c2}, ${p.c1})`, p.title, p.img1Compact);
-  setProjImg(document.getElementById('pg2'), p.img2, `linear-gradient(${p.ang}deg, ${p.c1}, ${p.c2})`, p.title);
-  setProjImg(document.getElementById('pg3'), p.img3, `radial-gradient(circle at 40% 30%, ${p.c2}, ${p.c1})`, p.title);
+  setProjImg(document.getElementById('pg2'), p.img2, `linear-gradient(${p.ang}deg, ${p.c1}, ${p.c2})`, p.title, p.img2Compact);
+  setProjImg(document.getElementById('pg3'), p.img3, `radial-gradient(circle at 40% 30%, ${p.c2}, ${p.c1})`, p.title, p.img3Compact);
+  const pRow2El = document.getElementById('pRow2');
+  const pg6El = document.getElementById('pg6');
+  if(p.img4 || p.img5 || p.img6){
+    pRow2El.style.display = 'flex';
+    setProjImg(document.getElementById('pg4'), p.img4, `linear-gradient(${(p.ang+40)}deg, ${p.c2}, ${p.c1})`, p.title, p.img4Compact);
+    setProjImg(document.getElementById('pg5'), p.img5, `linear-gradient(${p.ang}deg, ${p.c1}, ${p.c2})`, p.title, p.img5Compact);
+    if(p.img6){
+      pg6El.style.display = '';
+      setProjImg(pg6El, p.img6, `radial-gradient(circle at 40% 30%, ${p.c2}, ${p.c1})`, p.title, p.img6Compact);
+    } else {
+      pg6El.style.display = 'none';
+    }
+    pRow2El.classList.add('row-mode');
+  } else {
+    pRow2El.style.display = 'none';
+  }
+  document.getElementById('pRow').classList.toggle('row-mode', !!p.imgRow);
   const stripEl = document.getElementById('pStrip');
   stripEl.style.display = p.strip ? 'flex' : 'none';
   stripEl.innerHTML = p.strip ? p.strip.map(src=>`<img src="${src}" alt="${p.title}">`).join('') : '';
@@ -401,7 +432,7 @@ const ALLWORKS = [
    img1:'prism-flow.mp4', img2:'prism-promo.mp4',
    lead:'A music collaboration platform where artists drop tracks and fans explore them like a deck of cards.',
    body:['I designed the desktop app end-to-end, from the swipeable drop carousel to the overall dark, studio-inspired visual language.','The interface stays quiet and out of the way, letting the artwork and music take center stage.']},
-  {title:'Kodo', cat:'Visual Identity \u2219 UI/UX', year:'2026', client:'KODO', role:'Brand Identity, Packaging', tools:'Figma, Illustrator', c1:'#5b6cff', c2:'#9aa6ff', ang:130, img:'kodo.jpg', heroImg:'kodo-hero.jpg', img1:'kodo-flow-cropped.mp4', img1Compact:true,
+  {title:'Kodo', cat:'Visual Identity \u2219 UI/UX', year:'2026', client:'KODO', role:'Brand Identity, Packaging', tools:'Figma, Illustrator', c1:'#5b6cff', c2:'#9aa6ff', ang:130, img:'kodo.jpg', heroImg:'kodo-hero.jpg', img1:'kodo-flow-cropped.mp4', img1Compact:true, img2:'kodo.jpg', img3:'kodo-demo-recording.mp4', img3Compact:true,
    strip:['kodo-icon-led.png','kodo-icon-network.png','kodo-icon-screen.png','kodo-icon-button.png','kodo-icon-pi1.png','kodo-icon-pi2.png','kodo-icon-wires.png'],
    lead:'Meet KODO! Where Montessori principles meet the vibecoding and cyber decks of today. Instead of raising more iPad kids, we believe the next generation will be one of creators and visionaries: with the right tools, of course.',
    body:['With KODO, kids set up their own cyber decks and build their own games to play on them, returning a sense of agency and ownership over tech that we haven\u2019t had since the days of retro arcades.','Our vision is for classrooms to be full of students swapping decks and comparing games so screens don\u2019t keep isolating us, but rather bring back creativity and community.']},
@@ -415,7 +446,10 @@ const ALLWORKS = [
   {title:'VOUCH', cat:'UI/UX · App Design · Digital Product', year:'2026', client:'Vouch', role:'Product Design', tools:'Figma', c1:'#e8a68c', c2:'#f2d9c9', ang:150, img:'vouch.jpg',
    lead:'Vouch is a UX/UI design concept for a social habit-building app, developed during an intensive one-week design sprint at UX studio at Bezalel to explore how shared accountability can overcome the limitations of individual discipline.',
    body:['By linking the progress of two partners through a “shared streak” mechanism, the app transforms habit-tracking into a social commitment, featuring a unique “Forgiveness Loop” for missed days and a peer-rating system to foster reliability.','Through user research, rapid wireframing, and a vibrant, emotional interface, Vouch merges psychological insights with intuitive interaction design, turning mundane daily routines into a meaningful and supportive social ritual.']},
-  {title:'Digital Nomads', cat:'Illustration', year:'2023', client:'Editorial', role:'Illustration', tools:'Procreate, Illustrator', c1:'#8ea2ef', c2:'#c7d0f5', ang:120, img:'digital-nomads.jpg',
+  {title:'Digital Nomads', cat:'Digital Illustration', year:'2023', client:'Editorial', role:'Illustration', tools:'Procreate, Illustrator', c1:'#8ea2ef', c2:'#c7d0f5', ang:120, img:'digital-nomads.jpg', heroImg:'digital-nomads-hero.png', heroImgWidth:'85%',
+   img1:'digital-nomads-shot-1.png', img2:'digital-nomads-shot-2.png', img3:'digital-nomads-shot-3.png', imgRow:true,
+   img4:'digital-nomads-shot-4.png', img5:'digital-nomads-shot-5.png', img6:'digital-nomads-shot-6.png',
+   strip:['digital-nomads-strip-1.png','digital-nomads-strip-2.png','digital-nomads-strip-3.png','digital-nomads-strip-4.png','digital-nomads-strip-5.png','digital-nomads-strip-6.png','digital-nomads-strip-7.png'],
    lead:'A flat, friendly illustration series about the new rituals of remote work — laptops, coffee, and shared tables.',
    body:['Bold outlines and a cool blue-and-coral palette give the characters a light, editorial feel.','Built as a flexible cast that can be recomposed across articles, decks and social posts.']},
   {title:'Netflix Dating', cat:'Illustration / Editorial', year:'2025', client:'Netflix', role:'Illustration', tools:'Procreate, Illustrator', c1:'#e0433d', c2:'#f2ded0', ang:135, img:'netflix-dating.jpg',
