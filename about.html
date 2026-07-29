@@ -4,18 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About — Aviv Cohen</title>
+<meta name="description" content="About Aviv Cohen — a Visual Communication student at Bezalel Academy channeling illustration and art into product and graphic design.">
+<meta property="og:title" content="About — Aviv Cohen">
+<meta property="og:description" content="About Aviv Cohen — a Visual Communication student at Bezalel Academy channeling illustration and art into product and graphic design.">
+<meta property="og:image" content="aviv-photo.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=Familjen+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=Familjen+Grotesk:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#ffffff;
+    --bg:#F3F3F3;
     --ink:#2c2c30;
     --ink-soft:#5a5a60;
     --ink-faint:#9a9a9f;
     --line:rgba(40,40,45,.12);
-    --blob-a:#4b54e8;
-    --blob-b:#ff4d4d;
+    --brown:#3c2415;
+    --serif:'Playfair Display', serif;
     --display:'Hanken Grotesk', sans-serif;
     --body:'Familjen Grotesk', sans-serif;
     --ease:cubic-bezier(.22,.61,.36,1);
@@ -28,38 +36,38 @@
     min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;
   }
 
-  nav{position:fixed;top:0;left:0;right:0;z-index:30;
-    display:flex;align-items:center;justify-content:space-between;gap:2.1rem;padding:1.4rem 2rem;
-    font-size:1.02rem;letter-spacing:.01em;}
-  nav .links{display:flex;gap:2.1rem}
-  nav a{color:var(--ink);text-decoration:none;position:relative;cursor:pointer;transition:opacity .25s;}
-  nav a::after{content:"";position:absolute;left:0;bottom:-4px;height:1.5px;width:0;
-    background:var(--ink);transition:width .3s var(--ease);}
-  nav a:hover::after, nav a.active::after{width:100%}
+  nav{position:fixed;top:2.2rem;right:4.6rem;left:auto;z-index:30;
+    display:block;font-family:var(--serif);font-size:1.15rem;letter-spacing:0;}
+  nav .links{display:flex;flex-direction:column;align-items:flex-end;gap:.3rem}
+  nav a{color:var(--ink);text-decoration:none;position:relative;cursor:pointer;
+    transition:opacity .25s;font-style:italic}
+  nav a.active{font-style:normal;font-weight:600}
   nav a:not(.active):hover{opacity:.6}
-
-  .sec-bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 
   main{position:relative;z-index:10}
   .section{position:relative;min-height:100vh}
   .sec-inner{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;
-    min-height:100vh;display:flex;align-items:center;padding:8rem 2rem 5rem}
+    min-height:100vh;display:flex;align-items:center;padding:8rem 3.5vw 5rem}
 
-  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;width:100%;align-items:center}
-  .about-title{font-family:var(--display);font-weight:400;color:var(--ink);
-    font-size:clamp(1.8rem,3.6vw,2.8rem);letter-spacing:-.02em;margin-bottom:1.4rem}
-  .about-text{font-size:1.02rem;line-height:1.6;color:var(--ink);max-width:46ch}
-  .about-text-wrap{display:flex;align-items:flex-start;gap:1.6rem}
-  .about-photo{width:104px;height:130px;object-fit:cover;border-radius:0;flex:none;
-    box-shadow:0 10px 26px rgba(40,40,45,.16);transform:rotate(-3deg);
+  .about-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:4rem;width:100%;align-items:center}
+  .about-title{font-family:var(--serif);font-weight:400;color:var(--ink);
+    font-size:clamp(3rem,7vw,6rem);line-height:1.05;letter-spacing:0;margin-bottom:1.6rem}
+  .about-kicker{font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--ink-faint);
+    margin-bottom:.6rem;display:block}
+  .about-text{font-size:1.05rem;line-height:1.7;color:var(--ink);max-width:46ch}
+  .about-text + .about-text{margin-top:1.1rem}
+  .about-photo-wrap{position:relative}
+  .about-photo{width:100%;max-width:360px;height:440px;object-fit:cover;border-radius:0;
+    box-shadow:0 20px 50px rgba(40,40,45,.16);transform:rotate(-2deg);
     transition:transform .4s var(--ease)}
-  .about-photo:hover{transform:rotate(0deg) scale(1.03)}
+  .about-photo:hover{transform:rotate(0deg) scale(1.02)}
 
   @media(max-width:880px){
-    .about-grid{grid-template-columns:1fr;gap:1.4rem}
-    .about-text-wrap{gap:1.1rem}
-    .about-photo{width:78px;height:98px}
-    .sec-inner{padding-left:1.4rem;padding-right:1.4rem}
+    .about-grid{grid-template-columns:1fr;gap:2rem}
+    .about-photo{height:auto;aspect-ratio:4/5;max-width:280px}
+    .sec-inner{padding:6.5rem 1.4rem 4rem}
+    nav{top:1.2rem;right:1.4rem;font-size:.9rem}
+    nav .links{gap:.2rem}
   }
 </style>
 </head>
@@ -68,23 +76,24 @@
   <nav>
     <div class="links">
       <a href="index.html">Home</a>
-      <a href="index.html#works">Works</a>
       <a class="active">About</a>
-      <a href="index.html">Contact</a>
+      <a href="index.html#works">Works</a>
+      <a href="contact.html">Contact</a>
     </div>
   </nav>
 
   <main>
     <section class="section" id="about">
-      <div class="sec-bg"></div>
       <div class="sec-inner">
         <div class="about-grid">
-          <div>
-            <div class="about-title">About</div>
-          </div>
-          <div class="about-text-wrap">
+          <div class="about-photo-wrap">
             <img class="about-photo" src="aviv-photo.jpg" alt="Aviv Cohen">
-            <p class="about-text">My name is Aviv, a third-year Visual Communication student at Bezalel Academy. With a lifelong foundation in art and illustration, I&rsquo;ve developed a keen eye for visual language &ndash; now channeling that creative background into Product Design to transform passion into functional, impactful digital experiences.</p>
+          </div>
+          <div>
+            <span class="about-kicker">Hi, I&rsquo;m</span>
+            <div class="about-title">Aviv Cohen</div>
+            <p class="about-text">A third-year Visual Communication student at Bezalel Academy. With a lifelong foundation in art and illustration, I&rsquo;ve developed a keen eye for visual language.</p>
+            <p class="about-text">Now channeling that creative background into Product Design, to transform passion into functional, impactful digital experiences.</p>
           </div>
         </div>
       </div>
