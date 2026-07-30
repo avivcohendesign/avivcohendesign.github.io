@@ -191,7 +191,7 @@
   .proj-img .compact-video-wrap video{display:block;width:auto;max-height:72vh;
     height:auto;max-width:100%;border-radius:0}
   .proj-row{display:flex;flex-direction:column;gap:2.2rem}
-  .proj-row.row-mode{flex-direction:row;gap:1.4rem}
+  .proj-row.row-mode{flex-direction:row;gap:1.4rem;align-items:flex-end}
   .proj-row.row-mode .proj-img{flex:none;width:calc(33.333% - .93rem);min-width:0}
   @media(max-width:880px){
     .proj-row.row-mode{flex-direction:column}
@@ -309,6 +309,11 @@
             <div class="proj-img" id="pg5"></div>
             <div class="proj-img" id="pg6"></div>
           </div>
+          <div class="proj-row" id="pRow3">
+            <div class="proj-img" id="pg7"></div>
+            <div class="proj-img" id="pg8"></div>
+            <div class="proj-img" id="pg9"></div>
+          </div>
           <div class="proj-strip" id="pStrip"></div>
         </div>
       </div>
@@ -378,7 +383,7 @@ function openProject(id, list){
     heroEl.classList.remove('grad');
     heroEl.style.background = 'none';
     const heroVideoStyle = p.heroVideoCompact ? ' style="max-height:72vh;width:auto;margin:0 auto"' : '';
-    heroEl.innerHTML = `<video src="${p.heroVideo}" poster="${p.img||''}" autoplay muted loop playsinline${heroVideoStyle}></video>`;
+    heroEl.innerHTML = `<video src="${p.heroVideo}" poster="${p.heroVideoPoster||p.img||''}" autoplay muted loop playsinline${heroVideoStyle}></video>`;
   } else if(p.video){
     heroEl.classList.remove('grad');
     heroEl.style.background = 'none';
@@ -409,6 +414,22 @@ function openProject(id, list){
     pRow2El.classList.add('row-mode');
   } else {
     pRow2El.style.display = 'none';
+  }
+  const pRow3El = document.getElementById('pRow3');
+  const pg9El = document.getElementById('pg9');
+  if(p.img7 || p.img8 || p.img9){
+    pRow3El.style.display = 'flex';
+    setProjImg(document.getElementById('pg7'), p.img7, `linear-gradient(${(p.ang+40)}deg, ${p.c2}, ${p.c1})`, p.title, p.img7Compact);
+    setProjImg(document.getElementById('pg8'), p.img8, `linear-gradient(${p.ang}deg, ${p.c1}, ${p.c2})`, p.title, p.img8Compact);
+    if(p.img9){
+      pg9El.style.display = '';
+      setProjImg(pg9El, p.img9, `radial-gradient(circle at 40% 30%, ${p.c2}, ${p.c1})`, p.title, p.img9Compact);
+    } else {
+      pg9El.style.display = 'none';
+    }
+    pRow3El.classList.add('row-mode');
+  } else {
+    pRow3El.style.display = 'none';
   }
   document.getElementById('pRow').classList.toggle('row-mode', !!p.imgRow);
   const stripEl = document.getElementById('pStrip');
@@ -446,11 +467,11 @@ const ALLWORKS = [
    strip:['kodo-icon-led.png','kodo-icon-network.png','kodo-icon-screen.png','kodo-icon-button.png','kodo-icon-pi1.png','kodo-icon-pi2.png','kodo-icon-wires.png'],
    lead:'Meet KODO! Where Montessori principles meet the vibecoding and cyber decks of today. Instead of raising more iPad kids, we believe the next generation will be one of creators and visionaries: with the right tools, of course.',
    body:['With KODO, kids set up their own cyber decks and build their own games to play on them, returning a sense of agency and ownership over tech that we haven\u2019t had since the days of retro arcades.','Our vision is for classrooms to be full of students swapping decks and comparing games so screens don\u2019t keep isolating us, but rather bring back creativity and community.']},
-  {title:'Milon Hai', cat:'Visual Identity \u2219 UI/UX', year:'2026', client:'Milon Hai', role:'Pattern Design, Merch', tools:'Illustrator, Photoshop', c1:'#e0447a', c2:'#f2c14e', ang:135, img:'milon-hai.jpg', heroVideo:'milon-hai-flow.mp4', heroVideoCompact:true, img1:'milon-hai.jpg',
+  {title:'Milon Hai', cat:'Visual Identity \u2219 UI/UX', year:'2026', client:'Milon Hai', role:'Pattern Design, Merch', tools:'Illustrator, Photoshop', c1:'#e0447a', c2:'#f2c14e', ang:135, img:'milon-hai.jpg', heroVideo:'milon-hai-flow.mp4', heroVideoPoster:'milon-hai-flow-poster.jpg', heroVideoCompact:true, img1:'milon-hai.jpg',
    lead:'Milon Hai\u2019 is a concept app developed around a gap we identified among new immigrants in Israel: the lack of tools that teach the actual cultural context of local slang.',
    body:['The result is an app that serves as a social and experiential platform, allowing users to \u2018collect\u2019 the Israeli street \u2014 from coffee shop slang to workplace expressions.','It goes beyond literal translations (\u2018what does it mean?\u2019), providing the full cultural context: tone, humor, and the situations in which each word is appropriately used.']},
   {title:'Maskit.code', cat:'Branding / E-commerce', year:'2024', client:'Maskit.code', role:'Brand Identity, Web Design', tools:'Figma, Illustrator', c1:'#2c2c30', c2:'#8a8a90', ang:140,
-   img:'maskit-cotton.jpg', heroVideo:'maskit-farm.mp4',
+   img:'maskit-cotton.jpg', heroVideo:'maskit-farm.mp4', heroVideoPoster:'maskit-farm-poster.jpg',
    lead:'A digital archive reimagining Israel’s legendary Maskit fashion house as a living, browsable collection.',
    body:['Each historic garment is presented like a museum plate — reference number, origin, medium and pattern — paired with a rendered lookbook shot.','The system carries the label’s heritage craft into a clean, catalogue-like digital format.']},
   {title:'VOUCH', cat:'UI/UX · App Design · Digital Product', year:'2026', client:'Vouch', role:'Product Design', tools:'Figma', c1:'#e8a68c', c2:'#f2d9c9', ang:150, img:'vouch.jpg',
@@ -462,7 +483,10 @@ const ALLWORKS = [
    strip:['digital-nomads-strip-1.png','digital-nomads-strip-2.png','digital-nomads-strip-3.png','digital-nomads-strip-4.png','digital-nomads-strip-5.png','digital-nomads-strip-6.png','digital-nomads-strip-7.png'],
    lead:'A flat, friendly illustration series about the new rituals of remote work — laptops, coffee, and shared tables.',
    body:['Bold outlines and a cool blue-and-coral palette give the characters a light, editorial feel.','Built as a flexible cast that can be recomposed across articles, decks and social posts.']},
-  {title:'Netflix Dating', cat:'Illustration / Editorial', year:'2025', client:'Netflix', role:'Illustration', tools:'Procreate, Illustrator', c1:'#e0433d', c2:'#f2ded0', ang:135, img:'netflix-dating.jpg',
+  {title:'Netflix Dating', cat:'Illustration / Editorial', year:'2025', client:'Netflix', role:'Illustration', tools:'Procreate, Illustrator', c1:'#e0433d', c2:'#f2ded0', ang:135, img:'netflix-dating.jpg', heroImg:'netflix-dating-hero.png',
+   img1:'netflix-dating-shot-1.png', img2:'netflix-dating-shot-2.png', img3:'netflix-dating-shot-3.png', imgRow:true,
+   img4:'netflix-dating-shot-4.png', img5:'netflix-dating-shot-5.png', img6:'netflix-dating-shot-6.png',
+   img7:'netflix-dating-shot-7.png', img8:'netflix-dating-shot-8.png', img9:'netflix-dating-shot-9.png',
    lead:'A warm illustration set exploring the small rituals of modern dating, made for a Netflix editorial feature.',
    body:['Hand-drawn couples across sun-soaked picnic scenes, built with a loose line and a punchy red-on-cream palette.','Designed to work as a scrollable collage — playful, intimate, and a little voyeuristic.']},
   {title:'rootea', cat:'Branding / Packaging', year:'2024', client:'rootea', role:'Brand Identity, Packaging', tools:'Illustrator, Photography', c1:'#4a4a52', c2:'#8a8a92', ang:125, img:'rootea.jpg',
