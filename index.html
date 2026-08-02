@@ -113,7 +113,7 @@
   .hero-icons a:hover{opacity:1}
   .hero-icons svg{width:20px;height:20px;display:block}
   .hero-bottom{position:relative;display:flex;align-items:flex-end;justify-content:flex-end;gap:0;margin-top:8rem;width:100%}
-  .hero-portrait{width:min(460px,46vw);aspect-ratio:1.676;height:auto;object-fit:contain;object-position:bottom right;
+  .hero-portrait{width:min(540px,52vw);aspect-ratio:1.86;height:auto;object-fit:contain;object-position:bottom right;
     flex:none;margin-bottom:2.2rem;position:relative;z-index:1}
   .hero-tagline{margin-left:-1.5rem;padding-bottom:2.4rem;position:relative;z-index:2}
   .tagline-script{display:block;font-family:var(--serif);font-style:italic;font-weight:500;
@@ -275,6 +275,7 @@
           </div>
         </div>
         <div class="hero-bottom">
+          <img class="hero-portrait" id="heroPortrait" src="hero-portrait-light.png" data-light="hero-portrait-light.png" data-dark="hero-portrait-dark.png" alt="Aviv Cohen">
           <div class="hero-tagline">
             <span class="tagline-script" id="taglineLoop">Graphic</span>
             <span class="tagline-serif">designer</span>
@@ -527,7 +528,7 @@ const ALLWORKS = [
    body:['A bold, cropped wordmark letter anchors each issue, printed on a rotating set of loud fluorescent covers.','The stripped-down, photocopy-zine energy carries through typography, layout and the choice of paper stock.']},
 ];
 
-const taglineWords = ['Graphic','UI/UX','Branding','Illustrator'];
+const taglineWords = ['Graphic','UI/UX','Branding','Illustration'];
 const taglineEl = document.getElementById('taglineLoop');
 if(taglineEl){
   let taglineIndex = 0;
