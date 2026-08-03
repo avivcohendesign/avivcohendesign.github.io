@@ -221,14 +221,25 @@
   .archive-divider + .archive-block{margin-top:-1rem}
   .archive-group-title{font-family:var(--serif);font-style:italic;font-size:1.05rem;
     color:var(--ink-soft)}
-  .archive-group{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.6rem}
-  .archive-group img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:2px;
-    transition:transform .3s var(--ease)}
+  .archive-group{display:flex;gap:1.6rem;overflow-x:auto;padding-bottom:.6rem;
+    scroll-snap-type:x proximity;scrollbar-width:thin;scrollbar-color:var(--ink-faint) transparent}
+  .archive-group::-webkit-scrollbar{height:6px}
+  .archive-group::-webkit-scrollbar-thumb{background:var(--ink-faint);border-radius:3px}
+  .archive-group img{flex:none;height:340px;width:auto;max-width:none;border-radius:2px;
+    scroll-snap-align:start;transition:transform .3s var(--ease)}
   .archive-group img:hover{transform:scale(1.03)}
-  .archive-divider{height:1px;background:var(--ink)}
   @media(max-width:880px){
-    .archive-group{grid-template-columns:repeat(2,1fr)}
+    .archive-group img{height:220px}
   }
+  /* a single long strip you scroll through horizontally, instead of cropped squares */
+  .archive-long{display:flex;overflow-x:auto;scrollbar-width:thin;scrollbar-color:var(--ink-faint) transparent}
+  .archive-long::-webkit-scrollbar{height:6px}
+  .archive-long::-webkit-scrollbar-thumb{background:var(--ink-faint);border-radius:3px}
+  .archive-long img{flex:none;height:420px;width:auto;max-width:none;display:block}
+  @media(max-width:880px){
+    .archive-long img{height:220px}
+  }
+  .archive-divider{height:1px;background:var(--ink)}
 
   /* cute horizontal-scroll strip of illustrations */
   .proj-strip{display:flex;gap:1.1rem;overflow-x:auto;padding:.6rem .2rem 1.6rem;
@@ -446,8 +457,11 @@ function openProject(id, list){
   if(p.isArchive){
     archiveGridEl.style.display = 'flex';
     archiveGridEl.innerHTML = '<div class="archive-divider"></div>' + (p.archiveImages||[]).map(group=>
-      `<div class="archive-block"><div class="archive-group-title">${group.title||''}</div>
-       <div class="archive-group">${group.images.map(src=>`<img src="${src}" alt="${group.title||p.title}">`).join('')}</div></div>`
+      group.longScroll
+      ? `<div class="archive-block"><div class="archive-group-title">${group.title||''}</div>
+         <div class="archive-long">${group.images.map(src=>`<img src="${src}" alt="${group.title||p.title}">`).join('')}</div></div>`
+      : `<div class="archive-block"><div class="archive-group-title">${group.title||''}</div>
+         <div class="archive-group">${group.images.map(src=>`<img src="${src}" alt="${group.title||p.title}">`).join('')}</div></div>`
     ).join('<div class="archive-divider"></div>');
     document.getElementById('pHero').style.display = 'none';
     document.getElementById('pRow').style.display = 'none';
@@ -582,9 +596,10 @@ const ALLWORKS = [
    body:['A bold, cropped wordmark letter anchors each issue, printed on a rotating set of loud fluorescent covers.','The stripped-down, photocopy-zine energy carries through typography, layout and the choice of paper stock.']},
   {title:'Archive', cat:'Miscellaneous', year:'', client:'', role:'', tools:'', c1:'#8a8a92', c2:'#c9c2b0', ang:120, isArchive:true,
    archiveImages:[
-     {title:'Untitled 01', images:['archive-1.jpg','archive-2.jpg','archive-3.jpg']},
+     {title:'Untitled 01', images:['archive-1.jpg','archive-2.jpg','archive-3.jpg','archive-13.jpg']},
      {title:'Untitled 02', images:['archive-4.jpg','archive-5.jpg','archive-6.jpg']},
-     {title:'Untitled 03', images:['archive-7.jpg','archive-8.jpg','archive-9.jpg','archive-10.jpg','archive-11.jpg','archive-12.jpg']}
+     {title:'Untitled 03', longScroll:true, images:['archive-14.jpg']},
+     {title:'Untitled 04', images:['archive-15.jpg','archive-16.jpg','archive-17.jpg','archive-18.jpg','archive-19.jpg','archive-20.jpg','archive-21.jpg','archive-22.jpg']}
    ],
    lead:'A loose collection of smaller pieces and one-offs that didn’t need a page of their own.',
    body:[]},
