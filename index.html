@@ -25,9 +25,9 @@
   }
   :root{
     --bg:#F3F3F3;
-    --ink:#2c2c30;
-    --ink-soft:#5a5a60;
-    --ink-faint:#9a9a9f;
+    --ink:#4158a7;
+    --ink-soft:#5567b0;
+    --ink-faint:#8b9bd0;
     --line:rgba(40,40,45,.12);
     --blob-a:#4b54e8;   /* blue  */
     --blob-b:#ff4d4d;   /* red   */
@@ -72,26 +72,26 @@
   body[data-home-theme="dark"][data-section="home"] #themeToggle,
   body[data-home-theme="dark"][data-section="works"] #themeToggle,
   body[data-home-theme="dark"][data-section="home"] .hero-icons a,
-  body[data-home-theme="dark"][data-section="works"] .hero-icons a{color:#f1efed}
+  body[data-home-theme="dark"][data-section="works"] .hero-icons a{color:#a3ddf1}
 
 
   body[data-theme="dark"]{
-    --bg:#19191c;
-    --ink:#f1efed;
-    --ink-soft:#b6b6bc;
-    --ink-faint:#7c7c82;
-    --line:rgba(255,255,255,.14);
+    --bg:#3b2313;
+    --ink:#a3ddf1;
+    --ink-soft:#a3ddf1;
+    --ink-faint:#7fb8cf;
+    --line:rgba(163,221,241,.2);
   }
   body[data-theme="dark"] .card{background:#2a2a2e}
   body[data-theme="dark"] .chrome{transition:opacity .4s var(--ease), color .4s var(--ease)}
 
   body[data-home-theme="dark"] #home,
   body[data-home-theme="dark"] #works{
-    --bg:#19191c;
-    --ink:#f1efed;
-    --ink-soft:#b6b6bc;
-    --ink-faint:#7c7c82;
-    --line:rgba(255,255,255,.14);
+    --bg:#3b2313;
+    --ink:#a3ddf1;
+    --ink-soft:#a3ddf1;
+    --ink-faint:#7fb8cf;
+    --line:rgba(163,221,241,.2);
   }
 
 
@@ -106,7 +106,9 @@
   .hero-elegant{width:100%;max-width:1700px;margin:0 auto;height:100%;display:flex;flex-direction:column;justify-content:space-between;flex:1}
   .hero-top{position:relative}
   .hero-serif-title{font-family:var(--serif);font-weight:400;color:var(--ink);
-    font-size:clamp(3.6rem,9.2vw,8.2rem);line-height:1.18;letter-spacing:.01em;margin-left:2.5rem}
+    font-size:clamp(3.6rem,9.2vw,8.2rem);line-height:1.18;letter-spacing:.01em;margin-left:2.5rem;
+    clip-path:inset(0 0 100% 0);animation:heroTitleIn 1.6s .3s var(--ease) forwards}
+  @keyframes heroTitleIn{to{clip-path:inset(0 0 0 0)}}
   .hero-icons{position:absolute;top:4.2rem;left:clamp(340px,36vw,620px);
     display:flex;align-items:center;gap:.6rem;padding:.7rem .9rem}
   .hero-icons a{color:var(--ink);display:flex;align-items:center;justify-content:center;opacity:.85;transition:opacity .2s}
@@ -139,7 +141,7 @@
   .work-row{position:relative;display:flex;align-items:baseline;gap:2.2rem;color:var(--ink);
     padding:.65rem 2vw;border-bottom:1px solid var(--ink);cursor:pointer;}
   .work-cat{font-family:var(--serif);font-style:italic;font-size:1.02rem;
-    color:var(--ink-faint);width:170px;flex:none;text-transform:lowercase;
+    color:var(--ink);width:170px;flex:none;text-transform:lowercase;
     align-self:flex-start;margin-top:-.3rem}
   .work-title{font-family:var(--serif);font-weight:400;
     font-size:clamp(1.7rem,3.8vw,3.1rem);letter-spacing:-.01em;transition:opacity .2s var(--ease)}
@@ -172,6 +174,10 @@
     font-size:.82rem;margin-top:.6rem}
   .proj-head h1{font-family:var(--serif);font-weight:500;
     font-size:clamp(1.3rem,2.2vw,1.9rem);line-height:.98;letter-spacing:-.025em}
+  .site-link{display:none;align-items:center;gap:.4rem;font-family:var(--serif);font-style:italic;
+    font-size:.95rem;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink);
+    width:fit-content;padding-bottom:.15rem;margin-bottom:1.6rem;transition:opacity .2s var(--ease)}
+  .site-link:hover{opacity:.6}
   .proj-palette{display:flex;gap:.4rem;margin-top:.2rem}
   .proj-palette span{width:14px;height:14px;border-radius:4px;border:1px solid var(--line);flex:none;cursor:default}
   .color-tip{position:fixed;background:var(--ink);color:var(--bg);font-family:var(--body);
@@ -303,6 +309,7 @@
         <div class="proj-left">
           <div class="proj-head"><h1 id="pTitle"></h1><div class="cat" id="pCat"></div></div>
           <div class="proj-desc" id="pDesc"></div>
+          <a class="site-link" id="pSiteLink" target="_blank" rel="noopener">View full site &rarr;</a>
           <div class="proj-palette" id="pPalette"></div>
           <div class="next" id="next"><span class="lbl">Next project</span><span class="nm" id="pNext"></span></div>
         </div>
@@ -408,6 +415,13 @@ function openProject(id, list){
     .map(c=>`<span style="background:${c}" data-color="${c}"></span>`).join('');
   document.getElementById('pDesc').innerHTML = `<p class="lead">${p.lead}</p>` + p.body.map(t=>`<p>${t}</p>`).join('')
     + `<p><strong>${p.client}</strong> &middot; ${p.role} &middot; ${p.year} &middot; ${p.tools}</p>`;
+  const siteLinkEl = document.getElementById('pSiteLink');
+  if(p.siteLink){
+    siteLinkEl.href = p.siteLink;
+    siteLinkEl.style.display = 'inline-flex';
+  } else {
+    siteLinkEl.style.display = 'none';
+  }
   const heroEl = document.getElementById('pHero');
   if(p.heroVideo){
     heroEl.classList.remove('grad');
@@ -489,7 +503,7 @@ document.getElementById('back').addEventListener('click',()=>{
 
 /* ---------- MY WORKS PAGE (separate page, grid of 10) ---------- */
 const ALLWORKS = [
-  {title:'Prism', cat:'UI / UX', year:'2024', client:'Prism', role:'Product Design', tools:'Figma, Framer', c1:'#ff8a3d', c2:'#ffd64d', c3:'#ff5f6d', c4:'#ffcf5c', c5:'#fff4d6', ang:160, img:'prism.jpg',
+  {title:'Prism', cat:'UI / UX', year:'2024', client:'Prism', role:'Product Design', tools:'Figma, Framer', c1:'#FF1907', c2:'#000EA7', c3:'#671590', c4:'#000000', c5:'#ffffff', ang:160, img:'prism.jpg',
    img1:'prism-flow.mp4', img2:'prism-promo.mp4',
    lead:'A music collaboration platform where artists drop tracks and fans explore them like a deck of cards.',
    body:['I designed the desktop app end-to-end, from the swipeable drop carousel to the overall dark, studio-inspired visual language.','The interface stays quiet and out of the way, letting the artwork and music take center stage.']},
@@ -500,7 +514,7 @@ const ALLWORKS = [
   {title:'Milon Hai', cat:'Visual Identity \u2219 UI/UX', year:'2026', client:'Milon Hai', role:'Pattern Design, Merch', tools:'Illustrator, Photoshop', c1:'#e0447a', c2:'#f2c14e', c3:'#3ba39c', c4:'#f7e4c4', c5:'#7a3b46', ang:135, img:'milon-hai.jpg', heroVideo:'milon-hai-flow.mp4', heroVideoPoster:'milon-hai-flow-poster.jpg', heroVideoCompact:true, img1:'milon-hai.jpg', img2:'milon-hai-landing-flow-v2.mp4', img2Compact:true,
    lead:'Milon Hai\u2019 is a concept app developed around a gap we identified among new immigrants in Israel: the lack of tools that teach the actual cultural context of local slang.',
    body:['The result is an app that serves as a social and experiential platform, allowing users to \u2018collect\u2019 the Israeli street \u2014 from coffee shop slang to workplace expressions.','It goes beyond literal translations (\u2018what does it mean?\u2019), providing the full cultural context: tone, humor, and the situations in which each word is appropriately used.']},
-  {title:'Maskit.code', cat:'Branding / E-commerce', year:'2024', client:'Maskit.code', role:'Brand Identity, Web Design', tools:'Figma, Illustrator', c1:'#2c2c30', c2:'#8a8a90', c3:'#d8d3c9', c4:'#b0a89c', c5:'#4a4a52', ang:140,
+  {title:'Maskit.code', cat:'Branding / E-commerce', year:'2024', client:'Maskit.code', role:'Brand Identity, Web Design', tools:'Figma, Illustrator', c1:'#2c2c30', c2:'#8a8a90', c3:'#d8d3c9', c4:'#b0a89c', c5:'#4a4a52', ang:140, siteLink:'maskit-site-final.html',
    img:'maskit-cotton.jpg', heroVideo:'maskit-farm.mp4', heroVideoPoster:'maskit-farm-poster.jpg',
    img1:'maskit-code-brandbook.mp4', img1Compact:true, img2:'maskit-code-flow.mp4', img2Compact:true, img3:'maskit-code-detail.mp4', img3Compact:true,
    lead:'A digital archive reimagining Israel’s legendary Maskit fashion house as a living, browsable collection.',
