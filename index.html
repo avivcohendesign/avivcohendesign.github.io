@@ -144,11 +144,11 @@
   .work-title{font-family:var(--serif);font-weight:400;
     font-size:clamp(1.7rem,3.8vw,3.1rem);letter-spacing:-.01em;transition:opacity .2s var(--ease)}
   .work-row:hover .work-title{font-style:italic}
-  .work-preview{position:fixed;z-index:40;right:2rem;bottom:2rem;
-    max-width:min(46vw,640px);max-height:min(46vw,620px);width:auto;height:auto;
-    pointer-events:none;display:block;object-fit:contain;opacity:0;
+  .work-preview{position:fixed;z-index:40;right:3.5rem;bottom:2rem;
+    width:min(36vw,500px);height:min(36vw,480px);
+    pointer-events:none;display:block;object-fit:contain;object-position:bottom;opacity:0;
     transform:translateY(16px);transition:opacity .35s var(--ease), transform .35s var(--ease);
-    box-shadow:0 -10px 50px rgba(20,20,25,.18)}
+    filter:drop-shadow(10px 26px 32px rgba(20,20,25,.35))}
   .work-preview.show{opacity:1;transform:translateY(0)}
   @media(max-width:880px){
     .work-preview{display:none}
@@ -497,7 +497,7 @@ const ALLWORKS = [
    strip:['kodo-icon-led.png','kodo-icon-network.png','kodo-icon-screen.png','kodo-icon-button.png','kodo-icon-pi1.png','kodo-icon-pi2.png','kodo-icon-wires.png'],
    lead:'Meet KODO! Where Montessori principles meet the vibecoding and cyber decks of today. Instead of raising more iPad kids, we believe the next generation will be one of creators and visionaries: with the right tools, of course.',
    body:['With KODO, kids set up their own cyber decks and build their own games to play on them, returning a sense of agency and ownership over tech that we haven\u2019t had since the days of retro arcades.','Our vision is for classrooms to be full of students swapping decks and comparing games so screens don\u2019t keep isolating us, but rather bring back creativity and community.']},
-  {title:'Milon Hai', cat:'Visual Identity \u2219 UI/UX', year:'2026', client:'Milon Hai', role:'Pattern Design, Merch', tools:'Illustrator, Photoshop', c1:'#e0447a', c2:'#f2c14e', c3:'#3ba39c', c4:'#f7e4c4', c5:'#7a3b46', ang:135, img:'milon-hai.jpg', heroVideo:'milon-hai-flow.mp4', heroVideoPoster:'milon-hai-flow-poster.jpg', heroVideoCompact:true, img1:'milon-hai.jpg',
+  {title:'Milon Hai', cat:'Visual Identity \u2219 UI/UX', year:'2026', client:'Milon Hai', role:'Pattern Design, Merch', tools:'Illustrator, Photoshop', c1:'#e0447a', c2:'#f2c14e', c3:'#3ba39c', c4:'#f7e4c4', c5:'#7a3b46', ang:135, img:'milon-hai.jpg', heroVideo:'milon-hai-flow.mp4', heroVideoPoster:'milon-hai-flow-poster.jpg', heroVideoCompact:true, img1:'milon-hai.jpg', img2:'milon-hai-landing-flow-v2.mp4', img2Compact:true,
    lead:'Milon Hai\u2019 is a concept app developed around a gap we identified among new immigrants in Israel: the lack of tools that teach the actual cultural context of local slang.',
    body:['The result is an app that serves as a social and experiential platform, allowing users to \u2018collect\u2019 the Israeli street \u2014 from coffee shop slang to workplace expressions.','It goes beyond literal translations (\u2018what does it mean?\u2019), providing the full cultural context: tone, humor, and the situations in which each word is appropriately used.']},
   {title:'Maskit.code', cat:'Branding / E-commerce', year:'2024', client:'Maskit.code', role:'Brand Identity, Web Design', tools:'Figma, Illustrator', c1:'#2c2c30', c2:'#8a8a90', c3:'#d8d3c9', c4:'#b0a89c', c5:'#4a4a52', ang:140,
