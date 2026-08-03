@@ -34,6 +34,14 @@
   body{
     font-family:var(--body);background:var(--bg);color:var(--ink);
     min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+    transition:background .4s var(--ease), color .4s var(--ease);
+  }
+  body[data-home-theme="dark"]{
+    --bg:#3b2313;
+    --ink:#a3ddf1;
+    --ink-soft:#a3ddf1;
+    --ink-faint:#7fb8cf;
+    --line:rgba(163,221,241,.2);
   }
 
   nav{position:fixed;top:2.2rem;right:4.6rem;left:auto;z-index:30;
@@ -85,6 +93,10 @@
       <a class="active">Contact</a>
     </div>
   </nav>
+
+  <script>
+    if(localStorage.getItem('homeTheme') === 'dark'){ document.body.dataset.homeTheme = 'dark'; }
+  </script>
 
   <main>
     <section class="section" id="contact">

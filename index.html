@@ -214,6 +214,15 @@
     .proj-row.row-mode .proj-img{width:100%}
   }
 
+  /* square-tile grid for images after the hero, used by specific projects */
+  body[data-project-grid="square"] .proj-row{display:grid !important;grid-template-columns:repeat(3,1fr) !important;grid-auto-rows:1fr;gap:1rem !important;align-items:stretch !important}
+  body[data-project-grid="square"] .proj-row .proj-img{flex:none !important;width:100% !important;height:auto !important;aspect-ratio:1 !important;min-width:0 !important}
+  body[data-project-grid="square"] .proj-row .proj-img img,
+  body[data-project-grid="square"] .proj-row .proj-img video{width:100% !important;height:100% !important;object-fit:cover !important}
+  @media(max-width:880px){
+    body[data-project-grid="square"] .proj-row{grid-template-columns:repeat(2,1fr) !important}
+  }
+
   /* archive: loose grid of images that don't get their own project page */
   .archive-grid{display:none;flex-direction:column;gap:1.6rem;
     padding:0 0 2rem;border-bottom:1px solid var(--ink)}
@@ -539,10 +548,15 @@ function openProject(id, list){
   overlay.querySelector('.proj-left')?.scrollTo({top:0});
   body.classList.add('project-open');
   body.style.overflow='hidden';
-  if(p.title === 'Prism' || p.title === 'Maskit.code'){
+  if(p.title === 'Prism' || p.title === 'Maskit.code' || p.title === 'GRUNGE' || p.title === 'rootea'){
     body.dataset.theme = 'dark';
   } else {
     delete body.dataset.theme;
+  }
+  if(p.squareGrid){
+    body.dataset.projectGrid = 'square';
+  } else {
+    delete body.dataset.projectGrid;
   }
 }
 document.getElementById('back').addEventListener('click',()=>{
@@ -588,7 +602,9 @@ const ALLWORKS = [
    img7:'netflix-dating-shot-7.png', img8:'netflix-dating-shot-8.png', img9:'netflix-dating-shot-9.png',
    lead:'A warm illustration set exploring the small rituals of modern dating, made for a Netflix editorial feature.',
    body:['Hand-drawn couples across sun-soaked picnic scenes, built with a loose line and a punchy red-on-cream palette.','Designed to work as a scrollable collage — playful, intimate, and a little voyeuristic.']},
-  {title:'rootea', cat:'Branding / Packaging', year:'2024', client:'rootea', role:'Brand Identity, Packaging', tools:'Illustrator, Photography', c1:'#605a5b', c2:'#a68d86', c3:'#dcd9d6', c4:'#7c5952', c5:'#5d6048', ang:125, img:'rootea.jpg',
+  {title:'rootea', cat:'Branding / Packaging', year:'2024', client:'rootea', role:'Brand Identity, Packaging', tools:'Illustrator, Photography', c1:'#605a5b', c2:'#a68d86', c3:'#dcd9d6', c4:'#7c5952', c5:'#5d6048', ang:125, squareGrid:true, img:'rootea-detail.jpg', img1:'rootea.jpg',
+   img2:'rootea-photo-1.jpg', img3:'rootea-photo-2.jpg',
+   img4:'rootea-photo-3.jpg', img5:'rootea-tea-bag.jpg', img6:'rootea-photo-4.jpg',
    lead:'A quiet, herbal identity for a loose-leaf tea brand built around simplicity and ritual.',
    body:['A minimal wordmark and matte charcoal tags let the tea itself — dried petals, herbs, stems — take center stage.','The system stays understated across pyramid bags, labels and future packaging.']},
   {title:'GRUNGE', cat:'Editorial / Zine', year:'2025', client:'Grunge Zine', role:'Editorial Design, Art Direction', tools:'InDesign, Illustrator', c1:'#f83500', c2:'#f6e011', c3:'#ec0b4b', c4:'#5bcc18', c5:'#1a0f0a', ang:150, img:'grunge.jpg',
@@ -597,7 +613,7 @@ const ALLWORKS = [
   {title:'Archive', cat:'Miscellaneous', year:'', client:'', role:'', tools:'', c1:'#8a8a92', c2:'#c9c2b0', ang:120, isArchive:true,
    archiveImages:[
      {title:'Untitled 01', images:['archive-1.jpg','archive-2.jpg','archive-3.jpg','archive-13.jpg']},
-     {title:'Untitled 02', images:['archive-4.jpg','archive-5.jpg','archive-6.jpg']},
+     {title:'Untitled 02', images:['archive-4.jpg','archive-5.jpg','archive-6.jpg','archive-24.jpg','archive-25.jpg','archive-23.jpg']},
      {title:'Untitled 03', longScroll:true, images:['archive-14.jpg']},
      {title:'Untitled 04', images:['archive-15.jpg','archive-16.jpg','archive-17.jpg','archive-18.jpg','archive-19.jpg','archive-20.jpg','archive-21.jpg','archive-22.jpg']}
    ],
