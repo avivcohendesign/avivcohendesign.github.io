@@ -198,20 +198,25 @@
     overflow-y:auto;padding-bottom:6rem;scrollbar-width:thin;scrollbar-color:var(--ink-faint) transparent}
   .proj-right::-webkit-scrollbar{width:6px}
   .proj-right::-webkit-scrollbar-thumb{background:var(--ink-faint);border-radius:3px}
+  .proj-media{display:flex;flex-direction:column;gap:.6rem;width:100%;flex:none}
+  .proj-caption{font-family:var(--serif);font-style:italic;color:var(--ink-soft);
+    font-size:.9rem;display:none;padding-bottom:.6rem;border-bottom:1px solid var(--line)}
+  .proj-caption.show{display:block}
   .proj-img{width:100%;border-radius:0;position:relative;overflow:hidden;flex:none}
   .proj-img.grad{min-height:280px;background-size:cover;background-position:center}
   .proj-img img,.proj-img video{display:block;width:100%;height:auto;
     object-fit:contain;border-radius:0}
+  .proj-img video{aspect-ratio:16/9}
   .proj-img .compact-video-wrap{display:block;width:fit-content;max-width:100%;
     margin:0 auto;border-radius:0;overflow:hidden}
   .proj-img .compact-video-wrap video{display:block;width:auto;max-height:72vh;
     height:auto;max-width:100%;border-radius:0}
   .proj-row{display:flex;flex-direction:column;gap:2.2rem}
   .proj-row.row-mode{flex-direction:row;gap:1.4rem;align-items:flex-end}
-  .proj-row.row-mode .proj-img{flex:none;width:calc(33.333% - .93rem);min-width:0}
+  .proj-row.row-mode .proj-media{flex:none;width:calc(33.333% - .93rem);min-width:0}
   @media(max-width:880px){
     .proj-row.row-mode{flex-direction:column}
-    .proj-row.row-mode .proj-img{width:100%}
+    .proj-row.row-mode .proj-media{width:100%}
   }
 
   /* square-tile grid for images after the hero, used by specific projects */
@@ -253,13 +258,39 @@
   /* cute horizontal-scroll strip of illustrations */
   .proj-strip{display:flex;gap:1.1rem;overflow-x:auto;padding:.6rem .2rem 1.6rem;
     flex:none;scroll-snap-type:x proximity;scrollbar-width:thin;
-    scrollbar-color:var(--ink-faint) transparent}
+    scrollbar-color:var(--ink-faint) transparent;margin-top:2rem}
   .proj-strip::-webkit-scrollbar{height:6px}
   .proj-strip::-webkit-scrollbar-thumb{background:var(--ink-faint);border-radius:3px}
   .proj-strip img{flex:none;width:150px;height:150px;object-fit:contain;
     border-radius:18px;padding:.9rem;scroll-snap-align:start;
     transition:transform .3s var(--ease)}
   .proj-strip img:hover{transform:translateY(-4px) rotate(-2deg)}
+  .proj-strip-logo{display:none;width:340px;height:auto;object-fit:contain;margin:2rem auto 0}
+  .proj-strip-logo.show{display:block}
+  .proj-bts-row{display:flex;gap:1rem;width:100%}
+  .proj-bts-row img{flex:1;width:0;min-width:0;aspect-ratio:1;object-fit:cover;border-radius:8px}
+  @media(max-width:880px){
+    .proj-bts-row{flex-direction:column}
+    .proj-bts-row img{width:100%;flex:none}
+  }
+  .proj-process{display:flex;flex-wrap:wrap;justify-content:space-between;row-gap:2.6rem;padding:1rem .5rem 2rem;width:100%}
+  .process-pair{display:flex;align-items:center;gap:1rem;flex:none;transition:transform .3s var(--ease)}
+  .process-pair:hover{transform:translateY(-4px) scale(1.03)}
+  .process-pair .ref-photo{width:120px;height:120px;flex:none;border-radius:14px;
+    object-fit:cover;background:rgba(65,88,167,.06)}
+  .process-pair .ref-arrow{flex:none;color:var(--ink-faint);font-size:1.3rem}
+  .process-pair .ref-illust{width:130px;height:130px;flex:none;object-fit:contain}
+  .process-pair:nth-child(1){transform:rotate(-5deg);margin-top:1.6rem}
+  .process-pair:nth-child(2){transform:rotate(4deg);margin-top:4.5rem;margin-left:1.5rem}
+  .process-pair:nth-child(3){transform:rotate(-3deg);margin-top:-1.5rem;margin-left:.5rem}
+  .process-pair:nth-child(4){transform:rotate(6deg);margin-top:3.2rem;margin-left:2.5rem}
+  .process-pair:nth-child(5){transform:rotate(-4deg);margin-top:.5rem}
+  .process-pair:nth-child(6){transform:rotate(3deg);margin-top:4rem;margin-left:1rem}
+  .process-pair:hover{transform:translateY(-6px) scale(1.06) rotate(0deg)}
+  @media(max-width:880px){
+    .proj-process{gap:1.6rem}
+    .process-pair{margin-top:0 !important;transform:none !important}
+  }
   .next{border-top:1px solid var(--ink);padding-top:1.6rem;cursor:pointer;
     display:flex;flex-direction:column;gap:.3rem;transition:.3s;margin-top:auto;flex:none}
   .next:hover{padding-left:.6rem}
@@ -352,23 +383,24 @@
           <div class="next" id="next"><span class="lbl">Next project</span><span class="nm" id="pNext"></span></div>
         </div>
         <div class="proj-right">
-          <div class="proj-img" id="pHero"></div>
+          <div class="proj-media" id="pHeroWrap"><div class="proj-caption" id="pHeroCap"></div><div class="proj-img" id="pHero"></div></div>
           <div class="proj-row" id="pRow">
-            <div class="proj-img" id="pg1"></div>
-            <div class="proj-img" id="pg2"></div>
-            <div class="proj-img" id="pg3"></div>
+            <div class="proj-media"><div class="proj-caption" id="pCap1"></div><div class="proj-img" id="pg1"></div></div>
+            <div class="proj-media"><div class="proj-caption" id="pCap2"></div><div class="proj-img" id="pg2"></div></div>
+            <div class="proj-media"><div class="proj-caption" id="pCap3"></div><div class="proj-img" id="pg3"></div></div>
           </div>
           <div class="proj-row" id="pRow2">
-            <div class="proj-img" id="pg4"></div>
-            <div class="proj-img" id="pg5"></div>
-            <div class="proj-img" id="pg6"></div>
+            <div class="proj-media"><div class="proj-caption" id="pCap4"></div><div class="proj-img" id="pg4"></div></div>
+            <div class="proj-media"><div class="proj-caption" id="pCap5"></div><div class="proj-img" id="pg5"></div></div>
+            <div class="proj-media"><div class="proj-caption" id="pCap6"></div><div class="proj-img" id="pg6"></div></div>
           </div>
           <div class="proj-row" id="pRow3">
-            <div class="proj-img" id="pg7"></div>
-            <div class="proj-img" id="pg8"></div>
-            <div class="proj-img" id="pg9"></div>
+            <div class="proj-media"><div class="proj-caption" id="pCap7"></div><div class="proj-img" id="pg7"></div></div>
+            <div class="proj-media"><div class="proj-caption" id="pCap8"></div><div class="proj-img" id="pg8"></div></div>
+            <div class="proj-media"><div class="proj-caption" id="pCap9"></div><div class="proj-img" id="pg9"></div></div>
           </div>
-          <div class="proj-strip" id="pStrip"></div>
+          <div class="proj-media" id="pStripWrap"><div class="proj-caption" id="pStripCap"></div><img class="proj-strip-logo" id="pStripLogo" alt=""><div class="proj-strip" id="pStrip"></div></div>
+          <div class="proj-media" id="pProcessWrap"><div class="proj-caption" id="pProcessCap"></div><div class="proj-bts-row" id="pBts"></div><div class="proj-process" id="pProcess"></div></div>
           <div class="archive-grid" id="archiveGrid"></div>
         </div>
       </div>
@@ -399,6 +431,18 @@ const obs = new IntersectionObserver((entries)=>{
   });
 },{rootMargin:'-45% 0px -45% 0px', threshold:0});
 ['home','works'].forEach(id=>obs.observe(document.getElementById(id)));
+
+function setCaption(id, text){
+  const el = document.getElementById(id);
+  if(!el) return;
+  if(text){
+    el.textContent = text;
+    el.classList.add('show');
+  } else {
+    el.textContent = '';
+    el.classList.remove('show');
+  }
+}
 
 function setProjImg(el, src, gradient, alt, compact){
   if(src){
@@ -502,9 +546,11 @@ function openProject(id, list){
   } else {
     setProjImg(heroEl, p.img, thumb(p), p.title);
   }
+  setCaption('pHeroCap', p.heroCaption);
   setProjImg(document.getElementById('pg1'), p.img1, `linear-gradient(${(p.ang+40)}deg, ${p.c2}, ${p.c1})`, p.title, p.img1Compact);
   setProjImg(document.getElementById('pg2'), p.img2, `linear-gradient(${p.ang}deg, ${p.c1}, ${p.c2})`, p.title, p.img2Compact);
   setProjImg(document.getElementById('pg3'), p.img3, `radial-gradient(circle at 40% 30%, ${p.c2}, ${p.c1})`, p.title, p.img3Compact);
+  setCaption('pCap1', p.img1Caption); setCaption('pCap2', p.img2Caption); setCaption('pCap3', p.img3Caption);
   const pRow2El = document.getElementById('pRow2');
   const pg6El = document.getElementById('pg6');
   if(p.img4 || p.img5 || p.img6){
@@ -518,6 +564,7 @@ function openProject(id, list){
       pg6El.style.display = 'none';
     }
     pRow2El.classList.add('row-mode');
+    setCaption('pCap4', p.img4Caption); setCaption('pCap5', p.img5Caption); setCaption('pCap6', p.img6Caption);
   } else {
     pRow2El.style.display = 'none';
   }
@@ -534,13 +581,32 @@ function openProject(id, list){
       pg9El.style.display = 'none';
     }
     pRow3El.classList.add('row-mode');
+    setCaption('pCap7', p.img7Caption); setCaption('pCap8', p.img8Caption); setCaption('pCap9', p.img9Caption);
   } else {
     pRow3El.style.display = 'none';
   }
   document.getElementById('pRow').classList.toggle('row-mode', !!p.imgRow);
   const stripEl = document.getElementById('pStrip');
+  document.getElementById('pStripWrap').style.display = p.strip ? '' : 'none';
   stripEl.style.display = p.strip ? 'flex' : 'none';
   stripEl.innerHTML = p.strip ? p.strip.map(src=>`<img src="${src}" alt="${p.title}">`).join('') : '';
+  setCaption('pStripCap', p.strip ? p.stripCaption : '');
+  const stripLogoEl = document.getElementById('pStripLogo');
+  if(p.strip && p.stripLogo){
+    stripLogoEl.src = p.stripLogo;
+    stripLogoEl.classList.add('show');
+  } else {
+    stripLogoEl.removeAttribute('src');
+    stripLogoEl.classList.remove('show');
+  }
+  const btsEl = document.getElementById('pBts');
+  btsEl.innerHTML = p.btsImages ? p.btsImages.map(src=>`<img src="${src}" alt="${p.title}">`).join('') : '';
+  const processEl = document.getElementById('pProcess');
+  document.getElementById('pProcessWrap').style.display = p.processPairs ? '' : 'none';
+  processEl.innerHTML = p.processPairs ? p.processPairs.map(pair=>
+    `<div class="process-pair"><img class="ref-photo" src="${pair.photo}" alt="reference"><span class="ref-arrow">&rarr;</span><img class="ref-illust" src="${pair.illust}" alt="illustration"></div>`
+  ).join('') : '';
+  setCaption('pProcessCap', p.processPairs ? p.processCaption : '');
   document.getElementById('pNext').textContent = next.title;
   document.getElementById('next').onclick = ()=>{openProject(nextId, list);};
   overlay.classList.add('open');
@@ -570,12 +636,22 @@ document.getElementById('back').addEventListener('click',()=>{
 
 /* ---------- MY WORKS PAGE (separate page, grid of 10) ---------- */
 const ALLWORKS = [
-  {title:'Prism', cat:'UI / UX', year:'2024', client:'Prism', role:'Product Design', tools:'Figma, Framer', c1:'#FF1907', c2:'#000EA7', c3:'#671590', c4:'#000000', c5:'#ffffff', ang:160, img:'prism.jpg',
-   img1:'prism-flow.mp4', img2:'prism-promo.mp4',
+  {title:'Prism', cat:'UI / UX', year:'2024', client:'Prism', role:'Product Design', tools:'Figma, Framer', c1:'#FF1907', c2:'#000EA7', c3:'#671590', c4:'#000000', c5:'#ffffff', ang:160, img:'prism.jpg', heroVideo:'prism-flow.mp4', heroVideoPoster:'prism-flow-poster.jpg', heroCaption:'Exploring drops',
+   img1:'prism-flow-copy.mp4', img1Caption:'Building a visual DNA', img2:'prism-flow-2.mp4', img2Caption:'The mobile experience', img3:'prism-promo.mp4', img3Caption:'The generated visual in campaign use',
    lead:'A music collaboration platform where artists drop tracks and fans explore them like a deck of cards.',
    body:['I designed the desktop app end-to-end, from the swipeable drop carousel to the overall dark, studio-inspired visual language.','The interface stays quiet and out of the way, letting the artwork and music take center stage.']},
-  {title:'Kodo', cat:'Visual Identity \u2219 UI/UX', year:'2026', client:'KODO', role:'Brand Identity, Packaging', tools:'Figma, Illustrator', c1:'#afd3e4', c2:'#6297d8', c3:'#f09035', c4:'#e4542d', c5:'#4da34e', c6:'#ee7cb1', c7:'#f0ebe0', ang:130, img:'kodo.jpg', heroImg:'kodo-hero.jpg', img1:'kodo-flow-cropped.mp4', img1Compact:true, img2:'kodo.jpg', img3:'kodo-demo-recording.mp4', img3Compact:true,
-   strip:['kodo-icon-led.png','kodo-icon-network.png','kodo-icon-screen.png','kodo-icon-button.png','kodo-icon-pi1.png','kodo-icon-pi2.png','kodo-icon-wires.png'],
+  {title:'Kodo', cat:'Visual Identity \u2219 UI/UX', year:'2026', client:'KODO', role:'Brand Identity, Packaging', tools:'Figma, Illustrator', c1:'#afd3e4', c2:'#6297d8', c3:'#f09035', c4:'#e4542d', c5:'#4da34e', c6:'#ee7cb1', c7:'#f0ebe0', ang:130, img:'kodo.jpg', heroVideo:'kodo-desktop-flow.mp4', heroVideoPoster:'kodo-desktop-flow-poster.jpg', heroCaption:'The desktop building interface', img1:'kodo-flow-cropped.mp4', img1Compact:true, img1Caption:'The mobile onboarding flow', img2:'kodo.jpg', img2Caption:'The full Cyber Deck Creative Kit', img3:'kodo-hero.jpg',
+   strip:['kodo-icon-led.png','kodo-icon-network.png','kodo-icon-screen.png','kodo-icon-button.png','kodo-icon-pi1.png','kodo-icon-pi2.png','kodo-icon-wires.png'], stripCaption:'Branding', stripLogo:'kodo-group-57.png',
+   processCaption:'Behind the scenes - the process',
+   btsImages:['kodo-prototype-1.jpg','kodo-prototype-2.jpg','kodo-prototype-3.jpg'],
+   processPairs:[
+     {photo:'kodo-ref-1.jpg', illust:'kodo-group-43.png'},
+     {photo:'kodo-ref-2.jpg', illust:'kodo-group-44.png'},
+     {photo:'kodo-ref-3.jpg', illust:'kodo-group-45.png'},
+     {photo:'kodo-ref-4.jpg', illust:'kodo-group-46.png'},
+     {photo:'kodo-ref-5.jpg', illust:'kodo-group-47.png'},
+     {photo:'kodo-ref-6.jpg', illust:'kodo-group-48.png'}
+   ],
    lead:'Meet KODO! Where Montessori principles meet the vibecoding and cyber decks of today. Instead of raising more iPad kids, we believe the next generation will be one of creators and visionaries: with the right tools, of course.',
    body:['With KODO, kids set up their own cyber decks and build their own games to play on them, returning a sense of agency and ownership over tech that we haven\u2019t had since the days of retro arcades.','Our vision is for classrooms to be full of students swapping decks and comparing games so screens don\u2019t keep isolating us, but rather bring back creativity and community.']},
   {title:'Milon Hai', cat:'Visual Identity \u2219 UI/UX', year:'2026', client:'Milon Hai', role:'Pattern Design, Merch', tools:'Illustrator, Photoshop', c1:'#ED0560', c2:'#FFDB5A', c3:'#2A52BE', c4:'#005F10', c5:'#F9C4D3', c6:'#EE4C01', ang:135, img:'milon-hai.jpg', heroVideo:'milon-hai-flow.mp4', heroVideoPoster:'milon-hai-flow-poster.jpg', heroVideoCompact:true, img1:'milon-hai.jpg', img2:'milon-hai-landing-flow-v2.mp4', img2Compact:true,
@@ -587,15 +663,15 @@ const ALLWORKS = [
    img4:'maskit-poster-1.jpg', img5:'maskit-poster-2.jpg', img6:'maskit-poster-3.jpg',
    lead:'A digital archive reimagining Israel’s legendary Maskit fashion house as a living, browsable collection.',
    body:['Each historic garment is presented like a museum plate — reference number, origin, medium and pattern — paired with a rendered lookbook shot.','The system carries the label’s heritage craft into a clean, catalogue-like digital format.']},
-  {title:'VOUCH', cat:'UI/UX · App Design · Digital Product', year:'2026', client:'Vouch', role:'Product Design', tools:'Figma', c1:'#93a7d7', c2:'#df5958', c3:'#e2aa91', c4:'#e7ccae', c5:'#d2a59c', ang:150, img:'vouch.jpg',
-   lead:'Vouch is a UX/UI design concept for a social habit-building app, developed during an intensive one-week design sprint at UX studio at Bezalel to explore how shared accountability can overcome the limitations of individual discipline.',
-   body:['By linking the progress of two partners through a “shared streak” mechanism, the app transforms habit-tracking into a social commitment, featuring a unique “Forgiveness Loop” for missed days and a peer-rating system to foster reliability.','Through user research, rapid wireframing, and a vibrant, emotional interface, Vouch merges psychological insights with intuitive interaction design, turning mundane daily routines into a meaningful and supportive social ritual.']},
   {title:'Digital Nomads', cat:'Digital Illustration', year:'2023', client:'Editorial', role:'Illustration', tools:'Procreate, Illustrator', c1:'#e5ebfd', c2:'#6386f7', c3:'#3d5499', c4:'#ee9d81', c5:'#c96470', ang:120, img:'digital-nomads.jpg', heroImg:'digital-nomads-hero.png', heroImgWidth:'85%',
    img1:'digital-nomads-shot-1.png', img2:'digital-nomads-shot-2.png', img3:'digital-nomads-shot-3.png', imgRow:true,
    img4:'digital-nomads-shot-4.png', img5:'digital-nomads-shot-5.png', img6:'digital-nomads-shot-6.png',
    strip:['digital-nomads-strip-1.png','digital-nomads-strip-2.png','digital-nomads-strip-3.png','digital-nomads-strip-4.png','digital-nomads-strip-5.png','digital-nomads-strip-6.png','digital-nomads-strip-7.png'],
    lead:'A flat, friendly illustration series about the new rituals of remote work — laptops, coffee, and shared tables.',
    body:['Bold outlines and a cool blue-and-coral palette give the characters a light, editorial feel.','Built as a flexible cast that can be recomposed across articles, decks and social posts.']},
+  {title:'VOUCH', cat:'UI/UX · App Design · Digital Product', year:'2026', client:'Vouch', role:'Product Design', tools:'Figma', c1:'#93a7d7', c2:'#df5958', c3:'#e2aa91', c4:'#e7ccae', c5:'#d2a59c', ang:150, img:'vouch.jpg',
+   lead:'Vouch is a UX/UI design concept for a social habit-building app, developed during an intensive one-week design sprint at UX studio at Bezalel to explore how shared accountability can overcome the limitations of individual discipline.',
+   body:['By linking the progress of two partners through a “shared streak” mechanism, the app transforms habit-tracking into a social commitment, featuring a unique “Forgiveness Loop” for missed days and a peer-rating system to foster reliability.','Through user research, rapid wireframing, and a vibrant, emotional interface, Vouch merges psychological insights with intuitive interaction design, turning mundane daily routines into a meaningful and supportive social ritual.']},
   {title:'Netflix Dating', cat:'Illustration / Editorial', year:'2025', client:'Netflix', role:'Illustration', tools:'Procreate, Illustrator', c1:'#e13426', c2:'#220c0b', c3:'#f7eedc', c4:'#f3d1c3', c5:'#e8867b', ang:135, img:'netflix-dating.jpg', heroImg:'netflix-dating-hero.png',
    img1:'netflix-dating-shot-1.png', img2:'netflix-dating-shot-2.png', img3:'netflix-dating-shot-3.png', imgRow:true,
    img4:'netflix-dating-shot-4.png', img5:'netflix-dating-shot-5.png', img6:'netflix-dating-shot-6.png',
@@ -658,6 +734,16 @@ if(themeToggleBtn){
     applyHeroPortrait();
   });
 }
+
+/* ---------- fix: <video> with height:auto can keep a stale/default aspect ratio
+   in some browsers, leaving a gap at the bottom that shows the page background
+   through instead of the video content. Lock the box to the real ratio once it's known. ---------- */
+document.getElementById('project').addEventListener('loadedmetadata', (e)=>{
+  const v = e.target;
+  if(v.tagName === 'VIDEO' && v.videoWidth && v.videoHeight){
+    v.style.aspectRatio = v.videoWidth + ' / ' + v.videoHeight;
+  }
+}, true);
 
 const grid = document.getElementById('grid');
 const workPreview = document.getElementById('workPreview');
