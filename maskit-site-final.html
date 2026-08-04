@@ -1,0 +1,2322 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MASHKIT.CODE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600&family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html, body { background:#1C1C1C; }
+  body { margin:0; overflow-x:hidden; }
+  .page { position:relative; }
+  /* grid lines always render on top of images (but below buttons, modals, the fixed bar and the cart) */
+  .stage .hline, .stage .vline { z-index: 1; pointer-events: none; }
+#page-home .wrap { width: 100%; display: flex; justify-content: center; }
+#page-home .stage {
+    position: relative;
+    width: 1512px;
+    height: 3455.6px;
+    background: #1C1C1C;
+    overflow: hidden;
+    transform-origin: top center;
+    font-family: 'Source Code Pro', monospace;
+    color: #FFFFFF;
+  }
+#page-home .stage > * { position: absolute; }
+#page-home .hline { height: 0; border-top: 1px solid #FFFFFF; }
+#page-home .vline { width: 0; border-left: 1px solid #FFFFFF; }
+#page-home .hline.black { border-top-color: #000000; }
+#page-home .vline.black { border-left-color: #000000; }
+#page-home .hline.dim { border-top-color: #101010; }
+#page-home .navbtn {
+    display: flex; align-items: center; justify-content: center;
+    width: 135.63px; height: 41.15px;
+    background: #1C1C1C;
+    border: 1px solid #FFFFFF;
+    font-size: 16px; font-weight: 400; line-height: 20px;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    color: #FFFFFF; white-space: nowrap;
+    top: 18.56px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color .15s ease, color .15s ease;
+  }
+#page-home .navbtn:hover {
+    background: #FFFFFF;
+    color: #000000;
+  }
+#page-home .body-txt {
+    font-size: 16px; font-weight: 400; line-height: 134.96%;
+    letter-spacing: 0.02em; color: #FFFFFF;
+  }
+#page-home .body-light { font-weight: 300; }
+#page-home .heading {
+    font-size: 20px; font-weight: 600; line-height: 134.96%;
+    letter-spacing: 0.02em; color: #FFFFFF;
+  }
+#page-home .tick-label { font-size: 14px; font-weight: 400; line-height: 18px; color: #FFFFFF; }
+#page-home .tick-label.dim { color: #101010; }
+#page-home .tick-label.black { color: #000000; }
+#page-home .cell { overflow: hidden; }
+#page-home .cell img { width: 100%; height: 100%; object-fit: cover; display: block; }
+#page-home .archive-photo img { filter: grayscale(100%); transition: filter .55s ease; }
+#page-home .archive-photo:hover img { filter: grayscale(0%); }
+#page-home .ph { display: flex; align-items: flex-end; justify-content: center;
+        background: repeating-linear-gradient(45deg,#ececec,#ececec 6px,#f6f6f6 6px,#f6f6f6 12px);
+        border: 1px dashed #bdbdbd; overflow: hidden; }
+#page-home .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+#page-home .ph .lbl { position: relative; z-index: 1; font-family:'Source Code Pro',monospace;
+             font-size: 9px; color:#8a8a8a; padding: 4px; text-align:center; line-height:1.3;
+             background: rgba(255,255,255,.65); pointer-events:none; }
+#page-home .ph.cut, #page-home .ph.model { background: none; border: none; }
+#page-home .ph.cut { transition: opacity .2s ease; }
+#page-home .ph.cut:hover { opacity: .9 !important; }
+#page-home .ph.cut img, #page-home .ph.model img { transition: opacity .3s ease; }
+#page-home .chevron { cursor: pointer; user-select: none; }
+#page-home #plateModel { transition: opacity .3s ease; }
+#page-home #plateModel:hover { opacity: .92; }
+#page-home .plate-txt { font-size: 18px; font-weight: 500; line-height: 23px; color: #000000; white-space: pre-line; }
+#page-home .plate-txt .title { font-weight: 600; display:block; margin-bottom: 14px; }
+#page-home .plate-edition { font-size: 18px; font-weight: 400; line-height: 23px; color: #000000; white-space: pre-line; }
+#page-home .chevron { display:flex; align-items:center; justify-content:center; width:37.69px; height:30.68px; background:#1C1C1C; border:1px solid #FFFFFF; }
+#page-catalog .wrap { width: 100%; display: flex; justify-content: center; }
+#page-catalog .stage {
+    position: relative;
+    width: 1512px;
+    height: 5661px;
+    background: #1C1C1C;
+    overflow: hidden;
+    transform-origin: top center;
+    font-family: 'Source Code Pro', monospace;
+    color: #FFFFFF;
+  }
+#page-catalog .stage > * { position: absolute; }
+#page-catalog .hline { height: 1px; background:#FFFFFF; border:0; }
+#page-catalog .vline { width: 1px; background:#FFFFFF; border:0; }
+#page-catalog .navbtn {
+    display: flex; align-items: center; justify-content: center;
+    width: 135.63px; height: 41.15px; top: 18.56px;
+    background: #1C1C1C; border: 1px solid #FFFFFF;
+    font-size: 16px; font-weight: 400; line-height: 20px;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    color: #FFFFFF; white-space: nowrap; text-decoration: none;
+    cursor: pointer; transition: background-color .15s ease, color .15s ease;
+  }
+#page-catalog .navbtn:hover { background: #FFFFFF; color: #000000; }
+#page-catalog .navbtn.active { background: #FFFFFF; color: #000000; border-color: #FFFFFF; }
+#page-catalog .navbtn.active:hover { background: #FFFFFF; color: #000000; }
+#page-catalog .eyebrow {
+    width: 100%; text-align: center;
+    font-size: 13px; font-weight: 400; letter-spacing: 0.45em;
+    text-transform: uppercase; color: rgba(255,255,255,0.32);
+  }
+#page-catalog .monograph {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400; font-size: 54px; line-height: 65px;
+    text-align: center; color: #FFFFFF;
+  }
+#page-catalog .subtitle {
+    font-size: 18px; font-weight: 400; line-height: 23px; letter-spacing:0.01em;
+    text-align: center; color: rgba(255,255,255,0.8);
+  }
+#page-catalog .cell { overflow: hidden; z-index:10; background:transparent; }
+#page-catalog .cat-rect { background:#000000; z-index:0; }
+#page-catalog .tex { z-index:2; }
+#page-catalog .hline, #page-catalog .vline { z-index:999; pointer-events:none; }
+#page-catalog .cell img { width: 100%; height: 100%; object-fit: cover; display: block; }
+#page-catalog .book-cell img { object-fit: contain !important; background: transparent !important; }
+#page-catalog .cell video, #page-catalog video.cell { width: 100%; height: 100%; object-fit: cover; display: block; }
+#page-catalog .tex { mix-blend-mode: multiply; pointer-events: none; }
+#page-catalog .tex img { width: 100%; height: 100%; object-fit: cover; display: block; }
+#page-catalog .viewbtn {
+    display: flex; align-items: center; justify-content: center;
+    width: 135.62px; height: 41.22px;
+    background: #1C1C1C; border: 1px solid #FFFFFF;
+    font-size: 16px; font-weight: 400; line-height: 20px;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    color: #FFFFFF; white-space: nowrap; text-decoration: none;
+    cursor: pointer; transition: background-color .15s ease, color .15s ease;
+    z-index: 1200;
+  }
+#page-catalog .viewbtn:hover { background: #FFFFFF; color: #000000; }
+#page-catalog .ph { display: flex; align-items: center; justify-content: center;
+        background: repeating-linear-gradient(45deg,#3a3a3a,#3a3a3a 8px,#444 8px,#444 16px);
+        border: 1px dashed #6a6a6a; overflow: hidden; }
+#page-catalog .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+#page-catalog .ph .lbl { position: relative; z-index: 1; font-size: 12px; color:#cfcfcf;
+             padding: 6px 10px; text-align:center; line-height:1.4;
+             background: rgba(0,0,0,.45); pointer-events:none; letter-spacing:.04em; }
+#page-catalog .codepanel { z-index:1; background:#000; overflow:hidden; }
+#page-catalog .codepanel pre { margin:0; padding:22px 26px 16px; white-space:pre;
+    font-family:'Source Code Pro',monospace; font-size:14px; line-height:21px;
+    font-weight:400; color:#e9e9e9; }
+#page-catalog .codepanel .cursor { display:inline-block; width:8px; height:15px; margin-left:1px;
+    background:#e9e9e9; vertical-align:-2px; animation:blink 1.05s steps(1) infinite; }
+@keyframes blink { 50% { opacity:0; } }
+#page-catalog .archivescroll { z-index:1; background:#FFFFFF; overflow:hidden; }
+#page-catalog .archivescroll .track { animation: arscroll 34s linear infinite; will-change:transform; padding-top:6px; }
+#page-catalog .archivescroll .row { font-family:'Source Code Pro',monospace; font-size:8.5px;
+    line-height:15px; color:#161616; white-space:nowrap; padding:0 12px; }
+#page-catalog .archivescroll .row .yr { display:inline-block; width:26px; }
+#page-catalog .archivescroll .row .nm { display:inline-block; margin-left:26px; }
+@keyframes arscroll { from { transform:translateY(0); } to { transform:translateY(-50%); } }
+/* ===== live colour-pill archive (replaces static table image) ===== */
+#page-catalog .ar-live { width:100%; height:100%; background:#f6f4ef; overflow:hidden; }
+#page-catalog .ar-live .track { animation: ar2scroll var(--ar2-dur,40s) linear infinite; will-change:transform; }
+#page-catalog .ar-live .row { display:grid; align-items:center; height:19px;
+    grid-template-columns:38px 22px 72px 52px 76px 48px; column-gap:4px; padding:0 8px;
+    border-bottom:1px solid rgba(0,0,0,.07);
+    font-family:'Source Code Pro',monospace; line-height:1; white-space:nowrap; }
+#page-catalog .ar-live .id { color:#a09a90; font-size:7.5px; letter-spacing:-.02em; overflow:hidden; text-overflow:ellipsis; }
+#page-catalog .ar-live .yr { color:#2a2620; font-weight:700; font-size:9px; }
+#page-catalog .ar-live .pill { display:inline-block; max-width:100%; justify-self:start;
+    padding:3px 7px; border-radius:999px; font-size:8px; line-height:1;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+#page-catalog .ar-live .plain { color:#6a655c; font-size:8px; justify-self:start; max-width:100%;
+    overflow:hidden; text-overflow:ellipsis; }
+#page-catalog .ar-live .coral{background:#e8797e;color:#6e2024}
+#page-catalog .ar-live .orange{background:#e89149;color:#7a3d11}
+#page-catalog .ar-live .green{background:#84cf91;color:#245c2f}
+#page-catalog .ar-live .blue{background:#828fde;color:#2c3576}
+#page-catalog .ar-live .teal{background:#62d0c4;color:#135750}
+#page-catalog .ar-live .yellow{background:#f0d567;color:#6b5410}
+#page-catalog .ar-live .purple{background:#b9a2e2;color:#4a3578}
+#page-catalog .ar-live .pink{background:#f0a6cb;color:#7d2f57}
+#page-catalog .ar-live .gray{background:#d9d7d2;color:#4a4742}
+#page-catalog .ar-live .pale{background:#cfe9d2;color:#356b40}
+@keyframes ar2scroll { from { transform:translateY(0); } to { transform:translateY(-50%); } }
+#page-product .wrap { width: 100%; display: flex; justify-content: center; }
+#page-product .stage { position: relative; width: 1512px; height: 983px; background: #1C1C1C;
+    overflow: hidden; border-bottom:1px solid #FFFFFF; transform-origin: top center; font-family: 'Source Code Pro', monospace; color: #FFFFFF; }
+#page-product .stage > * { position: absolute; }
+#page-product .hline { height: 0; border-top: 1px solid #FFFFFF; }
+#page-product .vline { width: 0; border-left: 1px solid #FFFFFF; }
+#page-product .navbtn { display: flex; align-items: center; justify-content: center;
+    width: 135.63px; height: 41.15px; top: 18.56px; background: #1C1C1C; border: 1px solid #FFFFFF;
+    font-size: 16px; font-weight: 400; line-height: 20px; letter-spacing: 0.04em; text-transform: uppercase;
+    color: #FFFFFF; white-space: nowrap; text-decoration: none; cursor: pointer;
+    transition: background-color .15s ease, color .15s ease; }
+#page-product .navbtn:hover { background: #FFFFFF; color: #1C1C1C; }
+#page-product .navbtn.active { background: #FFFFFF; color: #1C1C1C; }
+#page-product .pp-back { left: 128.97px; top: 111.72px; width: 37.69px; height: 30.68px;
+    background: #1C1C1C; border: 1px solid #FFFFFF; display: flex; align-items: center; justify-content: center;
+    font-size: 24px; color: #FFFFFF; text-decoration: none; cursor: pointer; }
+#page-product .pp-back:hover { background: #FFFFFF; color: #1C1C1C; }
+#page-product .pp-thumbs { left: 84px; top: 460px; width: 100px; display: flex; flex-direction: column;
+    align-items: center; gap: 16px; }
+#page-product .pp-thumbs img { width: 70px; height: 100px; object-fit: contain; opacity: .5; cursor: pointer;
+    transition: opacity .2s ease; }
+#page-product .pp-thumbs img:hover { opacity: .85; }
+#page-product .pp-thumbs img.active { opacity: 1; }
+#page-product .pp-main { left: 286.87px; top: 169.38px; width: 405.01px; height: 721.3px; }
+#page-product .pp-main img { width: 100%; height: 100%; object-fit: contain; display: block; }
+#page-product .pp-arrow { display:flex; align-items:center; justify-content:center; width:37.69px; height:30.68px; background:#1C1C1C; border:1px solid #FFFFFF; cursor:pointer; user-select:none; }
+.chev { fill:none; stroke:#FFFFFF; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; display:block; }
+#page-product .pp-back:hover .chev, #page-product2 .pp-back:hover .chev, #page-product .pp-arrow:hover .chev, #page-product2 .pp-arrow:hover .chev, #page-home .chevron:hover .chev, #page-checkout .ck-back:hover .chev { stroke:#1C1C1C; }
+#page-product .pp-arrow:hover, #page-product2 .pp-arrow:hover, #page-home .chevron:hover { background:#FFFFFF; }
+#page-product .pp-title { left: 779.72px; top: 108.38px; width: 469px; font-family: 'Cormorant Garamond', serif;
+    font-weight: 400; font-size: 50px; line-height: 61px; color: #FFFFFF; white-space: nowrap; }
+#page-product .pp-price { left: 1315.65px; top: 118.88px; font-family: 'Cormorant Garamond', serif;
+    font-weight: 400; font-size: 33px; line-height: 40px; color: #FFFFFF; }
+#page-product .pp-code { left: 779.72px; top: 211.23px; font-size: 16px; font-weight: 500; line-height: 18px; color: #FFFFFF; }
+#page-product .pp-desc { left: 779.72px; top: 261.68px; width: 471.59px; font-size: 16px; font-weight: 400; line-height: 20px; color: #FFFFFF; }
+#page-product .pp-label { left: 779.72px; font-size: 15px; font-weight: 500; line-height: 18px; color: #FFFFFF; }
+#page-product .pp-value { right: 260px; text-align: right; font-size: 14px; font-weight: 400; line-height: 18px; color: #FFFFFF; }
+#page-product .pp-note { left: 779.72px; width: 479.69px; font-size: 15px; font-weight: 500; line-height: 18px; color: #FFFFFF; }
+#page-product .pp-note .h { display: block; margin-bottom: 14px; }
+#page-product .pp-note p { font-weight: 500; margin-bottom: 0; }
+#page-product .pp-hr { left: 756px; height: 0; border-top: 1px solid #FFFFFF; }
+#page-product .pp-v { top: 78px; width: 0; height: 905px; border-left: 1px solid #FFFFFF; }
+#page-product .pp-add { left: 1296.86px; top: 921.55px; width: 135.62px; height: 41.22px;
+    display: flex; align-items: center; justify-content: center; background: #1C1C1C; border: 1px solid #FFFFFF;
+    color: #FFFFFF; font-size: 16px; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; text-decoration: none;
+    transition: background-color .15s ease, color .15s ease; }
+#page-product .pp-add:hover { background: #FFFFFF; color: #1C1C1C; }
+#page-product2 .wrap { width: 100%; display: flex; justify-content: center; }
+#page-product2 .stage { position: relative; width: 1512px; height: 983px; background: #1C1C1C;
+    overflow: hidden; border-bottom:1px solid #FFFFFF; transform-origin: top center; font-family: 'Source Code Pro', monospace; color: #FFFFFF; }
+#page-product2 .stage > * { position: absolute; }
+#page-product2 .hline { height: 0; border-top: 1px solid #FFFFFF; }
+#page-product2 .vline { width: 0; border-left: 1px solid #FFFFFF; }
+#page-product2 .navbtn { display: flex; align-items: center; justify-content: center;
+    width: 135.63px; height: 41.15px; top: 18.56px; background: #1C1C1C; border: 1px solid #FFFFFF;
+    font-size: 16px; font-weight: 400; line-height: 20px; letter-spacing: 0.04em; text-transform: uppercase;
+    color: #FFFFFF; white-space: nowrap; text-decoration: none; cursor: pointer;
+    transition: background-color .15s ease, color .15s ease; }
+#page-product2 .navbtn:hover { background: #FFFFFF; color: #1C1C1C; }
+#page-product2 .navbtn.active { background: #FFFFFF; color: #1C1C1C; }
+#page-product2 .pp-back { left: 128.97px; top: 111.72px; width: 37.69px; height: 30.68px;
+    background: #1C1C1C; border: 1px solid #FFFFFF; display: flex; align-items: center; justify-content: center;
+    font-size: 24px; color: #FFFFFF; text-decoration: none; cursor: pointer; }
+#page-product2 .pp-back:hover { background: #FFFFFF; color: #1C1C1C; }
+#page-product2 .pp-thumbs { left: 84px; top: 460px; width: 100px; display: flex; flex-direction: column;
+    align-items: center; gap: 16px; }
+#page-product2 .pp-thumbs img { width: 70px; height: 100px; object-fit: contain; opacity: .5; cursor: pointer;
+    transition: opacity .2s ease; }
+#page-product2 .pp-thumbs img:hover { opacity: .85; }
+#page-product2 .pp-thumbs img.active { opacity: 1; }
+#page-product2 .pp-main { left: 286.87px; top: 169.38px; width: 405.01px; height: 721.3px; }
+#page-product2 .pp-main img { width: 100%; height: 100%; object-fit: contain; display: block; }
+#page-product2 .pp-arrow { display:flex; align-items:center; justify-content:center; width:37.69px; height:30.68px; background:#1C1C1C; border:1px solid #FFFFFF; cursor:pointer; user-select:none; }
+#page-product2 .pp-title { left: 779.72px; top: 108.38px; width: 469px; font-family: 'Cormorant Garamond', serif;
+    font-weight: 400; font-size: 50px; line-height: 61px; color: #FFFFFF; white-space: nowrap; }
+#page-product2 .pp-price { left: 1315.65px; top: 118.88px; font-family: 'Cormorant Garamond', serif;
+    font-weight: 400; font-size: 33px; line-height: 40px; color: #FFFFFF; }
+#page-product2 .pp-code { left: 779.72px; top: 211.23px; font-size: 16px; font-weight: 500; line-height: 18px; color: #FFFFFF; }
+#page-product2 .pp-desc { left: 779.72px; top: 261.68px; width: 471.59px; font-size: 16px; font-weight: 400; line-height: 20px; color: #FFFFFF; }
+#page-product2 .pp-label { left: 779.72px; font-size: 15px; font-weight: 500; line-height: 18px; color: #FFFFFF; }
+#page-product2 .pp-value { right: 260px; text-align: right; font-size: 14px; font-weight: 400; line-height: 18px; color: #FFFFFF; }
+#page-product2 .pp-note { left: 779.72px; width: 479.69px; font-size: 15px; font-weight: 500; line-height: 18px; color: #FFFFFF; }
+#page-product2 .pp-note .h { display: block; margin-bottom: 14px; }
+#page-product2 .pp-note p { font-weight: 500; margin-bottom: 0; }
+#page-product2 .pp-hr { left: 756px; height: 0; border-top: 1px solid #FFFFFF; }
+#page-product2 .pp-v { top: 78px; width: 0; height: 905px; border-left: 1px solid #FFFFFF; }
+#page-product2 .pp-add { left: 1296.86px; top: 921.55px; width: 135.62px; height: 41.22px;
+    display: flex; align-items: center; justify-content: center; background: #1C1C1C; border: 1px solid #FFFFFF;
+    color: #FFFFFF; font-size: 16px; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; text-decoration: none;
+    transition: background-color .15s ease, color .15s ease; }
+#page-product2 .pp-add:hover { background: #FFFFFF; color: #1C1C1C; }
+#page-checkout .wrap { width: 100%; display: flex; justify-content: center; }
+#page-checkout .stage { position: relative; width: 1512px; height: 982px; background: #1C1C1C;
+    overflow: hidden; border-bottom:1px solid #FFFFFF; transform-origin: top center; font-family: 'Source Code Pro', monospace; color: #FFFFFF; }
+#page-checkout .stage > * { position: absolute; }
+#page-checkout .hline { height: 0; border-top: 1px solid #FFFFFF; }
+#page-checkout .vline { width: 0; border-left: 1px solid #FFFFFF; }
+#page-checkout .navbtn { display: flex; align-items: center; justify-content: center;
+    width: 135.63px; height: 41.15px; top: 18.56px; background: #1C1C1C; border: 1px solid #FFFFFF;
+    font-size: 16px; line-height: 20px; letter-spacing: 0.04em; text-transform: uppercase;
+    color: #FFFFFF; white-space: nowrap; text-decoration: none; cursor: pointer;
+    transition: background-color .15s ease, color .15s ease; }
+#page-checkout .navbtn:hover, #page-checkout .navbtn.active { background: #FFFFFF; color: #1C1C1C; }
+#page-checkout .ck-eyebrow { left: 100px; top: 104px; font-size: 12px; letter-spacing: .22em; color: rgba(255,255,255,.55); }
+#page-checkout .ck-title { left: 98px; top: 120px; font-family: 'Cormorant Garamond', serif; font-weight: 400;
+    font-size: 46px; line-height: 56px; color: #FFFFFF; }
+#page-checkout .ck-back { left: 1230px; top: 116px; width: 182px; height: 34px; display: flex; align-items: center; justify-content: center; gap:7px;
+    border: 1px solid #FFFFFF; color: #FFFFFF; font-size: 12px; letter-spacing: .08em;
+    text-transform: uppercase; cursor: pointer; background: #1C1C1C; transition: all .15s ease; }
+#page-checkout .ck-back:hover { background:#FFFFFF; color: #1C1C1C; }
+#page-checkout .ck-divider { left: 561px; top: 189.67px; height: 792.33px; }
+#page-checkout .ck-sum { left: 100px; top: 232px; width: 420px; }
+#page-checkout .ck-sum .lbl { font-size: 11px; letter-spacing: .14em; color: rgba(255,255,255,.5); text-transform: uppercase; }
+#page-checkout .ck-prod { display: flex; gap: 22px; margin-top: 26px; }
+#page-checkout .ck-prod .img { width: 132px; height: 198px; flex: none; display: flex; align-items: center; justify-content: center; }
+#page-checkout .ck-prod .img img { width: 100%; height: 100%; object-fit: contain; }
+#page-checkout .ck-prod .meta { padding-top: 6px; }
+#page-checkout .ck-prod .ed { font-size: 11px; letter-spacing: .1em; color: rgba(255,255,255,.55); }
+#page-checkout .ck-prod .nm { font-family: 'Cormorant Garamond', serif; font-size: 26px; line-height: 30px; margin: 10px 0 14px; }
+#page-checkout .ck-prod .ds { font-size: 12px; line-height: 17px; color: rgba(255,255,255,.7); }
+#page-checkout .ck-prod .pr { font-family: 'Cormorant Garamond', serif; font-size: 24px; margin-top: 16px; }
+#page-checkout .ck-lines { margin-top: 40px; border-top: 1px solid rgba(255,255,255,.3); }
+#page-checkout .ck-row { display: flex; justify-content: space-between; padding: 13px 0; font-size: 12px;
+    border-bottom: 1px solid rgba(255,255,255,.18); }
+#page-checkout .ck-row .v { color: rgba(255,255,255,.75); }
+#page-checkout .ck-total { display: flex; justify-content: space-between; align-items: center; margin-top: 18px;
+    background: #FFFFFF; color: #1C1C1C; padding: 14px 18px; }
+#page-checkout .ck-total .t { font-size: 13px; font-weight: 600; letter-spacing: .04em; }
+#page-checkout .ck-total .a { font-family: 'Cormorant Garamond', serif; font-size: 22px; }
+#page-checkout .ck-note { margin-top: 16px; font-size: 11px; line-height: 16px; color: rgba(255,255,255,.45); }
+#page-checkout .ck-form { left: 616px; top: 224px; width: 800px; }
+#page-checkout .ck-sec { font-size: 12px; letter-spacing: .14em; color: rgba(255,255,255,.55); text-transform: uppercase;
+    margin: 26px 0 14px; }
+#page-checkout .ck-sec:first-child { margin-top: 0; }
+#page-checkout .ck-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 18px; }
+#page-checkout .ck-field { display: flex; flex-direction: column; gap: 6px; }
+#page-checkout .ck-field.full { grid-column: 1 / -1; }
+#page-checkout .ck-field label { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.5); }
+#page-checkout .ck-field input, #page-checkout .ck-field select { background: transparent; border: 1px solid rgba(255,255,255,.4);
+    color: #FFFFFF; font-family: 'Source Code Pro', monospace; font-size: 14px; padding: 10px 13px; outline: none;
+    border-radius: 0; transition: border-color .15s ease; }
+#page-checkout .ck-field input::placeholder { color: rgba(255,255,255,.28); }
+#page-checkout .ck-field input:focus, #page-checkout .ck-field select:focus { border-color: #FFFFFF; }
+#page-checkout .ck-field select { color: rgba(255,255,255,.85); appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, rgba(255,255,255,.5) 50%),
+      linear-gradient(135deg, rgba(255,255,255,.5) 50%, transparent 50%);
+    background-position: calc(100% - 18px) center, calc(100% - 13px) center;
+    background-size: 5px 5px, 5px 5px; background-repeat: no-repeat; }
+#page-checkout .ck-field select option { background: #1C1C1C; }
+#page-checkout .ck-submit { margin-top: 12px; width: 100%; height: 52px; display: flex; align-items: center; justify-content: center;
+    gap: 14px; background: #FFFFFF; color: #1C1C1C; border: none; cursor: pointer;
+    font-family: 'Source Code Pro', monospace; font-size: 15px; letter-spacing: .06em; text-transform: uppercase;
+    transition: opacity .15s ease; }
+#page-checkout .ck-submit:hover { opacity: .85; }
+#page-checkout .ck-submit .amt { font-family: 'Cormorant Garamond', serif; font-size: 20px; text-transform: none; }
+#page-checkout .ck-disclaim { margin-top: 12px; font-size: 10.5px; color: rgba(255,255,255,.4); text-align: center; letter-spacing: .03em; }
+#page-loading .wrap { width: 100%; display: flex; justify-content: center; }
+#page-loading .stage { position: relative; width: 1512px; height: 982px; background: #1C1C1C;
+    overflow: hidden; transform-origin: top center; font-family: 'Source Code Pro', monospace; color: #FFFFFF; }
+#page-loading .ld-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    width: 560px; text-align: center; }
+#page-loading .ld-brand { font-size: 12px; letter-spacing: .42em; color: rgba(255,255,255,.5); }
+#page-loading .ld-head { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 44px; line-height: 52px;
+    margin: 22px 0 30px; }
+#page-loading .ld-track { position: relative; width: 100%; height: 2px; background: rgba(255,255,255,.18); overflow: hidden; }
+#page-loading .ld-fill { position: absolute; top: 0; height: 100%; width: 32%; background: #FFFFFF;
+    animation: ldslide 1.5s cubic-bezier(.6,.0,.4,1) infinite; }
+@keyframes ldslide { 0% { left: -34%; } 100% { left: 102%; } }
+#page-loading .ld-status { margin-top: 22px; font-size: 12.5px; letter-spacing: .06em; color: rgba(255,255,255,.7);
+    min-height: 16px; }
+#page-loading .ld-status .dot { display: inline-block; animation: ldblink 1.2s steps(1) infinite; }
+#page-loading .ld-status .dot:nth-child(2) { animation-delay: .2s; }
+#page-loading .ld-status .dot:nth-child(3) { animation-delay: .4s; }
+@keyframes ldblink { 0%,50%{ opacity: 1; } 50.01%,100%{ opacity: .15; } }
+#page-loading .ld-sub { margin-top: 46px; font-size: 10.5px; letter-spacing: .14em; color: rgba(255,255,255,.32); }
+#page-loading .ld-corner { position: absolute; font-size: 11px; letter-spacing: .14em; color: rgba(255,255,255,.3); }
+#page-confirm .wrap { width: 100%; display: flex; justify-content: center; }
+#page-confirm .stage { position: relative; width: 1512px; height: 2236px; background: #1C1C1C;
+    overflow: hidden; transform-origin: top center; font-family: 'Source Code Pro', monospace; color: #FFFFFF; }
+#page-confirm .stage > * { position: absolute; }
+#page-confirm .hline { height: 0; border-top: 1px solid #FFFFFF; }
+#page-confirm .vline { width: 0; border-left: 1px solid #FFFFFF; }
+#page-confirm .navbtn { display: flex; align-items: center; justify-content: center;
+    width: 135.62px; height: 41.22px; top: 18.83px; background: #1C1C1C; border: 1px solid #FFFFFF;
+    font-size: 16px; line-height: 20px; letter-spacing: 0.04em; text-transform: uppercase;
+    color: #FFFFFF; white-space: nowrap; text-decoration: none; cursor: pointer;
+    transition: background-color .15s ease, color .15s ease; }
+#page-confirm .navbtn:hover { background: #FFFFFF; color: #1C1C1C; }
+#page-confirm .cf-status { left: 0; width: 1512px; text-align: center; }
+#page-confirm .cf-steps { top: 188px; font-size: 13px; letter-spacing: .14em; color: rgba(255,255,255,.42); }
+#page-confirm .cf-steps .on { color: #cfcfcf; }
+#page-confirm .cf-steps .dash { color: #3c3c3c; margin: 0 14px; letter-spacing: 0; }
+#page-confirm .cf-bound { top: 248px; font-size: 14px; letter-spacing: .14em; color: rgba(255,255,255,.34); }
+#page-confirm .cf-title { left: 531.01px; width: 452px; text-align: center; top: 317.85px;
+    font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 64px; line-height: 78px; color: #FFFFFF; }
+#page-confirm .cf-origin-img { left: 97px; top: 548.28px; width: 273.41px; height: 356.02px; overflow: hidden; }
+#page-confirm .cf-origin-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+#page-confirm .cf-cap { font-size: 15px; line-height: 19px; color: #FFFFFF; }
+#page-confirm .cf-cap.origin { left: 105.21px; top: 925.79px; width: 256.99px; text-align:center; }
+#page-confirm .cf-cap.desc { left: 120.43px; top: 1551.85px; width: 226.55px; text-align:center; }
+#page-confirm .cf-desc-img { left: 115.12px; top: 1106.93px; width: 237.17px; height: 422.39px; }
+#page-confirm .cf-desc-img img { width: 100%; height: 100%; object-fit: contain; display: block; }
+#page-confirm .cf-head { left:580.37px; font-family:'Cormorant Garamond', serif; font-weight:400; font-size:36px; line-height:44px; color:#FFFFFF; }
+#page-confirm .cf-body { width:697.63px; font-family:'Source Code Pro', monospace; font-weight:400; font-size:13px; line-height:17px; color:#FFFFFF; }
+#page-confirm .cf-body.origin-text { left:580.37px; top:636px; }
+#page-confirm .cf-body.translation-text { left:580.37px; top:1206px; }
+#page-confirm .cf-year { left: 1309.44px; width: 36px; text-align:left; font-size: 15px; line-height: 19px; color: #FFFFFF; }
+#page-confirm .cf-tick { left: 1357.34px; width: 9.69px; height: 0; border-top: 1px solid #FFFFFF; }
+#page-confirm .cf-btn { width: 208px; height: 42px; display: flex; align-items: center; justify-content: center;
+    background: #1C1C1C; border: 1px solid #FFFFFF; color: #FFFFFF; font-size: 16px; letter-spacing: .04em;
+    text-transform: uppercase; cursor: pointer; text-decoration: none;
+    transition: background-color .15s ease, color .15s ease; }
+#page-confirm .cf-btn:hover { background: #FFFFFF; color: #1C1C1C; }
+#page-confirm .cf-wear { left: 587.43px; width: 337.15px; text-align: center; top: 1998px;
+    font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 64px; line-height: 78px; color: #FFFFFF; }
+#page-confirm .cf-foot { left: 401.28px; width: 709.45px; top: 2106px; text-align: center;
+    font-size: 16px; line-height: 20px; color: #ACACAC; }
+#page-confirm .cf-foot a { color: #ACACAC; }
+#page-certificate .wrap { width: 100%; display: flex; justify-content: center; }
+#page-certificate .stage { position: relative; width: 1512px; height: 982px; background: #1C1C1C;
+    overflow: hidden; transform-origin: top center; font-family: 'Source Code Pro', monospace; color: #FFFFFF; }
+#page-certificate .stage > * { position: absolute; }
+#page-certificate .hline { height: 0; border-top: 1px solid #FFFFFF; }
+#page-certificate .vline { width: 0; border-left: 1px solid #FFFFFF; }
+#page-certificate .navbtn { position: absolute; display: flex; align-items: center; justify-content: center;
+    width: 135.62px; height: 41.22px; top: 18.83px; background: #1C1C1C; border: 1px solid #FFFFFF;
+    font-size: 16px; line-height: 20px; letter-spacing: 0.04em; text-transform: uppercase;
+    color: #FFFFFF; white-space: nowrap; text-decoration: none; cursor: pointer; }
+#page-certificate .ct-veil { inset: 0; background: rgba(28,28,28,.82); z-index: 2; }
+#page-certificate .ct-paper { inset: 0; z-index: 2; pointer-events: none;
+    background: url('maskit-img-1.jpg') center/cover no-repeat; opacity: .85;
+    -webkit-backdrop-filter: blur(4.5px); backdrop-filter: blur(4.5px); }
+#page-certificate .ct-nav { z-index: 3; opacity: .38; }
+#page-certificate .ct-nav .navbtn:hover { background: #FFFFFF; color: #1C1C1C; }
+#page-certificate .ct-card { left: 331.12px; top: 189.88px; width: 849.76px; height: 602.87px; z-index: 4;
+    box-shadow: 0 18px 60px rgba(0,0,0,.45); }
+#page-certificate .ct-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+#page-certificate .ct-dl { left: calc(50% - 116.5px); top: 823.24px; width: 233px; height: 42px; z-index: 5;
+    display: flex; align-items: center; justify-content: center; background: #1C1C1C; border: 1px solid #FFFFFF;
+    color: #FFFFFF; font-size: 16px; letter-spacing: .04em; text-transform: uppercase; cursor: pointer;
+    transition: background-color .15s ease, color .15s ease; }
+#page-certificate .ct-dl:hover { background: #FFFFFF; color: #1C1C1C; }
+</style></head>
+<body>
+<!-- ===== FIXED TOP BAR ===== -->
+<style>
+  #topbar{ position:fixed; top:0; left:0; right:0; z-index:9000; height:78px; box-sizing:border-box;
+    background:#1C1C1C; border-bottom:1px solid #FFFFFF; font-family:'Source Code Pro',monospace; }
+  #topbar .tb-inner{ width:100%; height:100%; margin:0 auto; box-sizing:border-box;
+    padding:0 79px; display:flex; align-items:center; justify-content:space-between; }
+  #topbar .tb-left{ display:flex; align-items:center; gap:39px; }
+  #topbar .tb-btn{ display:flex; align-items:center; justify-content:center; min-width:135px; height:41px;
+    padding:0 12px; box-sizing:border-box; background:#1C1C1C; border:1px solid #FFFFFF; color:#FFFFFF;
+    font-size:16px; line-height:20px; letter-spacing:.04em; text-transform:uppercase; white-space:nowrap;
+    text-decoration:none; cursor:pointer; transition:background-color .15s ease, color .15s ease; }
+  #topbar .tb-btn:hover{ background:#FFFFFF; color:#000000; }
+  #topbar .tb-btn.active{ background:#FFFFFF; color:#000000; }
+  /* theme toggle */
+  #topbar .tb-right{ display:flex; align-items:center; gap:18px; }
+  #topbar .tb-toggle{ width:54px; height:28px; flex:none; padding:0; position:relative; cursor:pointer;
+    background:transparent; border:1px solid #FFFFFF; border-radius:999px; }
+  #topbar .tb-knob{ position:absolute; top:3px; left:3px; width:20px; height:20px; border-radius:50%;
+    background:#FFFFFF; transition:transform .22s ease; }
+  body.light #topbar .tb-knob{ transform:translateX(26px); }
+  /* ===== LIGHT MODE: pure white chrome with original media colours ===== */
+  body.light{ background:#FFFFFF; }
+  body.light .page:not(#page-home) .stage,
+  body.light #topbar,
+  body.light #cartOverlay{ filter:invert(1) hue-rotate(180deg) brightness(1.124); }
+  body.light .page:not(#page-home) img, body.light .page:not(#page-home) video,
+  body.light #cartOverlay img, body.light #topbar img{ filter:invert(1) hue-rotate(180deg) brightness(0.89); }
+  body.light #page-home{ filter:none; }
+  body.light #page-home .stage{ background:#FFFFFF; }
+  body.light #page-home .stage > :not(.plate-section):not(.cell):not(video){ filter:invert(1) hue-rotate(180deg) brightness(1.124); }
+  body.light #page-home img, body.light #page-home video{ filter:none; }
+  /* archive photos keep their archive grayscale treatment without shifting hue */
+  body.light #page-home .archive-photo img{ filter:grayscale(100%); }
+  body.light #page-home .archive-photo:hover img{ filter:grayscale(0%); }
+  /* catalog paper-texture overlay uses multiply (breaks under the invert filter); hide it in light mode so the spreads underneath stay clean */
+  body.light #page-catalog .tex{ display:none; }
+
+  body.light #page-catalog .stage{ filter:none !important; background:#FFFFFF !important; color:#000000 !important; }
+  body.light #page-catalog .hline,
+  body.light #page-catalog .vline{ background:#000000 !important; border-color:#000000 !important; }
+  body.light #page-catalog .eyebrow,
+  body.light #page-catalog .monograph,
+  body.light #page-catalog .subtitle{ color:#000000 !important; }
+  body.light #page-catalog .viewbtn{ background:#FFFFFF !important; color:#000000 !important; border-color:#000000 !important; }
+
+  body.light #page-catalog .ar-live{ filter:invert(1) hue-rotate(180deg) brightness(0.89); }
+  body.light #page-catalog img{ filter:none !important; mix-blend-mode:normal !important; opacity:1 !important; }
+  body.light #page-catalog .book-cell{ background:#FFFFFF !important; background-color:#FFFFFF !important; }
+  body.light #page-catalog .book-cell img{ filter:none !important; mix-blend-mode:normal !important; opacity:1 !important; }
+  body.light #page-catalog video{ filter:invert(1) hue-rotate(180deg) brightness(0.95) contrast(1.02) !important; background-color:#FFFFFF !important; }
+  body.light #page-catalog .archivescroll,
+  body.light #page-catalog .codepanel{ filter:invert(1) hue-rotate(180deg) brightness(0.89) !important; }
+  body.light #page-catalog .archivescroll{ background:#FFFFFF !important; }
+  body.light #page-catalog .cat-rect{ background:#FFFFFF !important; }
+
+  body.light #page-catalog .stage,
+  body.light #page-catalog .cell,
+  body.light #page-catalog video,
+  body.light #page-catalog .codepanel,
+  body.light #page-catalog .archivescroll{ background-color:#FFFFFF !important; }
+  body.light #page-catalog [style*="background:#000"],
+  body.light #page-catalog [style*="background: #000"],
+  body.light #page-catalog [style*="background-color:#000"],
+  body.light #page-catalog [style*="background-color: #000"]{ background:#FFFFFF !important; background-color:#FFFFFF !important; }
+
+
+  body.light #page-home .plate-section{ filter:none; }
+  body.light #page-home .plate-section #cut0,
+  body.light #page-home .plate-section #cut1,
+  body.light #page-home .plate-section #cut3,
+  body.light #page-home .plate-section #cut4,
+  body.light #page-home .plate-section #cut5{ opacity:.52 !important; }
+  body.light #page-home .plate-section #cut0 img,
+  body.light #page-home .plate-section #cut1 img,
+  body.light #page-home .plate-section #cut3 img,
+  body.light #page-home .plate-section #cut4 img,
+  body.light #page-home .plate-section #cut5 img{ filter:brightness(.96) contrast(1.06) saturate(1.02); }
+  body.light #page-home .plate-section #plateModel img{ filter:brightness(.88) contrast(1.12) saturate(1.02); }
+  body.light .site-footer{ background:#FFFFFF; color:#000000; border-top-color:rgba(0,0,0,.55); }
+  body.light .site-footer .sf-line{ background:#000000; }
+  body.light .site-footer .sf-pt .yr{ color:#000000; }
+  body.light .site-footer .sf-pt .tick{ background:rgba(0,0,0,.6); }
+  body.light .site-footer .sf-pt .dot{ border-color:#000000; background:#FFFFFF; }
+  body.light .site-footer .sf-pt.end .dot,
+  body.light .site-footer .sf-pt:hover .dot{ background:#000000; }
+  body.light .site-footer .sf-pt .cap,
+  body.light .site-footer .sf-tag,
+  body.light .site-footer .sf-col span,
+  body.light .site-footer .sf-bottom{ color:rgba(0,0,0,.48); }
+  body.light .site-footer .sf-pt:hover .cap,
+  body.light .site-footer .sf-col a{ color:rgba(0,0,0,.8); }
+  body.light .site-footer .sf-col a:hover{ color:#000000; }
+  body.light .site-footer .sf-h{ color:rgba(0,0,0,.42); }
+  body.light .site-footer .sf-bottom{ border-top-color:rgba(0,0,0,.18); }
+  .home-footer{ border-top:0 !important; }
+  .catalog-footer{ border-top:0 !important; margin-top:-1px; }
+  .product-footer{ border-top:0 !important; margin-top:-1px; }
+  .checkout-footer{ border-top:0 !important; margin-top:-1px; }
+  .confirm-footer{ border-top:0 !important; margin-top:-1px; }
+  .site-footer .sf-line{ height:1px !important; background:#FFFFFF !important; }
+  body.light .site-footer .sf-line{ height:1px !important; background:#000000 !important; }
+  /* the fixed bar replaces the per-page nav rows */
+  .page .navbtn{ display:none !important; }
+  @media (max-width:560px){
+    #topbar{ height:62px; }
+    #topbar .tb-inner{ padding:0 16px; }
+    #topbar .tb-left{ gap:10px; }
+    #topbar .tb-btn{ min-width:0; height:36px; font-size:13px; padding:0 9px; }
+  }
+</style>
+<div id="topbar">
+  <div class="tb-inner">
+    <div class="tb-left">
+      <a href="#" class="tb-btn" data-go="home">Home</a>
+      <a href="#" class="tb-btn" data-go="home" data-scroll="conceptAnchor">concept</a>
+      <a href="#" class="tb-btn" data-go="catalog">Catalog</a>
+    </div>
+    <div class="tb-right">
+      <button id="themeToggle" class="tb-toggle" type="button" aria-label="Switch light / dark mode" title="Light / Dark mode"><span class="tb-knob"></span></button>
+      <a href="#" class="tb-btn" data-cart-open>Cart</a>
+    </div>
+  </div>
+</div>
+<script>
+(function(){ var t=document.getElementById('themeToggle'); if(t){ t.addEventListener('click', function(){ document.body.classList.toggle('light'); }); } })();
+</script>
+<!-- ===== /FIXED TOP BAR ===== -->
+  <div class="page" id="page-home"><div class="wrap">
+<div class="stage">
+
+  <!-- ================= NAV BAR ================= -->
+  <a class="navbtn" href="#" data-go="home" style="left:79.38px;">Home</a>
+  <a class="navbtn" href="#" data-go="home" data-scroll="conceptAnchor" style="left:253.56px;">concept</a>
+  <a class="navbtn" href="#" data-go="catalog" style="left:427.74px;">Catalog</a>
+  <a class="navbtn" href="#" data-cart-open style="left:1297.30px;">CArt</a>
+
+  <!-- top/corner frame lines removed so the video sits clean under the fixed bar -->
+
+  <!-- ================= HERO VIDEO ================= -->
+  <video class="cell" width="3840" height="1986" style="left:60.0px; top:78.22px; width:1391.59px; height:720px; object-fit:cover;"
+         autoplay muted loop playsinline>
+    <source src="maskit-vid-1.mp4" type="video/mp4">
+  </video>
+
+  <div class="hline" style="left:-1px; top:798.22px; width:1514.13px;"></div>
+
+  <div class="vline" style="left:408px; top:798.22px; height:348.11px;"></div>
+
+  <!-- frame side rails -->
+  <div class="vline" style="left:59.6px; top:0px; height:2535.81px;"></div>
+  <div class="vline" style="left:1451.6px; top:0px; height:2537.39px;"></div>
+
+  <!-- ================= CONCEPT / INTRO ================= -->
+  <div class="heading" id="conceptAnchor" style="left:158.1px; top:958.82px; width:149.72px;">MASHKIT.CODE</div>
+  <div class="body-txt" style="left:518.1px; top:917.46px; width:823.69px;">MASHKIT.CODE is a contemporary fashion house developed from the archive of Maskit.<br><br>Working with historical garments, textiles, imagery and material culture, the project extends the visual language of Maskit into the present through new collections, digital objects and contemporary forms of production.</div>
+
+  <!-- ================= ARCHIVE GRID ================= -->
+  <!-- horizontal grid lines -->
+  <div class="hline" style="left:-75px; top:1146.33px; width:1660.26px;"></div>
+  <div class="hline" style="left:-60px; top:1493.67px; width:1629.92px;"></div>
+  <div class="hline" style="left:-60px; top:1841.01px; width:1629.92px;"></div>
+  <div class="hline" style="left:-60px; top:2188.34px; width:1630.34px;"></div>
+  <div class="hline" style="left:-60px; top:2535.49px; width:1630.34px;"></div>
+
+  <!-- vertical grid lines -->
+  <div class="vline" style="left:408px; top:1146.33px; height:1389.45px;"></div>
+  <div class="vline" style="left:755.8px; top:1146.33px; height:1042.01px;"></div>
+  <div class="vline" style="left:1103.8px; top:1146.33px; height:1042.01px;"></div>
+
+  <!-- row 1 -->
+  <div class="cell archive-photo" style="left:59.6px; top:1146.33px; width:348.4px; height:347.34px;"><img src="maskit-img-2.jpg" alt="Ruth Dayan with women, archive"></div>
+  <div class="cell archive-photo" style="left:408px; top:1146.33px; width:347.8px; height:347.34px;"><img src="maskit-img-3.jpg" alt="Ruth Dayan with Maskit textile"></div>
+  <div class="cell archive-photo" style="left:1103.8px; top:1146.33px; width:347.8px; height:347.34px;"><img src="maskit-img-4.jpg" alt="Weaving loom"></div>
+
+  <!-- row 2 -->
+  <div class="body-txt body-light" style="left:125.5px; top:1568.08px; width:218px;">We study silhouettes,<br>construction methods,<br>textile traditions<br>and forgotten details.<br><br>Each archive record<br>is analyzed,<br>decoded<br>and rebuilt.</div>
+  <div class="cell archive-photo" style="left:408px; top:1493.67px; width:347.8px; height:347.34px;"><img src="maskit-img-5.jpg" alt="Ruth Dayan speaking"></div>
+  <div class="cell archive-photo" style="left:755.8px; top:1493.67px; width:348px; height:347.34px;"><img src="maskit-img-6.jpg" alt="Examining striped fabric"></div>
+
+  <!-- row 3 -->
+  <div class="cell archive-photo" style="left:59.6px; top:1841.01px; width:348.4px; height:347.33px;"><img src="maskit-img-7.jpg" alt="Ruth Dayan and hooded cape"></div>
+  <div class="body-txt body-light" style="left:801.44px; top:1915.82px; width:257.98px;">Every object begins<br>with a physical reference.<br><br>A photograph.<br>A sketch.<br>A textile sample.<br><br>The final output<br>exists entirely as code.</div>
+  <div class="cell archive-photo" style="left:1103.8px; top:1841.01px; width:347.8px; height:347.33px;"><img src="maskit-img-8.jpg" alt="Woman in patterned dress under arch"></div>
+
+  <!-- timeline markers -->
+  <div class="tick-label" style="left:216.18px; top:1113.8px;">1954</div>
+  <div class="vline" style="left:238.6px; top:1131.78px; height:9.69px;"></div>
+  <div class="tick-label" style="left:1394.33px; top:1657.84px;">1960</div>
+  <div class="hline" style="left:1442.44px; top:1667.3px; width:9.15px;"></div>
+
+  <!-- ================= MASKIT 1954 (dark) ================= -->
+  <div class="body-txt" style="left:479.63px; top:2296px; width:901.61px;">Founded in 1954 by Ruth Dayan, Maskit emerged from a vision to create opportunity through craft. Bringing together textile traditions, artisanal techniques and cultural influences carried by immigrant communities from across the world, the house developed a unique design language rooted in the identity, landscape and material culture of Israel.<br><br>It would go on to become Israel's first internationally recognized fashion house.</div>
+  <div class="heading" style="left:148.31px; top:2348.5px; width:149.72px;">MASKIT, 1954</div>
+  <div class="tick-label dim" style="left:1394.33px; top:2317.22px;">2030</div>
+  <div class="hline dim" style="left:1442.44px; top:2326.72px; width:13.28px;"></div>
+
+  <!-- ================= CATALOG (white) ================= -->
+  <div class="plate-section" style="left:0; top:2535.6px; width:1512px; height:920px; background:#FFFFFF; border-bottom:1px solid #000000;">
+    <!-- side frame rails (black) -->
+    <div style="position:absolute; left:59.08px; top:0; width:0; height:920.62px; border-left:1px solid #000;"></div>
+    <div style="position:absolute; left:1451.08px; top:0; width:0; height:920.62px; border-left:1px solid #000;"></div>
+
+    <!-- ===== interactive monograph (carousel) ===== -->
+    <div class="ph cut" id="cut0" style="position:absolute; left:92.98px; top:377px; width:110.65px; height:245.96px; opacity:.48; cursor:pointer;"><img alt=""></div>
+    <div class="ph cut" id="cut1" style="position:absolute; left:275.4px; top:382.06px; width:90.61px; height:236.66px; opacity:.48; cursor:pointer;"><img alt=""></div>
+
+    <!-- plate gradients (white fade) -->
+    <div style="position:absolute; left:407.8px; top:74.86px; width:174.56px; height:469.97px; background:linear-gradient(180deg, rgba(255,255,255,.5) 0%, rgba(255,255,255,0) 100%); pointer-events:none;"></div>
+    <div style="position:absolute; left:407.52px; top:205.74px; width:174.56px; height:269.86px; background:linear-gradient(180deg, rgba(255,255,255,.5) 0%, rgba(255,255,255,0) 100%); pointer-events:none;"></div>
+
+    <!-- faint cutout behind plate text -->
+    <div class="ph cut" id="cut2" style="position:absolute; left:447.44px; top:378.03px; width:95.28px; height:244.92px; opacity:.4; cursor:pointer;"><img alt=""></div>
+
+    <!-- plate metadata text -->
+    <div class="plate-txt" id="plateMeta" style="position:absolute; left:407.52px; top:74.86px; width:174.85px;"></div>
+
+    <!-- CENTER MODEL -->
+    <div class="ph model" id="plateModel" style="position:absolute; left:633.65px; top:127.96px; width:244.18px; height:707.78px; cursor:pointer;"><img alt=""></div>
+
+    <!-- right cutouts -->
+    <div class="ph cut" id="cut3" style="position:absolute; left:947.71px; top:378.07px; width:139.04px; height:246.37px; opacity:.48; cursor:pointer;"><img alt=""></div>
+    <div class="ph cut" id="cut4" style="position:absolute; left:1137.9px; top:373.6px; width:104.99px; height:249.59px; opacity:.48; cursor:pointer;"><img alt=""></div>
+    <div class="ph cut" id="cut5" style="position:absolute; left:1315.62px; top:378.07px; width:98.77px; height:242.7px; opacity:.48; cursor:pointer;"><img alt=""></div>
+
+    <!-- plate footer + chevron -->
+    <div class="plate-edition" id="plateEdition" style="position:absolute; left:408.74px; top:718.14px; width:215.37px;"></div>
+    <div class="chevron" id="plateNext" style="position:absolute; left:1007.22px; top:730.14px; cursor:pointer;"><svg class="chev" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><polyline points="9 5 16 12 9 19"/></svg></div>
+
+    <!-- white-section timeline tick -->
+    <div class="tick-label black" style="position:absolute; left:1394.8px; top:82.35px;">2030</div>
+    <div style="position:absolute; left:1442.92px; top:91.81px; width:9.15px; height:0; border-top:1px solid #000;"></div>
+  </div>
+
+</div><!-- /stage -->
+</div><!-- /wrap -->
+
+<!-- ===== SITE FOOTER (shared) ===== -->
+<style>
+  .site-footer { width: 1512px; max-width:none; margin:0 auto; transform-origin: top center;
+    background: #1C1C1C; color: #FFFFFF;
+    border-top: 1px solid rgba(255,255,255,.55); font-family: 'Source Code Pro', monospace; }
+  .site-footer * { box-sizing: border-box; }
+  .site-footer .sf-inner { max-width: 1392px; margin: 0 auto; padding: 70px 60px 40px; }
+
+  /* ---- timeline ---- */
+  .site-footer .sf-timeline { position: relative; height: 104px; margin-bottom: 78px; }
+  .site-footer .sf-line { position: absolute; left: 2%; right: 2%; top: 43px; height: 1px;
+    background:#FFFFFF; }
+  .site-footer .sf-pt { position: absolute; top: 0; width: 150px; margin-left: -75px; text-align: center; }
+  .site-footer .sf-pt .yr { font-size: 15px; letter-spacing: .06em; color: #fff; }
+  .site-footer .sf-pt .tick { display: block; width: 1px; height: 13px; margin: 7px auto 0;
+    background: rgba(255,255,255,.6); }
+  .site-footer .sf-pt .dot { display: block; width: 7px; height: 7px; margin: -4px auto 0; position: relative; z-index: 1;
+    border: 1px solid #fff; border-radius: 50%; background: #1C1C1C; transition: transform .2s ease, background .2s ease; }
+  .site-footer .sf-pt.end .dot { background: #fff; }
+  .site-footer .sf-pt .cap { display: block; margin-top: 11px; font-size: 10px; letter-spacing: .07em;
+    color: rgba(255,255,255,.5); white-space: nowrap; }
+  .site-footer .sf-pt:hover .dot { transform: scale(1.6); background: #fff; }
+  .site-footer .sf-pt:hover .cap { color: rgba(255,255,255,.85); }
+
+  /* ---- columns ---- */
+  .site-footer .sf-cols { display: flex; flex-wrap: wrap; gap: 40px 48px; }
+  .site-footer .sf-brand { flex: 2 1 320px; }
+  .site-footer .sf-mark { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 32px; letter-spacing: .02em; }
+  .site-footer .sf-tag { margin-top: 16px; max-width: 330px; font-size: 12px; line-height: 18px; color: rgba(255,255,255,.55); }
+  .site-footer .sf-col { flex: 1 1 150px; display: flex; flex-direction: column; gap: 12px; }
+  .site-footer .sf-h { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 3px; }
+  .site-footer .sf-col a, .site-footer .sf-col span { font-size: 13px; color: rgba(255,255,255,.8); text-decoration: none; cursor: pointer; }
+  .site-footer .sf-col a:hover { color: #fff; text-decoration: underline; }
+  .site-footer .sf-col span { cursor: default; color: rgba(255,255,255,.55); }
+
+  /* ---- bottom bar ---- */
+  .site-footer .sf-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px 24px;
+    margin-top: 58px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.18);
+    font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.4); }
+
+  @media (max-width: 820px) {
+    .site-footer .sf-inner { padding: 50px 30px 32px; }
+    .site-footer .sf-pt .cap { display: none; }
+    .site-footer .sf-pt .yr { font-size: 12px; }
+    .site-footer .sf-timeline { height: 64px; margin-bottom: 52px; }
+  }
+  @media (max-width: 520px) {
+    .site-footer .sf-mark { font-size: 26px; }
+    .site-footer .sf-bottom { gap: 6px; }
+  }
+</style>
+
+<footer class="site-footer home-footer">
+  <div class="sf-inner">
+
+    <div class="sf-timeline">
+      <div class="sf-line"></div>
+      <div class="sf-pt" style="left:2%;">
+        <span class="yr">1954</span><span class="tick"></span><span class="dot"></span><span class="cap">Founded · Ruth Dayan</span>
+      </div>
+      <div class="sf-pt" style="left:26%;">
+        <span class="yr">1955</span><span class="tick"></span><span class="dot"></span><span class="cap">First Collection</span>
+      </div>
+      <div class="sf-pt" style="left:50%;">
+        <span class="yr">1964</span><span class="tick"></span><span class="dot"></span><span class="cap">Plate 043</span>
+      </div>
+      <div class="sf-pt" style="left:74%;">
+        <span class="yr">1994</span><span class="tick"></span><span class="dot"></span><span class="cap">Archive Sealed</span>
+      </div>
+      <div class="sf-pt end" style="left:98%;">
+        <span class="yr">2030</span><span class="tick"></span><span class="dot"></span><span class="cap">Cipher Bound</span>
+      </div>
+    </div>
+
+    <div class="sf-cols">
+      <div class="sf-brand">
+        <div class="sf-mark">MASHKIT.CODE</div>
+        <div class="sf-tag">The digital monograph of the Maskit archive. Each garment survives as code — a numbered edition bound to its origin. Not a copy. A continuation.</div>
+      </div>
+      <div class="sf-col">
+        <div class="sf-h">// Index</div>
+        <a href="#" data-go="home">Home</a>
+        <a href="#">Concept</a>
+        <a href="#" data-go="catalog">Catalog</a>
+        <a href="#" data-cart-open>Cart</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-h">// Archive</div>
+        <a href="#" data-go="catalog">The Monograph</a>
+        <a href="#" data-go="catalog">Editions</a>
+        <a href="#">Certificates</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-h">// Custody</div>
+        <a href="#">custody@maskit.code</a>
+        <span>Tel Aviv · Jerusalem</span>
+        <span>Israel</span>
+      </div>
+    </div>
+
+    <div class="sf-bottom">
+      <span>© 2030 MASHKIT.CODE</span>
+      <span>Every edition numbered · 03 / 50</span>
+      <span>Archive 1954–2030</span>
+    </div>
+
+  </div>
+</footer>
+<!-- ===== /SITE FOOTER ===== --></div>
+  <div class="page" id="page-catalog" style="display:none"><div class="wrap">
+<div class="stage">
+  <!-- catalog rebuilt from latest Figma values using provided assets -->
+  <a class="navbtn" href="#" data-go="home" style="left:79.38px;">Home</a>
+  <a class="navbtn" href="#" data-go="home" data-scroll="conceptAnchor" style="left:253.56px;">concept</a>
+  <a class="navbtn active" href="#" data-go="catalog" style="left:427.74px;">Catalog</a>
+  <a class="navbtn" href="#" data-cart-open style="left:1297.30px;">CArt</a>
+  <div class="eyebrow" style="left:0; top:139.38px;">MASHKIT.CODE</div>
+  <div class="monograph" style="left:0; width:1512px; top:192.33px;">The Digital Monograph</div>
+  <div class="subtitle" style="left:270.72px; top:278.33px; width:971.91px;">Each piece in this volume exists only as code. The book is the last physical object the brand will ever produce.</div>
+  <div class="cat-rect" style="left:62.23px; top:2412px; width:1392.25px; height:515.95px;"></div>
+  <div class="cat-rect" style="left:62.23px; top:3336.88px; width:1392.25px; height:873.66px;"></div>
+  <div class="cat-rect" style="left:61.15px; top:4734.69px; width:1393.05px; height:515.95px;"></div>
+  <div class="cell" style="left:62.67px; top:417.79px; width:694.45px; height:734.92px;"><img src="maskit-img-9.png" alt=""></div>
+  <div class="cell" style="left:757.12px; top:418.23px; width:697.1px; height:734.48px;"><img src="maskit-img-10.png" alt=""></div>
+  <div class="cell" style="left:62.67px; top:1153.04px; width:694.45px; height:850.1px;"><img src="maskit-img-11.png" alt=""></div>
+  <video class="cell" style="left:757.16px; top:1153.49px; width:697.5px; height:849.66px; object-fit:cover;" autoplay muted loop playsinline><source src="maskit-vid-2.mp4" type="video/mp4"></video>
+  <div class="cell" style="left:62.4px; top:2003.51px; width:346.11px; height:408.14px;"><img src="maskit-img-12.png" alt=""></div>
+  <video class="cell" style="left:408.51px; top:2003.15px; width:348.65px; height:410.27px; object-fit:cover;" autoplay muted loop playsinline><source src="maskit-vid-3.mp4" type="video/mp4"></video>
+  <div class="cell" style="left:757.16px; top:2003.15px; width:347.35px; height:410.69px;"><img src="maskit-img-13.png" alt=""></div>
+  <div class="cell" style="left:1104.51px; top:2003.15px; width:349.4px; height:408.88px;"><img src="maskit-img-14.png" alt=""></div>
+  <div class="cell book-cell" style="left:31.59px; top:2412px; width:774.9px; height:519.88px;"><img src="maskit-img-15.png" alt=""></div>
+  <div class="cell book-cell" style="left:750.46px; top:2430.15px; width:720.79px; height:483.58px;"><img src="maskit-img-16.png" alt=""></div>
+  <div class="cell" style="left:62.21px; top:2928.74px; width:346.11px; height:408.14px;"><img src="maskit-img-17.png" alt=""></div>
+  <div class="cell" style="left:408.32px; top:2927.95px; width:348.5px; height:408.93px;"><img src="maskit-img-18.png" alt=""></div>
+  <div class="cell" style="left:757.14px; top:2928.37px; width:347.18px; height:408.51px;"><img src="maskit-img-19.png" alt=""></div>
+  <div class="cell" style="left:1104.84px; top:2928.37px; width:349.68px; height:408.51px;"><img src="maskit-img-20.png" alt=""></div>
+  <div class="cell" style="left:62.28px; top:3336.88px; width:1393.25px; height:873.66px;"><img src="maskit-img-21.png" alt=""></div>
+  <a class="viewbtn" href="#" data-go="product" style="left:254.27px; top:3999.88px;">view item</a>
+  <div class="cell" style="left:62.28px; top:4210.54px; width:694.04px; height:524.15px;"><img src="maskit-img-22.png" alt=""></div>
+  <div class="cell" style="left:757.32px; top:4210.08px; width:347.95px; height:524.61px;"><img src="maskit-img-23.png" alt=""></div>
+  <div class="cell" style="left:1104.32px; top:4210.54px; width:350.16px; height:524.15px;"><img src="maskit-img-24.png" alt=""></div>
+  <div class="cell book-cell" style="left:37.5px; top:4753.49px; width:736.14px; height:493.87px;"><img src="maskit-img-25.png" alt=""></div>
+  <div class="cell book-cell" style="left:737.28px; top:4747.93px; width:727.73px; height:488.23px;"><img src="maskit-img-26.png" alt=""></div>
+  <div class="cell" style="left:62.21px; top:5250.64px; width:346.11px; height:408.93px;"><img src="maskit-img-27.png" alt=""></div>
+  <div class="cell" style="left:408.32px; top:5251.06px; width:348.93px; height:408.51px;"><img src="maskit-img-28.png" alt=""></div>
+  <div class="cell" style="left:757.25px; top:5250.64px; width:348.02px; height:408.93px;"><img src="maskit-img-29.png" alt=""></div>
+  <div class="cell" style="left:1105.73px; top:5251.06px; width:348.79px; height:408.51px;"><img src="maskit-img-30.png" alt=""></div>
+  <div class="vline" style="left:60.03px; top:0.16px; height:5659.59px; width:1px;"></div>
+  <div class="vline" style="left:1452px; top:0.16px; height:5659.59px; width:1px;"></div>
+  <div class="hline" style="left:0.97px; top:417.79px; width:1514.13px; height:1px;"></div>
+  <div class="hline" style="left:-0.10px; top:1153.04px; width:1514.13px; height:1px;"></div>
+  <div class="hline" style="left:2.22px; top:2003.15px; width:1514.13px; height:1px;"></div>
+  <div class="hline" style="left:0.52px; top:2412.02px; width:1514.13px; height:1px;"></div>
+  <div class="hline" style="left:0.34px; top:2928.38px; width:1512.96px; height:1px;"></div>
+  <div class="hline" style="left:0.34px; top:3337.25px; width:1512.96px; height:1px;"></div>
+  <div class="hline" style="left:2.65px; top:4210.54px; width:1512.96px; height:1px;"></div>
+  <div class="hline" style="left:2.65px; top:4734.69px; width:1512.96px; height:1px;"></div>
+  <div class="hline" style="left:1.75px; top:5250.64px; width:1512.96px; height:1px;"></div>
+  <div class="hline" style="left:0.48px; top:5659.75px; width:1512.96px; height:1px;"></div>
+  <div class="vline" style="left:756.78px; top:417.79px; height:1994.23px; width:1px;"></div>
+  <div class="vline" style="left:408.17px; top:2002.94px; height:409.29px; width:1px;"></div>
+  <div class="vline" style="left:756.83px; top:2002.73px; height:409.29px; width:1px;"></div>
+  <div class="vline" style="left:1104.17px; top:2003.15px; height:408.14px; width:1px;"></div>
+  <div class="vline" style="left:408.32px; top:2927.95px; height:409.29px; width:1px;"></div>
+  <div class="vline" style="left:757.14px; top:2927.95px; height:409.29px; width:1px;"></div>
+  <div class="vline" style="left:1104.84px; top:2928.37px; height:408.14px; width:1px;"></div>
+  <div class="vline" style="left:757.32px; top:4210.6px; height:524.58px; width:1px;"></div>
+  <div class="vline" style="left:1104.32px; top:4210.6px; height:524.58px; width:1px;"></div>
+  <div class="vline" style="left:408.32px; top:5250.64px; height:409.12px; width:1px;"></div>
+  <div class="vline" style="left:757.25px; top:5250.64px; height:409.12px; width:1px;"></div>
+  <div class="vline" style="left:1105.73px; top:5250.64px; height:409.12px; width:1px;"></div>
+  <div id="archiveTrack" style="display:none"></div>
+  <div id="ar2Track" style="display:none"></div>
+  <span id="codeOut" style="display:none"></span>
+
+</div><!-- /stage -->
+</div><!-- /wrap -->
+
+<!-- ===== SITE FOOTER (shared) ===== -->
+<style>
+  .site-footer { width: 100%; background: #1C1C1C; color: #FFFFFF;
+    border-top: 1px solid rgba(255,255,255,.55); font-family: 'Source Code Pro', monospace; }
+  .site-footer * { box-sizing: border-box; }
+  .site-footer .sf-inner { max-width: 1392px; margin: 0 auto; padding: 70px 60px 40px; }
+
+  /* ---- timeline ---- */
+  .site-footer .sf-timeline { position: relative; height: 104px; margin-bottom: 78px; }
+  .site-footer .sf-line { position: absolute; left: 2%; right: 2%; top: 43px; height: 1px;
+    background: linear-gradient(90deg, rgba(255,255,255,.12), rgba(255,255,255,.5) 50%, #fff); }
+  .site-footer .sf-pt { position: absolute; top: 0; width: 150px; margin-left: -75px; text-align: center; }
+  .site-footer .sf-pt .yr { font-size: 15px; letter-spacing: .06em; color: #fff; }
+  .site-footer .sf-pt .tick { display: block; width: 1px; height: 13px; margin: 7px auto 0;
+    background: rgba(255,255,255,.6); }
+  .site-footer .sf-pt .dot { display: block; width: 7px; height: 7px; margin: -4px auto 0; position: relative; z-index: 1;
+    border: 1px solid #fff; border-radius: 50%; background: #1C1C1C; transition: transform .2s ease, background .2s ease; }
+  .site-footer .sf-pt.end .dot { background: #fff; }
+  .site-footer .sf-pt .cap { display: block; margin-top: 11px; font-size: 10px; letter-spacing: .07em;
+    color: rgba(255,255,255,.5); white-space: nowrap; }
+  .site-footer .sf-pt:hover .dot { transform: scale(1.6); background: #fff; }
+  .site-footer .sf-pt:hover .cap { color: rgba(255,255,255,.85); }
+
+  /* ---- columns ---- */
+  .site-footer .sf-cols { display: flex; flex-wrap: wrap; gap: 40px 48px; }
+  .site-footer .sf-brand { flex: 2 1 320px; }
+  .site-footer .sf-mark { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 32px; letter-spacing: .02em; }
+  .site-footer .sf-tag { margin-top: 16px; max-width: 330px; font-size: 12px; line-height: 18px; color: rgba(255,255,255,.55); }
+  .site-footer .sf-col { flex: 1 1 150px; display: flex; flex-direction: column; gap: 12px; }
+  .site-footer .sf-h { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 3px; }
+  .site-footer .sf-col a, .site-footer .sf-col span { font-size: 13px; color: rgba(255,255,255,.8); text-decoration: none; cursor: pointer; }
+  .site-footer .sf-col a:hover { color: #fff; text-decoration: underline; }
+  .site-footer .sf-col span { cursor: default; color: rgba(255,255,255,.55); }
+
+  /* ---- bottom bar ---- */
+  .site-footer .sf-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px 24px;
+    margin-top: 58px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.18);
+    font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.4); }
+
+  @media (max-width: 820px) {
+    .site-footer .sf-inner { padding: 50px 30px 32px; }
+    .site-footer .sf-pt .cap { display: none; }
+    .site-footer .sf-pt .yr { font-size: 12px; }
+    .site-footer .sf-timeline { height: 64px; margin-bottom: 52px; }
+  }
+  @media (max-width: 520px) {
+    .site-footer .sf-mark { font-size: 26px; }
+    .site-footer .sf-bottom { gap: 6px; }
+  }
+</style>
+
+<footer class="site-footer catalog-footer">
+  <div class="sf-inner">
+
+    <div class="sf-timeline">
+      <div class="sf-line"></div>
+      <div class="sf-pt" style="left:2%;">
+        <span class="yr">1954</span><span class="tick"></span><span class="dot"></span><span class="cap">Founded · Ruth Dayan</span>
+      </div>
+      <div class="sf-pt" style="left:26%;">
+        <span class="yr">1955</span><span class="tick"></span><span class="dot"></span><span class="cap">First Collection</span>
+      </div>
+      <div class="sf-pt" style="left:50%;">
+        <span class="yr">1964</span><span class="tick"></span><span class="dot"></span><span class="cap">Plate 043</span>
+      </div>
+      <div class="sf-pt" style="left:74%;">
+        <span class="yr">1994</span><span class="tick"></span><span class="dot"></span><span class="cap">Archive Sealed</span>
+      </div>
+      <div class="sf-pt end" style="left:98%;">
+        <span class="yr">2030</span><span class="tick"></span><span class="dot"></span><span class="cap">Cipher Bound</span>
+      </div>
+    </div>
+
+    <div class="sf-cols">
+      <div class="sf-brand">
+        <div class="sf-mark">MASHKIT.CODE</div>
+        <div class="sf-tag">The digital monograph of the Maskit archive. Each garment survives as code — a numbered edition bound to its origin. Not a copy. A continuation.</div>
+      </div>
+      <div class="sf-col">
+        <div class="sf-h">// Index</div>
+        <a href="#" data-go="home">Home</a>
+        <a href="#">Concept</a>
+        <a href="#" data-go="catalog">Catalog</a>
+        <a href="#" data-cart-open>Cart</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-h">// Archive</div>
+        <a href="#" data-go="catalog">The Monograph</a>
+        <a href="#" data-go="catalog">Editions</a>
+        <a href="#">Certificates</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-h">// Custody</div>
+        <a href="#">custody@maskit.code</a>
+        <span>Tel Aviv · Jerusalem</span>
+        <span>Israel</span>
+      </div>
+    </div>
+
+    <div class="sf-bottom">
+      <span>© 2030 MASHKIT.CODE</span>
+      <span>Every edition numbered · 03 / 50</span>
+      <span>Archive 1954–2030</span>
+    </div>
+
+  </div>
+</footer>
+<!-- ===== /SITE FOOTER ===== --></div>
+  <div class="page" id="page-product" style="display:none"><div class="wrap">
+<div class="stage">
+
+  <!-- nav -->
+  <div class="vline" style="left:60.03px; top:0; height:983px;"></div>
+  <div class="vline" style="left:1452px; top:0; height:983px;"></div>
+  <a class="navbtn" href="#" data-go="home" style="left:79.38px;">Home</a>
+  <a class="navbtn" href="#" data-go="home" data-scroll="conceptAnchor" style="left:253.56px;">concept</a>
+  <a class="navbtn active" href="#" data-go="catalog" style="left:427.74px;">Catalog</a>
+  <a class="navbtn" href="#" data-cart-open style="left:1297.30px;">CArt</a>
+
+  <!-- column dividers -->
+  <div class="pp-v" style="left:233.76px;"></div>
+  <div class="pp-v" style="left:756px;"></div>
+  <div class="pp-v" style="left:1277.76px;"></div>
+
+  <!-- back -->
+  <a class="pp-back" href="#" data-go="catalog"><svg class="chev" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg></a>
+
+  <!-- thumbnails -->
+  <div class="pp-thumbs" id="ppThumbs">
+    <img src="maskit-img-31.png"  data-i="1" alt="back view">
+    <img src="maskit-img-32.png" data-i="2" alt="side view">
+    <img src="maskit-img-33.png" data-i="3" alt="side view">
+    <img src="maskit-img-34.png" data-i="0" class="active" alt="front view">
+  </div>
+
+  <!-- main image -->
+  <div class="pp-main"><img id="ppMain" src="maskit-img-35.png" alt="Hooded Cape Ensemble"></div>
+  <div class="pp-arrow" id="ppPrev" style="left:304.31px; top:915.16px;"><svg class="chev" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg></div>
+  <div class="pp-arrow" id="ppNext" style="left:652.43px; top:915.16px;"><svg class="chev" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><polyline points="9 5 16 12 9 19"/></svg></div>
+
+  <!-- details -->
+  <div class="pp-title">Hooded Cape Ensemble</div>
+  <div class="pp-price">$ 14,500</div>
+  <div class="pp-hr" style="top:195.09px; width:757.72px;"></div>
+
+  <div class="pp-code">MSK-HCE-1965-072</div>
+  <div class="pp-hr" style="top:245.53px; width:521.58px;"></div>
+
+  <div class="pp-desc">A two-piece ensemble comprising a hooded cape and matching skirt in a black-and-white houndstooth textile. Characterized by an oversized silhouette and sculptural hood.</div>
+  <div class="pp-hr" style="top:358.53px; width:521.76px;"></div>
+
+  <div class="pp-label" style="top:374.67px;">YEAR</div>
+  <div class="pp-value" style="top:374.67px;">c.1965</div>
+  <div class="pp-hr" style="top:408.97px; width:521.76px;"></div>
+
+  <div class="pp-label" style="top:425.11px;">DESIGNER</div>
+  <div class="pp-value" style="top:425.11px;">Attributed to Fini Leitersdorf</div>
+  <div class="pp-hr" style="top:459.41px; width:522px;"></div>
+
+  <div class="pp-label" style="top:475.55px;">COUNTRY</div>
+  <div class="pp-value" style="top:475.55px;">Israel</div>
+  <div class="pp-hr" style="top:509.86px; width:522px;"></div>
+
+  <div class="pp-label" style="top:526px;">PATTERN</div>
+  <div class="pp-value" style="top:526px;">Houndstooth</div>
+  <div class="pp-hr" style="top:560.3px; width:522px;"></div>
+
+  <div class="pp-label" style="top:576.44px;">COLOR</div>
+  <div class="pp-value" style="top:576.44px;">Black / Ivory</div>
+  <div class="pp-hr" style="top:610.74px; width:522px;"></div>
+
+  <div class="pp-label" style="top:626.88px;">STATUS</div>
+  <div class="pp-value" style="top:626.88px;">Digitally Preserved</div>
+  <div class="pp-hr" style="top:661.18px; width:522px;"></div>
+
+  <div class="pp-note" style="top:677.33px;"><span class="h">ARCHIVE NOTE</span><p>Photographed as part of Maskit's documented ready-to-wear archive. The ensemble reflects the modernist visual language that became associated with the brand during its formative years.</p></div>
+  <div class="pp-hr" style="top:803.43px; width:521.76px;"></div>
+
+  <div class="pp-note" style="top:819.57px;"><span class="h">ACCESS</span><p>This garment no longer exists as fabric.<br>It survives as code.<br><br>Acquiring this archive record grants access to the prompt structure used to reconstruct the piece in contemporary digital environments.</p></div>
+
+  <!-- add to cart -->
+  <a class="pp-add" href="#" data-add-cape data-cart-open>Add to Cart</a>
+
+</div><!-- /stage -->
+</div><!-- /wrap -->
+
+<!-- ===== SITE FOOTER (shared) ===== -->
+<style>
+  .site-footer { width: 100%; background: #1C1C1C; color: #FFFFFF;
+    border-top: 1px solid rgba(255,255,255,.55); font-family: 'Source Code Pro', monospace; }
+  .site-footer * { box-sizing: border-box; }
+  .site-footer .sf-inner { max-width: 1392px; margin: 0 auto; padding: 70px 60px 40px; }
+
+  /* ---- timeline ---- */
+  .site-footer .sf-timeline { position: relative; height: 104px; margin-bottom: 78px; }
+  .site-footer .sf-line { position: absolute; left: 2%; right: 2%; top: 43px; height: 1px;
+    background: linear-gradient(90deg, rgba(255,255,255,.12), rgba(255,255,255,.5) 50%, #fff); }
+  .site-footer .sf-pt { position: absolute; top: 0; width: 150px; margin-left: -75px; text-align: center; }
+  .site-footer .sf-pt .yr { font-size: 15px; letter-spacing: .06em; color: #fff; }
+  .site-footer .sf-pt .tick { display: block; width: 1px; height: 13px; margin: 7px auto 0;
+    background: rgba(255,255,255,.6); }
+  .site-footer .sf-pt .dot { display: block; width: 7px; height: 7px; margin: -4px auto 0; position: relative; z-index: 1;
+    border: 1px solid #fff; border-radius: 50%; background: #1C1C1C; transition: transform .2s ease, background .2s ease; }
+  .site-footer .sf-pt.end .dot { background: #fff; }
+  .site-footer .sf-pt .cap { display: block; margin-top: 11px; font-size: 10px; letter-spacing: .07em;
+    color: rgba(255,255,255,.5); white-space: nowrap; }
+  .site-footer .sf-pt:hover .dot { transform: scale(1.6); background: #fff; }
+  .site-footer .sf-pt:hover .cap { color: rgba(255,255,255,.85); }
+
+  /* ---- columns ---- */
+  .site-footer .sf-cols { display: flex; flex-wrap: wrap; gap: 40px 48px; }
+  .site-footer .sf-brand { flex: 2 1 320px; }
+  .site-footer .sf-mark { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 32px; letter-spacing: .02em; }
+  .site-footer .sf-tag { margin-top: 16px; max-width: 330px; font-size: 12px; line-height: 18px; color: rgba(255,255,255,.55); }
+  .site-footer .sf-col { flex: 1 1 150px; display: flex; flex-direction: column; gap: 12px; }
+  .site-footer .sf-h { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 3px; }
+  .site-footer .sf-col a, .site-footer .sf-col span { font-size: 13px; color: rgba(255,255,255,.8); text-decoration: none; cursor: pointer; }
+  .site-footer .sf-col a:hover { color: #fff; text-decoration: underline; }
+  .site-footer .sf-col span { cursor: default; color: rgba(255,255,255,.55); }
+
+  /* ---- bottom bar ---- */
+  .site-footer .sf-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px 24px;
+    margin-top: 58px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.18);
+    font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.4); }
+
+  @media (max-width: 820px) {
+    .site-footer .sf-inner { padding: 50px 30px 32px; }
+    .site-footer .sf-pt .cap { display: none; }
+    .site-footer .sf-pt .yr { font-size: 12px; }
+    .site-footer .sf-timeline { height: 64px; margin-bottom: 52px; }
+  }
+  @media (max-width: 520px) {
+    .site-footer .sf-mark { font-size: 26px; }
+    .site-footer .sf-bottom { gap: 6px; }
+  }
+</style>
+
+<footer class="site-footer product-footer">
+  <div class="sf-inner">
+
+    <div class="sf-timeline">
+      <div class="sf-line"></div>
+      <div class="sf-pt" style="left:2%;">
+        <span class="yr">1954</span><span class="tick"></span><span class="dot"></span><span class="cap">Founded · Ruth Dayan</span>
+      </div>
+      <div class="sf-pt" style="left:26%;">
+        <span class="yr">1955</span><span class="tick"></span><span class="dot"></span><span class="cap">First Collection</span>
+      </div>
+      <div class="sf-pt" style="left:50%;">
+        <span class="yr">1964</span><span class="tick"></span><span class="dot"></span><span class="cap">Plate 043</span>
+      </div>
+      <div class="sf-pt" style="left:74%;">
+        <span class="yr">1994</span><span class="tick"></span><span class="dot"></span><span class="cap">Archive Sealed</span>
+      </div>
+      <div class="sf-pt end" style="left:98%;">
+        <span class="yr">2030</span><span class="tick"></span><span class="dot"></span><span class="cap">Cipher Bound</span>
+      </div>
+    </div>
+
+    <div class="sf-cols">
+      <div class="sf-brand">
+        <div class="sf-mark">MASHKIT.CODE</div>
+        <div class="sf-tag">The digital monograph of the Maskit archive. Each garment survives as code — a numbered edition bound to its origin. Not a copy. A continuation.</div>
+      </div>
+      <div class="sf-col">
+        <div class="sf-h">// Index</div>
+        <a href="#" data-go="home">Home</a>
+        <a href="#">Concept</a>
+        <a href="#" data-go="catalog">Catalog</a>
+        <a href="#" data-cart-open>Cart</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-h">// Archive</div>
+        <a href="#" data-go="catalog">The Monograph</a>
+        <a href="#" data-go="catalog">Editions</a>
+        <a href="#">Certificates</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-h">// Custody</div>
+        <a href="#">custody@maskit.code</a>
+        <span>Tel Aviv · Jerusalem</span>
+        <span>Israel</span>
+      </div>
+    </div>
+
+    <div class="sf-bottom">
+      <span>© 2030 MASHKIT.CODE</span>
+      <span>Every edition numbered · 03 / 50</span>
+      <span>Archive 1954–2030</span>
+    </div>
+
+  </div>
+</footer>
+<!-- ===== /SITE FOOTER ===== --></div>
+  <div class="page" id="page-product2" style="display:none"><div class="wrap">
+<div class="stage">
+
+  <!-- nav -->
+  <div class="vline" style="left:60.03px; top:0; height:983px;"></div>
+  <div class="vline" style="left:1452px; top:0; height:983px;"></div>
+  <a class="navbtn" href="#" data-go="home" style="left:79.38px;">Home</a>
+  <a class="navbtn" href="#" data-go="home" data-scroll="conceptAnchor" style="left:253.56px;">concept</a>
+  <a class="navbtn active" href="#" data-go="catalog" style="left:427.74px;">Catalog</a>
+  <a class="navbtn" href="#" data-cart-open style="left:1297.30px;">CArt</a>
+
+  <!-- column dividers -->
+  <div class="pp-v" style="left:233.76px;"></div>
+  <div class="pp-v" style="left:756px;"></div>
+  <div class="pp-v" style="left:1277.76px;"></div>
+
+  <!-- back -->
+  <a class="pp-back" href="#" data-go="catalog"><svg class="chev" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg></a>
+
+  <!-- thumbnails -->
+  <div class="pp-thumbs" id="pp2Thumbs">
+    <img src="maskit-img-36.png" data-i="0" class="active" alt="full view">
+    <img src="maskit-img-37.png" data-i="1" alt="neckline detail">
+    <img src="maskit-img-38.png" data-i="2" alt="lattice detail">
+    <img src="maskit-img-39.png" data-i="3" alt="hem detail">
+  </div>
+
+  <!-- main image -->
+  <div class="pp-main"><img id="pp2Main" src="maskit-img-40.png" alt="Open-Loop Net Dress"></div>
+  <div class="pp-arrow" id="pp2Prev" style="left:304.31px; top:915.16px;"><svg class="chev" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg></div>
+  <div class="pp-arrow" id="pp2Next" style="left:652.43px; top:915.16px;"><svg class="chev" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><polyline points="9 5 16 12 9 19"/></svg></div>
+
+  <!-- details -->
+  <div class="pp-title">Open-Loop Net Dress</div>
+  <div class="pp-price">$ 11,200</div>
+  <div class="pp-hr" style="top:195.09px; width:757.72px;"></div>
+
+  <div class="pp-code">MSK-OLN-1969-046</div>
+  <div class="pp-hr" style="top:245.53px; width:521.58px;"></div>
+
+  <div class="pp-desc">A sleeveless knee-length dress built as a single open-loop net of hand-knotted cord, worn over a tonal slip. The exposed lattice keeps the structure — and the body’s movement — fully in view.</div>
+  <div class="pp-hr" style="top:358.53px; width:521.76px;"></div>
+
+  <div class="pp-label" style="top:374.67px;">YEAR</div>
+  <div class="pp-value" style="top:374.67px;">c.1969</div>
+  <div class="pp-hr" style="top:408.97px; width:521.76px;"></div>
+
+  <div class="pp-label" style="top:425.11px;">DESIGNER</div>
+  <div class="pp-value" style="top:425.11px;">Attributed to Fini Leitersdorf</div>
+  <div class="pp-hr" style="top:459.41px; width:522px;"></div>
+
+  <div class="pp-label" style="top:475.55px;">COUNTRY</div>
+  <div class="pp-value" style="top:475.55px;">Israel</div>
+  <div class="pp-hr" style="top:509.86px; width:522px;"></div>
+
+  <div class="pp-label" style="top:526px;">PATTERN</div>
+  <div class="pp-value" style="top:526px;">Openwork Lattice</div>
+  <div class="pp-hr" style="top:560.3px; width:522px;"></div>
+
+  <div class="pp-label" style="top:576.44px;">COLOR</div>
+  <div class="pp-value" style="top:576.44px;">Ecru / Nude</div>
+  <div class="pp-hr" style="top:610.74px; width:522px;"></div>
+
+  <div class="pp-label" style="top:626.88px;">STATUS</div>
+  <div class="pp-value" style="top:626.88px;">Digitally Preserved</div>
+  <div class="pp-hr" style="top:661.18px; width:522px;"></div>
+
+  <div class="pp-note" style="top:677.33px;"><span class="h">ARCHIVE NOTE</span><p>Documented within Maskit's archival study of open-loop knit and macramé structures. The piece reflects the house’s lasting interest in translating traditional handcraft into a modern, transparent silhouette.</p></div>
+  <div class="pp-hr" style="top:803.43px; width:521.76px;"></div>
+
+  <div class="pp-note" style="top:819.57px;"><span class="h">ACCESS</span><p>This garment no longer exists as fabric.<br>It survives as code.<br><br>Acquiring this archive record grants access to the prompt structure used to reconstruct the piece in contemporary digital environments.</p></div>
+
+  <!-- add to cart -->
+  <a class="pp-add" href="#" data-add-cape data-cart-open>Add to Cart</a>
+
+</div><!-- /stage -->
+</div><!-- /wrap -->
+
+<!-- ===== SITE FOOTER (shared) ===== -->
+<style>
+  .site-footer { width: 100%; background: #1C1C1C; color: #FFFFFF;
+    border-top: 1px solid rgba(255,255,255,.55); font-family: 'Source Code Pro', monospace; }
+  .site-footer * { box-sizing: border-box; }
+  .site-footer .sf-inner { max-width: 1392px; margin: 0 auto; padding: 70px 60px 40px; }
+
+  /* ---- timeline ---- */
+  .site-footer .sf-timeline { position: relative; height: 104px; margin-bottom: 78px; }
+  .site-footer .sf-line { position: absolute; left: 2%; right: 2%; top: 43px; height: 1px;
+    background: linear-gradient(90deg, rgba(255,255,255,.12), rgba(255,255,255,.5) 50%, #fff); }
+  .site-footer .sf-pt { position: absolute; top: 0; width: 150px; margin-left: -75px; text-align: center; }
+  .site-footer .sf-pt .yr { font-size: 15px; letter-spacing: .06em; color: #fff; }
+  .site-footer .sf-pt .tick { display: block; width: 1px; height: 13px; margin: 7px auto 0;
+    background: rgba(255,255,255,.6); }
+  .site-footer .sf-pt .dot { display: block; width: 7px; height: 7px; margin: -4px auto 0; position: relative; z-index: 1;
+    border: 1px solid #fff; border-radius: 50%; background: #1C1C1C; transition: transform .2s ease, background .2s ease; }
+  .site-footer .sf-pt.end .dot { background: #fff; }
+  .site-footer .sf-pt .cap { display: block; margin-top: 11px; font-size: 10px; letter-spacing: .07em;
+    color: rgba(255,255,255,.5); white-space: nowrap; }
+  .site-footer .sf-pt:hover .dot { transform: scale(1.6); background: #fff; }
+  .site-footer .sf-pt:hover .cap { color: rgba(255,255,255,.85); }
+
+  /* ---- columns ---- */
+  .site-footer .sf-cols { display: flex; flex-wrap: wrap; gap: 40px 48px; }
+  .site-footer .sf-brand { flex: 2 1 320px; }
+  .site-footer .sf-mark { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 32px; letter-spacing: .02em; }
+  .site-footer .sf-tag { margin-top: 16px; max-width: 330px; font-size: 12px; line-height: 18px; color: rgba(255,255,255,.55); }
+  .site-footer .sf-col { flex: 1 1 150px; display: flex; flex-direction: column; gap: 12px; }
+  .site-footer .sf-h { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 3px; }
+  .site-footer .sf-col a, .site-footer .sf-col span { font-size: 13px; color: rgba(255,255,255,.8); text-decoration: none; cursor: pointer; }
+  .site-footer .sf-col a:hover { color: #fff; text-decoration: underline; }
+  .site-footer .sf-col span { cursor: default; color: rgba(255,255,255,.55); }
+
+  /* ---- bottom bar ---- */
+  .site-footer .sf-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px 24px;
+    margin-top: 58px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.18);
+    font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.4); }
+
+  @media (max-width: 820px) {
+    .site-footer .sf-inner { padding: 50px 30px 32px; }
+    .site-footer .sf-pt .cap { display: none; }
+    .site-footer .sf-pt .yr { font-size: 12px; }
+    .site-footer .sf-timeline { height: 64px; margin-bottom: 52px; }
+  }
+  @media (max-width: 520px) {
+    .site-footer .sf-mark { font-size: 26px; }
+    .site-footer .sf-bottom { gap: 6px; }
+  }
+</style>
+
+<footer class="site-footer product-footer">
+  <div class="sf-inner">
+
+    <div class="sf-timeline">
+      <div class="sf-line"></div>
+      <div class="sf-pt" style="left:2%;">
+        <span class="yr">1954</span><span class="tick"></span><span class="dot"></span><span class="cap">Founded · Ruth Dayan</span>
+      </div>
+      <div class="sf-pt" style="left:26%;">
+        <span class="yr">1955</span><span class="tick"></span><span class="dot"></span><span class="cap">First Collection</span>
+      </div>
+      <div class="sf-pt" style="left:50%;">
+        <span class="yr">1964</span><span class="tick"></span><span class="dot"></span><span class="cap">Plate 043</span>
+      </div>
+      <div class="sf-pt" style="left:74%;">
+        <span class="yr">1994</span><span class="tick"></span><span class="dot"></span><span class="cap">Archive Sealed</span>
+      </div>
+      <div class="sf-pt end" style="left:98%;">
+        <span class="yr">2030</span><span class="tick"></span><span class="dot"></span><span class="cap">Cipher Bound</span>
+      </div>
+    </div>
+
+    <div class="sf-cols">
+      <div class="sf-brand">
+        <div class="sf-mark">MASHKIT.CODE</div>
+        <div class="sf-tag">The digital monograph of the Maskit archive. Each garment survives as code — a numbered edition bound to its origin. Not a copy. A continuation.</div>
+      </div>
+      <div class="sf-col">
+        <div class="sf-h">// Index</div>
+        <a href="#" data-go="home">Home</a>
+        <a href="#">Concept</a>
+        <a href="#" data-go="catalog">Catalog</a>
+        <a href="#" data-cart-open>Cart</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-h">// Archive</div>
+        <a href="#" data-go="catalog">The Monograph</a>
+        <a href="#" data-go="catalog">Editions</a>
+        <a href="#">Certificates</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-h">// Custody</div>
+        <a href="#">custody@maskit.code</a>
+        <span>Tel Aviv · Jerusalem</span>
+        <span>Israel</span>
+      </div>
+    </div>
+
+    <div class="sf-bottom">
+      <span>© 2030 MASHKIT.CODE</span>
+      <span>Every edition numbered · 03 / 50</span>
+      <span>Archive 1954–2030</span>
+    </div>
+
+  </div>
+</footer>
+<!-- ===== /SITE FOOTER ===== --></div>
+
+  <div class="page" id="page-checkout" style="display:none"><div class="wrap">
+<div class="stage">
+
+  <!-- nav -->
+  <div class="vline" style="left:60.03px; top:0; height:982px;"></div>
+  <div class="vline" style="left:1452px; top:0; height:982px;"></div>
+  <a class="navbtn" href="#" data-go="home" style="left:79.38px;">Home</a>
+  <a class="navbtn" href="#" data-go="home" data-scroll="conceptAnchor" style="left:253.56px;">concept</a>
+  <a class="navbtn" href="#" data-go="catalog" style="left:427.74px;">Catalog</a>
+  <a class="navbtn" href="#" data-cart-open style="left:1297.30px;">CArt</a>
+  <div class="ck-eyebrow">// SECURE ACQUISITION</div>
+  <div class="ck-title">Checkout</div>
+  <div class="ck-back" id="ckBack"><svg class="chev" viewBox="0 0 24 24" width="11" height="11" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg> back to cart</div>
+
+  <div class="hline ck-figma-line" style="left:60.03px; top:189.67px; width:1391.97px;"></div>
+
+  <div class="vline ck-divider"></div>
+
+  <!-- order summary -->
+  <div class="ck-sum">
+    <div class="lbl">// Order</div>
+    <div class="ck-prod">
+      <div class="img"><img src="maskit-img-41.png" onerror="this.parentNode.style.background='repeating-linear-gradient(45deg,#2a2a2a,#2a2a2a 6px,#222 6px,#222 12px)'" alt=""></div>
+      <div class="meta">
+        <div class="ed">EDITION 03 / 50</div>
+        <div class="nm">Hooded Cape &amp; Skirt Ensemble</div>
+        <div class="ds">MSK-HCE-1965-072<br>Israeli Digital Couture · 16K</div>
+        <div class="pr">$ 14,500</div>
+      </div>
+    </div>
+    <div class="ck-lines">
+      <div class="ck-row"><span>SUBTOTAL</span><span class="v">// ₪ 14,500</span></div>
+      <div class="ck-row"><span>DIGITAL CERTIFICATION</span><span class="v">// included</span></div>
+      <div class="ck-row"><span>PROMPT DELIVERY</span><span class="v">// instant on confirmation</span></div>
+    </div>
+    <div class="ck-total"><span class="t">TOTAL</span><span class="a">₪ 14,500</span></div>
+    <div class="ck-note">This garment exists only as code. On confirmation you receive the numbered edition record and its bound prompt structure.</div>
+  </div>
+
+  <!-- form -->
+  <div class="ck-form">
+    <div class="ck-sec">// Contact</div>
+    <div class="ck-grid">
+      <div class="ck-field full"><label>Email address</label><input type="text" placeholder="you@domain.com" autocomplete="off"></div>
+    </div>
+
+    <div class="ck-sec">// Shipping / Identity</div>
+    <div class="ck-grid">
+      <div class="ck-field full"><label>Full name</label><input type="text" placeholder="Full name" autocomplete="off"></div>
+      <div class="ck-field full"><label>Address</label><input type="text" placeholder="Street and number" autocomplete="off"></div>
+      <div class="ck-field"><label>City</label><input type="text" placeholder="City" autocomplete="off"></div>
+      <div class="ck-field"><label>Postal code</label><input type="text" placeholder="0000000" autocomplete="off"></div>
+      <div class="ck-field full"><label>Country</label>
+        <select>
+          <option>Israel</option><option>United States</option><option>United Kingdom</option>
+          <option>France</option><option>Germany</option><option>Japan</option><option>Other</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="ck-sec">// Payment</div>
+    <div class="ck-grid">
+      <div class="ck-field full"><label>Card number</label><input type="text" placeholder="0000 0000 0000 0000" autocomplete="off"></div>
+      <div class="ck-field"><label>Expiry</label><input type="text" placeholder="MM / YY" autocomplete="off"></div>
+      <div class="ck-field"><label>CVC</label><input type="text" placeholder="000" autocomplete="off"></div>
+      <div class="ck-field full"><label>Name on card</label><input type="text" placeholder="Name on card" autocomplete="off"></div>
+    </div>
+
+    <button class="ck-submit" id="ckSubmit">Complete Purchase <span class="amt">// ₪ 14,500</span></button>
+    <div class="ck-disclaim">Demo checkout — no real payment is processed. You can continue without entering any details.</div>
+  </div>
+
+</div><!-- /stage -->
+</div><!-- /wrap -->
+
+<!-- ===== SITE FOOTER (shared) ===== -->
+<style>
+  .site-footer { width: 100%; background: #1C1C1C; color: #FFFFFF;
+    border-top: 1px solid rgba(255,255,255,.55); font-family: 'Source Code Pro', monospace; }
+  .site-footer * { box-sizing: border-box; }
+  .site-footer .sf-inner { max-width: 1392px; margin: 0 auto; padding: 70px 60px 40px; }
+
+  /* ---- timeline ---- */
+  .site-footer .sf-timeline { position: relative; height: 104px; margin-bottom: 78px; }
+  .site-footer .sf-line { position: absolute; left: 2%; right: 2%; top: 43px; height: 1px;
+    background: linear-gradient(90deg, rgba(255,255,255,.12), rgba(255,255,255,.5) 50%, #fff); }
+  .site-footer .sf-pt { position: absolute; top: 0; width: 150px; margin-left: -75px; text-align: center; }
+  .site-footer .sf-pt .yr { font-size: 15px; letter-spacing: .06em; color: #fff; }
+  .site-footer .sf-pt .tick { display: block; width: 1px; height: 13px; margin: 7px auto 0;
+    background: rgba(255,255,255,.6); }
+  .site-footer .sf-pt .dot { display: block; width: 7px; height: 7px; margin: -4px auto 0; position: relative; z-index: 1;
+    border: 1px solid #fff; border-radius: 50%; background: #1C1C1C; transition: transform .2s ease, background .2s ease; }
+  .site-footer .sf-pt.end .dot { background: #fff; }
+  .site-footer .sf-pt .cap { display: block; margin-top: 11px; font-size: 10px; letter-spacing: .07em;
+    color: rgba(255,255,255,.5); white-space: nowrap; }
+  .site-footer .sf-pt:hover .dot { transform: scale(1.6); background: #fff; }
+  .site-footer .sf-pt:hover .cap { color: rgba(255,255,255,.85); }
+
+  /* ---- columns ---- */
+  .site-footer .sf-cols { display: flex; flex-wrap: wrap; gap: 40px 48px; }
+  .site-footer .sf-brand { flex: 2 1 320px; }
+  .site-footer .sf-mark { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 32px; letter-spacing: .02em; }
+  .site-footer .sf-tag { margin-top: 16px; max-width: 330px; font-size: 12px; line-height: 18px; color: rgba(255,255,255,.55); }
+  .site-footer .sf-col { flex: 1 1 150px; display: flex; flex-direction: column; gap: 12px; }
+  .site-footer .sf-h { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 3px; }
+  .site-footer .sf-col a, .site-footer .sf-col span { font-size: 13px; color: rgba(255,255,255,.8); text-decoration: none; cursor: pointer; }
+  .site-footer .sf-col a:hover { color: #fff; text-decoration: underline; }
+  .site-footer .sf-col span { cursor: default; color: rgba(255,255,255,.55); }
+
+  /* ---- bottom bar ---- */
+  .site-footer .sf-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px 24px;
+    margin-top: 58px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.18);
+    font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.4); }
+
+  @media (max-width: 820px) {
+    .site-footer .sf-inner { padding: 50px 30px 32px; }
+    .site-footer .sf-pt .cap { display: none; }
+    .site-footer .sf-pt .yr { font-size: 12px; }
+    .site-footer .sf-timeline { height: 64px; margin-bottom: 52px; }
+  }
+  @media (max-width: 520px) {
+    .site-footer .sf-mark { font-size: 26px; }
+    .site-footer .sf-bottom { gap: 6px; }
+  }
+</style>
+
+<footer class="site-footer checkout-footer">
+  <div class="sf-inner">
+
+    <div class="sf-timeline">
+      <div class="sf-line"></div>
+      <div class="sf-pt" style="left:2%;">
+        <span class="yr">1954</span><span class="tick"></span><span class="dot"></span><span class="cap">Founded · Ruth Dayan</span>
+      </div>
+      <div class="sf-pt" style="left:26%;">
+        <span class="yr">1955</span><span class="tick"></span><span class="dot"></span><span class="cap">First Collection</span>
+      </div>
+      <div class="sf-pt" style="left:50%;">
+        <span class="yr">1964</span><span class="tick"></span><span class="dot"></span><span class="cap">Plate 043</span>
+      </div>
+      <div class="sf-pt" style="left:74%;">
+        <span class="yr">1994</span><span class="tick"></span><span class="dot"></span><span class="cap">Archive Sealed</span>
+      </div>
+      <div class="sf-pt end" style="left:98%;">
+        <span class="yr">2030</span><span class="tick"></span><span class="dot"></span><span class="cap">Cipher Bound</span>
+      </div>
+    </div>
+
+    <div class="sf-cols">
+      <div class="sf-brand">
+        <div class="sf-mark">MASHKIT.CODE</div>
+        <div class="sf-tag">The digital monograph of the Maskit archive. Each garment survives as code — a numbered edition bound to its origin. Not a copy. A continuation.</div>
+      </div>
+      <div class="sf-col">
+        <div class="sf-h">// Index</div>
+        <a href="#" data-go="home">Home</a>
+        <a href="#">Concept</a>
+        <a href="#" data-go="catalog">Catalog</a>
+        <a href="#" data-cart-open>Cart</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-h">// Archive</div>
+        <a href="#" data-go="catalog">The Monograph</a>
+        <a href="#" data-go="catalog">Editions</a>
+        <a href="#">Certificates</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-h">// Custody</div>
+        <a href="#">custody@maskit.code</a>
+        <span>Tel Aviv · Jerusalem</span>
+        <span>Israel</span>
+      </div>
+    </div>
+
+    <div class="sf-bottom">
+      <span>© 2030 MASHKIT.CODE</span>
+      <span>Every edition numbered · 03 / 50</span>
+      <span>Archive 1954–2030</span>
+    </div>
+
+  </div>
+</footer>
+<!-- ===== /SITE FOOTER ===== --></div>
+  <div class="page" id="page-loading" style="display:none"><div class="wrap">
+<div class="stage">
+  <div class="ld-corner" style="left:40px; top:36px;">MASHKIT.CODE</div>
+  <div class="vline" style="left:60.03px; top:0; height:982px;"></div>
+  <div class="vline" style="left:1452px; top:0; height:982px;"></div>
+  <div class="ld-corner" style="right:40px; top:36px;">// EDITION 03 / 50</div>
+
+  <div class="ld-center">
+    <div class="ld-brand">SECURE ACQUISITION</div>
+    <div class="ld-head">Finalizing your acquisition</div>
+    <div class="ld-track"><div class="ld-fill"></div></div>
+    <div class="ld-status"><span id="ldMsg">Verifying edition</span><span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></div>
+    <div class="ld-sub">PLEASE DO NOT CLOSE THIS WINDOW</div>
+  </div>
+</div>
+</div></div>
+  <div class="page" id="page-confirm" style="display:none"><div class="wrap">
+<div class="stage">
+
+  <!-- nav -->
+  <div class="vline" style="left:60.69px; top:0.56px; height:2235.44px;"></div>
+  <div class="vline" style="left:1452.69px; top:0.56px; height:2235.44px;"></div>
+  <a class="navbtn" href="#" data-go="home" style="left:79.14px;">Home</a>
+  <a class="navbtn" href="#" data-go="home" data-scroll="conceptAnchor" style="left:253.14px;">concept</a>
+  <a class="navbtn" href="#" data-go="catalog" style="left:427.14px;">Catalog</a>
+  <a class="navbtn" href="#" data-cart-open style="left:1297.05px;">CArt</a>
+
+  <!-- structural dividers -->
+  <div class="vline" style="left:407.95px; top:491.04px; height:1196.06px;"></div>
+  <div class="hline" style="left:-14.52px; top:491.04px; width:1526.52px;"></div>
+  <div class="hline" style="left:-14.52px; top:1049.7px; width:1526.52px;"></div>
+  <div class="hline" style="left:-14.52px; top:1687.1px; width:1526.52px;"></div>
+  <div class="hline" style="left:-14.52px; top:2235px; width:1526.52px;"></div>
+
+  <!-- timeline -->
+  <div class="vline" style="left:1367.03px; top:576.27px; height:1341.69px;"></div>
+  <div class="cf-tick" style="top:576.26px;"></div>
+  <div class="cf-tick" style="top:1574.64px;"></div>
+  <div class="cf-tick" style="top:1859.25px;"></div>
+  <div class="cf-tick" style="top:1917.45px;"></div>
+  <div class="cf-year" style="top:566.77px;">1954</div>
+  <div class="cf-year" style="top:1565.14px;">2030</div>
+
+  <!-- status header -->
+  <div class="cf-status cf-steps">[ QUEUE ]<span class="dash">———</span>[ BINDING ]<span class="dash">———</span><span class="on">[ DELIVERY ]</span></div>
+  <div class="cf-status cf-bound">CIPHER BOUND&nbsp;&nbsp;//&nbsp;&nbsp;2026.05.23&nbsp;&nbsp;//&nbsp;&nbsp;14:32:08 GMT+3</div>
+
+  <!-- title -->
+  <div class="cf-title">The piece is yours.</div>
+
+  <!-- ORIGIN -->
+  <div class="cf-origin-img"><img src="maskit-img-42.jpg" alt="Maskit archive 1954"></div>
+  <div class="cf-cap origin">ORIGIN&nbsp;&nbsp;//&nbsp;&nbsp;Maskit archive, 1954 /&nbsp;&nbsp;Hooded Cape &amp; Skirt Ensemble by Fini Leitersdorf.</div>
+  <div class="cf-head" style="top:566.77px;">Origin</div>
+  <div class="cf-body origin-text">The original item was woven in 1954 in a workshop on Rehov HaSoreg, Jerusalem, on commission for the first Maskit collection. Fini Leitersdorf — the house's founding designer — built it around a single bolt of Yemenite-embroidered silk produced by a family of recent immigrants whose names were never recorded in the workshop's ledger. Its construction took nine weeks. The bodice was hand-fitted; the skirt panels were assembled flat on the floor of the atelier and joined with the irregular hand-stitch tension that distinguished early Maskit pieces from the European couture they were quietly answering. The gown was first shown at the Habima Theatre in 1955. It was photographed by Paul Goldman; the negative is held at the Israel Museum's costume archive.</div>
+
+  <!-- TRANSLATION -->
+  <div class="cf-desc-img"><img src="maskit-img-43.png" alt="Descendant cipher"></div>
+  <div class="cf-cap desc">DESCENDANT&nbsp;&nbsp;//&nbsp;&nbsp;Hooded Cape &amp; Skirt Ensemble, 2030 / Edition 03 of 50.</div>
+  <div class="cf-head" style="top:1136.23px;">Translation</div>
+  <div class="cf-body translation-text">To bring this piece into the cipher form, the original garment was scanned, its weave structure photographed at thread-level resolution, and its silhouette decomposed into a parametric model that preserves silhouette, drape, and weave behavior under simulated gravity. What was not preserved was perfection. The irregular slub of the original silk, the hand-tension variance across the embroidered yoke, the slight asymmetry of the right cuff — these are not flaws corrected by the rendering. They are signatures. The cipher carries them forward at sixteen-thousand-pixel fidelity. This is not a copy. It is a continuation.</div>
+
+  <!-- buttons -->
+  <div class="cf-btn" id="cfCert" style="left:1149.48px; top:1838px;">View Certificate</div>
+  <div class="cf-btn" id="cfPrompt" style="left:1149.34px; top:1896px;">Download Prompt</div>
+
+  <!-- closing -->
+  <div class="cf-wear">Wear it well</div>
+  <div class="cf-foot">Your cipher has been mirrored to your registered email. A backup is stored in your wallet's metadata layer. If you ever lose access, contact <a href="#">custody@maskit.code</a> with your edition number.</div>
+
+</div><!-- /stage -->
+</div><!-- /wrap -->
+
+<!-- ===== SITE FOOTER (shared) ===== -->
+<style>
+  .site-footer { width: 100%; background: #1C1C1C; color: #FFFFFF;
+    border-top: 1px solid rgba(255,255,255,.55); font-family: 'Source Code Pro', monospace; }
+  .site-footer * { box-sizing: border-box; }
+  .site-footer .sf-inner { max-width: 1392px; margin: 0 auto; padding: 70px 60px 40px; }
+
+  /* ---- timeline ---- */
+  .site-footer .sf-timeline { position: relative; height: 104px; margin-bottom: 78px; }
+  .site-footer .sf-line { position: absolute; left: 2%; right: 2%; top: 43px; height: 1px;
+    background: linear-gradient(90deg, rgba(255,255,255,.12), rgba(255,255,255,.5) 50%, #fff); }
+  .site-footer .sf-pt { position: absolute; top: 0; width: 150px; margin-left: -75px; text-align: center; }
+  .site-footer .sf-pt .yr { font-size: 15px; letter-spacing: .06em; color: #fff; }
+  .site-footer .sf-pt .tick { display: block; width: 1px; height: 13px; margin: 7px auto 0;
+    background: rgba(255,255,255,.6); }
+  .site-footer .sf-pt .dot { display: block; width: 7px; height: 7px; margin: -4px auto 0; position: relative; z-index: 1;
+    border: 1px solid #fff; border-radius: 50%; background: #1C1C1C; transition: transform .2s ease, background .2s ease; }
+  .site-footer .sf-pt.end .dot { background: #fff; }
+  .site-footer .sf-pt .cap { display: block; margin-top: 11px; font-size: 10px; letter-spacing: .07em;
+    color: rgba(255,255,255,.5); white-space: nowrap; }
+  .site-footer .sf-pt:hover .dot { transform: scale(1.6); background: #fff; }
+  .site-footer .sf-pt:hover .cap { color: rgba(255,255,255,.85); }
+
+  /* ---- columns ---- */
+  .site-footer .sf-cols { display: flex; flex-wrap: wrap; gap: 40px 48px; }
+  .site-footer .sf-brand { flex: 2 1 320px; }
+  .site-footer .sf-mark { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 32px; letter-spacing: .02em; }
+  .site-footer .sf-tag { margin-top: 16px; max-width: 330px; font-size: 12px; line-height: 18px; color: rgba(255,255,255,.55); }
+  .site-footer .sf-col { flex: 1 1 150px; display: flex; flex-direction: column; gap: 12px; }
+  .site-footer .sf-h { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 3px; }
+  .site-footer .sf-col a, .site-footer .sf-col span { font-size: 13px; color: rgba(255,255,255,.8); text-decoration: none; cursor: pointer; }
+  .site-footer .sf-col a:hover { color: #fff; text-decoration: underline; }
+  .site-footer .sf-col span { cursor: default; color: rgba(255,255,255,.55); }
+
+  /* ---- bottom bar ---- */
+  .site-footer .sf-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px 24px;
+    margin-top: 58px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.18);
+    font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.4); }
+
+  @media (max-width: 820px) {
+    .site-footer .sf-inner { padding: 50px 30px 32px; }
+    .site-footer .sf-pt .cap { display: none; }
+    .site-footer .sf-pt .yr { font-size: 12px; }
+    .site-footer .sf-timeline { height: 64px; margin-bottom: 52px; }
+  }
+  @media (max-width: 520px) {
+    .site-footer .sf-mark { font-size: 26px; }
+    .site-footer .sf-bottom { gap: 6px; }
+  }
+</style>
+
+<footer class="site-footer confirm-footer">
+  <div class="sf-inner">
+
+    <div class="sf-timeline">
+      <div class="sf-line"></div>
+      <div class="sf-pt" style="left:2%;">
+        <span class="yr">1954</span><span class="tick"></span><span class="dot"></span><span class="cap">Founded · Ruth Dayan</span>
+      </div>
+      <div class="sf-pt" style="left:26%;">
+        <span class="yr">1955</span><span class="tick"></span><span class="dot"></span><span class="cap">First Collection</span>
+      </div>
+      <div class="sf-pt" style="left:50%;">
+        <span class="yr">1964</span><span class="tick"></span><span class="dot"></span><span class="cap">Plate 043</span>
+      </div>
+      <div class="sf-pt" style="left:74%;">
+        <span class="yr">1994</span><span class="tick"></span><span class="dot"></span><span class="cap">Archive Sealed</span>
+      </div>
+      <div class="sf-pt end" style="left:98%;">
+        <span class="yr">2030</span><span class="tick"></span><span class="dot"></span><span class="cap">Cipher Bound</span>
+      </div>
+    </div>
+
+    <div class="sf-cols">
+      <div class="sf-brand">
+        <div class="sf-mark">MASHKIT.CODE</div>
+        <div class="sf-tag">The digital monograph of the Maskit archive. Each garment survives as code — a numbered edition bound to its origin. Not a copy. A continuation.</div>
+      </div>
+      <div class="sf-col">
+        <div class="sf-h">// Index</div>
+        <a href="#" data-go="home">Home</a>
+        <a href="#">Concept</a>
+        <a href="#" data-go="catalog">Catalog</a>
+        <a href="#" data-cart-open>Cart</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-h">// Archive</div>
+        <a href="#" data-go="catalog">The Monograph</a>
+        <a href="#" data-go="catalog">Editions</a>
+        <a href="#">Certificates</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-h">// Custody</div>
+        <a href="#">custody@maskit.code</a>
+        <span>Tel Aviv · Jerusalem</span>
+        <span>Israel</span>
+      </div>
+    </div>
+
+    <div class="sf-bottom">
+      <span>© 2030 MASHKIT.CODE</span>
+      <span>Every edition numbered · 03 / 50</span>
+      <span>Archive 1954–2030</span>
+    </div>
+
+  </div>
+</footer>
+<!-- ===== /SITE FOOTER ===== --></div>
+  <div class="page" id="page-certificate" style="display:none"><div class="wrap">
+<div class="stage">
+
+  <!-- base nav (drawn under veil) -->
+  <div class="vline" style="left:60.03px; top:0; height:982px; z-index:1;"></div>
+  <div class="vline" style="left:1452px; top:0; height:982px; z-index:1;"></div>
+  <div class="hline" style="left:0.24px; top:79.1px; width:1512px; z-index:1;"></div>
+
+  <!-- dim veil + paper -->
+  <div class="ct-veil" id="ctVeil"></div>
+  <div class="ct-paper"></div>
+
+  <!-- faint functional nav -->
+  <div class="ct-nav">
+    <a class="navbtn" href="#" data-go="home" style="left:79.14px;">Home</a>
+    <a class="navbtn" href="#" data-go="home" data-scroll="conceptAnchor" style="left:253.14px;">concept</a>
+    <a class="navbtn" href="#" data-go="catalog" style="left:427.14px;">Catalog</a>
+    <a class="navbtn" href="#" data-cart-open style="left:1297.05px;">CArt</a>
+  </div>
+
+  <!-- the certificate card -->
+  <div class="ct-card"><img src="maskit-img-44.png" alt="Certificate of acquisition"></div>
+
+  <!-- download -->
+  <div class="ct-dl" id="ctDl">Download Prompt</div>
+
+</div><!-- /stage -->
+</div><!-- /wrap -->
+
+<!-- ===== SITE FOOTER (shared) ===== -->
+<style>
+  .site-footer { width: 100%; background: #1C1C1C; color: #FFFFFF;
+    border-top: 1px solid rgba(255,255,255,.55); font-family: 'Source Code Pro', monospace; }
+  .site-footer * { box-sizing: border-box; }
+  .site-footer .sf-inner { max-width: 1392px; margin: 0 auto; padding: 70px 60px 40px; }
+
+  /* ---- timeline ---- */
+  .site-footer .sf-timeline { position: relative; height: 104px; margin-bottom: 78px; }
+  .site-footer .sf-line { position: absolute; left: 2%; right: 2%; top: 43px; height: 1px;
+    background: linear-gradient(90deg, rgba(255,255,255,.12), rgba(255,255,255,.5) 50%, #fff); }
+  .site-footer .sf-pt { position: absolute; top: 0; width: 150px; margin-left: -75px; text-align: center; }
+  .site-footer .sf-pt .yr { font-size: 15px; letter-spacing: .06em; color: #fff; }
+  .site-footer .sf-pt .tick { display: block; width: 1px; height: 13px; margin: 7px auto 0;
+    background: rgba(255,255,255,.6); }
+  .site-footer .sf-pt .dot { display: block; width: 7px; height: 7px; margin: -4px auto 0; position: relative; z-index: 1;
+    border: 1px solid #fff; border-radius: 50%; background: #1C1C1C; transition: transform .2s ease, background .2s ease; }
+  .site-footer .sf-pt.end .dot { background: #fff; }
+  .site-footer .sf-pt .cap { display: block; margin-top: 11px; font-size: 10px; letter-spacing: .07em;
+    color: rgba(255,255,255,.5); white-space: nowrap; }
+  .site-footer .sf-pt:hover .dot { transform: scale(1.6); background: #fff; }
+  .site-footer .sf-pt:hover .cap { color: rgba(255,255,255,.85); }
+
+  /* ---- columns ---- */
+  .site-footer .sf-cols { display: flex; flex-wrap: wrap; gap: 40px 48px; }
+  .site-footer .sf-brand { flex: 2 1 320px; }
+  .site-footer .sf-mark { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 32px; letter-spacing: .02em; }
+  .site-footer .sf-tag { margin-top: 16px; max-width: 330px; font-size: 12px; line-height: 18px; color: rgba(255,255,255,.55); }
+  .site-footer .sf-col { flex: 1 1 150px; display: flex; flex-direction: column; gap: 12px; }
+  .site-footer .sf-h { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 3px; }
+  .site-footer .sf-col a, .site-footer .sf-col span { font-size: 13px; color: rgba(255,255,255,.8); text-decoration: none; cursor: pointer; }
+  .site-footer .sf-col a:hover { color: #fff; text-decoration: underline; }
+  .site-footer .sf-col span { cursor: default; color: rgba(255,255,255,.55); }
+
+  /* ---- bottom bar ---- */
+  .site-footer .sf-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px 24px;
+    margin-top: 58px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.18);
+    font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.4); }
+
+  @media (max-width: 820px) {
+    .site-footer .sf-inner { padding: 50px 30px 32px; }
+    .site-footer .sf-pt .cap { display: none; }
+    .site-footer .sf-pt .yr { font-size: 12px; }
+    .site-footer .sf-timeline { height: 64px; margin-bottom: 52px; }
+  }
+  @media (max-width: 520px) {
+    .site-footer .sf-mark { font-size: 26px; }
+    .site-footer .sf-bottom { gap: 6px; }
+  }
+</style>
+
+<footer class="site-footer">
+  <div class="sf-inner">
+
+    <div class="sf-timeline">
+      <div class="sf-line"></div>
+      <div class="sf-pt" style="left:2%;">
+        <span class="yr">1954</span><span class="tick"></span><span class="dot"></span><span class="cap">Founded · Ruth Dayan</span>
+      </div>
+      <div class="sf-pt" style="left:26%;">
+        <span class="yr">1955</span><span class="tick"></span><span class="dot"></span><span class="cap">First Collection</span>
+      </div>
+      <div class="sf-pt" style="left:50%;">
+        <span class="yr">1964</span><span class="tick"></span><span class="dot"></span><span class="cap">Plate 043</span>
+      </div>
+      <div class="sf-pt" style="left:74%;">
+        <span class="yr">1994</span><span class="tick"></span><span class="dot"></span><span class="cap">Archive Sealed</span>
+      </div>
+      <div class="sf-pt end" style="left:98%;">
+        <span class="yr">2030</span><span class="tick"></span><span class="dot"></span><span class="cap">Cipher Bound</span>
+      </div>
+    </div>
+
+    <div class="sf-cols">
+      <div class="sf-brand">
+        <div class="sf-mark">MASHKIT.CODE</div>
+        <div class="sf-tag">The digital monograph of the Maskit archive. Each garment survives as code — a numbered edition bound to its origin. Not a copy. A continuation.</div>
+      </div>
+      <div class="sf-col">
+        <div class="sf-h">// Index</div>
+        <a href="#" data-go="home">Home</a>
+        <a href="#">Concept</a>
+        <a href="#" data-go="catalog">Catalog</a>
+        <a href="#" data-cart-open>Cart</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-h">// Archive</div>
+        <a href="#" data-go="catalog">The Monograph</a>
+        <a href="#" data-go="catalog">Editions</a>
+        <a href="#">Certificates</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-h">// Custody</div>
+        <a href="#">custody@maskit.code</a>
+        <span>Tel Aviv · Jerusalem</span>
+        <span>Israel</span>
+      </div>
+    </div>
+
+    <div class="sf-bottom">
+      <span>© 2030 MASHKIT.CODE</span>
+      <span>Every edition numbered · 03 / 50</span>
+      <span>Archive 1954–2030</span>
+    </div>
+
+  </div>
+</footer>
+<!-- ===== /SITE FOOTER ===== --></div>
+<!-- ===== CART OVERLAY (shared) ===== -->
+<style>
+  .cart-overlay { position: fixed; inset: 0; z-index: 8900; display: none; }
+  .cart-overlay.open { display: block; }
+  .cart-overlay .co-backdrop { position: absolute; inset: 0;
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+  .cart-overlay .co-paper { position: absolute; inset: 0;
+    background: url('maskit-img-45.jpg') center/cover no-repeat; opacity: .8; }
+  .cart-overlay .co-stage { position: absolute; top: 0; left: 0; right: 0;
+    margin: 0 auto; width: 1512px; height: 982px;
+    transform-origin: top center; font-family: 'Source Code Pro', monospace; }
+  .cart-overlay .co-stage > * { position: absolute; }
+
+  .cart-overlay .co-nav { left: 0; top: 0; width: 1512px; height: 78px; background: #1C1C1C; }
+  .cart-overlay .co-rail { top: 0; width: 0; height: 78px; border-left: 1px solid #FFFFFF; }
+  .cart-overlay .co-navline { left: 0; top: 78px; width: 1512px; height: 0; border-top: 1px solid #FFFFFF; }
+  .cart-overlay .co-nav,
+  .cart-overlay .co-rail,
+  .cart-overlay .co-navline,
+  .cart-overlay .co-navbtn { display: none !important; }
+  .cart-overlay .co-navbtn { top: 18.56px; display: flex; align-items: center; justify-content: center;
+    width: 135.63px; height: 41.15px; background: #1C1C1C; border: 1px solid #FFFFFF;
+    color: #FFFFFF; font: 400 16px/20px 'Source Code Pro', monospace;
+    letter-spacing: .04em; text-transform: uppercase; text-decoration: none; cursor: pointer; }
+  .cart-overlay .co-navbtn:hover { background: #FFFFFF; color: #1C1C1C; }
+  .cart-overlay .co-navbtn.active { background: #FFFFFF; color: #1C1C1C; }
+
+  .cart-overlay .co-panel { left: 931.2px; top: 78.37px; width: 522px; height: 844px;
+    background: #FFFFFF; color: #000; box-shadow: 0 4px 11.9px rgba(0,0,0,.25);
+    font-family: 'Source Code Pro', monospace; }
+  .cart-overlay .co-panel > * { position: absolute; }
+
+  .cart-overlay .co-x { left: 18.08px; top: 16.31px; width: 37.69px; height: 30.68px; z-index: 10;
+    background: #1C1C1C; border: 1px solid #FFFFFF; color: #FFFFFF;
+    display: flex; align-items: center; justify-content: center; font-size: 21px; cursor: pointer; }
+  .cart-overlay .co-title { left: 0; top: 22.88px; width: 522px; text-align: center; pointer-events: none;
+    font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 40px; line-height: 48px; }
+  .cart-overlay .co-intro { left: 24.3px; top: 97.5px; width: 473.41px; font-size: 13.28px; line-height: 17px; }
+  .cart-overlay .co-h { left: 0; width: 522px; height: 0; border-top: 1px solid #000; }
+  .cart-overlay .co-v { width: 0; height: 0; border-left: 1px solid #000; }
+
+  .cart-overlay .co-item { position: absolute; inset: 0; pointer-events: none; }
+  .cart-overlay .co-item > * { position: absolute; }
+  .cart-overlay .co-empty { left: 0; top: 268px; width: 522px; text-align: center; color: #9a9a9a;
+    font-size: 13px; line-height: 20px; pointer-events: none; }
+  .cart-overlay .co-empty .big { display: block; color: #3a3a3a; font-size: 15px; margin-bottom: 8px; letter-spacing: .02em; }
+
+  .cart-overlay .co-thumb { left: 30.19px; top: 196.68px; width: 113.17px; height: 201.55px;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+    background:#FFFFFF; border:0; }
+  .cart-overlay .co-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+  .cart-overlay .co-thumb span { display:none; }
+
+  .cart-overlay .co-details { left: 187.64px; top: 186.21px; width: 150px; font-size: 11.72px; line-height: 15px; }
+  .cart-overlay .co-name { font-family: 'Cormorant Garamond', serif; font-size: 19px; line-height: 21px; }
+  .cart-overlay .co-price { left: 366.24px; top: 178.21px;
+    font-family: 'Cormorant Garamond', serif; font-size: 21px; line-height: 26px; }
+  .cart-overlay .co-remove { left: 366.24px; top: 220.23px; font-size: 11.72px; line-height: 15px; opacity: .55; cursor: pointer; pointer-events: auto; }
+  .cart-overlay .co-remove:hover { opacity: .9; text-decoration: underline; }
+  .cart-overlay .co-status { left: 366.24px; top: 289.21px; width: 129.61px; font-size: 11.72px; line-height: 15px; }
+  .cart-overlay .co-locked { color: #8a93a6; }
+
+  .cart-overlay .co-lbl { left: 23.76px; font-size: 10px; line-height: 13px; }
+  .cart-overlay .co-val { right: 23.76px; text-align: right; font-size: 10px; line-height: 13px; }
+
+  .cart-overlay .co-totalbar { left: 0; top: 593.92px; width: 521.97px; height: 45px; background: #1C1C1C; }
+  .cart-overlay .co-total-lbl { left: 23.76px; top: 608.92px; font-size: 12px; font-weight: 600; line-height: 15px; color: #FFFFFF; }
+  .cart-overlay .co-total-val { right: 23.34px; top: 608.92px; text-align: right; font-size: 12px; font-weight: 600; line-height: 15px; color: #FFFFFF; }
+
+  .cart-overlay .co-purchase { left: 347.86px; top: 655.64px; width: 150px; height: 42px;
+    display: flex; align-items: center; justify-content: center;
+    background: #FFFFFF; border: 1px solid #1C1C1C; color: #1C1C1C;
+    font-size: 16px; letter-spacing: .04em; text-transform: uppercase; cursor: pointer; }
+  .cart-overlay .co-purchase:hover { background: #1C1C1C; color: #FFFFFF; }
+  .cart-overlay .co-purchase.co-disabled { opacity: .3; pointer-events: none; }
+</style>
+
+<div class="cart-overlay" id="cartOverlay" role="dialog" aria-label="Your selected pieces">
+  <div class="co-backdrop"></div>
+  <div class="co-paper"></div>
+  <div class="co-stage" id="coStage">
+    <div class="co-nav"></div>
+    <div class="co-rail" style="left:60.03px;"></div>
+    <div class="co-rail" style="left:1452px;"></div>
+    <a class="co-navbtn" href="#" data-go="home" style="left:79.38px;">Home</a>
+    <a class="co-navbtn" href="#" data-go="home" data-scroll="conceptAnchor" style="left:253.56px;">concept</a>
+    <a class="co-navbtn" href="#" data-go="catalog" style="left:427.74px;">Catalog</a>
+    <a class="co-navbtn active" href="#" data-cart-open style="left:1297.30px;">CArt</a>
+    <div class="co-navline"></div>
+
+    <div class="co-panel">
+      <div class="co-x" data-cart-close>X</div>
+      <div class="co-title">Your selected pieces</div>
+      <div class="co-intro">Each piece is a numbered edition. Once acquired, the prompt is bound to your digital identity.</div>
+      <div class="co-h" style="top:92px;"></div>
+      <div class="co-h" style="top:137px;"></div>
+
+      <div class="co-item">
+        <div class="co-thumb">
+          <img src="maskit-img-46.png" onerror="this.remove()" alt="">
+        </div>
+        <div class="co-details">PLATE 43&nbsp;&nbsp;//&nbsp;&nbsp;EDITION 03/50<br><br><span class="co-name">Hooded Cape &amp; Skirt Ensemble</span><br><br>Total Look · Wide-leg jumpsuit<br>Identity: Rooted Israeli Digital Couture<br>Resolution: 16K · Molecular Weaving</div>
+        <div class="co-price">$ 14,500</div>
+        <div class="co-remove">remove from queue</div>
+        <div class="co-status">Status: <span class="co-locked">LOCKED</span> — acquire to reveal full prompt</div>
+        <div class="co-v" style="left:174.65px; top:137px; height:322.2px;"></div>
+        <div class="co-v" style="left:348.63px; top:137px; height:322.2px;"></div>
+        <div class="co-h" style="left:348.63px; top:260.78px; width:173.76px;"></div>
+      </div>
+
+      <div class="co-empty"><span class="big">Your selection is empty</span>Add a piece from the catalog to begin.</div>
+
+      <div class="co-h" style="top:458.92px;"></div>
+      <div class="co-lbl" style="top:475.92px;">SUBTOTAL</div>
+      <div class="co-val" id="coSubtotal" style="top:475.92px;">//₪ 0</div>
+      <div class="co-h" style="top:503.92px;"></div>
+      <div class="co-lbl" style="top:520.64px;">DIGITAL CERTIFICATION</div>
+      <div class="co-val" style="top:520.64px;">//included</div>
+      <div class="co-h" style="top:548.92px;"></div>
+      <div class="co-lbl" style="top:565.8px;">PROMPT DELIVERY</div>
+      <div class="co-val" style="top:565.8px;">//instant on confirmation</div>
+      <div class="co-h" style="top:593.92px;"></div>
+
+      <div class="co-totalbar"></div>
+      <div class="co-total-lbl">TOTAL</div>
+      <div class="co-total-val" id="coTotal">//₪ 0</div>
+
+      <div class="co-purchase co-disabled">Purchase</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    var ov = document.getElementById('cartOverlay');
+    if (!ov) return;
+    var stage = document.getElementById('coStage');
+    var KEY = 'mashkit_cart';
+    try { localStorage.removeItem(KEY); } catch(e){}   /* default: empty cart on every load; don't restore old carts */
+    function load(){ return window.__cart || []; }      /* session-only: persists across in-app navigation, not reloads */
+    function save(c){ window.__cart = c; }              /* in-memory only */
+    var cart = load();
+
+    var item = ov.querySelector('.co-item');
+    var empty = ov.querySelector('.co-empty');
+    var subVal = ov.querySelector('#coSubtotal');
+    var totVal = ov.querySelector('#coTotal');
+    var purchase = ov.querySelector('.co-purchase');
+
+    function fmt(n){ return '//\u20AA ' + n.toLocaleString('en-US'); }
+    function render(){
+      var has = cart.length > 0;
+      item.style.display = has ? '' : 'none';
+      empty.style.display = has ? 'none' : '';
+      var total = has ? 14500 : 0;
+      if (subVal) subVal.textContent = fmt(total);
+      if (totVal) totVal.textContent = fmt(total);
+      purchase.classList.toggle('co-disabled', !has);
+    }
+    function addCape(){ if (cart.length === 0) { cart = [{ id: 'MSK-HCE-1965-072', price: 14500 }]; save(cart); } render(); }
+    function removeCape(){ cart = []; save(cart); render(); }
+
+    function stableViewportWidth(){ return document.documentElement.clientWidth || window.innerWidth; }
+    function fitCo(){ stage.style.transform = 'scale(' + (stableViewportWidth()/1512) + ')'; }
+    function openCart(e){ if (e) e.preventDefault(); render(); ov.classList.add('open'); document.documentElement.style.overflow='hidden'; document.body.style.overflow='hidden'; fitCo(); }
+    function closeCart(){ ov.classList.remove('open'); document.documentElement.style.overflow=''; document.body.style.overflow=''; }
+
+    document.querySelectorAll('[data-add-cape]').forEach(function(el){ el.addEventListener('click', function(){ addCape(); }); });
+    document.querySelectorAll('[data-cart-open]').forEach(function(el){ el.addEventListener('click', openCart); });
+    document.querySelectorAll('[data-cart-close]').forEach(function(el){ el.addEventListener('click', closeCart); });
+    ov.querySelector('.co-remove').addEventListener('click', removeCape);
+    purchase.addEventListener('click', function(){
+      if (purchase.classList.contains('co-disabled')) return;
+      if (window.go) { closeCart(); window.go('checkout'); }
+      else { window.location.href = 'checkout.html'; }
+    });
+    ov.querySelector('.co-backdrop').addEventListener('click', closeCart);
+    ov.querySelector('.co-paper').addEventListener('click', closeCart);
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeCart(); });
+    window.addEventListener('resize', fitCo); fitCo();
+    render();
+    window.__openCart = openCart; window.__closeCart = closeCart;
+  })();
+</script>
+<!-- ===== /CART OVERLAY ===== -->
+<script>
+  (function(){
+    var plates = [
+      {p:'043',n:'HOODED CAPE AND SKIRT',ref:'M.043.1964',date:'c.1964',med:'Woven Textile',pat:'Houndstooth',ed:'03/50',model:'maskit-img-47.png',cut:'maskit-img-48.png'},
+      {p:'044',n:'STRIPED DAY DRESS',ref:'M.044.1966',date:'c.1966',med:'Cotton Textile',pat:'Vertical Stripe',ed:'03/50',model:'maskit-img-49.png',cut:'maskit-img-50.png'},
+      {p:'045',n:'SHOULDER DRAPE ENSEMBLE',ref:'M.045.1967',date:'c.1967',med:'Woven Textile',pat:'Linear Metallic Weave',ed:'03/50',model:'maskit-img-51.png',cut:'maskit-img-52.png'},
+      {p:'046',n:'LACE DRESS',ref:'M.046.1969',date:'c.1969',med:'Lace Textile',pat:'Openwork Lace',ed:'03/50',model:'maskit-img-53.png',cut:'maskit-img-54.png'},
+      {p:'040',n:'EMBROIDERED CAFTAN',ref:'M.040.1961',date:'c.1961',med:'Cotton Textile',pat:'Traditional Embroidery',ed:'04/50',model:'maskit-img-55.png',cut:'maskit-img-56.png'},
+      {p:'041',n:'SLEEVELESS SHIFT DRESS',ref:'M.041.1962',date:'c.1962',med:'Wool Textile',pat:'Solid',ed:'03/50',model:'maskit-img-57.png',cut:'maskit-img-58.png'},
+      {p:'042',n:'EMBROIDERED TROUSER SET',ref:'M.042.1965',date:'c.1965',med:'Cotton Textile',pat:'Floral Embroidery',ed:'03/50',model:'maskit-img-59.png',cut:'maskit-img-60.png'}
+    ];
+    var N=plates.length, cur=0;
+    var meta=document.getElementById('plateMeta'),
+        edi=document.getElementById('plateEdition'),
+        mdlBox=document.getElementById('plateModel'),
+        mdl=mdlBox?mdlBox.querySelector('img'):null;
+    if(!meta||!mdl) return;
+    var slotBox=[0,1,2,3,4,5].map(function(i){return document.getElementById('cut'+i);});
+    var offs=[-3,-2,-1,1,2,3];
+    function metaHTML(d){
+      return '<span class="title">PLATE '+d.p+'/'+d.n+'</span>'+
+        'Reference\n'+d.ref+'\n\nCollection\nMaskit\n\nOrigin\nIsrael\n\nDate\n'+d.date+
+        '\n\nMedium\n'+d.med+'\n\nPattern\n'+d.pat;
+    }
+    function render(){
+      var d=plates[cur];
+      meta.innerHTML=metaHTML(d);
+      edi.textContent='PLATE '+d.p+'\nEDITION '+d.ed;
+      mdl.src=d.model;
+      for(var i=0;i<6;i++){
+        var idx=((cur+offs[i])%N+N)%N;
+        var img=slotBox[i].querySelector('img'); img.src=plates[idx].cut;
+        slotBox[i].setAttribute('data-idx',idx);
+      }
+    }
+    function go(i){ cur=((i%N)+N)%N; render(); }
+    document.getElementById('plateNext').addEventListener('click',function(){ go(cur+1); });
+    mdlBox.addEventListener('click',function(){ go(cur+1); });
+    slotBox.forEach(function(el){ el.addEventListener('click',function(){ var x=el.getAttribute('data-idx'); if(x!==null) go(parseInt(x,10)); }); });
+    render();
+  })();
+
+
+  (function(){
+    // ----- scrolling archive index -----
+    var data = [
+      ["1954","Desert Coat I."],["1957","Desert Coat II."],["1962","Desert Coat III."],
+      ["1968","Caftan Dress I."],["1971","Caftan Dress II."],["1974","Caftan Dress III."],
+      ["1978","Wool Cape I."],["1982","Wool Cape II."],["1985","Wool Cape III."],
+      ["1987","Embroidered Vest I."],["1994","Embroidered Vest II."],["2001","Embroidered Vest III."],
+      ["2026","Bedouin Textile Panel I."],["1954","Bedouin Textile Panel II."],["1957","Bedouin Textile Panel III."],
+      ["1962","Handwoven Stripe I."],["1968","Handwoven Stripe II."],["1971","Handwoven Stripe III."],
+      ["1974","Archive Sketch I."],["1978","Archive Sketch II."],["1982","Archive Sketch III."],
+      ["1985","Pattern Scan I."],["1987","Pattern Scan II."],["1994","Pattern Scan III."],
+      ["2001","Prompt Fragment I."],["2026","Prompt Fragment II."],["1954","Prompt Fragment III."],
+      ["1957","Virtual Fitting I."],["1962","Virtual Fitting II."],["1968","Virtual Fitting III."],
+      ["1971","Digital Garment I."],["1974","Digital Garment II."],["1978","Digital Garment III."]
+    ];
+    var track = document.getElementById('archiveTrack');
+    if (track) {
+      var rows = data.map(function(d){
+        return '<div class="row"><span class="yr">'+d[0]+'</span><span class="nm">MASHKIT.CODE '+d[1]+'</span></div>';
+      }).join('');
+      track.innerHTML = rows + rows; // duplicate for seamless loop
+    }
+    // ----- live colour-pill archive (renders into the catalog table cell) -----
+    (function(){
+      var rng=(function(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};})(20260624);
+      function pick(x){return x[Math.floor(rng()*x.length)];}
+      function maybe(x,pp){return rng()<(pp||0.16)?null:pick(x);}
+      var garments=[["caftan dress","coral"],["handwoven wrap","coral"],["textile fragment","pink"],["embroidered panel","orange"],["wool cape","green"],["desert coat","yellow"],["digital garment","blue"],["linen / silk","teal"],["archive sample","coral"],["textile frame","coral"]];
+      var tech=[["jacquard weave","green"],["cotton base","yellow"],["woven structure","pink"],["embroidery","purple"],["linen / silk","teal"],["mesh render","plain"],["raw archive file","plain"],["cloth sim","teal"]];
+      var proc=[["render as AR file","purple"],["prompt seed: h\u2026","orange"],["jacquard scan","green"],["decode local m\u2026","blue"],["translate textil\u2026","teal"],["convert archiv\u2026","orange"],["extract silhoue\u2026","teal"],["generate mode\u2026","green"],["scan pattern r\u2026","orange"],["map embroider\u2026","green"],["preserve hand \u2026","coral"]];
+      var status=[["approved","green"],["rendering","coral"],["human review","teal"],["missing src","coral"],["locked","gray"],["ready","pale"],["queued","plain"],["compiling","gray"],["variation_03","plain"]];
+      var years=[1957,1954,1982,1978,2026,1987,1974,1962,2001,1968,1971,1937,1990,1949];
+      function cell(e){ if(!e) return '<span></span>'; if(e[1]==='plain') return '<span class="plain">'+e[0]+'</span>'; return '<span class="pill '+e[1]+'">'+e[0]+'</span>'; }
+      var t=document.getElementById('ar2Track');
+      if(t){
+        var N=46, rows='';
+        for(var k=0;k<N;k++){
+          var id='MK_'+('0000'+(28+k)).slice(-4);
+          rows+='<div class="row"><span class="id">'+id+'</span><span class="yr">'+pick(years)+'</span>'
+              +cell(maybe(garments))+cell(maybe(tech))+cell(maybe(proc,0.10))+cell(maybe(status,0.10))+'</div>';
+        }
+        t.innerHTML=rows+rows;
+        t.style.setProperty('--ar2-dur',(N*0.85)+'s');
+      }
+    })();
+
+        // ----- running-code typewriter -----
+    var code = [
+      "function decode(archive) {",
+      "  collections.forEach(function(c) {",
+      "    c.items.forEach(function($item) {",
+      "      archive.append($item);",
+      "      craft.decode();",
+      "      textile.translate();",
+      "      garment.render('digital body');",
+      "      interface.bind('heritage', 'code');",
+      "    });",
+      "  });",
+      "}",
+      "",
+      "function markdownText(string) {",
+      "  var previous = '';",
+      "  var array = string.split(' ');",
+      "  var htmltag = 'em';",
+      "",
+      "  for(i = 0; i < array.length; i++) {",
+      "    if(array[i] == '*') {",
+      "      array[i] = '';",
+      "      if(previous == '') previous = i;",
+      "      else if(i != 0) {",
+      "        previous_i = eval(i-1);",
+      "        array[previous_i] = '<'+htmltag+'>'+previous+'</'+htmltag+'>';",
+      "      }",
+      "    }",
+      "  }",
+      "",
+      "  var newtext = '';",
+      "  for(i = 0; i < array.length; i++) {",
+      "    newtext += array[i];",
+      "  }",
+      "  return newtext;",
+      "}",
+      "",
+      "MASHKIT.CODE.run();"
+    ].join("\n");
+
+    var out = document.getElementById('codeOut');
+    if (out) {
+      var i = 0;
+      (function type(){
+        if (i <= code.length) {
+          out.textContent = code.slice(0, i);
+          i += 2;
+          setTimeout(type, 14);
+        } else {
+          setTimeout(function(){ i = 0; type(); }, 2600);
+        }
+      })();
+    }
+  })();
+
+
+  (function(){
+    // product image switching
+    var views = ['maskit-img-61.png','maskit-img-62.png','maskit-img-63.png','maskit-img-64.png'];
+    var main = document.getElementById('ppMain');
+    var thumbs = Array.prototype.slice.call(document.querySelectorAll('#ppThumbs img'));
+    var cur = 0;
+    function show(i){
+      cur = (i + views.length) % views.length;
+      main.src = views[cur];
+      thumbs.forEach(function(t){ t.classList.toggle('active', parseInt(t.getAttribute('data-i'),10)===cur); });
+    }
+    thumbs.forEach(function(t){ t.addEventListener('click', function(){ show(parseInt(t.getAttribute('data-i'),10)); }); });
+    document.getElementById('ppPrev').addEventListener('click', function(){ show(cur-1); });
+    document.getElementById('ppNext').addEventListener('click', function(){ show(cur+1); });
+  })();
+
+  (function(){
+    // product2 image switching
+    var views = ['maskit-img-65.png','maskit-img-66.png','maskit-img-67.png','maskit-img-68.png'];
+    var main = document.getElementById('pp2Main');
+    if(!main) return;
+    var thumbs = Array.prototype.slice.call(document.querySelectorAll('#pp2Thumbs img'));
+    var cur = 0;
+    function show(i){
+      cur = (i + views.length) % views.length;
+      main.src = views[cur];
+      thumbs.forEach(function(t){ t.classList.toggle('active', parseInt(t.getAttribute('data-i'),10)===cur); });
+    }
+    thumbs.forEach(function(t){ t.addEventListener('click', function(){ show(parseInt(t.getAttribute('data-i'),10)); }); });
+    document.getElementById('pp2Prev').addEventListener('click', function(){ show(cur-1); });
+    document.getElementById('pp2Next').addEventListener('click', function(){ show(cur+1); });
+  })();
+
+
+  (function(){
+    // No validation — proceed regardless of what is filled in.
+    var submit = document.getElementById('ckSubmit');
+    if (submit) submit.addEventListener('click', function(){
+      if (window.go) { window.go('loading'); }
+      else { window.location.href = 'loading.html'; }
+    });
+    var back = document.getElementById('ckBack');
+    if (back) back.addEventListener('click', function(){
+      if (window.__openCart) { window.__openCart(); }
+      else { window.location.href = 'index.html'; }
+    });
+  })();
+
+
+  (function(){
+    var msgs = ['Verifying edition 03/50','Binding prompt to identity','Weaving 16K textile',
+                'Generating certificate','Securing acquisition record'];
+    var el = document.getElementById('ldMsg'); var i = 0;
+    if (el) setInterval(function(){ i = (i+1) % msgs.length; el.textContent = msgs[i]; }, 1700);
+    setTimeout(function(){
+      if (window.go) return;   /* single-file SPA: router advances loading -> confirm */
+      window.location.href = 'confirmation.html';
+    }, 4200);
+  })();
+
+
+  (function(){
+    function dl(name, text){
+      var a=document.createElement('a');
+      a.href='data:text/plain;charset=utf-8,'+encodeURIComponent(text);
+      a.download=name; document.body.appendChild(a); a.click(); a.remove();
+    }
+    var cert = document.getElementById('cfCert');
+    var prom = document.getElementById('cfPrompt');
+    if (cert) cert.addEventListener('click', function(){
+      if (window.go) { window.go('certificate'); } else { window.location.href = 'certificate.html'; }
+    });
+    if (prom) prom.addEventListener('click', function(){
+      dl('MASHKIT_prompt_MSK-HCE-1965-072.txt',
+        'MASHKIT.CODE — BOUND PROMPT (edition 03/50)\n\n[ locked excerpt ]\nHooded cape & skirt ensemble, black/ivory houndstooth, oversized silhouette, sculptural hood, fringed hem, 16K molecular weave, simulated gravity drape, irregular hand-stitch tension preserved as signature.');
+    });
+  })();
+
+
+  (function(){
+    function dl(name, text){
+      var a=document.createElement('a');
+      a.href='data:text/plain;charset=utf-8,'+encodeURIComponent(text);
+      a.download=name; document.body.appendChild(a); a.click(); a.remove();
+    }
+    var dlb=document.getElementById('ctDl');
+    if(dlb) dlb.addEventListener('click', function(){
+      dl('MASHKIT_prompt_MSK-HCE-1965-072.txt',
+        'MASHKIT.CODE — BOUND PROMPT (edition 03/50)\n\nHooded Cape & Skirt Ensemble\nMKT-196X.1313 · Attributed to Fini Leitersdorf · 1965-1970\n\n[ locked excerpt ]\nblack/ivory houndstooth, oversized silhouette, sculptural hood, fringed hem,\n16K molecular weave, simulated gravity drape, irregular hand-stitch tension preserved as signature.');
+    });
+    // click outside the card returns to the confirmation
+    var veil=document.getElementById('ctVeil');
+    if(veil) veil.addEventListener('click', function(){
+      if(window.go){ window.go('confirm'); } else { window.location.href='confirmation.html'; }
+    });
+  })();
+</script>
+<script>
+(function(){
+  function ensureFooterScales(){
+    document.querySelectorAll('.site-footer').forEach(function(f){
+      if(f.querySelector(':scope > .sf-scale')) return;
+      var wrap=document.createElement('div');
+      wrap.className='sf-scale';
+      while(f.firstChild) wrap.appendChild(f.firstChild);
+      f.appendChild(wrap);
+    });
+  }
+  function fitViewportWidth(){ return document.documentElement.clientWidth || window.innerWidth; }
+  function fitAll(){
+    var s=fitViewportWidth()/1512;
+    var bar=document.getElementById('topbar');
+    var topbarH=bar ? bar.offsetHeight : 78;
+    var offset=topbarH-(topbarH*s);
+    document.querySelectorAll('.page').forEach(function(p){
+      var st=p.querySelector('.stage'); if(!st) return;
+      st.style.transform='translateY('+offset+'px) scale('+s+')';
+      var h=parseFloat(getComputedStyle(st).height)||0;
+      var w=p.querySelector('.wrap'); if(w) w.style.height=(Math.max(0, offset)+(h*s))+'px';
+    });
+    ensureFooterScales();
+    document.querySelectorAll('.site-footer').forEach(function(f){
+      var inner=f.querySelector(':scope > .sf-scale'); if(!inner) return;
+      f.style.width='100%';
+      f.style.transform='none';
+      inner.style.width='1512px';
+      inner.style.margin='0 auto';
+      inner.style.transformOrigin='top center';
+      inner.style.transform='scale('+s+')';
+      f.style.height=(inner.scrollHeight*s)+'px';
+    });
+  }
+  function go(name, scrollTarget){
+    document.querySelectorAll('.page').forEach(function(p){ p.style.display='none'; });
+    var el=document.getElementById('page-'+name); if(el) el.style.display='';
+    window.scrollTo(0,0); fitAll();
+    if(scrollTarget){ var t=document.getElementById(scrollTarget); if(t){ requestAnimationFrame(function(){ t.scrollIntoView({behavior:'smooth', block:'start'}); }); } }
+    if(name==='loading'){ clearTimeout(window.__ldT); window.__ldT=setTimeout(function(){ go('confirm'); }, 4200); }
+  }
+  window.go=go;
+  document.querySelectorAll('[data-go]').forEach(function(a){
+    a.addEventListener('click', function(e){ e.preventDefault(); go(a.getAttribute('data-go'), a.getAttribute('data-scroll')); });
+  });
+  window.addEventListener('resize', fitAll); fitAll();
+})();
+</script>
+<script>
+(function(){
+  var bar=document.getElementById('topbar'); if(!bar) return;
+  var btns=Array.prototype.slice.call(bar.querySelectorAll('.tb-btn[data-go]'));
+  function setActive(name){
+    var key=(name==='product'||name==='product2'||name==='catalog')?'catalog':name;
+    btns.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-go')===key && b.getAttribute('data-scroll')!=='conceptAnchor'); });
+  }
+  document.addEventListener('click', function(e){
+    var t=e.target && e.target.closest ? e.target.closest('[data-go]') : null;
+    if(t){ var n=t.getAttribute('data-go'); requestAnimationFrame(function(){ setActive(n); }); }
+  }, true);
+  var pages=Array.prototype.slice.call(document.querySelectorAll('.page'));
+  var vis=pages.find(function(p){ return getComputedStyle(p).display!=='none'; });
+  setActive(vis?vis.id.replace('page-',''):'home');
+})();
+</script>
+</body></html>
