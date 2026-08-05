@@ -291,6 +291,32 @@
     .proj-process{gap:1.6rem}
     .process-pair{margin-top:0 !important;transform:none !important}
   }
+  .proj-pitch-strip{display:flex;gap:1rem;overflow-x:auto;padding:.5rem .2rem 1.4rem;
+    flex:none;scroll-snap-type:x proximity;scrollbar-width:thin;
+    scrollbar-color:var(--ink-faint) transparent}
+  .proj-pitch-strip::-webkit-scrollbar{height:6px}
+  .proj-pitch-strip::-webkit-scrollbar-thumb{background:var(--ink-faint);border-radius:3px}
+  .proj-pitch-strip img{flex:none;width:220px;aspect-ratio:16/9;object-fit:cover;
+    border-radius:10px;scroll-snap-align:start;cursor:pointer;box-shadow:0 8px 20px rgba(40,40,45,.12);
+    transition:transform .3s var(--ease)}
+  .proj-pitch-strip img:hover{transform:translateY(-4px)}
+
+  .pitch-lightbox{position:fixed;inset:0;z-index:300;background:rgba(20,20,24,.92);
+    display:none;align-items:center;justify-content:center;flex-direction:column;gap:1rem}
+  .pitch-lightbox.open{display:flex}
+  .pitch-lightbox img{max-width:88vw;max-height:78vh;object-fit:contain;border-radius:6px}
+  .pitch-lightbox .pl-count{color:#eee;font-family:var(--body);font-size:.85rem;letter-spacing:.05em}
+  .pitch-lightbox .pl-close{position:absolute;top:1.6rem;right:2rem;color:#eee;font-size:1.6rem;
+    cursor:pointer;line-height:1;background:none;border:none;padding:.4rem}
+  .pitch-lightbox .pl-nav{position:absolute;top:50%;transform:translateY(-50%);
+    color:#eee;font-size:2rem;cursor:pointer;background:none;border:none;padding:.6rem 1rem;
+    user-select:none}
+  .pitch-lightbox .pl-prev{left:.5rem}
+  .pitch-lightbox .pl-next{right:.5rem}
+  @media(max-width:880px){
+    .proj-pitch-strip img{width:170px}
+    .pitch-lightbox .pl-nav{font-size:1.4rem;padding:.4rem .6rem}
+  }
   .next{border-top:1px solid var(--ink);padding-top:1.6rem;cursor:pointer;
     display:flex;flex-direction:column;gap:.3rem;transition:.3s;margin-top:auto;flex:none}
   .next:hover{padding-left:.6rem}
@@ -401,10 +427,19 @@
           </div>
           <div class="proj-media" id="pStripWrap"><div class="proj-caption" id="pStripCap"></div><img class="proj-strip-logo" id="pStripLogo" alt=""><div class="proj-strip" id="pStrip"></div></div>
           <div class="proj-media" id="pProcessWrap"><div class="proj-caption" id="pProcessCap"></div><div class="proj-bts-row" id="pBts"></div><div class="proj-process" id="pProcess"></div></div>
+          <div class="proj-media" id="pPitchWrap"><div class="proj-caption" id="pPitchCap"></div><div class="proj-pitch-strip" id="pPitchStrip"></div></div>
           <div class="archive-grid" id="archiveGrid"></div>
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="pitch-lightbox" id="pitchLightbox">
+    <button class="pl-close" id="plClose" aria-label="Close">&times;</button>
+    <button class="pl-nav pl-prev" id="plPrev" aria-label="Previous">&larr;</button>
+    <img id="plImg" src="" alt="">
+    <button class="pl-nav pl-next" id="plNext" aria-label="Next">&rarr;</button>
+    <div class="pl-count" id="plCount"></div>
   </div>
 
 <script>
@@ -413,6 +448,40 @@ function thumb(p){
   return `linear-gradient(${p.ang||135}deg, ${p.c1}, ${p.c2})`;
 }
 const body = document.body;
+let pitchSlides = [];
+let pitchIdx = 0;
+const pitchLightboxEl = document.getElementById('pitchLightbox');
+const plImgEl = document.getElementById('plImg');
+const plCountEl = document.getElementById('plCount');
+function openPitchLightbox(i){
+  pitchIdx = i;
+  renderPitchLightbox();
+  pitchLightboxEl.classList.add('open');
+}
+function renderPitchLightbox(){
+  if(!pitchSlides.length) return;
+  plImgEl.src = pitchSlides[pitchIdx];
+  plCountEl.textContent = (pitchIdx+1) + ' / ' + pitchSlides.length;
+}
+function closePitchLightbox(){ pitchLightboxEl.classList.remove('open'); }
+document.getElementById('plClose').addEventListener('click', closePitchLightbox);
+document.getElementById('plPrev').addEventListener('click', ()=>{
+  pitchIdx = (pitchIdx - 1 + pitchSlides.length) % pitchSlides.length;
+  renderPitchLightbox();
+});
+document.getElementById('plNext').addEventListener('click', ()=>{
+  pitchIdx = (pitchIdx + 1) % pitchSlides.length;
+  renderPitchLightbox();
+});
+pitchLightboxEl.addEventListener('click', (e)=>{
+  if(e.target === pitchLightboxEl) closePitchLightbox();
+});
+document.addEventListener('keydown', (e)=>{
+  if(!pitchLightboxEl.classList.contains('open')) return;
+  if(e.key === 'Escape') closePitchLightbox();
+  if(e.key === 'ArrowRight') document.getElementById('plNext').click();
+  if(e.key === 'ArrowLeft') document.getElementById('plPrev').click();
+});
 document.querySelectorAll('nav a[data-go]').forEach(a=>{
   a.addEventListener('click',()=>{
     const el = document.getElementById(a.dataset.go);
@@ -607,6 +676,16 @@ function openProject(id, list){
     `<div class="process-pair"><img class="ref-photo" src="${pair.photo}" alt="reference"><span class="ref-arrow">&rarr;</span><img class="ref-illust" src="${pair.illust}" alt="illustration"></div>`
   ).join('') : '';
   setCaption('pProcessCap', p.processPairs ? p.processCaption : '');
+  const pitchStripEl = document.getElementById('pPitchStrip');
+  document.getElementById('pPitchWrap').style.display = p.pitchSlides ? '' : 'none';
+  pitchSlides = p.pitchSlides || [];
+  pitchStripEl.innerHTML = pitchSlides.map((src,i)=>
+    `<img src="${src}" alt="${p.title} pitch slide ${i+1}" data-idx="${i}">`
+  ).join('');
+  pitchStripEl.querySelectorAll('img').forEach(img=>{
+    img.addEventListener('click', ()=> openPitchLightbox(+img.dataset.idx));
+  });
+  setCaption('pPitchCap', p.pitchSlides ? (p.pitchCaption||'Pitch') : '');
   document.getElementById('pNext').textContent = next.title;
   document.getElementById('next').onclick = ()=>{openProject(nextId, list);};
   overlay.classList.add('open');
@@ -652,6 +731,8 @@ const ALLWORKS = [
      {photo:'kodo-ref-5.jpg', illust:'kodo-group-47.png'},
      {photo:'kodo-ref-6.jpg', illust:'kodo-group-48.png'}
    ],
+   pitchCaption:'Pitch',
+   pitchSlides:['pitch-1.jpg','pitch-2.jpg','pitch-3.jpg','pitch-4.jpg','pitch-5.jpg','pitch-6.jpg','pitch-7.jpg','pitch-8.jpg','pitch-9.jpg','pitch-10.jpg','pitch-11.jpg','pitch-12.jpg','pitch-13.jpg','pitch-14.jpg','pitch-15.jpg','pitch-16.jpg','pitch-17.jpg','pitch-18.jpg','pitch-19.jpg','pitch-20.jpg','pitch-21.jpg'],
    lead:'Meet KODO! Where Montessori principles meet the vibecoding and cyber decks of today. Instead of raising more iPad kids, we believe the next generation will be one of creators and visionaries: with the right tools, of course.',
    body:['With KODO, kids set up their own cyber decks and build their own games to play on them, returning a sense of agency and ownership over tech that we haven\u2019t had since the days of retro arcades.','Our vision is for classrooms to be full of students swapping decks and comparing games so screens don\u2019t keep isolating us, but rather bring back creativity and community.']},
   {title:'Milon Hai', cat:'Visual Identity \u2219 UI/UX', year:'2026', client:'Milon Hai', role:'Pattern Design, Merch', tools:'Illustrator, Photoshop', c1:'#ED0560', c2:'#FFDB5A', c3:'#2A52BE', c4:'#005F10', c5:'#F9C4D3', c6:'#EE4C01', ang:135, img:'milon-hai.jpg', heroVideo:'milon-hai-flow.mp4', heroVideoPoster:'milon-hai-flow-poster.jpg', heroVideoCompact:true, img1:'milon-hai.jpg', img2:'milon-hai-landing-flow-v2.mp4', img2Compact:true,
