@@ -328,16 +328,16 @@
   .proj-layout.archive-mode{grid-template-columns:1fr;grid-template-areas:"right" "next"}
   .proj-layout.archive-mode .proj-left{display:none}
   .proj-left{grid-area:left;display:flex;flex-direction:column;gap:1.6rem;height:100%;
-    overflow-y:auto;padding-bottom:2rem;border-right:1px solid var(--ink);padding-right:2.4rem}
+    overflow-y:auto;padding-bottom:2rem;border-right:1px solid var(--ink);padding-right:2.4rem;min-width:0}
   .proj-desc p{font-size:.92rem;line-height:1.5;color:var(--ink);margin-bottom:.9rem;max-width:34ch}
   .proj-desc p.lead{font-family:var(--display);font-size:.92rem;font-weight:400}
   .proj-next-wrap{grid-area:next;border-right:1px solid var(--ink);padding-right:2.4rem}
   .proj-layout.archive-mode .proj-next-wrap{border-right:none;padding-right:0}
-  .proj-right{grid-area:right;display:flex;flex-direction:column;gap:2.2rem;height:100%;
+  .proj-right{grid-area:right;display:flex;flex-direction:column;gap:2.2rem;height:100%;min-width:0;
     overflow-y:auto;padding-bottom:6rem;scrollbar-width:thin;scrollbar-color:var(--ink-faint) transparent}
   .proj-right::-webkit-scrollbar{width:6px}
   .proj-right::-webkit-scrollbar-thumb{background:var(--ink-faint);border-radius:3px}
-  .proj-media{display:flex;flex-direction:column;gap:.6rem;width:100%;flex:none}
+  .proj-media{display:flex;flex-direction:column;gap:.6rem;width:100%;flex:none;min-width:0}
   .proj-caption{font-family:var(--body);font-style:normal;color:var(--ink-soft);
     font-size:.9rem;display:none;padding-bottom:.6rem;border-bottom:1px solid var(--line)}
   .proj-caption.show{display:block}
@@ -355,8 +355,7 @@
   .proj-row.row-mode .proj-media{flex:none;width:calc(33.333% - .93rem);min-width:0}
   @media(max-width:880px){
     .proj-row.row-mode{flex-direction:column}
-    .proj-row.row-mode .proj-media{width:100%}
-  }
+    .proj-row.row-mode .proj-media{width:100%} } @media(max-width:880px){ body[data-mobile-compact-images="true"] .proj-row.row-mode{align-items:center} body[data-mobile-compact-images="true"] .proj-row.row-mode .proj-media{width:78%} }
 
   /* square-tile grid for images after the hero, used by specific projects */
   body[data-project-grid="square"] .proj-row{display:grid !important;grid-template-columns:repeat(3,1fr) !important;grid-auto-rows:1fr;gap:1rem !important;align-items:stretch !important}
@@ -395,7 +394,7 @@
   .archive-divider{height:1px;background:var(--ink)}
 
   /* cute horizontal-scroll strip of illustrations */
-  #pStripWrap{background:#F3EEE3;border-radius:0;padding:1.6rem 1.6rem 1rem}
+  #pStripWrap{background:#F1F1EF;border-radius:0;padding:1.6rem 1.6rem 1rem}
   .proj-strip{display:flex;gap:1.1rem;overflow-x:auto;padding:.6rem .2rem 1.6rem;
     flex:none;scroll-snap-type:x proximity;scrollbar-width:thin;
     scrollbar-color:var(--ink-faint) transparent;margin-top:2rem}
@@ -1039,7 +1038,7 @@ const ALLWORKS = [
    img4:'maskit-poster-1.jpg', img5:'maskit-poster-2.jpg', img6:'maskit-poster-3.jpg',
    lead:'A digital archive reimagining Israel’s legendary Maskit fashion house as a living, browsable collection.',
    body:['Each historic garment is presented like a museum plate — reference number, origin, medium and pattern — paired with a rendered lookbook shot.','The system carries the label’s heritage craft into a clean, catalogue-like digital format.']},
-  {title:'Digital Nomads', cat:'Digital Illustration', year:'2023', client:'Editorial', role:'Illustration', tools:'Procreate, Illustrator', c1:'#e5ebfd', c2:'#6386f7', c3:'#3d5499', c4:'#ee9d81', c5:'#c96470', ang:120, img:'digital-nomads.jpg', heroImg:'digital-nomads-hero.png', heroImgWidth:'85%',
+  {title:'Digital Nomads', cat:'Digital Illustration', year:'2023', client:'Editorial', role:'Illustration', tools:'Procreate, Illustrator', c1:'#e5ebfd', c2:'#6386f7', c3:'#3d5499', c4:'#ee9d81', c5:'#c96470', ang:120, mobileCompactImages:true, img:'digital-nomads.jpg', heroImg:'digital-nomads-hero.png', heroImgWidth:'85%',
    img1:'digital-nomads-shot-1.png', img2:'digital-nomads-shot-2.png', img3:'digital-nomads-shot-3.png', imgRow:true,
    img4:'digital-nomads-shot-4.png', img5:'digital-nomads-shot-5.png', img6:'digital-nomads-shot-6.png',
    strip:['digital-nomads-strip-1.png','digital-nomads-strip-2.png','digital-nomads-strip-3.png','digital-nomads-strip-4.png','digital-nomads-strip-5.png','digital-nomads-strip-6.png','digital-nomads-strip-7.png'],
@@ -1280,19 +1279,7 @@ updateScrollProgress();
 
   /* trail images live at repo root as trail-1.jpg / trail-2.jpg plus reused project assets
      folder and list their filenames below. */
-  const trailImages = [
-    'trail-1.jpg', 'trail-2.jpg', 'rootea-detail.jpg', 'archive-4.jpg', 'rootea-tea-bag.jpg', 'kodo-group-57.png',
-    'digital-nomads-shot-2.png', 'digital-nomads-shot-3.png',
-    'digital-nomads-shot-6.png', 'netflix-dating-shot-1.png',
-    'netflix-dating-shot-5.png', 'digital-nomads-strip-1.png', 'digital-nomads-strip-2.png',
-    'digital-nomads-strip-3.png', 'digital-nomads-strip-5.png', 'digital-nomads-strip-4.png',
-    'digital-nomads-strip-6.png', 'digital-nomads-hero.png', 'digital-nomads-strip-7.png',
-    'grunge.jpg', 'kodo-hero.jpg', 'kodo-icon-button.png', 'kodo-icon-led.png',
-    'kodo-icon-network.png', 'kodo-icon-pi1.png', 'kodo-icon-pi2.png', 'kodo-icon-screen.png',
-    'kodo-icon-wires.png', 'kodo.jpg', 'maskit-cotton.jpg', 'maskit-poster-1.jpg',
-    'maskit-poster-2.jpg', 'maskit-poster-3.jpg', 'milon-hai.jpg', 'netflix-dating.jpg',
-    'prism.jpg', 'rootea.jpg', 'vouch.jpg', 'archive-16.jpg', 'archive-15.jpg'
-  ];
+  const trailImages = ['trail-1.jpg', 'trail-3.jpg', 'trail-2.jpg', 'rootea-detail.jpg', 'trail-4.jpg', 'archive-4.jpg', 'grunge.jpg', 'trail-5.jpg', 'rootea-tea-bag.jpg', 'trail-6.jpg', 'trail-7.jpg', 'trail-8.jpg', 'trail-9.jpg', 'kodo-group-57.png', 'digital-nomads-shot-2.png', 'digital-nomads-shot-3.png', 'digital-nomads-shot-6.png', 'netflix-dating-shot-1.png', 'netflix-dating-shot-5.png', 'digital-nomads-strip-1.png', 'digital-nomads-strip-2.png', 'digital-nomads-strip-3.png', 'digital-nomads-strip-5.png', 'digital-nomads-strip-4.png', 'digital-nomads-strip-6.png', 'digital-nomads-hero.png', 'digital-nomads-strip-7.png', 'grunge.jpg', 'kodo-hero.jpg', 'kodo-icon-button.png', 'kodo-icon-led.png', 'kodo-icon-network.png', 'kodo-icon-pi1.png', 'kodo-icon-pi2.png', 'kodo-icon-screen.png', 'kodo-icon-wires.png', 'kodo.jpg', 'maskit-cotton.jpg', 'maskit-poster-1.jpg', 'maskit-poster-2.jpg', 'maskit-poster-3.jpg', 'milon-hai.jpg', 'netflix-dating.jpg', 'prism.jpg', 'rootea.jpg', 'vouch.jpg', 'archive-16.jpg', 'trail-10.jpg', 'trail-11.jpg', 'trail-12.jpg', 'archive-15.jpg'];
   let lastImg = null;
   function nextImage(){
     let pick;
