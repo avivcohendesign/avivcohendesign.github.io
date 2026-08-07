@@ -14,7 +14,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=Familjen+Grotesk:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500&family=Anton&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=Familjen+Grotesk:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500&family=Anton&family=Instrument+Serif:ital@0;1&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   @font-face{
     font-family:'Coffee Tea Demo';
@@ -25,15 +25,15 @@
   }
   :root{
     --bg:#1D4A36;
-    --ink:#F0CB3E;
+    --ink:#F1F1EF;
     --ink-soft:#F2C6DA;
     --ink-faint:#F2C6DA;
     --line:rgba(242,198,218,.45);
-    --blob-c:#F0CB3E;   /* yellow */
+    --blob-c:#F1F1EF;   /* yellow */
     --brown:#3c2415;    /* elegant hero ink */
-    --serif:'Playfair Display', serif;
+    --serif:'Instrument Serif', serif;
     --display:'Hanken Grotesk', sans-serif;
-    --body:'Familjen Grotesk', sans-serif;
+    --body:'Public Sans', sans-serif;
     --ease:cubic-bezier(.22,.61,.36,1);
     --maxw:1380px;
   }
@@ -70,7 +70,7 @@
 
   /* HOME */
   #home{min-height:100vh;padding:0;display:flex;flex-direction:column;justify-content:flex-start;
-    --bg:#1D4A36;--ink:#F0CB3E;--ink-soft:#F2C6DA;--ink-faint:#F2C6DA;--line:rgba(242,198,218,.45);
+    --bg:#1D4A36;--ink:#F1F1EF;--ink-soft:#F2C6DA;--ink-faint:#F2C6DA;--line:rgba(242,198,218,.45);
     background:var(--bg)}
 
   /* hero: an empty stage with just the title — moving the mouse leaves a trailing ribbon of
@@ -79,13 +79,13 @@
     display:flex;align-items:center;justify-content:center;overflow:hidden}
   .hero-collage-center{position:relative;z-index:5;text-align:center;max-width:820px;margin:0 auto;
     display:flex;flex-direction:column;align-items:center;gap:1.2rem;padding:0 1rem;pointer-events:none}
-  .hero-collage-title{font-family:'Anton', sans-serif;font-weight:400;color:var(--ink);
-    font-size:clamp(2.7rem,6.6vw,5.8rem);line-height:1;letter-spacing:0;text-transform:uppercase;
+  .hero-collage-title{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--ink);
+    font-size:clamp(2.7rem,6.6vw,5.8rem);line-height:1;letter-spacing:0;
     clip-path:inset(0 0 100% 0);animation:heroTitleIn 1.4s .2s var(--ease) forwards}
   @keyframes heroTitleIn{to{clip-path:inset(0 0 0 0)}}
   .hero-collage-title em{font-style:normal;font-weight:400;color:var(--ink-soft)}
   /* small pink pill at the bottom of the hero, bouncing gently to cue scrolling */
-  .scroll-hint{position:absolute;left:50%;bottom:5rem;transform:translateX(-50%);z-index:6;
+  .scroll-hint{position:absolute;left:50%;bottom:6.5rem;transform:translateX(-50%);z-index:6;
     display:flex;align-items:center;gap:.4rem;padding:.55rem 1.1rem;border-radius:999px;
     background:var(--ink-soft);color:var(--bg);border:none;cursor:pointer;
     font-family:var(--body);font-size:.78rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;
@@ -114,8 +114,8 @@
     100%{opacity:0;filter:blur(4px);
       transform:translate(-50%,-50%) scale(.7) rotate(calc(var(--tr,0deg) + 12deg)) translateY(30px)}
   }
-  @media(max-width:1000px){
-    .trail-layer{display:none}
+  @media(max-width:880px){
+    .trail-img{width:120px;height:120px}
   }
   @media(max-width:880px){
     #home{padding:6.5rem 1.4rem 3rem;justify-content:center}
@@ -123,32 +123,32 @@
   }
 
   /* filmstrip of design/AI tool icons, scrolling on a loop — grayscale until hovered */
-  .works-strip-wrap{position:relative;flex:none;width:100%;height:190px;overflow:hidden;
+  .works-strip-wrap{position:relative;flex:none;width:100%;height:140px;overflow:hidden;
     border-top:1px solid var(--line);z-index:4;display:flex;align-items:center;
-    background:var(--ink-soft)}
+    background:#F1F1EF}
   .works-strip-track{display:flex;align-items:center;gap:5rem;width:max-content;
     animation:stripScroll 32s linear infinite}
   .works-strip-wrap:hover .works-strip-track{animation-play-state:paused}
   @keyframes stripScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-  .works-strip-item{flex:none;width:88px;height:88px}
+  .works-strip-item{flex:none;width:64px;height:64px}
   .wsi-icon{display:block;width:100%;height:100%;object-fit:contain;
-    filter:url(#tools-duotone-pink);transition:filter .3s var(--ease),transform .3s var(--ease)}
-  .works-strip-item:hover .wsi-icon{filter:none;transform:scale(1.08)}
+    transition:transform .3s var(--ease)}
+  .works-strip-item:hover .wsi-icon{transform:scale(1.08)}
   @media(max-width:880px){
-    .works-strip-wrap{height:120px}
+    .works-strip-wrap{height:90px}
     .works-strip-track{gap:2.6rem}
-    .works-strip-item{width:60px;height:60px}
+    .works-strip-item{width:44px;height:44px}
   }
 
   /* ABOUT — peeks up slightly into the first screen so it's clear there's more to scroll to */
-  #about{--bg:#F2C6DA;--ink:#1D4A36;--ink-soft:#F0CB3E;--ink-faint:#F0CB3E;--line:rgba(30,74,54,.3);
+  #about{--bg:#F2C6DA;--ink:#1D4A36;--ink-soft:#F1F1EF;--ink-faint:#F1F1EF;--line:rgba(30,74,54,.3);
     background:var(--bg);position:relative;margin-top:-4rem}
   .about-inner{padding:5rem 1.5vw;border-top:1px solid var(--ink);
     max-width:var(--maxw);margin:0 auto}
   .about-grid{display:grid;grid-template-columns:0.8fr 1.2fr;gap:4rem;align-items:center;width:100%}
-  .about-kicker{font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--ink);
+  .about-kicker{font-family:var(--body);font-style:normal;font-size:1rem;color:var(--ink);
     margin-bottom:.6rem;display:block}
-  .about-title{font-family:var(--serif);font-weight:400;color:var(--ink);
+  .about-title{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--ink);
     font-size:clamp(2.2rem,4.6vw,3.8rem);line-height:1.05;letter-spacing:0;margin-bottom:1.4rem}
   .about-text{font-family:var(--body);font-size:1.02rem;line-height:1.7;color:var(--ink);max-width:46ch}
   .about-text + .about-text{margin-top:1rem}
@@ -170,44 +170,48 @@
 
   /* FAVORITE WORKS — the section is scroll-tall; the stack pins in place with
      position:sticky and a new card joins it for each slice of scroll progress you pass */
-  #favorites{--bg:#F2C6DA;--ink:#1D4A36;--ink-soft:#F0CB3E;--ink-faint:#F0CB3E;--line:rgba(30,74,54,.3);
-    background:var(--bg);height:420vh}
+  #favorites{--bg:#F2C6DA;--ink:#1D4A36;--ink-soft:#F1F1EF;--ink-faint:#F1F1EF;--line:rgba(30,74,54,.3);
+    background:var(--bg);height:170vh}
   .favorites-sticky{position:sticky;top:0;height:100vh;display:flex;
     align-items:center;justify-content:center;overflow:hidden}
   .favorites-inner{display:flex;flex-direction:column;align-items:center;
     justify-content:center;padding:5rem 1.5vw;max-width:var(--maxw);margin:0 auto;text-align:center}
-  .favorites-kicker{font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--ink-soft);
+  .favorites-kicker{font-family:var(--body);font-style:normal;font-size:1rem;color:var(--ink);
     margin-bottom:.6rem;display:block}
-  .favorites-title{font-size:clamp(2.2rem,4.6vw,3.6rem);color:var(--ink);margin-bottom:3rem}
+  .favorites-title{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(2.2rem,4.6vw,3.6rem);color:var(--ink);margin-bottom:3rem}
   .favorites-stack{position:relative;width:100%;max-width:520px;height:380px}
   .fav-card{position:absolute;top:0;left:50%;width:100%;height:100%;border-radius:14px;
     overflow:hidden;box-shadow:0 20px 45px rgba(20,20,25,.22);cursor:pointer;
     background-size:cover;background-position:center;
     opacity:0;transform:translate(-50%,40px) rotate(0deg) scale(.9);
-    transition:opacity .45s var(--ease),transform .45s var(--ease)}
+    transition:opacity .22s cubic-bezier(.16,.8,.3,1),transform .22s cubic-bezier(.16,.8,.3,1)}
   .fav-card.in{opacity:1}
+  .fav-card.in:not(.fav-front):hover{filter:brightness(1.1)}
+  .fav-card.fav-front{cursor:pointer}
   .fav-card .fav-label{position:absolute;top:1.1rem;left:1.1rem;padding:.4rem .9rem;
     background:#fff;color:#1D1A1A;border-radius:6px;font-family:var(--body);
     font-size:.78rem;font-weight:600;box-shadow:0 4px 10px rgba(20,20,25,.15)}
   @media(max-width:880px){
-    #favorites{height:340vh}
+    #favorites{height:150vh}
     .favorites-stack{height:280px}
     .favorites-inner{padding:4rem 1.4rem}
   }
 
   /* WORKS */
-  #works{--bg:#1D4A36;--ink:#F0CB3E;--ink-soft:#F2C6DA;--ink-faint:#F2C6DA;--line:rgba(242,198,218,.45);
+  #works{--bg:#1D4A36;--ink:#F1F1EF;--ink-soft:#F2C6DA;--ink-faint:#F2C6DA;--line:rgba(242,198,218,.45);
     background:var(--bg)}
   #works .sec-inner{padding:4.5rem 1.5vw 7rem;min-height:100vh;max-width:var(--maxw);width:auto;margin:0 auto}
+  .works-title{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--ink);
+    font-size:clamp(2.2rem,4.6vw,3.6rem);margin-bottom:2.4rem;padding:0 2vw}
   .work-list{width:calc(100% + 4vw);margin-left:-2vw;border-top:1px solid var(--ink)}
   .work-row{position:relative;display:flex;align-items:baseline;gap:2.2rem;color:var(--ink);
     padding:.65rem 2vw;border-bottom:1px solid var(--ink);cursor:pointer;
     opacity:0;transform:translateY(26px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
   .work-row.in{opacity:1;transform:translateY(0)}
-  .work-cat{font-family:var(--serif);font-style:italic;font-size:1.02rem;
+  .work-cat{font-family:var(--body);font-style:normal;font-size:.85rem;
     color:var(--ink);width:170px;flex:none;text-transform:lowercase;
     align-self:flex-start;margin-top:-.3rem}
-  .work-title{font-family:var(--serif);font-weight:400;
+  .work-title{font-family:var(--serif);font-style:normal;font-weight:400;
     font-size:clamp(1.7rem,3.8vw,3.1rem);letter-spacing:-.01em;transition:opacity .2s var(--ease),color .2s var(--ease)}
   .work-row:hover .work-title{font-style:italic;color:var(--ink-soft)}
   .work-preview{position:fixed;z-index:40;left:0;top:0;
@@ -223,13 +227,13 @@
   }
 
   /* CONTACT — footer band at the bottom of the page */
-  #contact{--bg:#F2C6DA;--ink:#1D4A36;--ink-soft:#F0CB3E;--ink-faint:#F0CB3E;--line:rgba(30,74,54,.3);
+  #contact{--bg:#F2C6DA;--ink:#1D4A36;--ink-soft:#F1F1EF;--ink-faint:#F1F1EF;--line:rgba(30,74,54,.3);
     background:var(--bg)}
   .contact-inner{min-height:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;
-    text-align:center;padding:2.5rem 1.5vw 5rem;max-width:var(--maxw);margin:0 auto}
-  .contact-kicker{font-family:var(--serif);font-style:italic;font-size:1.05rem;
+    text-align:center;padding:8rem 1.5vw 6rem;max-width:var(--maxw);margin:0 auto}
+  .contact-kicker{font-family:var(--body);font-style:normal;font-size:1.05rem;
     color:var(--ink);margin-bottom:.8rem;display:block}
-  .contact-title{font-family:var(--serif);font-weight:400;color:var(--ink);
+  .contact-title{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--ink);
     font-size:clamp(2.6rem,6vw,5rem);line-height:1.05;letter-spacing:0;margin-bottom:1.4rem}
   .contact-sub{color:var(--ink);font-size:1.05rem;line-height:1.6;max-width:44ch;margin-bottom:2.6rem}
   .contact-icons{display:flex;align-items:center;gap:1.2rem}
@@ -253,7 +257,7 @@
   .contact-inner.in .contact-icons a:nth-child(2){transition-delay:.34s}
   .contact-inner.in .contact-icons a:nth-child(3){transition-delay:.42s}
   .contact-inner.in .contact-icons a:nth-child(4){transition-delay:.5s}
-  .contact-email{margin-top:2.2rem;font-family:var(--serif);font-style:italic;
+  .contact-email{margin-top:2.2rem;font-family:var(--body);font-style:normal;
     font-size:1.1rem;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);
     padding-bottom:.2rem;transition:opacity .2s}
   .contact-email:hover{opacity:.6}
@@ -262,7 +266,7 @@
   }
 
   /* ---------- PROJECT OVERLAY ---------- */
-  .project-overlay{position:fixed;inset:0;z-index:50;background:#fff;
+  .project-overlay{position:fixed;inset:0;z-index:50;background:#F1F1EF;
     overflow:hidden;display:none;
     /* project pages are white for now — scope the ink colors to dark green so all text,
        borders and scrollbars inside stay readable regardless of the section palette */
@@ -278,10 +282,10 @@
   .proj-head{margin-bottom:1.6rem}
   .proj-head .cat{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem}
   .cat-tag{display:inline-flex;align-items:center;border:1.5px solid var(--ink-soft);
-    border-radius:999px;padding:.35rem 1rem;color:var(--ink-soft);
+    border-radius:999px;padding:.22rem .7rem;color:var(--ink-soft);
     font-family:var(--body);
-    font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
-  .proj-head h1{font-family:var(--serif);font-weight:500;
+    font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+  .proj-head h1{font-family:var(--serif);font-style:italic;font-weight:500;
     font-size:clamp(1.3rem,2.2vw,1.9rem);line-height:.98;letter-spacing:-.025em}
   /* project pages currently have a white background, so titles/captions/nav always use
      dark-green text to stay readable */
@@ -293,8 +297,20 @@
   .proj-dark-accent .back:hover{color:#1D4A36;opacity:.6}
   .proj-dark-accent .next{border-top-color:rgba(30,74,54,.3)}
   .proj-dark-accent .next .lbl{color:#1D4A36;opacity:.65}
+  /* used on the rare project page with a dark background — flips text/borders/scrollbars to
+     a light color instead, mirroring proj-dark-accent above */
+  .proj-light-accent{--ink:#F1F1EF;--ink-soft:#F1F1EF;--ink-faint:#F1F1EF}
+  .proj-light-accent .proj-head h1,
+  .proj-light-accent .proj-caption{color:#F1F1EF;border-bottom-color:rgba(241,241,239,.3)}
+  .proj-light-accent .cat-tag{color:#F1F1EF;border-color:#F1F1EF}
+  .proj-light-accent .proj-palette span{border-color:rgba(241,241,239,.3)}
+  .proj-light-accent .back{color:#F1F1EF}
+  .proj-light-accent .back:hover{color:#F1F1EF;opacity:.6}
+  .proj-light-accent .next{border-top-color:rgba(241,241,239,.3)}
+  .proj-light-accent .next .lbl{color:#F1F1EF;opacity:.65}
+  .proj-light-accent .next .nm{color:#F1F1EF}
   .proj-dark-accent .next .nm{color:#1D4A36}
-  .site-link{display:none;align-items:center;gap:.4rem;font-family:var(--serif);font-style:italic;
+  .site-link{display:none;align-items:center;gap:.4rem;font-family:var(--body);font-style:normal;
     font-size:.95rem;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink);
     width:fit-content;padding-bottom:.15rem;margin-bottom:1.6rem;transition:opacity .2s var(--ease)}
   .site-link:hover{opacity:.6}
@@ -306,20 +322,23 @@
   .color-tip.show{opacity:1}
 
   /* two-column layout: left text is static, only the right image column scrolls */
-  .proj-layout{display:grid;grid-template-columns:minmax(220px,0.8fr) 1.8fr;gap:3rem;
+  .proj-layout{display:grid;grid-template-columns:minmax(220px,0.8fr) 1.8fr;
+    grid-template-rows:1fr auto;grid-template-areas:"left right" "next right";gap:3rem;
     flex:1;min-height:0}
-  .proj-layout.archive-mode{grid-template-columns:1fr}
+  .proj-layout.archive-mode{grid-template-columns:1fr;grid-template-areas:"right" "next"}
   .proj-layout.archive-mode .proj-left{display:none}
-  .proj-left{display:flex;flex-direction:column;gap:1.6rem;height:100%;
+  .proj-left{grid-area:left;display:flex;flex-direction:column;gap:1.6rem;height:100%;
     overflow-y:auto;padding-bottom:2rem;border-right:1px solid var(--ink);padding-right:2.4rem}
-  .proj-desc p{font-size:.82rem;line-height:1.5;color:var(--ink);margin-bottom:.9rem;max-width:34ch}
-  .proj-desc p.lead{font-family:var(--display);font-size:.95rem;font-weight:400}
-  .proj-right{display:flex;flex-direction:column;gap:2.2rem;height:100%;
+  .proj-desc p{font-size:.92rem;line-height:1.5;color:var(--ink);margin-bottom:.9rem;max-width:34ch}
+  .proj-desc p.lead{font-family:var(--display);font-size:.92rem;font-weight:400}
+  .proj-next-wrap{grid-area:next;border-right:1px solid var(--ink);padding-right:2.4rem}
+  .proj-layout.archive-mode .proj-next-wrap{border-right:none;padding-right:0}
+  .proj-right{grid-area:right;display:flex;flex-direction:column;gap:2.2rem;height:100%;
     overflow-y:auto;padding-bottom:6rem;scrollbar-width:thin;scrollbar-color:var(--ink-faint) transparent}
   .proj-right::-webkit-scrollbar{width:6px}
   .proj-right::-webkit-scrollbar-thumb{background:var(--ink-faint);border-radius:3px}
   .proj-media{display:flex;flex-direction:column;gap:.6rem;width:100%;flex:none}
-  .proj-caption{font-family:var(--serif);font-style:italic;color:var(--ink-soft);
+  .proj-caption{font-family:var(--body);font-style:normal;color:var(--ink-soft);
     font-size:.9rem;display:none;padding-bottom:.6rem;border-bottom:1px solid var(--line)}
   .proj-caption.show{display:block}
   .proj-img{width:100%;border-radius:0;position:relative;overflow:hidden;flex:none}
@@ -353,7 +372,7 @@
     padding:0 0 2rem;border-bottom:1px solid var(--ink)}
   .archive-block{display:flex;flex-direction:column;gap:1rem}
   .archive-divider + .archive-block{margin-top:-1rem}
-  .archive-group-title{font-family:var(--serif);font-style:italic;font-size:1.05rem;
+  .archive-group-title{font-family:var(--body);font-style:normal;font-size:1.05rem;
     color:var(--ink-soft)}
   .archive-group{display:flex;gap:1.6rem;overflow-x:auto;padding-bottom:.6rem;
     scroll-snap-type:x proximity;scrollbar-width:thin;scrollbar-color:var(--ink-faint) transparent}
@@ -376,6 +395,7 @@
   .archive-divider{height:1px;background:var(--ink)}
 
   /* cute horizontal-scroll strip of illustrations */
+  #pStripWrap{background:#F3EEE3;border-radius:0;padding:1.6rem 1.6rem 1rem}
   .proj-strip{display:flex;gap:1.1rem;overflow-x:auto;padding:.6rem .2rem 1.6rem;
     flex:none;scroll-snap-type:x proximity;scrollbar-width:thin;
     scrollbar-color:var(--ink-faint) transparent;margin-top:2rem}
@@ -459,9 +479,15 @@
     width:18px;height:18px;transition:opacity .2s var(--ease)}
   .top-social a:hover{opacity:.65}
   .top-social svg{width:100%;height:100%}
+  /* name mark pinned top-left, clicking it scrolls back to the hero */
+  .site-name{position:fixed;top:.9rem;left:1.6rem;z-index:1001;
+    font-family:var(--serif);font-style:italic;font-size:.95rem;color:#F2C6DA;
+    text-decoration:none;transition:opacity .2s var(--ease)}
+  .site-name:hover{opacity:.65}
   @media(max-width:880px){
     .top-social{top:.6rem;right:1rem;gap:.5rem}
     .top-social a{width:15px;height:15px}
+    .site-name{top:.6rem;left:1rem;font-size:.82rem}
     .made-with{font-size:.58rem;top:.5rem}
     nav{top:1.2rem;right:1.4rem;font-size:.9rem}
     nav .links{gap:.2rem}
@@ -469,9 +495,16 @@
     .card.wide,.card.sq{grid-column:1/-1;aspect-ratio:4/3}
     #project .sec-inner{height:auto;overflow-y:auto}
     .project-overlay{overflow-y:auto}
-    .proj-layout{grid-template-columns:1fr;gap:1.8rem;height:auto}
+    .proj-layout{grid-template-columns:1fr;grid-template-rows:auto;
+      grid-template-areas:"left" "right" "next";gap:1.8rem;height:auto}
+    .proj-layout.archive-mode{grid-template-areas:"right" "next"}
     .proj-left,.proj-right{height:auto;overflow-y:visible}
     .proj-left{border-right:none;padding-right:0;border-bottom:1px solid var(--ink);padding-bottom:1.6rem}
+    .proj-next-wrap{border-right:none;padding-right:0;border-top:1px solid var(--ink);padding-top:1.6rem}
+    .next{border-top:none;padding-top:0;margin-top:0}
+    /* tall/portrait images (mobile-format screenshots etc.) shouldn't blow up past screen height */
+    .proj-img img,.proj-img video{width:auto;max-width:100%;max-height:65vh;margin:0 auto}
+    .proj-img.grad{min-height:180px}
     #works .sec-inner,#project .sec-inner{padding-left:1.4rem;padding-right:1.4rem}
   }
 </style>
@@ -496,6 +529,8 @@
   </svg>
 
   <div class="made-with">made with claude code</div>
+
+  <a href="#home" class="site-name" id="siteNameLink">Aviv Cohen</a>
 
   <div class="top-social">
     <a href="https://instagram.com/aviv_arts" target="_blank" rel="noopener" aria-label="Instagram">
@@ -549,8 +584,7 @@
             <img class="about-photo" src="aviv-photo.jpg" alt="Aviv Cohen">
           </div>
           <div>
-            <span class="about-kicker">Hi, I&rsquo;m</span>
-            <div class="about-title magnetic-title">Aviv Cohen</div>
+            <div class="about-title magnetic-title">About</div>
             <p class="about-text">A third-year Visual Communication student at Bezalel Academy. With a lifelong foundation in art and illustration, I&rsquo;ve developed a keen eye for visual language.</p>
             <p class="about-text">Now channeling that creative background into Product Design, to transform passion into functional, impactful digital experiences.</p>
           </div>
@@ -579,6 +613,7 @@
     <section class="section" id="works">
       <div class="sec-bg"></div>
       <div class="sec-inner">
+        <div class="works-title magnetic-title">All Works</div>
         <div class="work-list" id="grid"></div>
       </div>
     </section>
@@ -636,6 +671,8 @@
           <div class="proj-desc" id="pDesc"></div>
           <a class="site-link" id="pSiteLink" target="_blank" rel="noopener">View full site &rarr;</a>
           <div class="proj-palette" id="pPalette"></div>
+        </div>
+        <div class="proj-next-wrap">
           <div class="next" id="next"><span class="lbl">Next project</span><span class="nm" id="pNext"></span></div>
         </div>
         <div class="proj-right">
@@ -667,7 +704,7 @@
   <div class="pitch-lightbox" id="pitchLightbox">
     <button class="pl-close" id="plClose" aria-label="Close">&times;</button>
     <button class="pl-nav pl-prev" id="plPrev" aria-label="Previous">&larr;</button>
-    <img id="plImg" src="" alt="">
+    <img id="plImg" alt="">
     <button class="pl-nav pl-next" id="plNext" aria-label="Next">&rarr;</button>
     <div class="pl-count" id="plCount"></div>
   </div>
@@ -718,6 +755,13 @@ document.querySelectorAll('nav a[data-go], [data-go].hero-collage-cta').forEach(
     if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
   });
 });
+const siteNameLink = document.getElementById('siteNameLink');
+if(siteNameLink){
+  siteNameLink.addEventListener('click', (e)=>{
+    e.preventDefault();
+    document.getElementById('home').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+}
 const scrollHintBtn = document.getElementById('scrollHint');
 if(scrollHintBtn){
   scrollHintBtn.addEventListener('click', ()=>{
@@ -749,14 +793,17 @@ function setCaption(id, text){
   }
 }
 
-function setProjImg(el, src, gradient, alt, compact){
+function setProjImg(el, src, gradient, alt, compact, cropScale){
   if(src){
     el.classList.remove('grad');
     el.style.background = 'none';
     const compactStyle = compact ? ' style="max-height:72vh;width:auto;margin:0 auto"' : '';
     if(/\.(mp4|mov|webm)$/i.test(src)){
       if(compact){
-        el.innerHTML = `<div class="compact-video-wrap"><video src="${src}" autoplay muted loop playsinline></video></div>`;
+        // cropScale zooms the video in and relies on the wrapper's overflow:hidden to clip
+        // the edges evenly on all sides — used to crop out stray elements peeking in at the sides
+        const cropStyle = cropScale ? ` style="transform:scale(${cropScale})"` : '';
+        el.innerHTML = `<div class="compact-video-wrap"><video src="${src}" autoplay muted loop playsinline${cropStyle}></video></div>`;
       } else {
         el.innerHTML = `<video src="${src}" autoplay muted loop playsinline></video>`;
       }
@@ -798,8 +845,10 @@ function openProject(id, list){
   const nextId = (id+1)%list.length;
   const next = list[nextId];
   document.getElementById('project').style.background = p.pageBg || '';
-  // project pages are white for now, so titles/captions always use the dark-accent text color
-  document.getElementById('project').classList.add('proj-dark-accent');
+  // project pages are white/light by default, so titles/captions default to the dark-accent
+  // text color — a project can set pageDark:true (with a dark pageBg) to flip that to light text
+  document.getElementById('project').classList.toggle('proj-dark-accent', !p.pageDark);
+  document.getElementById('project').classList.toggle('proj-light-accent', !!p.pageDark);
   const pCatEl = document.getElementById('pCat');
   pCatEl.innerHTML = '';
   p.cat.split(/\s*[∙·]\s*|\s+\/\s+/).map(t=>t.trim()).filter(Boolean).forEach(t=>{
@@ -862,7 +911,7 @@ function openProject(id, list){
     setProjImg(heroEl, p.img, thumb(p), p.title);
   }
   setCaption('pHeroCap', p.heroCaption);
-  setProjImg(document.getElementById('pg1'), p.img1, `linear-gradient(${(p.ang+40)}deg, ${p.c2}, ${p.c1})`, p.title, p.img1Compact);
+  setProjImg(document.getElementById('pg1'), p.img1, `linear-gradient(${(p.ang+40)}deg, ${p.c2}, ${p.c1})`, p.title, p.img1Compact, p.img1CompactCrop);
   setProjImg(document.getElementById('pg2'), p.img2, `linear-gradient(${p.ang}deg, ${p.c1}, ${p.c2})`, p.title, p.img2Compact);
   setProjImg(document.getElementById('pg3'), p.img3, `radial-gradient(circle at 40% 30%, ${p.c2}, ${p.c1})`, p.title, p.img3Compact);
   setCaption('pCap1', p.img1Caption); setCaption('pCap2', p.img2Caption); setCaption('pCap3', p.img3Caption);
@@ -961,11 +1010,11 @@ document.getElementById('back').addEventListener('click',()=>{
 
 /* ---------- MY WORKS PAGE (separate page, grid of 10) ---------- */
 const ALLWORKS = [
-  {title:'Prism', cat:'UI / UX', year:'2024', client:'Prism', role:'Product Design', tools:'Figma, Framer', c1:'#FF1907', c2:'#000EA7', c3:'#671590', c4:'#000000', c5:'#ffffff', ang:160, img:'prism.jpg', heroVideo:'prism-flow.mp4', heroVideoPoster:'prism-flow-poster.jpg', heroCaption:'Exploring drops',
+  {title:'Prism', cat:'UI / UX', year:'2024', client:'Prism', role:'Product Design', tools:'Figma, Framer', c1:'#FF1907', c2:'#000EA7', c3:'#671590', c4:'#000000', c5:'#ffffff', ang:160, pageBg:'#1D4A36', pageDark:true, img:'prism.jpg', heroVideo:'prism-flow.mp4', heroVideoPoster:'prism-flow-poster.jpg', heroCaption:'Exploring drops',
    img1:'prism-flow-copy.mp4', img1Caption:'Building a visual DNA', img2:'prism-flow-2.mp4', img2Caption:'The mobile experience', img3:'prism-promo.mp4', img3Caption:'The generated visual in campaign use',
    lead:'A music collaboration platform where artists drop tracks and fans explore them like a deck of cards.',
    body:['I designed the desktop app end-to-end, from the swipeable drop carousel to the overall dark, studio-inspired visual language.','The interface stays quiet and out of the way, letting the artwork and music take center stage.']},
-  {title:'Kodo', cat:'Visual Identity \u2219 UI/UX', year:'2026', client:'KODO', role:'Brand Identity, Packaging', tools:'Figma, Illustrator', c1:'#afd3e4', c2:'#6297d8', c3:'#f09035', c4:'#e4542d', c5:'#4da34e', c6:'#ee7cb1', c7:'#f0ebe0', ang:130, img:'kodo.jpg', heroVideo:'kodo-desktop-flow.mp4', heroVideoPoster:'kodo-desktop-flow-poster.jpg', heroCaption:'The desktop building interface', img1:'kodo-flow-cropped.mp4', img1Compact:true, img1Caption:'The mobile onboarding flow', img2:'kodo.jpg', img2Caption:'The full Cyber Deck Creative Kit', img3:'kodo-hero.jpg',
+  {title:'Kodo', cat:'Visual Identity \u2219 UI/UX', year:'2026', client:'KODO', role:'Brand Identity, Packaging', tools:'Figma, Illustrator', c1:'#afd3e4', c2:'#6297d8', c3:'#f09035', c4:'#e4542d', c5:'#4da34e', c6:'#ee7cb1', c7:'#f0ebe0', ang:130, pageBg:'#F2C6DA', img:'kodo.jpg', heroVideo:'kodo-desktop-flow.mp4', heroVideoPoster:'kodo-desktop-flow-poster.jpg', heroCaption:'The desktop building interface', img1:'kodo-flow-cropped.mp4', img1Compact:true, img1Caption:'The mobile onboarding flow', img2:'kodo.jpg', img2Caption:'The full Cyber Deck Creative Kit', img3:'kodo-hero.jpg',
    strip:['kodo-icon-led.png','kodo-icon-network.png','kodo-icon-screen.png','kodo-icon-button.png','kodo-icon-pi1.png','kodo-icon-pi2.png','kodo-icon-wires.png'], stripCaption:'Branding', stripLogo:'kodo-group-57.png',
    processCaption:'Behind the scenes - the process',
    btsImages:['kodo-prototype-1.jpg','kodo-prototype-2.jpg','kodo-prototype-3.jpg'],
@@ -1005,7 +1054,7 @@ const ALLWORKS = [
    img7:'netflix-dating-shot-7.png', img8:'netflix-dating-shot-8.png', img9:'netflix-dating-shot-9.png',
    lead:'A warm illustration set exploring the small rituals of modern dating, made for a Netflix editorial feature.',
    body:['Hand-drawn couples across sun-soaked picnic scenes, built with a loose line and a punchy red-on-cream palette.','Designed to work as a scrollable collage — playful, intimate, and a little voyeuristic.']},
-  {title:'rootea', cat:'Branding / Packaging', year:'2024', client:'rootea', role:'Brand Identity, Packaging', tools:'Illustrator, Photography', c1:'#605a5b', c2:'#a68d86', c3:'#dcd9d6', c4:'#7c5952', c5:'#5d6048', ang:125, squareGrid:true, img:'rootea-detail.jpg', img1:'rootea.jpg',
+  {title:'rootea', cat:'Branding / Packaging', year:'2024', client:'rootea', role:'Brand Identity, Packaging', tools:'Illustrator, Photography', c1:'#605a5b', c2:'#a68d86', c3:'#dcd9d6', c4:'#7c5952', c5:'#5d6048', ang:125, pageBg:'#1D4A36', pageDark:true, squareGrid:true, img:'rootea-detail.jpg', img1:'rootea.jpg',
    img2:'rootea-photo-1.jpg', img3:'rootea-photo-2.jpg',
    img4:'rootea-photo-3.jpg', img5:'rootea-tea-bag.jpg', img6:'rootea-photo-4.jpg',
    lead:'A quiet, herbal identity for a loose-leaf tea brand built around simplicity and ritual.',
@@ -1035,37 +1084,53 @@ document.getElementById('project').addEventListener('loadedmetadata', (e)=>{
 }, true);
 
 /* ---------- favorite works: a fanned stack of cards, empty at first, that build in
-   one by one as the section scrolls into view ---------- */
+   one by one as the section scrolls into view, and can then be browsed by clicking ---------- */
 const favoritesStack = document.getElementById('favoritesStack');
 if(favoritesStack){
-  const FAVORITE_TITLES = ['Prism', 'Kodo', 'Milon Hai', 'VOUCH', 'rootea'];
+  const FAVORITE_TITLES = ['Milon Hai', 'Maskit.code', 'Prism', 'Kodo'];
   const favorites = FAVORITE_TITLES.map(t => ALLWORKS.find(p => p.title === t)).filter(Boolean);
-  const fanAngles = [-10, -4, 3, 9, 14];
-  const fanOffsets = [-30, -12, 6, 22, 36];
 
-  favorites.forEach((p, i)=>{
-    const idx = ALLWORKS.indexOf(p);
+  favorites.forEach((p)=>{
     const card = document.createElement('div');
     card.className = 'fav-card';
     card.style.background = thumb(p);
-    card.style.zIndex = i + 1;
-    const angle = fanAngles[i % fanAngles.length];
-    const offset = fanOffsets[i % fanOffsets.length];
-    card.dataset.finalTransform = `translate(calc(-50% + ${offset}px), 0) rotate(${angle}deg) scale(1)`;
     const label = document.createElement('span');
     label.className = 'fav-label';
     label.textContent = p.title;
     card.appendChild(label);
-    card.addEventListener('click', ()=> openProject(idx, ALLWORKS));
     favoritesStack.appendChild(card);
   });
 
-  // one card joins the stack for each slice of scroll progress through the (tall) section —
-  // scroll down to add a card, scroll back up to remove it
+  // wildishandco.co.uk-style card deck: each new card lands upright and front-and-center,
+  // and every card already shown recedes one notch further into a fan behind it —
+  // driven entirely by scroll position through the (tall, pinned) section.
+  // once a card is revealed it's also clickable: tap a card in the back to bring it to
+  // the front, tap the front card to open that project — a simple, tactile way to browse.
   const favCards = [...favoritesStack.querySelectorAll('.fav-card')];
   const favSection = document.getElementById('favorites');
   let favShown = 0;
   let favTicking = false;
+  let order = []; // front-to-back list of card indices currently revealed
+
+  function bringToFront(idx){
+    order = order.filter(x => x !== idx);
+    order.unshift(idx);
+  }
+
+  function layoutFavorites(){
+    favCards.forEach(card=>{ card.classList.remove('in'); card.style.transform = ''; card.style.zIndex = ''; });
+    order.forEach((idx, k)=>{
+      const card = favCards[idx];
+      const angle = -k * 7;
+      const offsetX = k * 16;
+      const offsetY = -k * 12;
+      const scale = Math.max(.82, 1 - k * .045);
+      card.classList.add('in');
+      card.classList.toggle('fav-front', k === 0);
+      card.style.zIndex = favCards.length - k;
+      card.style.transform = `translate(calc(-50% + ${offsetX}px), ${offsetY}px) rotate(${angle}deg) scale(${scale})`;
+    });
+  }
 
   function updateFavorites(){
     favTicking = false;
@@ -1074,21 +1139,36 @@ if(favoritesStack){
     const progress = scrollable > 0
       ? Math.min(1, Math.max(0, -rect.top / scrollable))
       : 0;
-    // reserve the first slice of progress for reading the heading before cards start
-    const eased = Math.max(0, (progress - 0.08) / 0.8);
+    // whole deck builds up within a short scroll span, almost like a single scroll gesture
+    const eased = Math.max(0, (progress - 0.02) / 0.96);
     const target = Math.min(favCards.length, Math.floor(eased * (favCards.length + 1)));
     if(target === favShown) return;
+    if(target > favShown){
+      for(let i = favShown; i < target; i++){
+        // slow down just this card's first-ever entrance; browsing clicks stay snappy
+        const card = favCards[i];
+        card.style.transitionDuration = '.6s';
+        card.addEventListener('transitionend', ()=>{ card.style.transitionDuration = ''; }, {once:true});
+        bringToFront(i);
+      }
+    } else {
+      order = order.filter(idx => idx < target);
+    }
     favShown = target;
-    favCards.forEach((card, i)=>{
-      if(i < favShown){
-        card.classList.add('in');
-        card.style.transform = card.dataset.finalTransform;
+    layoutFavorites();
+  }
+
+  favCards.forEach((card, idx)=>{
+    card.addEventListener('click', ()=>{
+      if(!card.classList.contains('in')) return; // not revealed yet
+      if(order[0] === idx){
+        openProject(ALLWORKS.indexOf(favorites[idx]), ALLWORKS);
       } else {
-        card.classList.remove('in');
-        card.style.transform = '';
+        bringToFront(idx);
+        layoutFavorites();
       }
     });
-  }
+  });
 
   window.addEventListener('scroll', ()=>{
     if(!favTicking){ favTicking = true; requestAnimationFrame(updateFavorites); }
@@ -1190,16 +1270,18 @@ function updateScrollProgress(){
 window.addEventListener('scroll', updateScrollProgress, { passive:true });
 updateScrollProgress();
 
-/* ---------- hero mouse trail: an empty stage — moving the mouse leaves a ribbon of project images behind it ---------- */
+/* ---------- hero trail: an empty stage — moving the mouse (or dragging a finger on
+   touch devices) leaves a ribbon of project images behind it ---------- */
 (function(){
   const layer = document.getElementById('trailLayer');
   const canHover = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
-  if(!layer || !canHover || window.innerWidth < 1000) return;
+  if(!layer) return;
+  if(canHover && window.innerWidth < 1000) return; // narrow desktop windows skip it
 
-  /* pull the trail images from ball-pit-images/ — drop whichever pictures you want in that
+  /* trail images live at repo root as trail-1.jpg / trail-2.jpg plus reused project assets
      folder and list their filenames below. */
-  const TRAIL_FILENAMES = [
-    'ball-pit-1.jpg', 'ball-pit-2.jpg', 'rootea-detail.jpg', 'archive-4.jpg', 'ball-pit-3.jpg', 'kodo-group-57.png',
+  const trailImages = [
+    'trail-1.jpg', 'trail-2.jpg', 'rootea-detail.jpg', 'archive-4.jpg', 'rootea-tea-bag.jpg', 'kodo-group-57.png',
     'digital-nomads-shot-2.png', 'digital-nomads-shot-3.png',
     'digital-nomads-shot-6.png', 'netflix-dating-shot-1.png',
     'netflix-dating-shot-5.png', 'digital-nomads-strip-1.png', 'digital-nomads-strip-2.png',
@@ -1211,7 +1293,6 @@ updateScrollProgress();
     'maskit-poster-2.jpg', 'maskit-poster-3.jpg', 'milon-hai.jpg', 'netflix-dating.jpg',
     'prism.jpg', 'rootea.jpg', 'vouch.jpg', 'archive-16.jpg', 'archive-15.jpg'
   ];
-  const trailImages = TRAIL_FILENAMES.map(f => f);
   let lastImg = null;
   function nextImage(){
     let pick;
@@ -1224,12 +1305,9 @@ updateScrollProgress();
 
   const hero = document.getElementById('heroCollage');
   let lastX = null, lastY = null;
-  const MIN_DIST = 55; // spawn a new trail image only after the mouse has moved this far
+  const MIN_DIST = 55; // spawn a new trail image only after the pointer has moved this far
 
-  hero.addEventListener('mousemove', (e)=>{
-    const rect = hero.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+  function spawnTrailImage(x, y){
     let dx = 0, dy = 0;
     if(lastX !== null){
       dx = x - lastX; dy = y - lastY;
@@ -1238,7 +1316,7 @@ updateScrollProgress();
     }
     lastX = x; lastY = y;
 
-    /* the faster/more diagonal the mouse moves, the more the image "swooshes" in — skewed
+    /* the faster/more diagonal the pointer moves, the more the image "swooshes" in — skewed
        and blurred in the direction of travel before it snaps into place */
     const angle = Math.atan2(dy, dx) * (180/Math.PI);
     const skew = Math.max(-18, Math.min(18, dx * 0.35));
@@ -1254,9 +1332,35 @@ updateScrollProgress();
     img.style.top = y + 'px';
     layer.appendChild(img);
     img.addEventListener('animationend', ()=> img.remove());
-  });
+  }
 
-  hero.addEventListener('mouseleave', ()=>{ lastX = null; lastY = null; });
+  if(canHover){
+    hero.addEventListener('mousemove', (e)=>{
+      const rect = hero.getBoundingClientRect();
+      spawnTrailImage(e.clientX - rect.left, e.clientY - rect.top);
+    });
+    hero.addEventListener('mouseleave', ()=>{ lastX = null; lastY = null; });
+  } else {
+    // touch devices: a finger dragging across the hero does the same thing a mouse does
+    const touchPoint = (e)=>{
+      const t = e.touches[0];
+      if(!t) return null;
+      const rect = hero.getBoundingClientRect();
+      return { x: t.clientX - rect.left, y: t.clientY - rect.top };
+    };
+    hero.addEventListener('touchstart', (e)=>{
+      const p = touchPoint(e);
+      if(!p) return;
+      lastX = null; lastY = null;
+      spawnTrailImage(p.x, p.y);
+    }, {passive:true});
+    hero.addEventListener('touchmove', (e)=>{
+      const p = touchPoint(e);
+      if(!p) return;
+      spawnTrailImage(p.x, p.y);
+    }, {passive:true});
+    hero.addEventListener('touchend', ()=>{ lastX = null; lastY = null; });
+  }
 })();
 
 /* ---------- magnetic titles: split big headings into per-letter spans and lift/scale
@@ -1333,4 +1437,3 @@ updateScrollProgress();
 </script>
 </body>
 </html>
-
