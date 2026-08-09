@@ -314,7 +314,9 @@
     font-size:.95rem;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink);
     width:fit-content;padding-bottom:.15rem;margin-bottom:1.6rem;transition:opacity .2s var(--ease)}
   .site-link:hover{opacity:.6}
-  .proj-palette{display:flex;gap:.4rem;margin-top:.2rem}
+  .cat-row{display:flex;flex-direction:column;gap:.6rem;margin-top:.8rem}
+  .cat-row .cat{margin-top:0}
+  .proj-palette{display:flex;gap:.4rem;margin-top:0}
   .proj-palette span{width:14px;height:14px;border-radius:4px;border:1px solid var(--line);flex:none;cursor:default}
   .color-tip{position:fixed;background:var(--ink);color:var(--bg);font-family:var(--body);
     font-size:.68rem;letter-spacing:.02em;padding:.25rem .5rem;border-radius:4px;white-space:nowrap;
@@ -323,16 +325,18 @@
 
   /* two-column layout: left text is static, only the right image column scrolls */
   .proj-layout{display:grid;grid-template-columns:minmax(220px,0.8fr) 1.8fr;
-    grid-template-rows:1fr auto;grid-template-areas:"left right" "next right";gap:3rem;
+    grid-template-rows:1fr;grid-template-areas:"left right";gap:3rem;
     flex:1;min-height:0}
-  .proj-layout.archive-mode{grid-template-columns:1fr;grid-template-areas:"right" "next"}
+  .proj-layout.archive-mode{grid-template-columns:1fr;grid-template-rows:1fr auto;grid-template-areas:"right" "next"}
+  .proj-layout.archive-mode .proj-left-col{grid-area:next}
   .proj-layout.archive-mode .proj-left{display:none}
-  .proj-left{grid-area:left;display:flex;flex-direction:column;gap:1.6rem;height:100%;
-    overflow-y:auto;padding-bottom:2rem;border-right:1px solid var(--ink);padding-right:2.4rem;min-width:0}
+  .proj-left-col{grid-area:left;display:flex;flex-direction:column;gap:1.6rem;height:100%;
+    min-height:0;overflow-y:auto;padding-bottom:2rem;border-right:1px solid var(--ink);padding-right:2.4rem;min-width:0}
+  .proj-left{display:flex;flex-direction:column;gap:1.6rem;flex:none}
   .proj-desc p{font-size:.92rem;line-height:1.5;color:var(--ink);margin-bottom:.9rem;max-width:34ch}
   .proj-desc p.lead{font-family:var(--display);font-size:.92rem;font-weight:400}
-  .proj-next-wrap{grid-area:next;border-right:1px solid var(--ink);padding-right:2.4rem}
-  .proj-layout.archive-mode .proj-next-wrap{border-right:none;padding-right:0}
+  .proj-next-wrap{flex:none}
+  .proj-layout.archive-mode .proj-left-col{border-right:none;padding-right:0;height:auto;overflow-y:visible}
   .proj-right{grid-area:right;display:flex;flex-direction:column;gap:2.2rem;height:100%;min-width:0;
     overflow-y:auto;padding-bottom:6rem;scrollbar-width:thin;scrollbar-color:var(--ink-faint) transparent}
   .proj-right::-webkit-scrollbar{width:6px}
@@ -355,7 +359,27 @@
   .proj-row.row-mode .proj-media{flex:none;width:calc(33.333% - .93rem);min-width:0}
   @media(max-width:880px){
     .proj-row.row-mode{flex-direction:column}
-    .proj-row.row-mode .proj-media{width:100%} } @media(max-width:880px){ body[data-mobile-compact-images="true"] .proj-row.row-mode{align-items:center} body[data-mobile-compact-images="true"] .proj-row.row-mode .proj-media{width:78%} }
+    .proj-row.row-mode .proj-media{width:100%}
+  }
+
+  /* two images side by side, cropped to match each other's height —
+     used when a project wants a pair of images shown at equal length */
+  .proj-row.pair-mode{flex-direction:row;gap:1.4rem;align-items:stretch}
+  .proj-row.pair-mode .proj-media{flex:none;width:calc(50% - .7rem);min-width:0}
+  .proj-row.pair-mode .proj-img{height:100%;aspect-ratio:4/3}
+  .proj-row.pair-mode .proj-img img,
+  .proj-row.pair-mode .proj-img video{width:100%;height:100%;object-fit:cover}
+  @media(max-width:880px){
+    .proj-row.pair-mode{flex-direction:column}
+    .proj-row.pair-mode .proj-media{width:100%}
+  }
+
+  /* on mobile only, shrink the row images a bit instead of running full-bleed —
+     opt-in per project via p.mobileCompactImages */
+  @media(max-width:880px){
+    body[data-mobile-compact-images="true"] .proj-row.row-mode{align-items:center}
+    body[data-mobile-compact-images="true"] .proj-row.row-mode .proj-media{width:78%}
+  }
 
   /* square-tile grid for images after the hero, used by specific projects */
   body[data-project-grid="square"] .proj-row{display:grid !important;grid-template-columns:repeat(3,1fr) !important;grid-auto-rows:1fr;gap:1rem !important;align-items:stretch !important}
@@ -364,6 +388,17 @@
   body[data-project-grid="square"] .proj-row .proj-img video{width:100% !important;height:100% !important;object-fit:cover !important}
   @media(max-width:880px){
     body[data-project-grid="square"] .proj-row{grid-template-columns:repeat(2,1fr) !important}
+  }
+
+  /* masonry grid for images after the hero — every image keeps its own natural
+     aspect ratio (no cropping), just tiled into neat columns like a pinboard */
+  body[data-project-grid="masonry"] .proj-row{display:block !important;column-count:2;column-gap:1.2rem}
+  body[data-project-grid="masonry"] .proj-row .proj-media{display:inline-block !important;width:100% !important;break-inside:avoid;margin-bottom:1.2rem;flex:none !important}
+  body[data-project-grid="masonry"] .proj-row .proj-img{width:100% !important;height:auto !important;aspect-ratio:auto !important}
+  body[data-project-grid="masonry"] .proj-row .proj-img img,
+  body[data-project-grid="masonry"] .proj-row .proj-img video{width:100% !important;height:auto !important;object-fit:contain !important}
+  @media(max-width:880px){
+    body[data-project-grid="masonry"] .proj-row{column-count:1}
   }
 
   /* archive: loose grid of images that don't get their own project page */
@@ -406,6 +441,18 @@
   .proj-strip img:hover{transform:translateY(-4px) rotate(-2deg)}
   .proj-strip-logo{display:none;width:340px;height:auto;object-fit:contain;margin:2rem auto 0}
   .proj-strip-logo.show{display:block}
+  .proj-big-stack{display:flex;flex-direction:column;gap:1.6rem;width:100%}
+  /* a main video/image on the left with a stack of side images to its right —
+     used to show something "next to" its supporting media */
+  .proj-feature-row{display:flex;gap:1rem;align-items:stretch;width:100%}
+  .proj-feature-main{flex:1 1 45%;min-width:0}
+  .proj-feature-main img,.proj-feature-main video{width:100%;height:100%;object-fit:contain}
+  .proj-feature-side{flex:1 1 55%;min-width:0;display:flex;flex-direction:column;gap:1rem}
+  .proj-feature-side .proj-img{flex:1;min-width:0}
+  .proj-feature-side .proj-img img,.proj-feature-side .proj-img video{width:100%;height:100%;object-fit:cover}
+  @media(max-width:880px){
+    .proj-feature-row{flex-direction:column}
+  }
   .proj-bts-row{display:flex;gap:1rem;width:100%}
   .proj-bts-row img{flex:1;width:0;min-width:0;aspect-ratio:1;object-fit:cover;border-radius:8px}
   @media(max-width:880px){
@@ -495,12 +542,11 @@
     #project .sec-inner{height:auto;overflow-y:auto}
     .project-overlay{overflow-y:auto}
     .proj-layout{grid-template-columns:1fr;grid-template-rows:auto;
-      grid-template-areas:"left" "right" "next";gap:1.8rem;height:auto}
+      grid-template-areas:"left" "right";gap:1.8rem;height:auto}
     .proj-layout.archive-mode{grid-template-areas:"right" "next"}
-    .proj-left,.proj-right{height:auto;overflow-y:visible}
-    .proj-left{border-right:none;padding-right:0;border-bottom:1px solid var(--ink);padding-bottom:1.6rem}
-    .proj-next-wrap{border-right:none;padding-right:0;border-top:1px solid var(--ink);padding-top:1.6rem}
-    .next{border-top:none;padding-top:0;margin-top:0}
+    .proj-right{height:auto;overflow-y:visible}
+    .proj-left-col{border-right:none;padding-right:0;border-bottom:1px solid var(--ink);padding-bottom:1.6rem;height:auto;overflow-y:visible}
+    .next{margin-top:0}
     /* tall/portrait images (mobile-format screenshots etc.) shouldn't blow up past screen height */
     .proj-img img,.proj-img video{width:auto;max-width:100%;max-height:65vh;margin:0 auto}
     .proj-img.grad{min-height:180px}
@@ -665,17 +711,20 @@
     <div class="sec-inner">
       <span class="back" id="back">&larr; Back to works</span>
       <div class="proj-layout" id="pLayout">
-        <div class="proj-left">
-          <div class="proj-head"><h1 id="pTitle"></h1><div class="cat" id="pCat"></div></div>
-          <div class="proj-desc" id="pDesc"></div>
-          <a class="site-link" id="pSiteLink" target="_blank" rel="noopener">View full site &rarr;</a>
-          <div class="proj-palette" id="pPalette"></div>
-        </div>
-        <div class="proj-next-wrap">
-          <div class="next" id="next"><span class="lbl">Next project</span><span class="nm" id="pNext"></span></div>
+        <div class="proj-left-col">
+          <div class="proj-left">
+            <div class="proj-head"><h1 id="pTitle"></h1><div class="cat-row"><div class="cat" id="pCat"></div><div class="proj-palette" id="pPalette"></div></div></div>
+            <div class="proj-desc" id="pDesc"></div>
+            <a class="site-link" id="pSiteLink" target="_blank" rel="noopener">View full site &rarr;</a>
+          </div>
+          <div class="proj-next-wrap">
+            <div class="next" id="next"><span class="lbl">Next project</span><span class="nm" id="pNext"></span></div>
+          </div>
         </div>
         <div class="proj-right">
           <div class="proj-media" id="pHeroWrap"><div class="proj-caption" id="pHeroCap"></div><div class="proj-img" id="pHero"></div></div>
+          <div class="proj-media" id="pFeatureWrap"><div class="proj-caption" id="pFeatureCap"></div><div class="proj-feature-row" id="pFeatureRow"><div class="proj-img proj-feature-main" id="pFeatureMain"></div><div class="proj-feature-side" id="pFeatureSide"></div></div></div>
+          <div class="proj-caption" id="pRowCap"></div>
           <div class="proj-row" id="pRow">
             <div class="proj-media"><div class="proj-caption" id="pCap1"></div><div class="proj-img" id="pg1"></div></div>
             <div class="proj-media"><div class="proj-caption" id="pCap2"></div><div class="proj-img" id="pg2"></div></div>
@@ -691,6 +740,7 @@
             <div class="proj-media"><div class="proj-caption" id="pCap8"></div><div class="proj-img" id="pg8"></div></div>
             <div class="proj-media"><div class="proj-caption" id="pCap9"></div><div class="proj-img" id="pg9"></div></div>
           </div>
+          <div class="proj-media" id="pBigWrap"><div class="proj-caption" id="pBigCap"></div><div class="proj-big-stack" id="pBigStack"></div></div>
           <div class="proj-media" id="pStripWrap"><div class="proj-caption" id="pStripCap"></div><img class="proj-strip-logo" id="pStripLogo" alt=""><div class="proj-strip" id="pStrip"></div></div>
           <div class="proj-media" id="pProcessWrap"><div class="proj-caption" id="pProcessCap"></div><div class="proj-bts-row" id="pBts"></div><div class="proj-process" id="pProcess"></div></div>
           <div class="proj-media" id="pPitchWrap"><div class="proj-caption" id="pPitchCap"></div><div class="proj-pitch-strip" id="pPitchStrip"></div></div>
@@ -910,9 +960,19 @@ function openProject(id, list){
     setProjImg(heroEl, p.img, thumb(p), p.title);
   }
   setCaption('pHeroCap', p.heroCaption);
+  document.getElementById('pFeatureWrap').style.display = p.featureMain ? '' : 'none';
+  setProjImg(document.getElementById('pFeatureMain'), p.featureMain, `linear-gradient(${p.ang}deg, ${p.c1}, ${p.c2})`, p.title, p.featureMainCompact);
+  document.getElementById('pFeatureSide').innerHTML = (p.featureSide || []).map(src =>
+    /\.(mp4|mov|webm)$/i.test(src)
+      ? `<div class="proj-img"><video src="${src}" autoplay muted loop playsinline></video></div>`
+      : `<div class="proj-img"><img src="${src}" alt="${p.title}"></div>`
+  ).join('');
+  setCaption('pFeatureCap', p.featureMain ? p.featureCaption : '');
+  setCaption('pRowCap', p.rowCaption);
   setProjImg(document.getElementById('pg1'), p.img1, `linear-gradient(${(p.ang+40)}deg, ${p.c2}, ${p.c1})`, p.title, p.img1Compact, p.img1CompactCrop);
   setProjImg(document.getElementById('pg2'), p.img2, `linear-gradient(${p.ang}deg, ${p.c1}, ${p.c2})`, p.title, p.img2Compact);
   setProjImg(document.getElementById('pg3'), p.img3, `radial-gradient(circle at 40% 30%, ${p.c2}, ${p.c1})`, p.title, p.img3Compact);
+  document.getElementById('pg3').closest('.proj-media').style.display = (p.img3 || !p.imgPair) ? '' : 'none';
   setCaption('pCap1', p.img1Caption); setCaption('pCap2', p.img2Caption); setCaption('pCap3', p.img3Caption);
   const pRow2El = document.getElementById('pRow2');
   const pg6El = document.getElementById('pg6');
@@ -948,7 +1008,40 @@ function openProject(id, list){
   } else {
     pRow3El.style.display = 'none';
   }
+  const pRowEl = document.getElementById('pRow');
+  // always restore pg4-9 to their original row containers first, in case a previous
+  // masonry project folded them into pRow — otherwise non-masonry projects would
+  // inherit a scrambled layout
+  [document.getElementById('pg4'), document.getElementById('pg5'), pg6El].forEach(el=>{
+    const media = el.closest('.proj-media');
+    if(media && media.parentElement !== pRow2El) pRow2El.appendChild(media);
+  });
+  [document.getElementById('pg7'), document.getElementById('pg8'), pg9El].forEach(el=>{
+    const media = el.closest('.proj-media');
+    if(media && media.parentElement !== pRow3El) pRow3El.appendChild(media);
+  });
+  if(p.masonryGrid){
+    // masonry projects show all tiles (img1..img9) as ONE continuous grid instead of
+    // three separate row-of-three blocks — fold pRow2/pRow3's tiles into pRow itself
+    [...pRow2El.querySelectorAll('.proj-media')].forEach(el=>{
+      if(el.style.display !== 'none') pRowEl.appendChild(el);
+    });
+    [...pRow3El.querySelectorAll('.proj-media')].forEach(el=>{
+      if(el.style.display !== 'none') pRowEl.appendChild(el);
+    });
+    pRow2El.style.display = 'none';
+    pRow3El.style.display = 'none';
+  }
   document.getElementById('pRow').classList.toggle('row-mode', !!p.imgRow);
+  document.getElementById('pRow').classList.toggle('pair-mode', !!p.imgPair);
+  const bigImgs = p.bigImg ? (Array.isArray(p.bigImg) ? p.bigImg : [p.bigImg]) : [];
+  document.getElementById('pBigWrap').style.display = bigImgs.length ? '' : 'none';
+  document.getElementById('pBigStack').innerHTML = bigImgs.map(src =>
+    /\.(mp4|mov|webm)$/i.test(src)
+      ? `<div class="proj-img"><video src="${src}" autoplay muted loop playsinline></video></div>`
+      : `<div class="proj-img"><img src="${src}" alt="${p.title}"></div>`
+  ).join('');
+  setCaption('pBigCap', bigImgs.length ? p.bigImgCaption : '');
   const stripEl = document.getElementById('pStrip');
   document.getElementById('pStripWrap').style.display = p.strip ? '' : 'none';
   stripEl.style.display = p.strip ? 'flex' : 'none';
@@ -984,18 +1077,25 @@ function openProject(id, list){
   document.getElementById('next').onclick = ()=>{openProject(nextId, list);};
   overlay.classList.add('open');
   overlay.querySelector('.proj-right')?.scrollTo({top:0});
-  overlay.querySelector('.proj-left')?.scrollTo({top:0});
+  overlay.querySelector('.proj-left-col')?.scrollTo({top:0});
   body.classList.add('project-open');
   body.style.overflow='hidden';
-  if(p.title === 'Prism' || p.title === 'Maskit.code' || p.title === 'GRUNGE' || p.title === 'rootea'){
+  if(p.title === 'Maskit.code' || p.title === 'GRUNGE' || p.title === 'rootea'){
     body.dataset.theme = 'dark';
   } else {
     delete body.dataset.theme;
   }
   if(p.squareGrid){
     body.dataset.projectGrid = 'square';
+  } else if(p.masonryGrid){
+    body.dataset.projectGrid = 'masonry';
   } else {
     delete body.dataset.projectGrid;
+  }
+  if(p.mobileCompactImages){
+    body.dataset.mobileCompactImages = 'true';
+  } else {
+    delete body.dataset.mobileCompactImages;
   }
 }
 document.getElementById('back').addEventListener('click',()=>{
@@ -1009,11 +1109,11 @@ document.getElementById('back').addEventListener('click',()=>{
 
 /* ---------- MY WORKS PAGE (separate page, grid of 10) ---------- */
 const ALLWORKS = [
-  {title:'Prism', cat:'UI / UX', year:'2024', client:'Prism', role:'Product Design', tools:'Figma, Framer', c1:'#FF1907', c2:'#000EA7', c3:'#671590', c4:'#000000', c5:'#ffffff', ang:160, pageBg:'#1D4A36', pageDark:true, img:'prism.jpg', heroVideo:'prism-flow.mp4', heroVideoPoster:'prism-flow-poster.jpg', heroCaption:'Exploring drops',
-   img1:'prism-flow-copy.mp4', img1Caption:'Building a visual DNA', img2:'prism-flow-2.mp4', img2Caption:'The mobile experience', img3:'prism-promo.mp4', img3Caption:'The generated visual in campaign use',
-   lead:'A music collaboration platform where artists drop tracks and fans explore them like a deck of cards.',
-   body:['I designed the desktop app end-to-end, from the swipeable drop carousel to the overall dark, studio-inspired visual language.','The interface stays quiet and out of the way, letting the artwork and music take center stage.']},
-  {title:'Kodo', cat:'Visual Identity \u2219 UI/UX', year:'2026', client:'KODO', role:'Brand Identity, Packaging', tools:'Figma, Illustrator', c1:'#afd3e4', c2:'#6297d8', c3:'#f09035', c4:'#e4542d', c5:'#4da34e', c6:'#ee7cb1', c7:'#f0ebe0', ang:130, pageBg:'#F2C6DA', img:'kodo.jpg', heroVideo:'kodo-desktop-flow.mp4', heroVideoPoster:'kodo-desktop-flow-poster.jpg', heroCaption:'The desktop building interface', img1:'kodo-flow-cropped.mp4', img1Compact:true, img1Caption:'The mobile onboarding flow', img2:'kodo.jpg', img2Caption:'The full Cyber Deck Creative Kit', img3:'kodo-hero.jpg',
+  {title:'Prism', cat:'UI / UX', year:'2024', client:'Prism', role:'Product Design', tools:'Figma, Framer', c1:'#FF1907', c2:'#000EA7', c3:'#671590', c4:'#000000', c5:'#ffffff', ang:160, img:'prism.jpg', heroVideo:'prism-flow.mp4', heroVideoPoster:'prism-flow-poster.jpg', heroCaption:'Create vision Sketch',
+   img1:'prism-flow-copy.mp4', img1Caption:'Patch the Canvas', img2:'prism-flow-2.mp4', img2Caption:'Your DROP visual is ready', img3:'prism-promo.mp4', img3Caption:'Prism, out in the world',
+   lead:'A tool for creating visual identity for music — a prototype built as a UI/UX studio project at Bezalel in partnership with Lightricks.',
+   body:['The idea: to let independent artists, with no budget, studio, or designer, turn a song into a moving visual — a vertical Spotify Canvas (9:16) that plays beneath the track, along with visuals for social media and live performances.','The conceptual core is “Album DNA”: each album gets a single, unified generative visual identity, and every song inherits its own variation from it — so all the tracks feel like one family without being identical. Living covers for every track.','The user experience is built around the metaphor of a modular synthesizer / patch cables: the user “connects cables” between different inputs — image, color, texture, mood, lyrics — into a canvas, and everything feeds into the visual.','Technically, it’s a single-file HTML application, with all media embedded as base64 and an iframe-based screen architecture.']},
+  {title:'Kodo', cat:'Visual Identity \u2219 UI/UX', year:'2026', client:'KODO', role:'Brand Identity, Packaging', tools:'Figma, Illustrator', c1:'#afd3e4', c2:'#6297d8', c3:'#f09035', c4:'#e4542d', c5:'#4da34e', c6:'#ee7cb1', c7:'#f0ebe0', ang:130, img:'kodo.jpg', heroVideo:'kodo-desktop-flow.mp4', heroVideoPoster:'kodo-desktop-flow-poster.jpg', heroCaption:'The desktop building interface', img1:'kodo-flow-cropped.mp4', img1Compact:true, img1Caption:'The mobile onboarding flow', img2:'kodo.jpg', img2Caption:'The full Cyber Deck Creative Kit', img3:'kodo-hero.jpg',
    strip:['kodo-icon-led.png','kodo-icon-network.png','kodo-icon-screen.png','kodo-icon-button.png','kodo-icon-pi1.png','kodo-icon-pi2.png','kodo-icon-wires.png'], stripCaption:'Branding', stripLogo:'kodo-group-57.png',
    processCaption:'Behind the scenes - the process',
    btsImages:['kodo-prototype-1.jpg','kodo-prototype-2.jpg','kodo-prototype-3.jpg'],
@@ -1032,18 +1132,21 @@ const ALLWORKS = [
   {title:'Milon Hai', cat:'Visual Identity \u2219 UI/UX', year:'2026', client:'Milon Hai', role:'Pattern Design, Merch', tools:'Illustrator, Photoshop', c1:'#ED0560', c2:'#FFDB5A', c3:'#2A52BE', c4:'#005F10', c5:'#F9C4D3', c6:'#EE4C01', ang:135, img:'milon-hai.jpg', heroVideo:'milon-hai-flow.mp4', heroVideoPoster:'milon-hai-flow-poster.jpg', heroVideoCompact:true, img1:'milon-hai.jpg', img2:'milon-hai-landing-flow-v2.mp4', img2Compact:true,
    lead:'Milon Hai\u2019 is a concept app developed around a gap we identified among new immigrants in Israel: the lack of tools that teach the actual cultural context of local slang.',
    body:['The result is an app that serves as a social and experiential platform, allowing users to \u2018collect\u2019 the Israeli street \u2014 from coffee shop slang to workplace expressions.','It goes beyond literal translations (\u2018what does it mean?\u2019), providing the full cultural context: tone, humor, and the situations in which each word is appropriately used.']},
-  {title:'Maskit.code', cat:'Branding / E-commerce', year:'2024', client:'Maskit.code', role:'Brand Identity, Web Design', tools:'Figma, Illustrator', c1:'#ffffff', c2:'#1c1c1c', ang:140, siteLink:'maskit-site-final.html',
-   img:'maskit-cotton.jpg', heroVideo:'maskit-farm.mp4', heroVideoPoster:'maskit-farm-poster.jpg',
-   img1:'maskit-code-brandbook.mp4', img1Compact:true, img2:'maskit-code-flow.mp4', img2Compact:true, img3:'maskit-code-detail.mp4', img3Compact:true,
-   img4:'maskit-poster-1.jpg', img5:'maskit-poster-2.jpg', img6:'maskit-poster-3.jpg',
-   lead:'A digital archive reimagining Israel’s legendary Maskit fashion house as a living, browsable collection.',
-   body:['Each historic garment is presented like a museum plate — reference number, origin, medium and pattern — paired with a rendered lookbook shot.','The system carries the label’s heritage craft into a clean, catalogue-like digital format.']},
-  {title:'Digital Nomads', cat:'Digital Illustration', year:'2023', client:'Editorial', role:'Illustration', tools:'Procreate, Illustrator', c1:'#e5ebfd', c2:'#6386f7', c3:'#3d5499', c4:'#ee9d81', c5:'#c96470', ang:120, mobileCompactImages:true, img:'digital-nomads.jpg', heroImg:'digital-nomads-hero.png', heroImgWidth:'85%',
+  {title:'Maskit.code', cat:'Speculative Branding', year:'2024', client:'Maskit.code', role:'Brand Identity, Web Design', tools:'Figma, Illustrator', c1:'#ffffff', c2:'#1c1c1c', ang:140, pageBg:'#1D4A36', pageDark:true, siteLink:'maskit-site-final.html',
+   img:'maskit-cotton.jpg', heroVideo:'maskit-code-flow.mp4',
+   featureMain:'maskit-code-brandbook.mp4', featureMainCompact:true,
+   featureSide:['maskit-brandbook-1.png','maskit-brandbook-2.png','maskit-brandbook-3.png'],
+   featureCaption:'The brand book',
+   img1:'maskit-code-detail.mp4', img1Compact:true, img2:'maskit-poster-1.jpg', img3:'maskit-poster-2.jpg',
+   img4:'maskit-poster-3.jpg', img5:'maskit-farm.mp4', img5Compact:true,
+   lead:'The project presents a speculative future scenario in which tangibility has completely vanished, and the world exists exclusively within a digital realm.',
+   body:['In this reality, the historic brand “Maskit” undergoes a transformation, serving as a marketplace for virtual assets. The historical garments no longer exist in physical form; instead, they are sold as incredibly detailed text prompts.','Through words and code, Maskit preserves the haute couture, luxury, and exclusivity that characterized the original brand.','Within the void of the virtual world, the “New Maskit” yearns for and echoes materiality. It seeks a way back to the physical world, doing so by integrating visual and conceptual elements from the realms of print, craft, and manual making, acting as a bridge that connects the digital with the human.']},
+  {title:'Digital Nomads', cat:'Digital Illustration', year:'2026', client:'Editorial', role:'Illustration', tools:'Procreate, Illustrator', c1:'#e5ebfd', c2:'#6386f7', c3:'#3d5499', c4:'#ee9d81', c5:'#c96470', ang:120, mobileCompactImages:true, img:'digital-nomads.jpg', heroImg:'digital-nomads-hero.png', heroImgWidth:'85%',
    img1:'digital-nomads-shot-1.png', img2:'digital-nomads-shot-2.png', img3:'digital-nomads-shot-3.png', imgRow:true,
    img4:'digital-nomads-shot-4.png', img5:'digital-nomads-shot-5.png', img6:'digital-nomads-shot-6.png',
    strip:['digital-nomads-strip-1.png','digital-nomads-strip-2.png','digital-nomads-strip-3.png','digital-nomads-strip-4.png','digital-nomads-strip-5.png','digital-nomads-strip-6.png','digital-nomads-strip-7.png'],
-   lead:'A flat, friendly illustration series about the new rituals of remote work — laptops, coffee, and shared tables.',
-   body:['Bold outlines and a cool blue-and-coral palette give the characters a light, editorial feel.','Built as a flexible cast that can be recomposed across articles, decks and social posts.']},
+   lead:'This project features a series of illustrations created for an app designed for the digital nomad community. The remote work lifestyle brings freedom, but also a daily struggle with uncertainty: finding the fastest Wi-Fi, an available power outlet, and a quiet environment.',
+   body:['The goal of these illustrations was to create a visual language that conveys reliability, a sense of community, and efficiency. The illustrations guide the user throughout their experience — from the onboarding screens to the Explore section, which allows them to discover new workspaces by category — making the interface inviting and intuitive.','Through its illustrative style, the project demonstrates how the app transforms the frustrating task of finding a workspace into a simple, effortless, and community-driven experience.']},
   {title:'VOUCH', cat:'UI/UX · App Design · Digital Product', year:'2026', client:'Vouch', role:'Product Design', tools:'Figma', c1:'#93a7d7', c2:'#df5958', c3:'#e2aa91', c4:'#e7ccae', c5:'#d2a59c', ang:150, img:'vouch.jpg',
    lead:'Vouch is a UX/UI design concept for a social habit-building app, developed during an intensive one-week design sprint at UX studio at Bezalel to explore how shared accountability can overcome the limitations of individual discipline.',
    body:['By linking the progress of two partners through a “shared streak” mechanism, the app transforms habit-tracking into a social commitment, featuring a unique “Forgiveness Loop” for missed days and a peer-rating system to foster reliability.','Through user research, rapid wireframing, and a vibrant, emotional interface, Vouch merges psychological insights with intuitive interaction design, turning mundane daily routines into a meaningful and supportive social ritual.']},
@@ -1051,16 +1154,17 @@ const ALLWORKS = [
    img1:'netflix-dating-shot-1.png', img2:'netflix-dating-shot-2.png', img3:'netflix-dating-shot-3.png', imgRow:true,
    img4:'netflix-dating-shot-4.png', img5:'netflix-dating-shot-5.png', img6:'netflix-dating-shot-6.png',
    img7:'netflix-dating-shot-7.png', img8:'netflix-dating-shot-8.png', img9:'netflix-dating-shot-9.png',
-   lead:'A warm illustration set exploring the small rituals of modern dating, made for a Netflix editorial feature.',
-   body:['Hand-drawn couples across sun-soaked picnic scenes, built with a loose line and a punchy red-on-cream palette.','Designed to work as a scrollable collage — playful, intimate, and a little voyeuristic.']},
-  {title:'rootea', cat:'Branding / Packaging', year:'2024', client:'rootea', role:'Brand Identity, Packaging', tools:'Illustrator, Photography', c1:'#605a5b', c2:'#a68d86', c3:'#dcd9d6', c4:'#7c5952', c5:'#5d6048', ang:125, pageBg:'#1D4A36', pageDark:true, squareGrid:true, img:'rootea-detail.jpg', img1:'rootea.jpg',
+   lead:'The concept was born from the desire to take “Netflix and Chill” and turn it into a meaningful dating experience. Based on the idea that our favorite movies and series tell our story better than any bio, the app uses Netflix’s famous algorithm to find matches based on shared taste.',
+   body:['To capture the romantic, nostalgic essence of classic cinema, I developed a unique illustrative language for the interface. By adapting iconic movie scenes and featuring them with contemporary, diverse characters, the illustrations bridge the gap between silver-screen magic and modern-day connection.']},
+  {title:'rootea', cat:'Branding / Packaging', year:'2024', client:'rootea', role:'Brand Identity, Packaging', tools:'Illustrator, Photography', c1:'#605a5b', c2:'#a68d86', c3:'#dcd9d6', c4:'#7c5952', c5:'#5d6048', ang:125, pageBg:'#1D4A36', pageDark:true, masonryGrid:true, rowCaption:'Images from the submission', img:'rootea-detail.jpg', heroImg:'rootea-detail.jpg', heroImgWidth:'92%', img1:'rootea.jpg',
    img2:'rootea-photo-1.jpg', img3:'rootea-photo-2.jpg',
    img4:'rootea-photo-3.jpg', img5:'rootea-tea-bag.jpg', img6:'rootea-photo-4.jpg',
-   lead:'A quiet, herbal identity for a loose-leaf tea brand built around simplicity and ritual.',
-   body:['A minimal wordmark and matte charcoal tags let the tea itself — dried petals, herbs, stems — take center stage.','The system stays understated across pyramid bags, labels and future packaging.']},
-  {title:'GRUNGE', cat:'Editorial / Zine', year:'2025', client:'Grunge Zine', role:'Editorial Design, Art Direction', tools:'InDesign, Illustrator', c1:'#f83500', c2:'#f6e011', c3:'#ec0b4b', c4:'#5bcc18', c5:'#1a0f0a', ang:150, img:'grunge.jpg',
-   lead:'A neon, punk-inspired zine series built around the line “Grunge, lo met” — grunge isn’t dead.',
-   body:['A bold, cropped wordmark letter anchors each issue, printed on a rotating set of loud fluorescent covers.','The stripped-down, photocopy-zine energy carries through typography, layout and the choice of paper stock.']},
+   bigImg:['rootea-bts-frame.png', 'rootea-bts-layout.png'], bigImgCaption:'Behind the scenes — building the brand',
+   lead:'‘rootea’ is a new medicinal mushroom tea brand. It aims to provide an alternative approach to managing mental health struggles, offering a departure from the traditional medication experience.',
+   body:['The visual identity draws inspiration from the organic forms, unique shapes, and delicate color palettes of the medicinal mushrooms themselves.']},
+  {title:'GRUNGE', cat:'Editorial / Zine', year:'2025', client:'Grunge Zine', role:'Editorial Design, Art Direction', tools:'InDesign, Illustrator', c1:'#f83500', c2:'#f6e011', c3:'#ec0b4b', c4:'#5bcc18', c5:'#1a0f0a', ang:150, img:'grunge.jpg', heroVideo:'grunge-hero.mp4', img1:'grunge.jpg', img2:'grunge-bd-2.jpg', imgPair:true,
+   lead:'Booklet, poster, and website design centered around the ‘Grunge’ Wikipedia entry, utilizing typography to create a layered reading experience.',
+   body:['The project integrates the encyclopedic definitions with imagery from the grunge scene, employing a distinct grunge aesthetic.','The poster and website extend this typographic language, serving as an invitation to the booklet’s launch event.']},
   {title:'Archive', cat:'Miscellaneous', year:'', client:'', role:'', tools:'', c1:'#8a8a92', c2:'#c9c2b0', ang:120, isArchive:true,
    archiveImages:[
      {title:'Untitled 01', images:['archive-1.jpg','archive-2.jpg','archive-3.jpg','archive-13.jpg']},
@@ -1201,15 +1305,15 @@ ALLWORKS.forEach((p,i)=>{
 
 /* ---------- static row of the design/AI tools in my kit, one icon each ---------- */
 const TOOL_STRIP = [
-  {title:'Claude', url:'https://claude.ai', img:'https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/29/25/7b/29257bef-ef63-11b5-f30c-1ee806165851/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg'},
-  {title:'Gemini', url:'https://gemini.google.com', img:'https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/0b/ca/a1/0bcaa148-9669-0a11-ff26-9a1945c785fe/AppIcon-0-0-1x_U007epad-0-0-0-1-0-0-sRGB-0-0-85-220.png/512x512bb.jpg'},
-  {title:'Illustrator', url:'https://www.adobe.com/products/illustrator.html', img:'https://img.icons8.com/color/512/adobe-illustrator.png'},
-  {title:'Figma', url:'https://www.figma.com', img:'https://img.icons8.com/color/512/figma.png'},
-  {title:'Photoshop', url:'https://www.adobe.com/products/photoshop.html', img:'https://img.icons8.com/color/512/adobe-photoshop.png'},
-  {title:'InDesign', url:'https://www.adobe.com/products/indesign.html', img:'https://img.icons8.com/color/512/adobe-indesign.png'},
-  {title:'Premiere', url:'https://www.adobe.com/products/premiere.html', img:'https://img.icons8.com/color/512/adobe-premiere-pro.png'},
-  {title:'Procreate', url:'https://procreate.com', img:'https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/7b/36/95/7b36957c-dc43-6e38-99e5-31ecd83ff2dd/AppIcon-0-0-1x_U007emarketing-0-5-0-85-220.png/512x512bb.jpg'},
-  {title:'Cinema 4D', url:'https://www.maxon.net/cinema-4d', img:'https://img.icons8.com/color/512/cinema-4d.png'}
+  {title:'Claude', url:'https://claude.ai', img:'512x512bb.jpg'},
+  {title:'Gemini', url:'https://gemini.google.com', img:'512x512bb.jpg'},
+  {title:'Illustrator', url:'https://www.adobe.com/products/illustrator.html', img:'adobe-illustrator.png'},
+  {title:'Figma', url:'https://www.figma.com', img:'figma.png'},
+  {title:'Photoshop', url:'https://www.adobe.com/products/photoshop.html', img:'adobe-photoshop.png'},
+  {title:'InDesign', url:'https://www.adobe.com/products/indesign.html', img:'adobe-indesign.png'},
+  {title:'Premiere', url:'https://www.adobe.com/products/premiere.html', img:'adobe-premiere-pro.png'},
+  {title:'Procreate', url:'https://procreate.com', img:'512x512bb.jpg'},
+  {title:'Cinema 4D', url:'https://www.maxon.net/cinema-4d', img:'cinema-4d.png'}
 ];
 const worksStripTrack = document.getElementById('worksStripTrack');
 if(worksStripTrack){
@@ -1277,8 +1381,7 @@ updateScrollProgress();
   if(!layer) return;
   if(canHover && window.innerWidth < 1000) return; // narrow desktop windows skip it
 
-  /* trail images live at repo root as trail-1.jpg / trail-2.jpg plus reused project assets
-     folder and list their filenames below. */
+  // flat array of already-deployed filenames used for the hero mouse-trail effect
   const trailImages = ['trail-1.jpg', 'trail-3.png', 'trail-2.jpg', 'rootea-detail.jpg', 'trail-4.png', 'archive-4.jpg', 'grunge.jpg', 'trail-5.jpg', 'rootea-tea-bag.jpg', 'trail-6.png', 'trail-7.png', 'trail-8.png', 'trail-9.png', 'kodo-group-57.png', 'digital-nomads-shot-2.png', 'digital-nomads-shot-3.png', 'digital-nomads-shot-6.png', 'netflix-dating-shot-1.png', 'netflix-dating-shot-5.png', 'digital-nomads-strip-1.png', 'digital-nomads-strip-2.png', 'digital-nomads-strip-3.png', 'digital-nomads-strip-5.png', 'digital-nomads-strip-4.png', 'digital-nomads-strip-6.png', 'digital-nomads-hero.png', 'digital-nomads-strip-7.png', 'grunge.jpg', 'kodo-hero.jpg', 'kodo-icon-button.png', 'kodo-icon-led.png', 'kodo-icon-network.png', 'kodo-icon-pi1.png', 'kodo-icon-pi2.png', 'kodo-icon-screen.png', 'kodo-icon-wires.png', 'kodo.jpg', 'maskit-cotton.jpg', 'maskit-poster-1.jpg', 'maskit-poster-2.jpg', 'maskit-poster-3.jpg', 'milon-hai.jpg', 'netflix-dating.jpg', 'prism.jpg', 'rootea.jpg', 'vouch.jpg', 'archive-16.jpg', 'trail-10.png', 'trail-11.png', 'trail-12.png', 'archive-15.jpg'];
   let lastImg = null;
   function nextImage(){
