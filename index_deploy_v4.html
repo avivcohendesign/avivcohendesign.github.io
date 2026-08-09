@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aviv Cohen — Graphic Designer</title>
+<meta name="description" content="Portfolio of Aviv Cohen — graphic and product designer specializing in branding, UI/UX and illustration.">
+<meta property="og:title" content="Aviv Cohen — Graphic Designer">
+<meta property="og:description" content="Portfolio of Aviv Cohen — graphic and product designer specializing in branding, UI/UX and illustration.">
+<meta property="og:image" content="aviv-photo.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=Familjen+Grotesk:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500&family=Anton&family=Instrument+Serif:ital@0;1&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @font-face{
+    font-family:'Coffee Tea Demo';
+    src:url('coffee-tea-demo.woff') format('woff');
+    font-weight:normal;
+    font-style:normal;
+    font-display:swap;
+  }
+  :root{
+    --bg:#1D4A36;
+    --ink:#F1F1EF;
+    --ink-soft:#F2C6DA;
+    --ink-faint:#F2C6DA;
+    --line:rgba(242,198,218,.45);
+    --blob-c:#F1F1EF;   /* yellow */
+    --brown:#3c2415;    /* elegant hero ink */
+    --serif:'Instrument Serif', serif;
+    --display:'Hanken Grotesk', sans-serif;
+    --body:'Public Sans', sans-serif;
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --maxw:1380px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--body);background:var(--bg);color:var(--ink);
+    min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  }
+
+  .sec-bg{position:absolute;inset:0;z-index:0;pointer-events:none}
+  #project .sec-bg{position:fixed;overflow:hidden}
+
+  /* thin progress line across the top that fills as you scroll down the page */
+  .scroll-progress{position:fixed;top:0;left:0;height:3px;background:var(--ink);
+    z-index:1000;width:0%;pointer-events:none}
+
+  /* ---------- CHROME (fixed nav + corner labels) ---------- */
+  .chrome{transition:opacity .4s var(--ease)}
+  body.project-open .chrome{opacity:0;pointer-events:none}
+
+  nav{position:fixed;top:2.2rem;right:4.6rem;left:auto;z-index:30;
+    display:flex;align-items:flex-start;gap:.9rem;font-family:var(--serif);font-size:1.15rem;letter-spacing:0;}
+  nav .links{display:flex;flex-direction:column;align-items:flex-end;gap:.3rem}
+  nav a{color:var(--ink);text-decoration:none;position:relative;cursor:pointer;
+    transition:opacity .25s;font-style:italic}
+  nav a.active{font-style:normal;font-weight:600}
+  nav a:not(.active):hover{opacity:.6}
+
+  /* ---------- SECTIONS (one continuous scroll) ---------- */
+  main{position:relative;z-index:10;overflow:clip}
+  .section{position:relative}
+  .sec-inner{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto}
+
+  /* HOME */
+  #home{min-height:100vh;padding:0;display:flex;flex-direction:column;justify-content:flex-start;
+    --bg:#1D4A36;--ink:#F1F1EF;--ink-soft:#F2C6DA;--ink-faint:#F2C6DA;--line:rgba(242,198,218,.45);
+    background:var(--bg)}
+
+  /* hero: an empty stage with just the title — moving the mouse leaves a trailing ribbon of
+     project images behind the cursor. full-bleed, fills the whole first screen. */
+  .hero-collage{position:relative;width:100%;max-width:none;margin:0;min-height:calc(100vh - 4rem);
+    display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .hero-collage-center{position:relative;z-index:5;text-align:center;max-width:820px;margin:0 auto;
+    display:flex;flex-direction:column;align-items:center;gap:1.2rem;padding:0 1rem;pointer-events:none}
+  .hero-collage-title{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--ink);
+    font-size:clamp(2.7rem,6.6vw,5.8rem);line-height:1;letter-spacing:0;
+    clip-path:inset(0 0 100% 0);animation:heroTitleIn 1.4s .2s var(--ease) forwards}
+  @keyframes heroTitleIn{to{clip-path:inset(0 0 0 0)}}
+  .hero-collage-title em{font-style:normal;font-weight:400;color:var(--ink-soft)}
+  /* small pink pill at the bottom of the hero, bouncing gently to cue scrolling */
+  .scroll-hint{position:absolute;left:50%;bottom:6.5rem;transform:translateX(-50%);z-index:6;
+    display:flex;align-items:center;gap:.4rem;padding:.55rem 1.1rem;border-radius:999px;
+    background:var(--ink-soft);color:var(--bg);border:none;cursor:pointer;
+    font-family:var(--body);font-size:.78rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;
+    box-shadow:0 8px 20px rgba(20,20,25,.18);animation:scrollHintBounce 1.8s ease-in-out infinite}
+  .scroll-hint svg{width:14px;height:14px}
+  .scroll-hint:hover{animation-play-state:paused}
+  @keyframes scrollHintBounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
+  @media(max-width:880px){
+    .scroll-hint{bottom:1.2rem;font-size:.7rem;padding:.5rem 1rem}
+  }
+  .trail-layer{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+  .trail-img{position:absolute;top:0;left:0;width:172px;height:172px;object-fit:contain;border-radius:0;
+    background:transparent;
+    box-shadow:0 16px 34px rgba(20,20,25,.28);
+    pointer-events:none;will-change:transform,opacity,filter;
+    animation:trailPop 2s cubic-bezier(.2,1.4,.3,1) forwards}
+  @keyframes trailPop{
+    0%{opacity:0;filter:blur(10px);
+      transform:translate(-50%,-50%) scale(.25) rotate(var(--tr,0deg)) skew(var(--sk,0deg),var(--sk,0deg))}
+    14%{opacity:1;filter:blur(0);
+      transform:translate(-50%,-50%) scale(1.12) rotate(var(--tr,0deg)) skew(0deg,0deg)}
+    22%{transform:translate(-50%,-50%) scale(.97) rotate(var(--tr,0deg))}
+    30%{transform:translate(-50%,-50%) scale(1.03) rotate(var(--tr,0deg))}
+    40%{transform:translate(-50%,-50%) scale(1) rotate(var(--tr,0deg))}
+    72%{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(var(--tr,0deg))}
+    100%{opacity:0;filter:blur(4px);
+      transform:translate(-50%,-50%) scale(.7) rotate(calc(var(--tr,0deg) + 12deg)) translateY(30px)}
+  }
+  @media(max-width:880px){
+    .trail-img{width:120px;height:120px}
+  }
+  @media(max-width:880px){
+    #home{padding:6.5rem 1.4rem 3rem;justify-content:center}
+    .hero-collage{min-height:auto}
+  }
+
+  /* filmstrip of design/AI tool icons, scrolling on a loop — grayscale until hovered */
+  .works-strip-wrap{position:relative;flex:none;width:100%;height:140px;overflow:hidden;
+    border-top:1px solid var(--line);z-index:4;display:flex;align-items:center;
+    background:#F1F1EF}
+  .works-strip-track{display:flex;align-items:center;gap:5rem;width:max-content;
+    animation:stripScroll 32s linear infinite}
+  .works-strip-wrap:hover .works-strip-track{animation-play-state:paused}
+  @keyframes stripScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .works-strip-item{flex:none;width:64px;height:64px}
+  .wsi-icon{display:block;width:100%;height:100%;object-fit:contain;
+    transition:transform .3s var(--ease)}
+  .works-strip-item:hover .wsi-icon{transform:scale(1.08)}
+  @media(max-width:880px){
+    .works-strip-wrap{height:90px}
+    .works-strip-track{gap:2.6rem}
+    .works-strip-item{width:44px;height:44px}
+  }
+
+  /* ABOUT — peeks up slightly into the first screen so it's clear there's more to scroll to */
+  #about{--bg:#F2C6DA;--ink:#1D4A36;--ink-soft:#F1F1EF;--ink-faint:#F1F1EF;--line:rgba(30,74,54,.3);
+    background:var(--bg);position:relative;margin-top:-4rem}
+  .about-inner{padding:5rem 1.5vw;border-top:1px solid var(--ink);
+    max-width:var(--maxw);margin:0 auto}
+  .about-grid{display:grid;grid-template-columns:0.8fr 1.2fr;gap:4rem;align-items:center;width:100%}
+  .about-kicker{font-family:var(--body);font-style:normal;font-size:1rem;color:var(--ink);
+    margin-bottom:.6rem;display:block}
+  .about-title{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--ink);
+    font-size:clamp(2.2rem,4.6vw,3.8rem);line-height:1.05;letter-spacing:0;margin-bottom:1.4rem}
+  .about-text{font-family:var(--body);font-size:1.02rem;line-height:1.7;color:var(--ink);max-width:46ch}
+  .about-text + .about-text{margin-top:1rem}
+  .about-photo-wrap{position:relative;opacity:0;transform:translateX(-34px);
+    transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .about-photo{width:100%;max-width:320px;height:400px;object-fit:cover;border-radius:0;
+    box-shadow:0 20px 50px rgba(40,40,45,.16);transform:rotate(-2deg);transition:transform .4s var(--ease)}
+  .about-photo:hover{transform:rotate(0deg) scale(1.02)}
+  .about-grid > div:last-child{opacity:0;transform:translateX(34px);
+    transition:opacity .8s .12s var(--ease),transform .8s .12s var(--ease)}
+  .about-grid.in .about-photo-wrap,
+  .about-grid.in > div:last-child{opacity:1;transform:translateX(0)}
+  @media(max-width:880px){
+    #about{margin-top:0}
+    .about-inner{padding:3.5rem 1.4rem}
+    .about-grid{grid-template-columns:1fr;gap:1.8rem}
+    .about-photo{height:auto;aspect-ratio:4/5;max-width:260px}
+  }
+
+  /* FAVORITE WORKS — the section is scroll-tall; the stack pins in place with
+     position:sticky and a new card joins it for each slice of scroll progress you pass */
+  #favorites{--bg:#F2C6DA;--ink:#1D4A36;--ink-soft:#F1F1EF;--ink-faint:#F1F1EF;--line:rgba(30,74,54,.3);
+    background:var(--bg);height:170vh}
+  .favorites-sticky{position:sticky;top:0;height:100vh;display:flex;
+    align-items:center;justify-content:center;overflow:hidden}
+  .favorites-inner{display:flex;flex-direction:column;align-items:center;
+    justify-content:center;padding:5rem 1.5vw;max-width:var(--maxw);margin:0 auto;text-align:center}
+  .favorites-kicker{font-family:var(--body);font-style:normal;font-size:1rem;color:var(--ink);
+    margin-bottom:.6rem;display:block}
+  .favorites-title{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(2.2rem,4.6vw,3.6rem);color:var(--ink);margin-bottom:3rem}
+  .favorites-stack{position:relative;width:100%;max-width:520px;height:380px}
+  .fav-card{position:absolute;top:0;left:50%;width:100%;height:100%;border-radius:14px;
+    overflow:hidden;box-shadow:0 20px 45px rgba(20,20,25,.22);cursor:pointer;
+    background-size:cover;background-position:center;
+    opacity:0;transform:translate(-50%,40px) rotate(0deg) scale(.9);
+    transition:opacity .22s cubic-bezier(.16,.8,.3,1),transform .22s cubic-bezier(.16,.8,.3,1)}
+  .fav-card.in{opacity:1}
+  .fav-card.in:not(.fav-front):hover{filter:brightness(1.1)}
+  .fav-card.fav-front{cursor:pointer}
+  .fav-card .fav-label{position:absolute;top:1.1rem;left:1.1rem;padding:.4rem .9rem;
+    background:#fff;color:#1D1A1A;border-radius:6px;font-family:var(--body);
+    font-size:.78rem;font-weight:600;box-shadow:0 4px 10px rgba(20,20,25,.15)}
+  @media(max-width:880px){
+    #favorites{height:150vh}
+    .favorites-stack{height:280px}
+    .favorites-inner{padding:4rem 1.4rem}
+  }
+
+  /* WORKS */
+  #works{--bg:#1D4A36;--ink:#F1F1EF;--ink-soft:#F2C6DA;--ink-faint:#F2C6DA;--line:rgba(242,198,218,.45);
+    background:var(--bg)}
+  #works .sec-inner{padding:4.5rem 1.5vw 7rem;min-height:100vh;max-width:var(--maxw);width:auto;margin:0 auto}
+  .works-title{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--ink);
+    font-size:clamp(2.2rem,4.6vw,3.6rem);margin-bottom:2.4rem;padding:0 2vw}
+  .work-list{width:calc(100% + 4vw);margin-left:-2vw;border-top:1px solid var(--ink)}
+  .work-row{position:relative;display:flex;align-items:baseline;gap:2.2rem;color:var(--ink);
+    padding:.65rem 2vw;border-bottom:1px solid var(--ink);cursor:pointer;
+    opacity:0;transform:translateY(26px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+  .work-row.in{opacity:1;transform:translateY(0)}
+  .work-cat{font-family:var(--body);font-style:normal;font-size:.85rem;
+    color:var(--ink);width:170px;flex:none;text-transform:lowercase;
+    align-self:flex-start;margin-top:-.3rem}
+  .work-title{font-family:var(--serif);font-style:normal;font-weight:400;
+    font-size:clamp(1.7rem,3.8vw,3.1rem);letter-spacing:-.01em;transition:opacity .2s var(--ease),color .2s var(--ease)}
+  .work-row:hover .work-title{font-style:italic;color:var(--ink-soft)}
+  .work-preview{position:fixed;z-index:40;left:0;top:0;
+    width:min(30vw,420px);height:min(30vw,400px);
+    pointer-events:none;display:block;object-fit:contain;object-position:bottom;opacity:0;
+    transform:translateY(16px) rotate(-3deg) scale(.9);transition:opacity .35s var(--ease), transform .25s var(--ease);
+    filter:drop-shadow(10px 26px 32px rgba(20,20,25,.35))}
+  .work-preview.show{opacity:1;transform:translateY(0) rotate(-3deg) scale(1)}
+  @media(max-width:880px){
+    .work-preview{display:none}
+    .work-cat{width:110px;font-size:.72rem}
+    .work-row{gap:1rem}
+  }
+
+  /* CONTACT — footer band at the bottom of the page */
+  #contact{--bg:#F2C6DA;--ink:#1D4A36;--ink-soft:#F1F1EF;--ink-faint:#F1F1EF;--line:rgba(30,74,54,.3);
+    background:var(--bg)}
+  .contact-inner{min-height:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:8rem 1.5vw 6rem;max-width:var(--maxw);margin:0 auto}
+  .contact-kicker{font-family:var(--body);font-style:normal;font-size:1.05rem;
+    color:var(--ink);margin-bottom:.8rem;display:block}
+  .contact-title{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--ink);
+    font-size:clamp(2.6rem,6vw,5rem);line-height:1.05;letter-spacing:0;margin-bottom:1.4rem}
+  .contact-sub{color:var(--ink);font-size:1.05rem;line-height:1.6;max-width:44ch;margin-bottom:2.6rem}
+  .contact-icons{display:flex;align-items:center;gap:1.2rem}
+  .contact-icons a{display:flex;align-items:center;justify-content:center;
+    width:54px;height:54px;border-radius:50%;border:1px solid var(--line);
+    color:var(--ink);transition:.3s var(--ease);background:rgba(44,44,48,.03);
+    opacity:0;transform:translateY(18px) scale(.8)}
+  .contact-icons a:hover{background:var(--ink);color:var(--bg);border-color:var(--ink);transform:translateY(-3px)}
+  .contact-icons svg{width:21px;height:21px}
+  /* whole contact block fades/slides up together, then the icons pop in one after another */
+  .contact-inner > *{opacity:0;transform:translateY(24px);
+    transition:opacity .6s var(--ease),transform .6s var(--ease)}
+  .contact-inner.in > *{opacity:1;transform:translateY(0)}
+  .contact-inner.in > *:nth-child(1){transition-delay:.02s}
+  .contact-inner.in > *:nth-child(2){transition-delay:.1s}
+  .contact-inner.in > *:nth-child(3){transition-delay:.18s}
+  .contact-inner.in > *:nth-child(4){transition-delay:.24s}
+  .contact-inner.in .contact-icons a{transition:opacity .5s var(--ease),transform .5s var(--ease),background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease)}
+  .contact-inner.in .contact-icons a{opacity:1;transform:translateY(0) scale(1)}
+  .contact-inner.in .contact-icons a:nth-child(1){transition-delay:.26s}
+  .contact-inner.in .contact-icons a:nth-child(2){transition-delay:.34s}
+  .contact-inner.in .contact-icons a:nth-child(3){transition-delay:.42s}
+  .contact-inner.in .contact-icons a:nth-child(4){transition-delay:.5s}
+  .contact-email{margin-top:2.2rem;font-family:var(--body);font-style:normal;
+    font-size:1.1rem;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);
+    padding-bottom:.2rem;transition:opacity .2s}
+  .contact-email:hover{opacity:.6}
+  @media(max-width:880px){
+    .contact-inner{padding:4.5rem 1.4rem 3.5rem}
+  }
+
+  /* ---------- PROJECT OVERLAY ---------- */
+  .project-overlay{position:fixed;inset:0;z-index:50;background:#F1F1EF;
+    overflow:hidden;display:none;
+    /* project pages are white for now — scope the ink colors to dark green so all text,
+       borders and scrollbars inside stay readable regardless of the section palette */
+    --ink:#1D4A36;--ink-soft:#1D4A36;--ink-faint:#1D4A36}
+  .project-overlay.open{display:block;animation:viewIn .5s var(--ease) both}
+  .project-overlay.closing{display:block;animation:viewOut .35s var(--ease) both}
+  @keyframes viewIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @keyframes viewOut{from{opacity:1;transform:none}to{opacity:0;transform:translateY(14px)}}
+  #project .sec-inner{padding:5rem 2rem 0;height:100vh;display:flex;flex-direction:column}
+  .back{display:inline-flex;align-items:center;gap:.5rem;color:var(--ink-soft);cursor:pointer;
+    font-size:.98rem;margin-bottom:2rem;transition:.25s;flex:none}
+  .back:hover{color:var(--ink);gap:.8rem}
+  .proj-head{margin-bottom:1.6rem}
+  .proj-head .cat{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem}
+  .cat-tag{display:inline-flex;align-items:center;border:1.5px solid var(--ink-soft);
+    border-radius:999px;padding:.22rem .7rem;color:var(--ink-soft);
+    font-family:var(--body);
+    font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+  .proj-head h1{font-family:var(--serif);font-style:italic;font-weight:500;
+    font-size:clamp(1.3rem,2.2vw,1.9rem);line-height:.98;letter-spacing:-.025em}
+  /* project pages currently have a white background, so titles/captions/nav always use
+     dark-green text to stay readable */
+  .proj-dark-accent .proj-head h1,
+  .proj-dark-accent .proj-caption{color:#1D4A36;border-bottom-color:rgba(30,74,54,.3)}
+  .proj-dark-accent .cat-tag{color:#1D4A36;border-color:#1D4A36}
+  .proj-dark-accent .proj-palette span{border-color:rgba(30,74,54,.3)}
+  .proj-dark-accent .back{color:#1D4A36}
+  .proj-dark-accent .back:hover{color:#1D4A36;opacity:.6}
+  .proj-dark-accent .next{border-top-color:rgba(30,74,54,.3)}
+  .proj-dark-accent .next .lbl{color:#1D4A36;opacity:.65}
+  /* used on the rare project page with a dark background — flips text/borders/scrollbars to
+     a light color instead, mirroring proj-dark-accent above */
+  .proj-light-accent{--ink:#F1F1EF;--ink-soft:#F1F1EF;--ink-faint:#F1F1EF}
+  .proj-light-accent .proj-head h1,
+  .proj-light-accent .proj-caption{color:#F1F1EF;border-bottom-color:rgba(241,241,239,.3)}
+  .proj-light-accent .cat-tag{color:#F1F1EF;border-color:#F1F1EF}
+  .proj-light-accent .proj-palette span{border-color:rgba(241,241,239,.3)}
+  .proj-light-accent .back{color:#F1F1EF}
+  .proj-light-accent .back:hover{color:#F1F1EF;opacity:.6}
+  .proj-light-accent .next{border-top-color:rgba(241,241,239,.3)}
+  .proj-light-accent .next .lbl{color:#F1F1EF;opacity:.65}
+  .proj-light-accent .next .nm{color:#F1F1EF}
+  .proj-dark-accent .next .nm{color:#1D4A36}
+  .site-link{display:none;align-items:center;gap:.4rem;font-family:var(--body);font-style:normal;
+    font-size:.95rem;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink);
+    width:fit-content;padding-bottom:.15rem;margin-bottom:1.6rem;transition:opacity .2s var(--ease)}
+  .site-link:hover{opacity:.6}
+  .cat-row{display:flex;flex-direction:column;gap:.6rem;margin-top:.8rem}
+  .cat-row .cat{margin-top:0}
+  .proj-palette{display:flex;gap:.4rem;margin-top:0}
+  .proj-palette span{width:14px;height:14px;border-radius:4px;border:1px solid var(--line);flex:none;cursor:default}
+  .color-tip{position:fixed;background:var(--ink);color:var(--bg);font-family:var(--body);
+    font-size:.68rem;letter-spacing:.02em;padding:.25rem .5rem;border-radius:4px;white-space:nowrap;
+    opacity:0;pointer-events:none;transition:opacity .15s var(--ease);z-index:200}
+  .color-tip.show{opacity:1}
+
+  /* two-column layout: left text is static, only the right image column scrolls */
+  .proj-layout{display:grid;grid-template-columns:minmax(220px,0.8fr) 1.8fr;
+    grid-template-rows:1fr;grid-template-areas:"left right";gap:3rem;
+    flex:1;min-height:0}
+  .proj-layout.archive-mode{grid-template-columns:1fr;grid-template-rows:1fr auto;grid-template-areas:"right" "next"}
+  .proj-layout.archive-mode .proj-left-col{grid-area:next}
+  .proj-layout.archive-mode .proj-left{display:none}
+  .proj-left-col{grid-area:left;display:flex;flex-direction:column;gap:1.6rem;height:100%;
+    min-height:0;overflow-y:auto;padding-bottom:2rem;border-right:1px solid var(--ink);padding-right:2.4rem;min-width:0}
+  .proj-left{display:flex;flex-direction:column;gap:1.6rem;flex:none}
+  .proj-desc p{font-size:.92rem;line-height:1.5;color:var(--ink);margin-bottom:.9rem;max-width:34ch}
+  .proj-desc p.lead{font-family:var(--display);font-size:.92rem;font-weight:400}
+  .proj-next-wrap{flex:none}
+  .proj-layout.archive-mode .proj-left-col{border-right:none;padding-right:0;height:auto;overflow-y:visible}
+  .proj-right{grid-area:right;display:flex;flex-direction:column;gap:2.2rem;height:100%;min-width:0;
+    overflow-y:auto;padding-bottom:6rem;scrollbar-width:thin;scrollbar-color:var(--ink-faint) transparent}
+  .proj-right::-webkit-scrollbar{width:6px}
+  .proj-right::-webkit-scrollbar-thumb{background:var(--ink-faint);border-radius:3px}
+  .proj-media{display:flex;flex-direction:column;gap:.6rem;width:100%;flex:none;min-width:0}
+  .proj-caption{font-family:var(--body);font-style:normal;color:var(--ink-soft);
+    font-size:.9rem;display:none;padding-bottom:.6rem;border-bottom:1px solid var(--line)}
+  .proj-caption.show{display:block}
+  .proj-img{width:100%;border-radius:0;position:relative;overflow:hidden;flex:none}
+  .proj-img.grad{min-height:280px;background-size:cover;background-position:center}
+  .proj-img img,.proj-img video{display:block;width:100%;height:auto;
+    object-fit:contain;border-radius:0}
+  .proj-img video{aspect-ratio:16/9}
+  .proj-img .compact-video-wrap{display:block;width:fit-content;max-width:100%;
+    margin:0 auto;border-radius:0;overflow:hidden}
+  .proj-img .compact-video-wrap video{display:block;width:auto;max-height:72vh;
+    height:auto;max-width:100%;border-radius:0}
+  .proj-row{display:flex;flex-direction:column;gap:2.2rem}
+  .proj-row.row-mode{flex-direction:row;gap:1.4rem;align-items:flex-end}
+  .proj-row.row-mode .proj-media{flex:none;width:calc(33.333% - .93rem);min-width:0}
+  @media(max-width:880px){
+    .proj-row.row-mode{flex-direction:column}
+    .proj-row.row-mode .proj-media{width:100%}
+  }
+
+  /* two images side by side, cropped to match each other's height —
+     used when a project wants a pair of images shown at equal length */
+  .proj-row.pair-mode{flex-direction:row;gap:1.4rem;align-items:stretch}
+  .proj-row.pair-mode .proj-media{flex:none;width:calc(50% - .7rem);min-width:0}
+  .proj-row.pair-mode .proj-img{height:100%;aspect-ratio:4/3}
+  .proj-row.pair-mode .proj-img img,
+  .proj-row.pair-mode .proj-img video{width:100%;height:100%;object-fit:cover}
+  @media(max-width:880px){
+    .proj-row.pair-mode{flex-direction:column}
+    .proj-row.pair-mode .proj-media{width:100%}
+  }
+
+  /* on mobile only, shrink the row images a bit instead of running full-bleed —
+     opt-in per project via p.mobileCompactImages */
+  @media(max-width:880px){
+    body[data-mobile-compact-images="true"] .proj-row.row-mode{align-items:center}
+    body[data-mobile-compact-images="true"] .proj-row.row-mode .proj-media{width:78%}
+  }
+
+  /* square-tile grid for images after the hero, used by specific projects */
+  body[data-project-grid="square"] .proj-row{display:grid !important;grid-template-columns:repeat(3,1fr) !important;grid-auto-rows:1fr;gap:1rem !important;align-items:stretch !important}
+  body[data-project-grid="square"] .proj-row .proj-img{flex:none !important;width:100% !important;height:auto !important;aspect-ratio:1 !important;min-width:0 !important}
+  body[data-project-grid="square"] .proj-row .proj-img img,
+  body[data-project-grid="square"] .proj-row .proj-img video{width:100% !important;height:100% !important;object-fit:cover !important}
+  @media(max-width:880px){
+    body[data-project-grid="square"] .proj-row{grid-template-columns:repeat(2,1fr) !important}
+  }
+
+  /* masonry grid for images after the hero — every image keeps its own natural
+     aspect ratio (no cropping), just tiled into neat columns like a pinboard */
+  body[data-project-grid="masonry"] .proj-row{display:block !important;column-count:2;column-gap:1.2rem}
+  body[data-project-grid="masonry"] .proj-row .proj-media{display:inline-block !important;width:100% !important;break-inside:avoid;margin-bottom:1.2rem;flex:none !important}
+  body[data-project-grid="masonry"] .proj-row .proj-img{width:100% !important;height:auto !important;aspect-ratio:auto !important}
+  body[data-project-grid="masonry"] .proj-row .proj-img img,
+  body[data-project-grid="masonry"] .proj-row .proj-img video{width:100% !important;height:auto !important;object-fit:contain !important}
+  @media(max-width:880px){
+    body[data-project-grid="masonry"] .proj-row{column-count:1}
+  }
+
+  /* archive: loose grid of images that don't get their own project page */
+  .archive-grid{display:none;flex-direction:column;gap:1.6rem;
+    padding:0 0 2rem;border-bottom:1px solid var(--ink)}
+  .archive-block{display:flex;flex-direction:column;gap:1rem}
+  .archive-divider + .archive-block{margin-top:-1rem}
+  .archive-group-title{font-family:var(--body);font-style:normal;font-size:1.05rem;
+    color:var(--ink-soft)}
+  .archive-group{display:flex;gap:1.6rem;overflow-x:auto;padding-bottom:.6rem;
+    scroll-snap-type:x proximity;scrollbar-width:thin;scrollbar-color:var(--ink-faint) transparent}
+  .archive-group::-webkit-scrollbar{height:6px}
+  .archive-group::-webkit-scrollbar-thumb{background:var(--ink-faint);border-radius:3px}
+  .archive-group img{flex:none;height:340px;width:auto;max-width:none;border-radius:2px;
+    scroll-snap-align:start;transition:transform .3s var(--ease)}
+  .archive-group img:hover{transform:scale(1.03)}
+  @media(max-width:880px){
+    .archive-group img{height:220px}
+  }
+  /* a single long strip you scroll through horizontally, instead of cropped squares */
+  .archive-long{display:flex;overflow-x:auto;scrollbar-width:thin;scrollbar-color:var(--ink-faint) transparent}
+  .archive-long::-webkit-scrollbar{height:6px}
+  .archive-long::-webkit-scrollbar-thumb{background:var(--ink-faint);border-radius:3px}
+  .archive-long img{flex:none;height:420px;width:auto;max-width:none;display:block}
+  @media(max-width:880px){
+    .archive-long img{height:220px}
+  }
+  .archive-divider{height:1px;background:var(--ink)}
+
+  /* cute horizontal-scroll strip of illustrations */
+  #pStripWrap{background:#F1F1EF;border-radius:0;padding:1.6rem 1.6rem 1rem}
+  .proj-strip{display:flex;gap:1.1rem;overflow-x:auto;padding:.6rem .2rem 1.6rem;
+    flex:none;scroll-snap-type:x proximity;scrollbar-width:thin;
+    scrollbar-color:var(--ink-faint) transparent;margin-top:2rem}
+  .proj-strip::-webkit-scrollbar{height:6px}
+  .proj-strip::-webkit-scrollbar-thumb{background:var(--ink-faint);border-radius:3px}
+  .proj-strip img{flex:none;width:150px;height:150px;object-fit:contain;
+    border-radius:18px;padding:.9rem;scroll-snap-align:start;
+    transition:transform .3s var(--ease)}
+  .proj-strip img:hover{transform:translateY(-4px) rotate(-2deg)}
+  .proj-strip-logo{display:none;width:340px;height:auto;object-fit:contain;margin:2rem auto 0}
+  .proj-strip-logo.show{display:block}
+  .proj-big-stack{display:flex;flex-direction:column;gap:1.6rem;width:100%}
+  /* a main video/image on the left with a stack of side images to its right —
+     used to show something "next to" its supporting media */
+  .proj-feature-row{display:flex;gap:1rem;align-items:stretch;width:100%}
+  .proj-feature-main{flex:1 1 45%;min-width:0}
+  .proj-feature-main img,.proj-feature-main video{width:100%;height:100%;object-fit:contain}
+  .proj-feature-side{flex:1 1 55%;min-width:0;display:flex;flex-direction:column;gap:1rem}
+  .proj-feature-side .proj-img{flex:1;min-width:0}
+  .proj-feature-side .proj-img img,.proj-feature-side .proj-img video{width:100%;height:100%;object-fit:cover}
+  @media(max-width:880px){
+    .proj-feature-row{flex-direction:column}
+  }
+  .proj-bts-row{display:flex;gap:1rem;width:100%}
+  .proj-bts-row img{flex:1;width:0;min-width:0;aspect-ratio:1;object-fit:cover;border-radius:8px}
+  @media(max-width:880px){
+    .proj-bts-row{flex-direction:column}
+    .proj-bts-row img{width:100%;flex:none}
+  }
+  .proj-process{display:flex;flex-wrap:wrap;justify-content:space-between;row-gap:2.6rem;padding:1rem .5rem 2rem;width:100%}
+  .process-pair{display:flex;align-items:center;gap:1rem;flex:none;transition:transform .3s var(--ease)}
+  .process-pair:hover{transform:translateY(-4px) scale(1.03)}
+  .process-pair .ref-photo{width:120px;height:120px;flex:none;border-radius:14px;
+    object-fit:cover;background:rgba(65,88,167,.06)}
+  .process-pair .ref-arrow{flex:none;color:var(--ink-faint);font-size:1.3rem}
+  .process-pair .ref-illust{width:130px;height:130px;flex:none;object-fit:contain}
+  .process-pair:nth-child(1){transform:rotate(-5deg);margin-top:1.6rem}
+  .process-pair:nth-child(2){transform:rotate(4deg);margin-top:4.5rem;margin-left:1.5rem}
+  .process-pair:nth-child(3){transform:rotate(-3deg);margin-top:-1.5rem;margin-left:.5rem}
+  .process-pair:nth-child(4){transform:rotate(6deg);margin-top:3.2rem;margin-left:2.5rem}
+  .process-pair:nth-child(5){transform:rotate(-4deg);margin-top:.5rem}
+  .process-pair:nth-child(6){transform:rotate(3deg);margin-top:4rem;margin-left:1rem}
+  .process-pair:hover{transform:translateY(-6px) scale(1.06) rotate(0deg)}
+  @media(max-width:880px){
+    .proj-process{gap:1.6rem}
+    .process-pair{margin-top:0 !important;transform:none !important}
+  }
+  .proj-pitch-strip{display:flex;gap:1rem;overflow-x:auto;padding:.5rem .2rem 1.4rem;
+    flex:none;scroll-snap-type:x proximity;scrollbar-width:thin;
+    scrollbar-color:var(--ink-faint) transparent}
+  .proj-pitch-strip::-webkit-scrollbar{height:6px}
+  .proj-pitch-strip::-webkit-scrollbar-thumb{background:var(--ink-faint);border-radius:3px}
+  .proj-pitch-strip img{flex:none;width:220px;aspect-ratio:16/9;object-fit:cover;
+    border-radius:10px;scroll-snap-align:start;cursor:pointer;box-shadow:0 8px 20px rgba(40,40,45,.12);
+    transition:transform .3s var(--ease)}
+  .proj-pitch-strip img:hover{transform:translateY(-4px)}
+
+  .pitch-lightbox{position:fixed;inset:0;z-index:300;background:rgba(20,20,24,.92);
+    display:none;align-items:center;justify-content:center;flex-direction:column;gap:1rem}
+  .pitch-lightbox.open{display:flex}
+  .pitch-lightbox img{max-width:88vw;max-height:78vh;object-fit:contain;border-radius:6px}
+  .pitch-lightbox .pl-count{color:#eee;font-family:var(--body);font-size:.85rem;letter-spacing:.05em}
+  .pitch-lightbox .pl-close{position:absolute;top:1.6rem;right:2rem;color:#eee;font-size:1.6rem;
+    cursor:pointer;line-height:1;background:none;border:none;padding:.4rem}
+  .pitch-lightbox .pl-nav{position:absolute;top:50%;transform:translateY(-50%);
+    color:#eee;font-size:2rem;cursor:pointer;background:none;border:none;padding:.6rem 1rem;
+    user-select:none}
+  .pitch-lightbox .pl-prev{left:.5rem}
+  .pitch-lightbox .pl-next{right:.5rem}
+  @media(max-width:880px){
+    .proj-pitch-strip img{width:170px}
+    .pitch-lightbox .pl-nav{font-size:1.4rem;padding:.4rem .6rem}
+  }
+  .next{border-top:1px solid var(--ink);padding-top:1.6rem;cursor:pointer;
+    display:flex;flex-direction:column;gap:.3rem;transition:.3s;margin-top:auto;flex:none}
+  .next:hover{padding-left:.6rem}
+  .next .lbl{color:var(--ink-faint);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase}
+  .next .nm{font-family:var(--serif);font-weight:500;font-size:clamp(1rem,1.8vw,1.4rem);letter-spacing:-.02em}
+
+
+  /* magnetic titles — each letter gently lifts/scales as the cursor passes near it */
+  .magnetic-title .letter{display:inline-block;transform-origin:50% 100%;
+    transition:transform .25s cubic-bezier(.2,1,.3,1);will-change:transform}
+
+  /* tiny credit line pinned to the very top of the site */
+  .made-with{position:fixed;top:.7rem;left:50%;transform:translateX(-50%);z-index:1001;
+    font-family:var(--body);font-size:.68rem;letter-spacing:.04em;text-transform:uppercase;
+    color:rgba(255,255,255,.55);pointer-events:none;mix-blend-mode:difference}
+  /* small pink social links pinned top-right of the site */
+  .top-social{position:fixed;top:.9rem;right:1.6rem;z-index:1001;
+    display:flex;align-items:center;gap:.6rem}
+  .top-social a{display:flex;align-items:center;justify-content:center;color:#F2C6DA;
+    width:18px;height:18px;transition:opacity .2s var(--ease)}
+  .top-social a:hover{opacity:.65}
+  .top-social svg{width:100%;height:100%}
+  /* name mark pinned top-left, clicking it scrolls back to the hero */
+  .site-name{position:fixed;top:.9rem;left:1.6rem;z-index:1001;
+    font-family:var(--serif);font-style:italic;font-size:.95rem;color:#F2C6DA;
+    text-decoration:none;transition:opacity .2s var(--ease)}
+  .site-name:hover{opacity:.65}
+  @media(max-width:880px){
+    .top-social{top:.6rem;right:1rem;gap:.5rem}
+    .top-social a{width:15px;height:15px}
+    .site-name{top:.6rem;left:1rem;font-size:.82rem}
+    .made-with{font-size:.58rem;top:.5rem}
+    nav{top:1.2rem;right:1.4rem;font-size:.9rem}
+    nav .links{gap:.2rem}
+    .grid{grid-template-columns:1fr}
+    .card.wide,.card.sq{grid-column:1/-1;aspect-ratio:4/3}
+    #project .sec-inner{height:auto;overflow-y:auto}
+    .project-overlay{overflow-y:auto}
+    .proj-layout{grid-template-columns:1fr;grid-template-rows:auto;
+      grid-template-areas:"left" "right";gap:1.8rem;height:auto}
+    .proj-layout.archive-mode{grid-template-areas:"right" "next"}
+    .proj-right{height:auto;overflow-y:visible}
+    .proj-left-col{border-right:none;padding-right:0;border-bottom:1px solid var(--ink);padding-bottom:1.6rem;height:auto;overflow-y:visible}
+    .next{margin-top:0}
+    /* tall/portrait images (mobile-format screenshots etc.) shouldn't blow up past screen height */
+    .proj-img img,.proj-img video{width:auto;max-width:100%;max-height:65vh;margin:0 auto}
+    .proj-img.grad{min-height:180px}
+    #works .sec-inner,#project .sec-inner{padding-left:1.4rem;padding-right:1.4rem}
+  }
+</style>
+</head>
+<body data-section="home">
+
+  <!-- pink duotone filter for the tool-strip icons: converts to grayscale, then maps
+       shadows/highlights to two pink tones so the icon detail stays recognizable -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="tools-duotone-pink">
+      <feColorMatrix type="matrix"
+        values="0.33 0.33 0.33 0 0
+                0.33 0.33 0.33 0 0
+                0.33 0.33 0.33 0 0
+                0    0    0    1 0"/>
+      <feComponentTransfer>
+        <feFuncR type="table" tableValues="0.7608 0.9490"/>
+        <feFuncG type="table" tableValues="0.3020 0.7765"/>
+        <feFuncB type="table" tableValues="0.5098 0.8549"/>
+      </feComponentTransfer>
+    </filter>
+  </svg>
+
+  <div class="made-with">made with claude code</div>
+
+  <a href="#home" class="site-name" id="siteNameLink">Aviv Cohen</a>
+
+  <div class="top-social">
+    <a href="https://instagram.com/aviv_arts" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="5"/>
+        <circle cx="12" cy="12" r="4.2"/>
+        <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/>
+      </svg>
+    </a>
+    <a href="https://wa.me/972549482244" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.1-1.1L3.5 20.5l1.2-4.3a8.4 8.4 0 0 1-1.2-4.3c0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5z"/>
+        <path d="M8.5 8.8c.1-.5.6-.9 1.1-.9.2 0 .5 0 .7.1.2 0 .4.1.5.4l.7 1.7c.1.2 0 .5-.1.7l-.5.6c-.1.2-.1.4 0 .6.4.8 1.5 1.9 2.3 2.3.2.1.4.1.6 0l.6-.5c.2-.1.5-.2.7-.1l1.7.7c.2.1.4.3.4.5 0 .2.1.5.1.7 0 .5-.4 1-.9 1.1-.4.1-.9.2-1.5 0-1.3-.3-2.7-1.2-3.8-2.3-1.1-1.1-2-2.5-2.3-3.8-.2-.6-.1-1.1 0-1.5z"/>
+      </svg>
+    </a>
+    <a href="https://www.linkedin.com/in/aviv-cohen-753022332/" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="3"/>
+        <path d="M8 10.5v6" stroke-linecap="round"/>
+        <circle cx="8" cy="7.2" r="0.4" fill="currentColor" stroke="currentColor" stroke-width="1.2"/>
+        <path d="M12 16.5v-3.5c0-1.4 1-2.5 2.3-2.5s2.2 1 2.2 2.5v3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 10.5v6" stroke-linecap="round"/>
+      </svg>
+    </a>
+  </div>
+
+  <main>
+    <!-- HOME -->
+    <section class="section" id="home">
+      <div class="sec-bg"></div>
+
+      <div class="hero-collage" id="heroCollage">
+        <div class="trail-layer" id="trailLayer" aria-hidden="true"></div>
+        <div class="hero-collage-center">
+          <h1 class="hero-collage-title magnetic-title" id="heroTitle">Hi, I&rsquo;m <em>Aviv Cohen</em></h1>
+        </div>
+      </div>
+
+      <button class="scroll-hint" id="scrollHint" type="button" aria-label="Scroll down">
+        <span>Scroll</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+      </button>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="sec-bg"></div>
+      <div class="sec-inner about-inner">
+        <div class="about-grid">
+          <div class="about-photo-wrap">
+            <img class="about-photo" src="aviv-photo.jpg" alt="Aviv Cohen">
+          </div>
+          <div>
+            <div class="about-title magnetic-title">About</div>
+            <p class="about-text">A third-year Visual Communication student at Bezalel Academy. With a lifelong foundation in art and illustration, I&rsquo;ve developed a keen eye for visual language.</p>
+            <p class="about-text">Now channeling that creative background into Product Design, to transform passion into functional, impactful digital experiences.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="works-strip-wrap">
+        <div class="works-strip-track" id="worksStripTrack"></div>
+      </div>
+    </section>
+
+    <!-- FAVORITE WORKS — tall scroll track; the stack stays pinned and a new card
+         joins it for each bit of scroll progress through the section -->
+    <section class="section" id="favorites">
+      <div class="sec-bg"></div>
+      <div class="favorites-sticky">
+        <div class="favorites-inner">
+          <span class="favorites-kicker">A few I&rsquo;m proud of</span>
+          <div class="favorites-title magnetic-title">Favorite Works</div>
+          <div class="favorites-stack" id="favoritesStack"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORKS -->
+    <section class="section" id="works">
+      <div class="sec-bg"></div>
+      <div class="sec-inner">
+        <div class="works-title magnetic-title">All Works</div>
+        <div class="work-list" id="grid"></div>
+      </div>
+    </section>
+    <img class="work-preview" id="workPreview" alt="">
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="sec-bg"></div>
+      <div class="sec-inner contact-inner">
+        <span class="contact-kicker">Say hello</span>
+        <div class="contact-title magnetic-title">Let&rsquo;s talk</div>
+        <p class="contact-sub">Got a project in mind, or just want to say hi? Reach out through any of these.</p>
+        <div class="contact-icons">
+          <a href="https://instagram.com/aviv_arts" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="5"/>
+              <circle cx="12" cy="12" r="4.2"/>
+              <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+          <a href="mailto:avivcohn5467@gmail.com" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="5" width="18" height="14" rx="3"/>
+              <path d="M4 7l8 6 8-6"/>
+            </svg>
+          </a>
+          <a href="https://wa.me/972549482244" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.1-1.1L3.5 20.5l1.2-4.3a8.4 8.4 0 0 1-1.2-4.3c0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5z"/>
+              <path d="M8.5 8.8c.1-.5.6-.9 1.1-.9.2 0 .5 0 .7.1.2 0 .4.1.5.4l.7 1.7c.1.2 0 .5-.1.7l-.5.6c-.1.2-.1.4 0 .6.4.8 1.5 1.9 2.3 2.3.2.1.4.1.6 0l.6-.5c.2-.1.5-.2.7-.1l1.7.7c.2.1.4.3.4.5 0 .2.1.5.1.7 0 .5-.4 1-.9 1.1-.4.1-.9.2-1.5 0-1.3-.3-2.7-1.2-3.8-2.3-1.1-1.1-2-2.5-2.3-3.8-.2-.6-.1-1.1 0-1.5z"/>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/aviv-cohen-753022332/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="3"/>
+              <path d="M8 10.5v6" stroke-linecap="round"/>
+              <circle cx="8" cy="7.2" r="0.4" fill="currentColor" stroke="currentColor" stroke-width="1.2"/>
+              <path d="M12 16.5v-3.5c0-1.4 1-2.5 2.3-2.5s2.2 1 2.2 2.5v3.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 10.5v6" stroke-linecap="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- PROJECT OVERLAY -->
+  <div class="project-overlay" id="project">
+    <div class="sec-bg"></div>
+    <div class="sec-inner">
+      <span class="back" id="back">&larr; Back to works</span>
+      <div class="proj-layout" id="pLayout">
+        <div class="proj-left-col">
+          <div class="proj-left">
+            <div class="proj-head"><h1 id="pTitle"></h1><div class="cat-row"><div class="cat" id="pCat"></div><div class="proj-palette" id="pPalette"></div></div></div>
+            <div class="proj-desc" id="pDesc"></div>
+            <a class="site-link" id="pSiteLink" target="_blank" rel="noopener">View full site &rarr;</a>
+          </div>
+          <div class="proj-next-wrap">
+            <div class="next" id="next"><span class="lbl">Next project</span><span class="nm" id="pNext"></span></div>
+          </div>
+        </div>
+        <div class="proj-right">
+          <div class="proj-media" id="pHeroWrap"><div class="proj-caption" id="pHeroCap"></div><div class="proj-img" id="pHero"></div></div>
+          <div class="proj-media" id="pFeatureWrap"><div class="proj-caption" id="pFeatureCap"></div><div class="proj-feature-row" id="pFeatureRow"><div class="proj-img proj-feature-main" id="pFeatureMain"></div><div class="proj-feature-side" id="pFeatureSide"></div></div></div>
+          <div class="proj-caption" id="pRowCap"></div>
+          <div class="proj-row" id="pRow">
+            <div class="proj-media"><div class="proj-caption" id="pCap1"></div><div class="proj-img" id="pg1"></div></div>
+            <div class="proj-media"><div class="proj-caption" id="pCap2"></div><div class="proj-img" id="pg2"></div></div>
+            <div class="proj-media"><div class="proj-caption" id="pCap3"></div><div class="proj-img" id="pg3"></div></div>
+          </div>
+          <div class="proj-row" id="pRow2">
+            <div class="proj-media"><div class="proj-caption" id="pCap4"></div><div class="proj-img" id="pg4"></div></div>
+            <div class="proj-media"><div class="proj-caption" id="pCap5"></div><div class="proj-img" id="pg5"></div></div>
+            <div class="proj-media"><div class="proj-caption" id="pCap6"></div><div class="proj-img" id="pg6"></div></div>
+          </div>
+          <div class="proj-row" id="pRow3">
+            <div class="proj-media"><div class="proj-caption" id="pCap7"></div><div class="proj-img" id="pg7"></div></div>
+            <div class="proj-media"><div class="proj-caption" id="pCap8"></div><div class="proj-img" id="pg8"></div></div>
+            <div class="proj-media"><div class="proj-caption" id="pCap9"></div><div class="proj-img" id="pg9"></div></div>
+          </div>
+          <div class="proj-media" id="pBigWrap"><div class="proj-caption" id="pBigCap"></div><div class="proj-big-stack" id="pBigStack"></div></div>
+          <div class="proj-media" id="pStripWrap"><div class="proj-caption" id="pStripCap"></div><img class="proj-strip-logo" id="pStripLogo" alt=""><div class="proj-strip" id="pStrip"></div></div>
+          <div class="proj-media" id="pProcessWrap"><div class="proj-caption" id="pProcessCap"></div><div class="proj-bts-row" id="pBts"></div><div class="proj-process" id="pProcess"></div></div>
+          <div class="proj-media" id="pPitchWrap"><div class="proj-caption" id="pPitchCap"></div><div class="proj-pitch-strip" id="pPitchStrip"></div></div>
+          <div class="archive-grid" id="archiveGrid"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pitch-lightbox" id="pitchLightbox">
+    <button class="pl-close" id="plClose" aria-label="Close">&times;</button>
+    <button class="pl-nav pl-prev" id="plPrev" aria-label="Previous">&larr;</button>
+    <img id="plImg" alt="">
+    <button class="pl-nav pl-next" id="plNext" aria-label="Next">&rarr;</button>
+    <div class="pl-count" id="plCount"></div>
+  </div>
+
+<script>
+function thumb(p){
+  if(p.img) return `url('${p.img}') center/cover no-repeat`;
+  return `linear-gradient(${p.ang||135}deg, ${p.c1}, ${p.c2})`;
+}
+const body = document.body;
+let pitchSlides = [];
+let pitchIdx = 0;
+const pitchLightboxEl = document.getElementById('pitchLightbox');
+const plImgEl = document.getElementById('plImg');
+const plCountEl = document.getElementById('plCount');
+function openPitchLightbox(i){
+  pitchIdx = i;
+  renderPitchLightbox();
+  pitchLightboxEl.classList.add('open');
+}
+function renderPitchLightbox(){
+  if(!pitchSlides.length) return;
+  plImgEl.src = pitchSlides[pitchIdx];
+  plCountEl.textContent = (pitchIdx+1) + ' / ' + pitchSlides.length;
+}
+function closePitchLightbox(){ pitchLightboxEl.classList.remove('open'); }
+document.getElementById('plClose').addEventListener('click', closePitchLightbox);
+document.getElementById('plPrev').addEventListener('click', ()=>{
+  pitchIdx = (pitchIdx - 1 + pitchSlides.length) % pitchSlides.length;
+  renderPitchLightbox();
+});
+document.getElementById('plNext').addEventListener('click', ()=>{
+  pitchIdx = (pitchIdx + 1) % pitchSlides.length;
+  renderPitchLightbox();
+});
+pitchLightboxEl.addEventListener('click', (e)=>{
+  if(e.target === pitchLightboxEl) closePitchLightbox();
+});
+document.addEventListener('keydown', (e)=>{
+  if(!pitchLightboxEl.classList.contains('open')) return;
+  if(e.key === 'Escape') closePitchLightbox();
+  if(e.key === 'ArrowRight') document.getElementById('plNext').click();
+  if(e.key === 'ArrowLeft') document.getElementById('plPrev').click();
+});
+document.querySelectorAll('nav a[data-go], [data-go].hero-collage-cta').forEach(a=>{
+  a.addEventListener('click',()=>{
+    const el = document.getElementById(a.dataset.go);
+    if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+});
+const siteNameLink = document.getElementById('siteNameLink');
+if(siteNameLink){
+  siteNameLink.addEventListener('click', (e)=>{
+    e.preventDefault();
+    document.getElementById('home').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+}
+const scrollHintBtn = document.getElementById('scrollHint');
+if(scrollHintBtn){
+  scrollHintBtn.addEventListener('click', ()=>{
+    document.getElementById('about').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+}
+const obs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id = e.target.id;
+      body.dataset.section = id;
+      document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+      const link = document.querySelector(`nav a[data-go="${id}"]`);
+      if(link) link.classList.add('active');
+    }
+  });
+},{rootMargin:'-45% 0px -45% 0px', threshold:0});
+['home','about','works','contact'].forEach(id=>obs.observe(document.getElementById(id)));
+
+function setCaption(id, text){
+  const el = document.getElementById(id);
+  if(!el) return;
+  if(text){
+    el.textContent = text;
+    el.classList.add('show');
+  } else {
+    el.textContent = '';
+    el.classList.remove('show');
+  }
+}
+
+function setProjImg(el, src, gradient, alt, compact, cropScale){
+  if(src){
+    el.classList.remove('grad');
+    el.style.background = 'none';
+    const compactStyle = compact ? ' style="max-height:72vh;width:auto;margin:0 auto"' : '';
+    if(/\.(mp4|mov|webm)$/i.test(src)){
+      if(compact){
+        // cropScale zooms the video in and relies on the wrapper's overflow:hidden to clip
+        // the edges evenly on all sides — used to crop out stray elements peeking in at the sides
+        const cropStyle = cropScale ? ` style="transform:scale(${cropScale})"` : '';
+        el.innerHTML = `<div class="compact-video-wrap"><video src="${src}" autoplay muted loop playsinline${cropStyle}></video></div>`;
+      } else {
+        el.innerHTML = `<video src="${src}" autoplay muted loop playsinline></video>`;
+      }
+    } else {
+      el.innerHTML = `<img src="${src}" alt="${alt}"${compactStyle}>`;
+    }
+  } else {
+    el.classList.add('grad');
+    el.innerHTML = '';
+    el.style.background = gradient;
+  }
+}
+
+const colorTip = document.createElement('div');
+colorTip.className = 'color-tip';
+document.body.appendChild(colorTip);
+document.addEventListener('mouseover', e=>{
+  const sw = e.target.closest('.proj-palette span');
+  if(!sw) return;
+  colorTip.textContent = sw.dataset.color;
+  const r = sw.getBoundingClientRect();
+  colorTip.style.left = (r.left + r.width/2) + 'px';
+  colorTip.style.top = (r.top - 8) + 'px';
+  colorTip.style.transform = 'translate(-50%,-100%)';
+  colorTip.classList.add('show');
+});
+document.addEventListener('mouseout', e=>{
+  const sw = e.target.closest('.proj-palette span');
+  if(!sw) return;
+  colorTip.classList.remove('show');
+});
+
+const overlay = document.getElementById('project');
+let activeList = null;
+function openProject(id, list){
+  list = list || activeList;
+  activeList = list;
+  const p = list[id];
+  const nextId = (id+1)%list.length;
+  const next = list[nextId];
+  document.getElementById('project').style.background = p.pageBg || '';
+  // project pages are white/light by default, so titles/captions default to the dark-accent
+  // text color — a project can set pageDark:true (with a dark pageBg) to flip that to light text
+  document.getElementById('project').classList.toggle('proj-dark-accent', !p.pageDark);
+  document.getElementById('project').classList.toggle('proj-light-accent', !!p.pageDark);
+  const pCatEl = document.getElementById('pCat');
+  pCatEl.innerHTML = '';
+  p.cat.split(/\s*[∙·]\s*|\s+\/\s+/).map(t=>t.trim()).filter(Boolean).forEach(t=>{
+    const tag = document.createElement('span');
+    tag.className = 'cat-tag';
+    tag.textContent = t;
+    pCatEl.appendChild(tag);
+  });
+  document.getElementById('pTitle').textContent = p.title;
+  document.getElementById('pPalette').innerHTML = [p.c1,p.c2,p.c3,p.c4,p.c5,p.c6,p.c7].filter(Boolean)
+    .map(c=>`<span style="background:${c}" data-color="${c}"></span>`).join('');
+  document.getElementById('pDesc').innerHTML = `<p class="lead">${p.lead}</p>` + p.body.map(t=>`<p>${t}</p>`).join('')
+    + (p.client ? `<p><strong>${p.client}</strong> &middot; ${p.role} &middot; ${p.year} &middot; ${p.tools}</p>` : '');
+  const siteLinkEl = document.getElementById('pSiteLink');
+  if(p.siteLink){
+    siteLinkEl.href = p.siteLink;
+    siteLinkEl.style.display = 'inline-flex';
+  } else {
+    siteLinkEl.style.display = 'none';
+  }
+  const archiveGridEl = document.getElementById('archiveGrid');
+  document.getElementById('pLayout').classList.toggle('archive-mode', !!p.isArchive);
+  if(p.isArchive){
+    archiveGridEl.style.display = 'flex';
+    archiveGridEl.innerHTML = '<div class="archive-divider"></div>' + (p.archiveImages||[]).map(group=>
+      group.longScroll
+      ? `<div class="archive-block"><div class="archive-group-title">${group.title||''}</div>
+         <div class="archive-long">${group.images.map(src=>`<img src="${src}" alt="${group.title||p.title}">`).join('')}</div></div>`
+      : `<div class="archive-block"><div class="archive-group-title">${group.title||''}</div>
+         <div class="archive-group">${group.images.map(src=>`<img src="${src}" alt="${group.title||p.title}">`).join('')}</div></div>`
+    ).join('<div class="archive-divider"></div>');
+    document.getElementById('pHero').style.display = 'none';
+    document.getElementById('pRow').style.display = 'none';
+    document.getElementById('pRow2').style.display = 'none';
+    document.getElementById('pRow3').style.display = 'none';
+    document.getElementById('pStrip').style.display = 'none';
+  } else {
+    archiveGridEl.style.display = 'none';
+    document.getElementById('pHero').style.display = '';
+    document.getElementById('pRow').style.display = '';
+  }
+  const heroEl = document.getElementById('pHero');
+  if(p.isArchive){
+    // skip normal hero/media rendering entirely for archive projects
+  } else if(p.heroVideo){
+    heroEl.classList.remove('grad');
+    heroEl.style.background = 'none';
+    const heroVideoStyle = p.heroVideoCompact ? ' style="max-height:72vh;width:auto;margin:0 auto"' : '';
+    heroEl.innerHTML = `<video src="${p.heroVideo}" poster="${p.heroVideoPoster||p.img||''}" autoplay muted loop playsinline${heroVideoStyle}></video>`;
+  } else if(p.video){
+    heroEl.classList.remove('grad');
+    heroEl.style.background = 'none';
+    heroEl.innerHTML = `<video src="${p.video}" poster="${p.img||''}" autoplay muted loop playsinline></video>`;
+  } else if(p.heroImg){
+    heroEl.classList.remove('grad');
+    heroEl.style.background = 'none';
+    const heroImgStyle = p.heroImgWidth ? ` style="width:${p.heroImgWidth};margin:0 auto"` : '';
+    heroEl.innerHTML = `<img src="${p.heroImg}" alt="${p.title}"${heroImgStyle}>`;
+  } else {
+    setProjImg(heroEl, p.img, thumb(p), p.title);
+  }
+  setCaption('pHeroCap', p.heroCaption);
+  document.getElementById('pFeatureWrap').style.display = p.featureMain ? '' : 'none';
+  setProjImg(document.getElementById('pFeatureMain'), p.featureMain, `linear-gradient(${p.ang}deg, ${p.c1}, ${p.c2})`, p.title, p.featureMainCompact);
+  document.getElementById('pFeatureSide').innerHTML = (p.featureSide || []).map(src =>
+    /\.(mp4|mov|webm)$/i.test(src)
+      ? `<div class="proj-img"><video src="${src}" autoplay muted loop playsinline></video></div>`
+      : `<div class="proj-img"><img src="${src}" alt="${p.title}"></div>`
+  ).join('');
+  setCaption('pFeatureCap', p.featureMain ? p.featureCaption : '');
+  setCaption('pRowCap', p.rowCaption);
+  setProjImg(document.getElementById('pg1'), p.img1, `linear-gradient(${(p.ang+40)}deg, ${p.c2}, ${p.c1})`, p.title, p.img1Compact, p.img1CompactCrop);
+  setProjImg(document.getElementById('pg2'), p.img2, `linear-gradient(${p.ang}deg, ${p.c1}, ${p.c2})`, p.title, p.img2Compact);
+  setProjImg(document.getElementById('pg3'), p.img3, `radial-gradient(circle at 40% 30%, ${p.c2}, ${p.c1})`, p.title, p.img3Compact);
+  document.getElementById('pg3').closest('.proj-media').style.display = (p.img3 || !p.imgPair) ? '' : 'none';
+  setCaption('pCap1', p.img1Caption); setCaption('pCap2', p.img2Caption); setCaption('pCap3', p.img3Caption);
+  const pRow2El = document.getElementById('pRow2');
+  const pg6El = document.getElementById('pg6');
+  if(p.img4 || p.img5 || p.img6){
+    pRow2El.style.display = 'flex';
+    setProjImg(document.getElementById('pg4'), p.img4, `linear-gradient(${(p.ang+40)}deg, ${p.c2}, ${p.c1})`, p.title, p.img4Compact);
+    setProjImg(document.getElementById('pg5'), p.img5, `linear-gradient(${p.ang}deg, ${p.c1}, ${p.c2})`, p.title, p.img5Compact);
+    if(p.img6){
+      pg6El.style.display = '';
+      setProjImg(pg6El, p.img6, `radial-gradient(circle at 40% 30%, ${p.c2}, ${p.c1})`, p.title, p.img6Compact);
+    } else {
+      pg6El.style.display = 'none';
+    }
+    pRow2El.classList.add('row-mode');
+    setCaption('pCap4', p.img4Caption); setCaption('pCap5', p.img5Caption); setCaption('pCap6', p.img6Caption);
+  } else {
+    pRow2El.style.display = 'none';
+  }
+  const pRow3El = document.getElementById('pRow3');
+  const pg9El = document.getElementById('pg9');
+  if(p.img7 || p.img8 || p.img9){
+    pRow3El.style.display = 'flex';
+    setProjImg(document.getElementById('pg7'), p.img7, `linear-gradient(${(p.ang+40)}deg, ${p.c2}, ${p.c1})`, p.title, p.img7Compact);
+    setProjImg(document.getElementById('pg8'), p.img8, `linear-gradient(${p.ang}deg, ${p.c1}, ${p.c2})`, p.title, p.img8Compact);
+    if(p.img9){
+      pg9El.style.display = '';
+      setProjImg(pg9El, p.img9, `radial-gradient(circle at 40% 30%, ${p.c2}, ${p.c1})`, p.title, p.img9Compact);
+    } else {
+      pg9El.style.display = 'none';
+    }
+    pRow3El.classList.add('row-mode');
+    setCaption('pCap7', p.img7Caption); setCaption('pCap8', p.img8Caption); setCaption('pCap9', p.img9Caption);
+  } else {
+    pRow3El.style.display = 'none';
+  }
+  const pRowEl = document.getElementById('pRow');
+  // always restore pg4-9 to their original row containers first, in case a previous
+  // masonry project folded them into pRow — otherwise non-masonry projects would
+  // inherit a scrambled layout
+  [document.getElementById('pg4'), document.getElementById('pg5'), pg6El].forEach(el=>{
+    const media = el.closest('.proj-media');
+    if(media && media.parentElement !== pRow2El) pRow2El.appendChild(media);
+  });
+  [document.getElementById('pg7'), document.getElementById('pg8'), pg9El].forEach(el=>{
+    const media = el.closest('.proj-media');
+    if(media && media.parentElement !== pRow3El) pRow3El.appendChild(media);
+  });
+  if(p.masonryGrid){
+    // masonry projects show all tiles (img1..img9) as ONE continuous grid instead of
+    // three separate row-of-three blocks — fold pRow2/pRow3's tiles into pRow itself
+    [...pRow2El.querySelectorAll('.proj-media')].forEach(el=>{
+      if(el.style.display !== 'none') pRowEl.appendChild(el);
+    });
+    [...pRow3El.querySelectorAll('.proj-media')].forEach(el=>{
+      if(el.style.display !== 'none') pRowEl.appendChild(el);
+    });
+    pRow2El.style.display = 'none';
+    pRow3El.style.display = 'none';
+  }
+  document.getElementById('pRow').classList.toggle('row-mode', !!p.imgRow);
+  document.getElementById('pRow').classList.toggle('pair-mode', !!p.imgPair);
+  const bigImgs = p.bigImg ? (Array.isArray(p.bigImg) ? p.bigImg : [p.bigImg]) : [];
+  document.getElementById('pBigWrap').style.display = bigImgs.length ? '' : 'none';
+  document.getElementById('pBigStack').innerHTML = bigImgs.map(src =>
+    /\.(mp4|mov|webm)$/i.test(src)
+      ? `<div class="proj-img"><video src="${src}" autoplay muted loop playsinline></video></div>`
+      : `<div class="proj-img"><img src="${src}" alt="${p.title}"></div>`
+  ).join('');
+  setCaption('pBigCap', bigImgs.length ? p.bigImgCaption : '');
+  const stripEl = document.getElementById('pStrip');
+  document.getElementById('pStripWrap').style.display = p.strip ? '' : 'none';
+  stripEl.style.display = p.strip ? 'flex' : 'none';
+  stripEl.innerHTML = p.strip ? p.strip.map(src=>`<img src="${src}" alt="${p.title}">`).join('') : '';
+  setCaption('pStripCap', p.strip ? p.stripCaption : '');
+  const stripLogoEl = document.getElementById('pStripLogo');
+  if(p.strip && p.stripLogo){
+    stripLogoEl.src = p.stripLogo;
+    stripLogoEl.classList.add('show');
+  } else {
+    stripLogoEl.removeAttribute('src');
+    stripLogoEl.classList.remove('show');
+  }
+  const btsEl = document.getElementById('pBts');
+  btsEl.innerHTML = p.btsImages ? p.btsImages.map(src=>`<img src="${src}" alt="${p.title}">`).join('') : '';
+  const processEl = document.getElementById('pProcess');
+  document.getElementById('pProcessWrap').style.display = p.processPairs ? '' : 'none';
+  processEl.innerHTML = p.processPairs ? p.processPairs.map(pair=>
+    `<div class="process-pair"><img class="ref-photo" src="${pair.photo}" alt="reference"><span class="ref-arrow">&rarr;</span><img class="ref-illust" src="${pair.illust}" alt="illustration"></div>`
+  ).join('') : '';
+  setCaption('pProcessCap', p.processPairs ? p.processCaption : '');
+  const pitchStripEl = document.getElementById('pPitchStrip');
+  document.getElementById('pPitchWrap').style.display = p.pitchSlides ? '' : 'none';
+  pitchSlides = p.pitchSlides || [];
+  pitchStripEl.innerHTML = pitchSlides.map((src,i)=>
+    `<img src="${src}" alt="${p.title} pitch slide ${i+1}" data-idx="${i}">`
+  ).join('');
+  pitchStripEl.querySelectorAll('img').forEach(img=>{
+    img.addEventListener('click', ()=> openPitchLightbox(+img.dataset.idx));
+  });
+  setCaption('pPitchCap', p.pitchSlides ? (p.pitchCaption||'Pitch') : '');
+  document.getElementById('pNext').textContent = next.title;
+  document.getElementById('next').onclick = ()=>{openProject(nextId, list);};
+  overlay.classList.add('open');
+  overlay.querySelector('.proj-right')?.scrollTo({top:0});
+  overlay.querySelector('.proj-left-col')?.scrollTo({top:0});
+  body.classList.add('project-open');
+  body.style.overflow='hidden';
+  if(p.title === 'Maskit.code' || p.title === 'GRUNGE' || p.title === 'rootea'){
+    body.dataset.theme = 'dark';
+  } else {
+    delete body.dataset.theme;
+  }
+  if(p.squareGrid){
+    body.dataset.projectGrid = 'square';
+  } else if(p.masonryGrid){
+    body.dataset.projectGrid = 'masonry';
+  } else {
+    delete body.dataset.projectGrid;
+  }
+  if(p.mobileCompactImages){
+    body.dataset.mobileCompactImages = 'true';
+  } else {
+    delete body.dataset.mobileCompactImages;
+  }
+}
+document.getElementById('back').addEventListener('click',()=>{
+  overlay.classList.remove('open');
+  overlay.classList.add('closing');
+  overlay.addEventListener('animationend', ()=>overlay.classList.remove('closing'), {once:true});
+  delete body.dataset.theme;
+  body.classList.remove('project-open');
+  body.style.overflow='';
+});
+
+/* ---------- MY WORKS PAGE (separate page, grid of 10) ---------- */
+const ALLWORKS = [
+  {title:'Prism', cat:'UI / UX', year:'2024', client:'Prism', role:'Product Design', tools:'Figma, Framer', c1:'#FF1907', c2:'#000EA7', c3:'#671590', c4:'#000000', c5:'#ffffff', ang:160, img:'prism.jpg', heroVideo:'prism-flow.mp4', heroVideoPoster:'prism-flow-poster.jpg', heroCaption:'Create vision Sketch',
+   img1:'prism-flow-copy.mp4', img1Caption:'Patch the Canvas', img2:'prism-flow-2.mp4', img2Caption:'Your DROP visual is ready', img3:'prism-promo.mp4', img3Caption:'Prism, out in the world',
+   lead:'A tool for creating visual identity for music — a prototype built as a UI/UX studio project at Bezalel in partnership with Lightricks.',
+   body:['The idea: to let independent artists, with no budget, studio, or designer, turn a song into a moving visual — a vertical Spotify Canvas (9:16) that plays beneath the track, along with visuals for social media and live performances.','The conceptual core is “Album DNA”: each album gets a single, unified generative visual identity, and every song inherits its own variation from it — so all the tracks feel like one family without being identical. Living covers for every track.','The user experience is built around the metaphor of a modular synthesizer / patch cables: the user “connects cables” between different inputs — image, color, texture, mood, lyrics — into a canvas, and everything feeds into the visual.','Technically, it’s a single-file HTML application, with all media embedded as base64 and an iframe-based screen architecture.']},
+  {title:'Kodo', cat:'Visual Identity \u2219 UI/UX', year:'2026', client:'KODO', role:'Brand Identity, Packaging', tools:'Figma, Illustrator', c1:'#afd3e4', c2:'#6297d8', c3:'#f09035', c4:'#e4542d', c5:'#4da34e', c6:'#ee7cb1', c7:'#f0ebe0', ang:130, img:'kodo.jpg', heroVideo:'kodo-desktop-flow.mp4', heroVideoPoster:'kodo-desktop-flow-poster.jpg', heroCaption:'The desktop building interface', img1:'kodo-flow-cropped.mp4', img1Compact:true, img1Caption:'The mobile onboarding flow', img2:'kodo.jpg', img2Caption:'The full Cyber Deck Creative Kit', img3:'kodo-hero.jpg',
+   strip:['kodo-icon-led.png','kodo-icon-network.png','kodo-icon-screen.png','kodo-icon-button.png','kodo-icon-pi1.png','kodo-icon-pi2.png','kodo-icon-wires.png'], stripCaption:'Branding', stripLogo:'kodo-group-57.png',
+   processCaption:'Behind the scenes - the process',
+   btsImages:['kodo-prototype-1.jpg','kodo-prototype-2.jpg','kodo-prototype-3.jpg'],
+   processPairs:[
+     {photo:'kodo-ref-1.jpg', illust:'kodo-group-43.png'},
+     {photo:'kodo-ref-2.jpg', illust:'kodo-group-44.png'},
+     {photo:'kodo-ref-3.jpg', illust:'kodo-group-45.png'},
+     {photo:'kodo-ref-4.jpg', illust:'kodo-group-46.png'},
+     {photo:'kodo-ref-5.jpg', illust:'kodo-group-47.png'},
+     {photo:'kodo-ref-6.jpg', illust:'kodo-group-48.png'}
+   ],
+   pitchCaption:'Pitch',
+   pitchSlides:['pitch-1.jpg','pitch-2.jpg','pitch-3.jpg','pitch-4.jpg','pitch-5.jpg','pitch-6.jpg','pitch-7.jpg','pitch-8.jpg','pitch-9.jpg','pitch-10.jpg','pitch-11.jpg','pitch-12.jpg','pitch-13.jpg','pitch-14.jpg','pitch-15.jpg','pitch-16.jpg','pitch-17.jpg','pitch-18.jpg','pitch-19.jpg','pitch-20.jpg','pitch-21.jpg'],
+   lead:'Meet KODO! Where Montessori principles meet the vibecoding and cyber decks of today. Instead of raising more iPad kids, we believe the next generation will be one of creators and visionaries: with the right tools, of course.',
+   body:['With KODO, kids set up their own cyber decks and build their own games to play on them, returning a sense of agency and ownership over tech that we haven\u2019t had since the days of retro arcades.','Our vision is for classrooms to be full of students swapping decks and comparing games so screens don\u2019t keep isolating us, but rather bring back creativity and community.']},
+  {title:'Milon Hai', cat:'Visual Identity \u2219 UI/UX', year:'2026', client:'Milon Hai', role:'Pattern Design, Merch', tools:'Illustrator, Photoshop', c1:'#ED0560', c2:'#FFDB5A', c3:'#2A52BE', c4:'#005F10', c5:'#F9C4D3', c6:'#EE4C01', ang:135, img:'milon-hai.jpg', heroVideo:'milon-hai-flow.mp4', heroVideoPoster:'milon-hai-flow-poster.jpg', heroVideoCompact:true, img1:'milon-hai.jpg', img2:'milon-hai-landing-flow-v2.mp4', img2Compact:true,
+   lead:'Milon Hai\u2019 is a concept app developed around a gap we identified among new immigrants in Israel: the lack of tools that teach the actual cultural context of local slang.',
+   body:['The result is an app that serves as a social and experiential platform, allowing users to \u2018collect\u2019 the Israeli street \u2014 from coffee shop slang to workplace expressions.','It goes beyond literal translations (\u2018what does it mean?\u2019), providing the full cultural context: tone, humor, and the situations in which each word is appropriately used.']},
+  {title:'Maskit.code', cat:'Speculative Branding', year:'2024', client:'Maskit.code', role:'Brand Identity, Web Design', tools:'Figma, Illustrator', c1:'#ffffff', c2:'#1c1c1c', ang:140, pageBg:'#1D4A36', pageDark:true, siteLink:'maskit-site-final.html',
+   img:'maskit-cotton.jpg', heroVideo:'maskit-code-flow.mp4',
+   featureMain:'maskit-code-brandbook.mp4', featureMainCompact:true,
+   featureSide:['maskit-brandbook-1.png','maskit-brandbook-2.png','maskit-brandbook-3.png'],
+   featureCaption:'The brand book',
+   img1:'maskit-code-detail.mp4', img1Compact:true, img2:'maskit-poster-1.jpg', img3:'maskit-poster-2.jpg',
+   img4:'maskit-poster-3.jpg', img5:'maskit-farm.mp4', img5Compact:true,
+   lead:'The project presents a speculative future scenario in which tangibility has completely vanished, and the world exists exclusively within a digital realm.',
+   body:['In this reality, the historic brand “Maskit” undergoes a transformation, serving as a marketplace for virtual assets. The historical garments no longer exist in physical form; instead, they are sold as incredibly detailed text prompts.','Through words and code, Maskit preserves the haute couture, luxury, and exclusivity that characterized the original brand.','Within the void of the virtual world, the “New Maskit” yearns for and echoes materiality. It seeks a way back to the physical world, doing so by integrating visual and conceptual elements from the realms of print, craft, and manual making, acting as a bridge that connects the digital with the human.']},
+  {title:'Digital Nomads', cat:'Digital Illustration', year:'2026', client:'Editorial', role:'Illustration', tools:'Procreate, Illustrator', c1:'#e5ebfd', c2:'#6386f7', c3:'#3d5499', c4:'#ee9d81', c5:'#c96470', ang:120, mobileCompactImages:true, img:'digital-nomads.jpg', heroImg:'digital-nomads-hero.png', heroImgWidth:'85%',
+   img1:'digital-nomads-shot-1.png', img2:'digital-nomads-shot-2.png', img3:'digital-nomads-shot-3.png', imgRow:true,
+   img4:'digital-nomads-shot-4.png', img5:'digital-nomads-shot-5.png', img6:'digital-nomads-shot-6.png',
+   strip:['digital-nomads-strip-1.png','digital-nomads-strip-2.png','digital-nomads-strip-3.png','digital-nomads-strip-4.png','digital-nomads-strip-5.png','digital-nomads-strip-6.png','digital-nomads-strip-7.png'],
+   lead:'This project features a series of illustrations created for an app designed for the digital nomad community. The remote work lifestyle brings freedom, but also a daily struggle with uncertainty: finding the fastest Wi-Fi, an available power outlet, and a quiet environment.',
+   body:['The goal of these illustrations was to create a visual language that conveys reliability, a sense of community, and efficiency. The illustrations guide the user throughout their experience — from the onboarding screens to the Explore section, which allows them to discover new workspaces by category — making the interface inviting and intuitive.','Through its illustrative style, the project demonstrates how the app transforms the frustrating task of finding a workspace into a simple, effortless, and community-driven experience.']},
+  {title:'VOUCH', cat:'UI/UX · App Design · Digital Product', year:'2026', client:'Vouch', role:'Product Design', tools:'Figma', c1:'#93a7d7', c2:'#df5958', c3:'#e2aa91', c4:'#e7ccae', c5:'#d2a59c', ang:150, img:'vouch.jpg',
+   lead:'Vouch is a UX/UI design concept for a social habit-building app, developed during an intensive one-week design sprint at UX studio at Bezalel to explore how shared accountability can overcome the limitations of individual discipline.',
+   body:['By linking the progress of two partners through a “shared streak” mechanism, the app transforms habit-tracking into a social commitment, featuring a unique “Forgiveness Loop” for missed days and a peer-rating system to foster reliability.','Through user research, rapid wireframing, and a vibrant, emotional interface, Vouch merges psychological insights with intuitive interaction design, turning mundane daily routines into a meaningful and supportive social ritual.']},
+  {title:'Netflix Dating', cat:'Illustration / Editorial', year:'2025', client:'Netflix', role:'Illustration', tools:'Procreate, Illustrator', c1:'#e13426', c2:'#220c0b', c3:'#f7eedc', c4:'#f3d1c3', c5:'#e8867b', ang:135, img:'netflix-dating.jpg', heroImg:'netflix-dating-hero.png',
+   img1:'netflix-dating-shot-1.png', img2:'netflix-dating-shot-2.png', img3:'netflix-dating-shot-3.png', imgRow:true,
+   img4:'netflix-dating-shot-4.png', img5:'netflix-dating-shot-5.png', img6:'netflix-dating-shot-6.png',
+   img7:'netflix-dating-shot-7.png', img8:'netflix-dating-shot-8.png', img9:'netflix-dating-shot-9.png',
+   lead:'The concept was born from the desire to take “Netflix and Chill” and turn it into a meaningful dating experience. Based on the idea that our favorite movies and series tell our story better than any bio, the app uses Netflix’s famous algorithm to find matches based on shared taste.',
+   body:['To capture the romantic, nostalgic essence of classic cinema, I developed a unique illustrative language for the interface. By adapting iconic movie scenes and featuring them with contemporary, diverse characters, the illustrations bridge the gap between silver-screen magic and modern-day connection.']},
+  {title:'rootea', cat:'Branding / Packaging', year:'2024', client:'rootea', role:'Brand Identity, Packaging', tools:'Illustrator, Photography', c1:'#605a5b', c2:'#a68d86', c3:'#dcd9d6', c4:'#7c5952', c5:'#5d6048', ang:125, pageBg:'#1D4A36', pageDark:true, masonryGrid:true, rowCaption:'Images from the submission', img:'rootea-detail.jpg', heroImg:'rootea-detail.jpg', heroImgWidth:'92%', img1:'rootea.jpg',
+   img2:'rootea-photo-1.jpg', img3:'rootea-photo-2.jpg',
+   img4:'rootea-photo-3.jpg', img5:'rootea-tea-bag.jpg', img6:'rootea-photo-4.jpg',
+   bigImg:['rootea-bts-frame.png', 'rootea-bts-layout.png'], bigImgCaption:'Behind the scenes — building the brand',
+   lead:'‘rootea’ is a new medicinal mushroom tea brand. It aims to provide an alternative approach to managing mental health struggles, offering a departure from the traditional medication experience.',
+   body:['The visual identity draws inspiration from the organic forms, unique shapes, and delicate color palettes of the medicinal mushrooms themselves.']},
+  {title:'GRUNGE', cat:'Editorial / Zine', year:'2025', client:'Grunge Zine', role:'Editorial Design, Art Direction', tools:'InDesign, Illustrator', c1:'#f83500', c2:'#f6e011', c3:'#ec0b4b', c4:'#5bcc18', c5:'#1a0f0a', ang:150, img:'grunge.jpg', heroVideo:'grunge-hero.mp4', img1:'grunge.jpg', img2:'grunge-bd-2.jpg', imgPair:true,
+   lead:'Booklet, poster, and website design centered around the ‘Grunge’ Wikipedia entry, utilizing typography to create a layered reading experience.',
+   body:['The project integrates the encyclopedic definitions with imagery from the grunge scene, employing a distinct grunge aesthetic.','The poster and website extend this typographic language, serving as an invitation to the booklet’s launch event.']},
+  {title:'Archive', cat:'Miscellaneous', year:'', client:'', role:'', tools:'', c1:'#8a8a92', c2:'#c9c2b0', ang:120, isArchive:true,
+   archiveImages:[
+     {title:'Untitled 01', images:['archive-1.jpg','archive-2.jpg','archive-3.jpg','archive-13.jpg']},
+     {title:'Untitled 02', images:['archive-4.jpg','archive-5.jpg','archive-6.jpg','archive-24.jpg','archive-25.jpg','archive-23.jpg']},
+     {title:'Untitled 03', longScroll:true, images:['archive-14.jpg']},
+     {title:'Untitled 04', images:['archive-15.jpg','archive-16.jpg','archive-17.jpg','archive-18.jpg','archive-19.jpg','archive-20.jpg','archive-21.jpg','archive-22.jpg']}
+   ],
+   lead:'A loose collection of smaller pieces and one-offs that didn’t need a page of their own.',
+   body:[]},
+];
+
+/* ---------- fix: <video> with height:auto can keep a stale/default aspect ratio
+   in some browsers, leaving a gap at the bottom that shows the page background
+   through instead of the video content. Lock the box to the real ratio once it's known. ---------- */
+document.getElementById('project').addEventListener('loadedmetadata', (e)=>{
+  const v = e.target;
+  if(v.tagName === 'VIDEO' && v.videoWidth && v.videoHeight){
+    v.style.aspectRatio = v.videoWidth + ' / ' + v.videoHeight;
+  }
+}, true);
+
+/* ---------- favorite works: a fanned stack of cards, empty at first, that build in
+   one by one as the section scrolls into view, and can then be browsed by clicking ---------- */
+const favoritesStack = document.getElementById('favoritesStack');
+if(favoritesStack){
+  const FAVORITE_TITLES = ['Milon Hai', 'Maskit.code', 'Prism', 'Kodo'];
+  const favorites = FAVORITE_TITLES.map(t => ALLWORKS.find(p => p.title === t)).filter(Boolean);
+
+  favorites.forEach((p)=>{
+    const card = document.createElement('div');
+    card.className = 'fav-card';
+    card.style.background = thumb(p);
+    const label = document.createElement('span');
+    label.className = 'fav-label';
+    label.textContent = p.title;
+    card.appendChild(label);
+    favoritesStack.appendChild(card);
+  });
+
+  // wildishandco.co.uk-style card deck: each new card lands upright and front-and-center,
+  // and every card already shown recedes one notch further into a fan behind it —
+  // driven entirely by scroll position through the (tall, pinned) section.
+  // once a card is revealed it's also clickable: tap a card in the back to bring it to
+  // the front, tap the front card to open that project — a simple, tactile way to browse.
+  const favCards = [...favoritesStack.querySelectorAll('.fav-card')];
+  const favSection = document.getElementById('favorites');
+  let favShown = 0;
+  let favTicking = false;
+  let order = []; // front-to-back list of card indices currently revealed
+
+  function bringToFront(idx){
+    order = order.filter(x => x !== idx);
+    order.unshift(idx);
+  }
+
+  function layoutFavorites(){
+    favCards.forEach(card=>{ card.classList.remove('in'); card.style.transform = ''; card.style.zIndex = ''; });
+    order.forEach((idx, k)=>{
+      const card = favCards[idx];
+      const angle = -k * 7;
+      const offsetX = k * 16;
+      const offsetY = -k * 12;
+      const scale = Math.max(.82, 1 - k * .045);
+      card.classList.add('in');
+      card.classList.toggle('fav-front', k === 0);
+      card.style.zIndex = favCards.length - k;
+      card.style.transform = `translate(calc(-50% + ${offsetX}px), ${offsetY}px) rotate(${angle}deg) scale(${scale})`;
+    });
+  }
+
+  function updateFavorites(){
+    favTicking = false;
+    const rect = favSection.getBoundingClientRect();
+    const scrollable = rect.height - window.innerHeight;
+    const progress = scrollable > 0
+      ? Math.min(1, Math.max(0, -rect.top / scrollable))
+      : 0;
+    // whole deck builds up within a short scroll span, almost like a single scroll gesture
+    const eased = Math.max(0, (progress - 0.02) / 0.96);
+    const target = Math.min(favCards.length, Math.floor(eased * (favCards.length + 1)));
+    if(target === favShown) return;
+    if(target > favShown){
+      for(let i = favShown; i < target; i++){
+        // slow down just this card's first-ever entrance; browsing clicks stay snappy
+        const card = favCards[i];
+        card.style.transitionDuration = '.6s';
+        card.addEventListener('transitionend', ()=>{ card.style.transitionDuration = ''; }, {once:true});
+        bringToFront(i);
+      }
+    } else {
+      order = order.filter(idx => idx < target);
+    }
+    favShown = target;
+    layoutFavorites();
+  }
+
+  favCards.forEach((card, idx)=>{
+    card.addEventListener('click', ()=>{
+      if(!card.classList.contains('in')) return; // not revealed yet
+      if(order[0] === idx){
+        openProject(ALLWORKS.indexOf(favorites[idx]), ALLWORKS);
+      } else {
+        bringToFront(idx);
+        layoutFavorites();
+      }
+    });
+  });
+
+  window.addEventListener('scroll', ()=>{
+    if(!favTicking){ favTicking = true; requestAnimationFrame(updateFavorites); }
+  }, {passive:true});
+  updateFavorites();
+}
+
+const grid = document.getElementById('grid');
+const workPreview = document.getElementById('workPreview');
+ALLWORKS.forEach((p,i)=>{
+  const row = document.createElement('div');
+  row.className = 'work-row';
+  row.innerHTML = `<span class="work-cat">${p.cat}</span><span class="work-title">${p.title}</span>`;
+  row.addEventListener('click', ()=>openProject(i, ALLWORKS));
+  row.addEventListener('mouseenter', ()=>{
+    if(workPreview && p.img){
+      workPreview.src = p.img;
+      workPreview.classList.add('show');
+    }
+  });
+  row.addEventListener('mousemove', (e)=>{
+    if(!workPreview || !workPreview.classList.contains('show')) return;
+    workPreview.style.left = (e.clientX + 26) + 'px';
+    workPreview.style.top = (e.clientY - 210) + 'px';
+  });
+  row.addEventListener('mouseleave', ()=>{
+    if(workPreview) workPreview.classList.remove('show');
+  });
+  grid.appendChild(row);
+});
+
+/* ---------- static row of the design/AI tools in my kit, one icon each ---------- */
+const TOOL_STRIP = [
+  {title:'Claude', url:'https://claude.ai', img:'https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/29/25/7b/29257bef-ef63-11b5-f30c-1ee806165851/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg'},
+  {title:'Gemini', url:'https://gemini.google.com', img:'https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/0b/ca/a1/0bcaa148-9669-0a11-ff26-9a1945c785fe/AppIcon-0-0-1x_U007epad-0-0-0-1-0-0-sRGB-0-0-85-220.png/512x512bb.jpg'},
+  {title:'Illustrator', url:'https://www.adobe.com/products/illustrator.html', img:'https://img.icons8.com/color/512/adobe-illustrator.png'},
+  {title:'Figma', url:'https://www.figma.com', img:'https://img.icons8.com/color/512/figma.png'},
+  {title:'Photoshop', url:'https://www.adobe.com/products/photoshop.html', img:'https://img.icons8.com/color/512/adobe-photoshop.png'},
+  {title:'InDesign', url:'https://www.adobe.com/products/indesign.html', img:'https://img.icons8.com/color/512/adobe-indesign.png'},
+  {title:'Premiere', url:'https://www.adobe.com/products/premiere.html', img:'https://img.icons8.com/color/512/adobe-premiere-pro.png'},
+  {title:'Procreate', url:'https://procreate.com', img:'https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/7b/36/95/7b36957c-dc43-6e38-99e5-31ecd83ff2dd/AppIcon-0-0-1x_U007emarketing-0-5-0-85-220.png/512x512bb.jpg'},
+  {title:'Cinema 4D', url:'https://www.maxon.net/cinema-4d', img:'https://img.icons8.com/color/512/cinema-4d.png'}
+];
+const worksStripTrack = document.getElementById('worksStripTrack');
+if(worksStripTrack){
+  const buildStrip = ()=>{
+    const frag = document.createDocumentFragment();
+    TOOL_STRIP.forEach(t=>{
+      const item = document.createElement('div');
+      item.className = 'works-strip-item';
+      const img = document.createElement('img');
+      img.className = 'wsi-icon';
+      img.src = t.img;
+      img.alt = t.title;
+      item.appendChild(img);
+      frag.appendChild(item);
+    });
+    return frag;
+  };
+  // duplicated once so the looping translateX(-50%) animation is seamless
+  worksStripTrack.appendChild(buildStrip());
+  worksStripTrack.appendChild(buildStrip());
+}
+
+/* ---------- scroll animations ---------- */
+
+/* each work row fades/slides in the first time it scrolls into view */
+const rowRevealObs = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('in');
+      rowRevealObs.unobserve(entry.target);
+    }
+  });
+},{threshold:0.15, rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.work-row').forEach(row=>rowRevealObs.observe(row));
+
+/* about photo/text slide in from opposite sides, contact block fades/stacks up with the icons popping in */
+const groupRevealObs = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('in');
+      groupRevealObs.unobserve(entry.target);
+    }
+  });
+},{threshold:0.25});
+document.querySelectorAll('.about-grid, .contact-inner').forEach(el=>groupRevealObs.observe(el));
+
+/* thin progress line across the top that fills as the page is scrolled */
+const scrollProgressEl = document.createElement('div');
+scrollProgressEl.className = 'scroll-progress';
+document.body.appendChild(scrollProgressEl);
+function updateScrollProgress(){
+  const doc = document.documentElement;
+  const max = doc.scrollHeight - doc.clientHeight;
+  const pct = max > 0 ? (doc.scrollTop / max) * 100 : 0;
+  scrollProgressEl.style.width = pct + '%';
+}
+window.addEventListener('scroll', updateScrollProgress, { passive:true });
+updateScrollProgress();
+
+/* ---------- hero trail: an empty stage — moving the mouse (or dragging a finger on
+   touch devices) leaves a ribbon of project images behind it ---------- */
+(function(){
+  const layer = document.getElementById('trailLayer');
+  const canHover = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  if(!layer) return;
+  if(canHover && window.innerWidth < 1000) return; // narrow desktop windows skip it
+
+  // flat array of already-deployed filenames used for the hero mouse-trail effect
+  const trailImages = ['trail-1.jpg', 'trail-3.png', 'trail-2.jpg', 'rootea-detail.jpg', 'trail-4.png', 'archive-4.jpg', 'grunge.jpg', 'trail-5.jpg', 'rootea-tea-bag.jpg', 'trail-6.png', 'trail-7.png', 'trail-8.png', 'trail-9.png', 'kodo-group-57.png', 'digital-nomads-shot-2.png', 'digital-nomads-shot-3.png', 'digital-nomads-shot-6.png', 'netflix-dating-shot-1.png', 'netflix-dating-shot-5.png', 'digital-nomads-strip-1.png', 'digital-nomads-strip-2.png', 'digital-nomads-strip-3.png', 'digital-nomads-strip-5.png', 'digital-nomads-strip-4.png', 'digital-nomads-strip-6.png', 'digital-nomads-hero.png', 'digital-nomads-strip-7.png', 'grunge.jpg', 'kodo-hero.jpg', 'kodo-icon-button.png', 'kodo-icon-led.png', 'kodo-icon-network.png', 'kodo-icon-pi1.png', 'kodo-icon-pi2.png', 'kodo-icon-screen.png', 'kodo-icon-wires.png', 'kodo.jpg', 'maskit-cotton.jpg', 'maskit-poster-1.jpg', 'maskit-poster-2.jpg', 'maskit-poster-3.jpg', 'milon-hai.jpg', 'netflix-dating.jpg', 'prism.jpg', 'rootea.jpg', 'vouch.jpg', 'archive-16.jpg', 'trail-10.png', 'trail-11.png', 'trail-12.png', 'archive-15.jpg'];
+  let lastImg = null;
+  function nextImage(){
+    let pick;
+    do {
+      pick = trailImages[Math.floor(Math.random() * trailImages.length)];
+    } while (pick === lastImg && trailImages.length > 1);
+    lastImg = pick;
+    return pick;
+  }
+
+  const hero = document.getElementById('heroCollage');
+  let lastX = null, lastY = null;
+  const MIN_DIST = 55; // spawn a new trail image only after the pointer has moved this far
+
+  function spawnTrailImage(x, y){
+    let dx = 0, dy = 0;
+    if(lastX !== null){
+      dx = x - lastX; dy = y - lastY;
+      const dist = Math.hypot(dx, dy);
+      if(dist < MIN_DIST) return;
+    }
+    lastX = x; lastY = y;
+
+    /* the faster/more diagonal the pointer moves, the more the image "swooshes" in — skewed
+       and blurred in the direction of travel before it snaps into place */
+    const angle = Math.atan2(dy, dx) * (180/Math.PI);
+    const skew = Math.max(-18, Math.min(18, dx * 0.35));
+
+    const img = document.createElement('img');
+    img.className = 'trail-img';
+    img.src = nextImage();
+    img.alt = '';
+    const rot = (Math.random() - 0.5) * 14 + (angle * 0.06);
+    img.style.setProperty('--tr', rot + 'deg');
+    img.style.setProperty('--sk', skew + 'deg');
+    img.style.left = x + 'px';
+    img.style.top = y + 'px';
+    layer.appendChild(img);
+    img.addEventListener('animationend', ()=> img.remove());
+  }
+
+  if(canHover){
+    hero.addEventListener('mousemove', (e)=>{
+      const rect = hero.getBoundingClientRect();
+      spawnTrailImage(e.clientX - rect.left, e.clientY - rect.top);
+    });
+    hero.addEventListener('mouseleave', ()=>{ lastX = null; lastY = null; });
+  } else {
+    // touch devices: a finger dragging across the hero does the same thing a mouse does
+    const touchPoint = (e)=>{
+      const t = e.touches[0];
+      if(!t) return null;
+      const rect = hero.getBoundingClientRect();
+      return { x: t.clientX - rect.left, y: t.clientY - rect.top };
+    };
+    hero.addEventListener('touchstart', (e)=>{
+      const p = touchPoint(e);
+      if(!p) return;
+      lastX = null; lastY = null;
+      spawnTrailImage(p.x, p.y);
+    }, {passive:true});
+    hero.addEventListener('touchmove', (e)=>{
+      const p = touchPoint(e);
+      if(!p) return;
+      spawnTrailImage(p.x, p.y);
+    }, {passive:true});
+    hero.addEventListener('touchend', ()=>{ lastX = null; lastY = null; });
+  }
+})();
+
+/* ---------- magnetic titles: split big headings into per-letter spans and lift/scale
+   whichever letters the cursor passes near ---------- */
+(function(){
+  const canHover = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  if(!canHover) return;
+
+  function splitLetters(el){
+    function walk(node){
+      if(node.nodeType === 3){
+        const frag = document.createDocumentFragment();
+        [...node.textContent].forEach(ch=>{
+          if(ch.trim() === ''){
+            frag.appendChild(document.createTextNode(ch));
+          } else {
+            const span = document.createElement('span');
+            span.className = 'letter';
+            span.textContent = ch;
+            frag.appendChild(span);
+          }
+        });
+        node.parentNode.replaceChild(frag, node);
+      } else if(node.nodeType === 1){
+        [...node.childNodes].forEach(walk);
+      }
+    }
+    [...el.childNodes].forEach(walk);
+  }
+
+  document.querySelectorAll('.magnetic-title').forEach(splitLetters);
+
+  const RADIUS = 90;
+  const MAX_LIFT = 10;
+  const MAX_SCALE = 1.35;
+  let mouseX = -9999, mouseY = -9999;
+  let ticking = false;
+
+  function updateLetters(){
+    ticking = false;
+    document.querySelectorAll('.magnetic-title .letter').forEach(el=>{
+      const r = el.getBoundingClientRect();
+      const cx = r.left + r.width / 2;
+      const cy = r.top + r.height / 2;
+      const dist = Math.hypot(mouseX - cx, mouseY - cy);
+      if(dist < RADIUS){
+        const t = 1 - dist / RADIUS;
+        const scale = 1 + (MAX_SCALE - 1) * t;
+        const lift = -MAX_LIFT * t;
+        el.style.transform = `translateY(${lift}px) scale(${scale})`;
+      } else if(el.style.transform){
+        el.style.transform = '';
+      }
+    });
+  }
+
+  window.addEventListener('mousemove', (e)=>{
+    mouseX = e.clientX; mouseY = e.clientY;
+    if(!ticking){ ticking = true; requestAnimationFrame(updateLetters); }
+  });
+
+  // new work-titles get built after page load — re-split any that appear later
+  const stripObserver = new MutationObserver((mutations)=>{
+    mutations.forEach(m=>{
+      m.addedNodes.forEach(node=>{
+        if(node.nodeType !== 1) return;
+        if(node.classList && node.classList.contains('magnetic-title')) splitLetters(node);
+        node.querySelectorAll && node.querySelectorAll('.magnetic-title').forEach(splitLetters);
+      });
+    });
+  });
+  stripObserver.observe(document.body, {childList:true, subtree:true});
+})();
+</script>
+</body>
+</html>
