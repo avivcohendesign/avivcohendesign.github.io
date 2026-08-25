@@ -253,10 +253,10 @@
   .contact-inner.in > *:nth-child(4){transition-delay:.24s}
   .contact-inner.in .contact-icons a{transition:opacity .5s var(--ease),transform .5s var(--ease),background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease)}
   .contact-inner.in .contact-icons a{opacity:1;transform:translateY(0) scale(1)}
-  .contact-inner.in .contact-icons a:nth-child(1){transition-delay:.26s}
-  .contact-inner.in .contact-icons a:nth-child(2){transition-delay:.34s}
-  .contact-inner.in .contact-icons a:nth-child(3){transition-delay:.42s}
-  .contact-inner.in .contact-icons a:nth-child(4){transition-delay:.5s}
+  .contact-inner.in .contact-icons a:nth-child(1){transition-delay:.26s,.26s,0s,0s,0s}
+  .contact-inner.in .contact-icons a:nth-child(2){transition-delay:.34s,.34s,0s,0s,0s}
+  .contact-inner.in .contact-icons a:nth-child(3){transition-delay:.42s,.42s,0s,0s,0s}
+  .contact-inner.in .contact-icons a:nth-child(4){transition-delay:.5s,.5s,0s,0s,0s}
   .contact-email{margin-top:2.2rem;font-family:var(--body);font-style:normal;
     font-size:1.1rem;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);
     padding-bottom:.2rem;transition:opacity .2s}
@@ -341,7 +341,7 @@
     overflow-y:auto;padding-bottom:6rem;scrollbar-width:thin;scrollbar-color:var(--ink-faint) transparent}
   .proj-right::-webkit-scrollbar{width:6px}
   .proj-right::-webkit-scrollbar-thumb{background:var(--ink-faint);border-radius:3px}
-  .proj-media{display:flex;flex-direction:column;gap:.6rem;width:100%;flex:none;min-width:0}
+  .proj-media{display:flex;flex-direction:column;gap:1.4rem;width:100%;flex:none;min-width:0}
   .proj-caption{font-family:var(--body);font-style:normal;color:var(--ink-soft);
     font-size:.9rem;display:none;padding-bottom:.6rem;border-bottom:1px solid var(--line)}
   .proj-caption.show{display:block}
@@ -442,6 +442,19 @@
   .proj-strip-logo{display:none;width:340px;height:auto;object-fit:contain;margin:2rem auto 0}
   .proj-strip-logo.show{display:block}
   .proj-big-stack{display:flex;flex-direction:column;gap:1.6rem;width:100%}
+  /* a horizontal scroll of large color swatches with hex labels — the brand's selected palette */
+  .proj-color-strip{display:none;gap:.8rem;overflow-x:auto;padding:.3rem .2rem 1rem;margin-top:1.6rem;
+    scroll-snap-type:x proximity;scrollbar-width:thin;scrollbar-color:var(--ink-faint) transparent}
+  .proj-color-strip:empty{display:none !important}
+  .proj-color-strip::-webkit-scrollbar{height:6px}
+  .proj-color-strip::-webkit-scrollbar-thumb{background:var(--ink-faint);border-radius:3px}
+  .proj-color-swatch{flex:none;width:130px;height:150px;border-radius:6px;display:flex;
+    align-items:flex-end;padding:.7rem;font-family:var(--body);font-size:.8rem;letter-spacing:.02em;
+    scroll-snap-align:start;border:1px solid rgba(0,0,0,.08);transition:transform .25s var(--ease)}
+  .proj-color-swatch:hover{transform:translateY(-4px)}
+  @media(max-width:880px){
+    .proj-color-swatch{width:110px;height:130px}
+  }
   /* a main video/image on the left with a stack of side images to its right —
      used to show something "next to" its supporting media */
   .proj-feature-row{display:flex;gap:1rem;align-items:stretch;width:100%}
@@ -522,18 +535,22 @@
   .top-social{position:fixed;top:.9rem;right:1.6rem;z-index:1001;
     display:flex;align-items:center;gap:.6rem}
   .top-social a{display:flex;align-items:center;justify-content:center;color:#F2C6DA;
-    width:18px;height:18px;transition:opacity .2s var(--ease)}
+    width:18px;height:18px;transition:opacity .2s var(--ease),color .2s var(--ease)}
   .top-social a:hover{opacity:.65}
   .top-social svg{width:100%;height:100%}
+  /* on project pages with a light background, pink is hard to read — switch to the same
+     dark-green accent used for text on those pages */
+  body.project-light-bg .top-social a{color:#1D4A36}
+  body.project-light-bg .site-name{color:#1D4A36}
   /* name mark pinned top-left, clicking it scrolls back to the hero */
   .site-name{position:fixed;top:.9rem;left:1.6rem;z-index:1001;
-    font-family:var(--serif);font-style:italic;font-size:.95rem;color:#F2C6DA;
-    text-decoration:none;transition:opacity .2s var(--ease)}
+    font-family:var(--serif);font-style:italic;font-size:1.3rem;color:#F2C6DA;
+    text-decoration:none;transition:opacity .2s var(--ease),color .2s var(--ease)}
   .site-name:hover{opacity:.65}
   @media(max-width:880px){
     .top-social{top:.6rem;right:1rem;gap:.5rem}
     .top-social a{width:15px;height:15px}
-    .site-name{top:.6rem;left:1rem;font-size:.82rem}
+    .site-name{top:.6rem;left:1rem;font-size:1.05rem}
     .made-with{font-size:.58rem;top:.5rem}
     nav{top:1.2rem;right:1.4rem;font-size:.9rem}
     nav .links{gap:.2rem}
@@ -740,7 +757,7 @@
             <div class="proj-media"><div class="proj-caption" id="pCap8"></div><div class="proj-img" id="pg8"></div></div>
             <div class="proj-media"><div class="proj-caption" id="pCap9"></div><div class="proj-img" id="pg9"></div></div>
           </div>
-          <div class="proj-media" id="pBigWrap"><div class="proj-caption" id="pBigCap"></div><div class="proj-big-stack" id="pBigStack"></div></div>
+          <div class="proj-media" id="pBigWrap"><div class="proj-caption" id="pBigCap"></div><div class="proj-big-stack" id="pBigStack"></div><div class="proj-color-strip" id="pColorStrip"></div></div>
           <div class="proj-media" id="pStripWrap"><div class="proj-caption" id="pStripCap"></div><img class="proj-strip-logo" id="pStripLogo" alt=""><div class="proj-strip" id="pStrip"></div></div>
           <div class="proj-media" id="pProcessWrap"><div class="proj-caption" id="pProcessCap"></div><div class="proj-bts-row" id="pBts"></div><div class="proj-process" id="pProcess"></div></div>
           <div class="proj-media" id="pPitchWrap"><div class="proj-caption" id="pPitchCap"></div><div class="proj-pitch-strip" id="pPitchStrip"></div></div>
@@ -898,6 +915,9 @@ function openProject(id, list){
   // text color — a project can set pageDark:true (with a dark pageBg) to flip that to light text
   document.getElementById('project').classList.toggle('proj-dark-accent', !p.pageDark);
   document.getElementById('project').classList.toggle('proj-light-accent', !!p.pageDark);
+  // pink top-bar (name + social icons) is hard to read on light project backgrounds — switch it to
+  // the same dark-green accent used for text on those pages
+  body.classList.toggle('project-light-bg', !p.pageDark);
   const pCatEl = document.getElementById('pCat');
   pCatEl.innerHTML = '';
   p.cat.split(/\s*[∙·]\s*|\s+\/\s+/).map(t=>t.trim()).filter(Boolean).forEach(t=>{
@@ -1042,6 +1062,16 @@ function openProject(id, list){
       : `<div class="proj-img"><img src="${src}" alt="${p.title}"></div>`
   ).join('');
   setCaption('pBigCap', bigImgs.length ? p.bigImgCaption : '');
+  const colorStripEl = document.getElementById('pColorStrip');
+  const brandColors = p.brandColors || [];
+  colorStripEl.style.display = brandColors.length ? 'flex' : 'none';
+  colorStripEl.innerHTML = brandColors.map(hex => {
+    const c = hex.replace('#','');
+    const r = parseInt(c.substr(0,2),16), g = parseInt(c.substr(2,2),16), b = parseInt(c.substr(4,2),16);
+    const lum = (0.299*r + 0.587*g + 0.114*b) / 255;
+    const textColor = lum > 0.6 ? '#1c1c1c' : '#ffffff';
+    return `<div class="proj-color-swatch" style="background:${hex};color:${textColor}">${hex.toUpperCase()}</div>`;
+  }).join('');
   const stripEl = document.getElementById('pStrip');
   document.getElementById('pStripWrap').style.display = p.strip ? '' : 'none';
   stripEl.style.display = p.strip ? 'flex' : 'none';
@@ -1104,6 +1134,7 @@ document.getElementById('back').addEventListener('click',()=>{
   overlay.addEventListener('animationend', ()=>overlay.classList.remove('closing'), {once:true});
   delete body.dataset.theme;
   body.classList.remove('project-open');
+  body.classList.remove('project-light-bg');
   body.style.overflow='';
 });
 
@@ -1129,7 +1160,9 @@ const ALLWORKS = [
    pitchSlides:['pitch-1.jpg','pitch-2.jpg','pitch-3.jpg','pitch-4.jpg','pitch-5.jpg','pitch-6.jpg','pitch-7.jpg','pitch-8.jpg','pitch-9.jpg','pitch-10.jpg','pitch-11.jpg','pitch-12.jpg','pitch-13.jpg','pitch-14.jpg','pitch-15.jpg','pitch-16.jpg','pitch-17.jpg','pitch-18.jpg','pitch-19.jpg','pitch-20.jpg','pitch-21.jpg'],
    lead:'Meet KODO! Where Montessori principles meet the vibecoding and cyber decks of today. Instead of raising more iPad kids, we believe the next generation will be one of creators and visionaries: with the right tools, of course.',
    body:['With KODO, kids set up their own cyber decks and build their own games to play on them, returning a sense of agency and ownership over tech that we haven\u2019t had since the days of retro arcades.','Our vision is for classrooms to be full of students swapping decks and comparing games so screens don\u2019t keep isolating us, but rather bring back creativity and community.']},
-  {title:'Milon Hai', cat:'Visual Identity \u2219 UI/UX', year:'2026', client:'Milon Hai', role:'Pattern Design, Merch', tools:'Illustrator, Photoshop', c1:'#ED0560', c2:'#FFDB5A', c3:'#2A52BE', c4:'#005F10', c5:'#F9C4D3', c6:'#EE4C01', ang:135, img:'milon-hai.jpg', heroVideo:'milon-hai-flow.mp4', heroVideoPoster:'milon-hai-flow-poster.jpg', heroVideoCompact:true, img1:'milon-hai.jpg', img2:'milon-hai-landing-flow-v2.mp4', img2Compact:true,
+  {title:'Milon Hai', cat:'Visual Identity \u2219 UI/UX', year:'2026', client:'Milon Hai', role:'Pattern Design, Merch', tools:'Illustrator, Photoshop', c1:'#ED0560', c2:'#FFDB5A', c3:'#2A52BE', c4:'#005F10', c5:'#F9C4D3', c6:'#EE4C01', ang:135, img:'milon-hai.jpg', heroVideo:'milon-hai-flow.mp4', heroVideoPoster:'milon-hai-flow-poster.jpg', heroVideoCompact:true, heroCaption:'app flow', img1:'milon-hai-landing-flow-v2.mp4', img1Compact:true, img1Caption:'landing page',
+   bigImg:'milon-hai.jpg', bigImgCaption:'Branding',
+   brandColors:['#EE4C01','#9ACDFF','#F9C4D3','#005F10','#FFDB5A','#2A52BE','#EC0760','#FBFAF6','#000000'],
    lead:'Milon Hai\u2019 is a concept app developed around a gap we identified among new immigrants in Israel: the lack of tools that teach the actual cultural context of local slang.',
    body:['The result is an app that serves as a social and experiential platform, allowing users to \u2018collect\u2019 the Israeli street \u2014 from coffee shop slang to workplace expressions.','It goes beyond literal translations (\u2018what does it mean?\u2019), providing the full cultural context: tone, humor, and the situations in which each word is appropriately used.']},
   {title:'Maskit.code', cat:'Speculative Branding', year:'2024', client:'Maskit.code', role:'Brand Identity, Web Design', tools:'Figma, Illustrator', c1:'#ffffff', c2:'#1c1c1c', ang:140, pageBg:'#1D4A36', pageDark:true, siteLink:'maskit-site-final.html',
