@@ -1418,8 +1418,25 @@ updateScrollProgress();
   if(!layer) return;
   if(canHover && window.innerWidth < 1000) return; // narrow desktop windows skip it
 
-  // flat array of already-deployed filenames used for the hero mouse-trail effect
-  const trailImages = ['trail-1.jpg', 'trail-3.png', 'trail-2.jpg', 'rootea-detail.jpg', 'trail-4.png', 'archive-4.jpg', 'grunge.jpg', 'trail-5.jpg', 'rootea-tea-bag.jpg', 'trail-6.png', 'trail-7.png', 'trail-8.png', 'trail-9.png', 'kodo-group-57.png', 'digital-nomads-shot-2.png', 'digital-nomads-shot-3.png', 'digital-nomads-shot-6.png', 'netflix-dating-shot-1.png', 'netflix-dating-shot-5.png', 'digital-nomads-strip-1.png', 'digital-nomads-strip-2.png', 'digital-nomads-strip-3.png', 'digital-nomads-strip-5.png', 'digital-nomads-strip-4.png', 'digital-nomads-strip-6.png', 'digital-nomads-hero.png', 'digital-nomads-strip-7.png', 'grunge.jpg', 'kodo-hero.jpg', 'kodo-icon-button.png', 'kodo-icon-led.png', 'kodo-icon-network.png', 'kodo-icon-pi1.png', 'kodo-icon-pi2.png', 'kodo-icon-screen.png', 'kodo-icon-wires.png', 'kodo.jpg', 'maskit-cotton.jpg', 'maskit-poster-1.jpg', 'maskit-poster-2.jpg', 'maskit-poster-3.jpg', 'milon-hai.jpg', 'netflix-dating.jpg', 'prism.jpg', 'rootea.jpg', 'vouch.jpg', 'archive-16.jpg', 'trail-10.png', 'trail-11.png', 'trail-12.png', 'archive-15.jpg'];
+  /* pull the trail images from ball-pit-images/ — drop whichever pictures you want in that
+     folder and list their filenames below. */
+  const TRAIL_FILENAMES = [
+    '1.PNG', '2.png', '3.PNG', '555.png', '55555.png', '666.png', 'DSC03374.jpg', 'DSC03425.jpg',
+    'DSC04063 2.JPEG', 'Gemini_Generated_Image_baozn8baozn8baoz 10.png', 'Gemini_Generated_Image_c4o3wfc4o3wfc4o3.png',
+    'Group 442.png', 'Group 445.png', 'Group 57.png',
+    'Screenshot 2026-07-29 at 14.58.54.png', 'Screenshot 2026-07-29 at 14.59.04.png',
+    'Screenshot 2026-07-29 at 15.11.55.png', 'Screenshot 2026-07-30 at 22.04.14.png',
+    'Screenshot 2026-07-30 at 22.06.46.png', 'Untitled_Artwork 1.png', 'Untitled_Artwork 2.png',
+    'Untitled_Artwork 3.png', 'Untitled_Artwork 4 copy.png', 'Untitled_Artwork 4.png',
+    'Untitled_Artwork 5.png', 'Untitled_Artwork 8 1.png', 'Untitled_Artwork copy.png',
+    'grunge.jpg', 'kodo-hero.png', 'kodo-icon-button.png', 'kodo-icon-led.png',
+    'kodo-icon-network.png', 'kodo-icon-pi1.png', 'kodo-icon-pi2.png', 'kodo-icon-screen.png',
+    'kodo-icon-wires.png', 'kodo.png', 'maskit-cotton.png', 'maskit-poster-1.jpg',
+    'maskit-poster-2.jpg', 'maskit-poster-3.jpg', 'milon-hai.png', 'netflix-dating.png',
+    'prism.png', 'rootea.png', 'vouch.png', 'אליס .PNG', 'בלנסטון סטיקר ורוד.png',
+    'מוקאפ שעונים copy.png', 'סטיקר קרמבו.png', 'שלופפפפפ_Main.PNG'
+  ];
+  const trailImages = TRAIL_FILENAMES.map(f => 'ball-pit-images/' + f);
   let lastImg = null;
   function nextImage(){
     let pick;
