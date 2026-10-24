@@ -215,7 +215,8 @@
     align-self:flex-start;margin-top:-.3rem}
   .work-title{font-family:var(--serif);font-style:normal;font-weight:400;
     font-size:clamp(1.7rem,3.8vw,3.1rem);letter-spacing:-.01em;transition:opacity .2s var(--ease),color .2s var(--ease)}
-  .work-row:hover .work-title{font-style:italic;color:var(--ink-soft)}
+  .work-row:hover .work-title,.work-row:focus-visible .work-title{font-style:italic;color:var(--ink-soft)}
+  .work-row:focus-visible,.back:focus-visible{outline:2px solid var(--ink-soft);outline-offset:4px}
   .work-preview{position:fixed;z-index:40;left:0;top:0;
     width:min(30vw,420px);height:min(30vw,400px);
     pointer-events:none;display:block;object-fit:contain;object-position:bottom;opacity:0;
@@ -255,6 +256,9 @@
   .contact-inner.in > *:nth-child(4){transition-delay:.24s}
   .contact-inner.in .contact-icons a{transition:opacity .5s var(--ease),transform .5s var(--ease),background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease)}
   .contact-inner.in .contact-icons a{opacity:1;transform:translateY(0) scale(1)}
+  /* the delay list is positional (matches the transition-property order above): only opacity/transform
+     (the entrance animation) get staggered — background/color/border-color (the hover effect) must stay
+     at 0s, otherwise the leftover entrance delay makes hover feel unresponsive afterwards */
   .contact-inner.in .contact-icons a:nth-child(1){transition-delay:.26s,.26s,0s,0s,0s}
   .contact-inner.in .contact-icons a:nth-child(2){transition-delay:.34s,.34s,0s,0s,0s}
   .contact-inner.in .contact-icons a:nth-child(3){transition-delay:.42s,.42s,0s,0s,0s}
@@ -728,7 +732,7 @@
   <div class="project-overlay" id="project">
     <div class="sec-bg"></div>
     <div class="sec-inner">
-      <span class="back" id="back">&larr; Back to works</span>
+      <span class="back" id="back" role="button" tabindex="0">&larr; Back to works</span>
       <div class="proj-layout" id="pLayout">
         <div class="proj-left-col">
           <div class="proj-left">
@@ -906,6 +910,7 @@ document.addEventListener('mouseout', e=>{
 
 const overlay = document.getElementById('project');
 let activeList = null;
+let currentWorkIdx = -1;
 function openProject(id, list){
   list = list || activeList;
   activeList = list;
@@ -994,6 +999,8 @@ function openProject(id, list){
   setProjImg(document.getElementById('pg1'), p.img1, `linear-gradient(${(p.ang+40)}deg, ${p.c2}, ${p.c1})`, p.title, p.img1Compact, p.img1CompactCrop);
   setProjImg(document.getElementById('pg2'), p.img2, `linear-gradient(${p.ang}deg, ${p.c1}, ${p.c2})`, p.title, p.img2Compact);
   setProjImg(document.getElementById('pg3'), p.img3, `radial-gradient(circle at 40% 30%, ${p.c2}, ${p.c1})`, p.title, p.img3Compact);
+  document.getElementById('pg1').closest('.proj-media').style.display = p.img1 ? '' : 'none';
+  document.getElementById('pg2').closest('.proj-media').style.display = p.img2 ? '' : 'none';
   document.getElementById('pg3').closest('.proj-media').style.display = (p.img3 || !p.imgPair) ? '' : 'none';
   setCaption('pCap1', p.img1Caption); setCaption('pCap2', p.img2Caption); setCaption('pCap3', p.img3Caption);
   const pRow2El = document.getElementById('pRow2');
@@ -1107,6 +1114,8 @@ function openProject(id, list){
   setCaption('pPitchCap', p.pitchSlides ? (p.pitchCaption||'Pitch') : '');
   document.getElementById('pNext').textContent = next.title;
   document.getElementById('next').onclick = ()=>{openProject(nextId, list);};
+  currentWorkIdx = id;
+  if(list === ALLWORKS) syncProjectHash(p);
   overlay.classList.add('open');
   overlay.querySelector('.proj-right')?.scrollTo({top:0});
   overlay.querySelector('.proj-left-col')?.scrollTo({top:0});
@@ -1130,7 +1139,8 @@ function openProject(id, list){
     delete body.dataset.mobileCompactImages;
   }
 }
-document.getElementById('back').addEventListener('click',()=>{
+function closeProject(){
+  if(!overlay.classList.contains('open')) return;
   overlay.classList.remove('open');
   overlay.classList.add('closing');
   overlay.addEventListener('animationend', ()=>overlay.classList.remove('closing'), {once:true});
@@ -1138,6 +1148,46 @@ document.getElementById('back').addEventListener('click',()=>{
   body.classList.remove('project-open');
   body.classList.remove('project-light-bg');
   body.style.overflow='';
+}
+
+/* ---------- deep links: every project has its own URL (#work-vouch) so it can be shared, and the
+   browser's back button closes the project instead of leaving the site ---------- */
+const WORK_HASH = '#work-';
+let projectPushed = false; // true when this session pushed a history entry for the open project
+const workSlug = (p)=> WORK_HASH + p.title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+function syncProjectHash(p){
+  const h = workSlug(p);
+  if(location.hash === h) return;
+  try{
+    if(overlay.classList.contains('open') || projectPushed){
+      history.replaceState(null,'',h); // "next project" etc. — keep a single history entry
+    } else {
+      history.pushState(null,'',h);
+      projectPushed = true;
+    }
+  }catch(err){}
+}
+function openFromHash(){
+  const i = ALLWORKS.findIndex(p => workSlug(p) === location.hash);
+  if(i >= 0){ if(!overlay.classList.contains('open') || activeList !== ALLWORKS || currentWorkIdx !== i) openProject(i, ALLWORKS); return true; }
+  return false;
+}
+document.getElementById('back').addEventListener('click',()=>{
+  if(projectPushed){ projectPushed = false; history.back(); return; } // popstate closes it
+  closeProject();
+  if(location.hash.startsWith(WORK_HASH)){ try{ history.replaceState(null,'',location.pathname+location.search); }catch(err){} }
+});
+document.getElementById('back').addEventListener('keydown',(e)=>{
+  if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); e.currentTarget.click(); }
+});
+window.addEventListener('popstate',()=>{
+  if(location.hash.startsWith(WORK_HASH)){ openFromHash(); }
+  else { projectPushed = false; closeProject(); }
+});
+document.addEventListener('keydown',(e)=>{
+  if(e.key !== 'Escape' || !overlay.classList.contains('open')) return;
+  if(pitchLightboxEl.classList.contains('open')) return; // lightbox handles its own Esc
+  document.getElementById('back').click();
 });
 
 /* ---------- MY WORKS PAGE (separate page, grid of 10) ---------- */
@@ -1189,6 +1239,9 @@ const ALLWORKS = [
    bigImg:'vouch-watch.png', bigImgCaption:'Watch experience',
    lead:'Vouch is a UX/UI design concept for a social habit-building app, developed during an intensive one-week design sprint at UX studio at Bezalel to explore how shared accountability can overcome the limitations of individual discipline.',
    body:['By linking the progress of two partners through a “shared streak” mechanism, the app transforms habit-tracking into a social commitment, featuring a unique “Forgiveness Loop” for missed days and a peer-rating system to foster reliability.','Through user research, rapid wireframing, and a vibrant, emotional interface, Vouch merges psychological insights with intuitive interaction design, turning mundane daily routines into a meaningful and supportive social ritual.']},
+  {title:'Horizon', cat:'UI / UX', year:'2026', client:'Horizon', role:'Product Design', tools:'Figma', c1:'#5B7CFA', c2:'#0A0A14', c3:'#1C2240', c4:'#F1F1EF', c5:'#8FA0FF', ang:140, img:'horizon.jpg',
+   lead:'More details on this project coming soon.',
+   body:[]},
   {title:'Netflix Dating', cat:'Illustration / Editorial', year:'2025', client:'Netflix', role:'Illustration', tools:'Procreate, Illustrator', c1:'#e13426', c2:'#220c0b', c3:'#f7eedc', c4:'#f3d1c3', c5:'#e8867b', ang:135, img:'netflix-dating.jpg', heroImg:'netflix-dating-hero.png',
    img1:'netflix-dating-shot-1.png', img2:'netflix-dating-shot-2.png', img3:'netflix-dating-shot-3.png', imgRow:true,
    img4:'netflix-dating-shot-4.png', img5:'netflix-dating-shot-5.png', img6:'netflix-dating-shot-6.png',
@@ -1325,6 +1378,12 @@ ALLWORKS.forEach((p,i)=>{
   row.className = 'work-row';
   row.innerHTML = `<span class="work-cat">${p.cat}</span><span class="work-title">${p.title}</span>`;
   row.addEventListener('click', ()=>openProject(i, ALLWORKS));
+  // keyboard access: rows are focusable and open with Enter / Space
+  row.tabIndex = 0;
+  row.setAttribute('role','link');
+  row.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openProject(i, ALLWORKS); }
+  });
   row.addEventListener('mouseenter', ()=>{
     if(workPreview && p.img){
       workPreview.src = p.img;
@@ -1341,6 +1400,8 @@ ALLWORKS.forEach((p,i)=>{
   });
   grid.appendChild(row);
 });
+// opened via a shared link (e.g. index.html#work-vouch) — show that project right away
+if(location.hash.startsWith(WORK_HASH)) openFromHash();
 
 /* ---------- static row of the design/AI tools in my kit, one icon each ---------- */
 const TOOL_STRIP = [
