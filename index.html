@@ -473,6 +473,22 @@
   .proj-big-stack.side-by-side{flex-direction:row;gap:1rem}
   .proj-big-stack.side-by-side .proj-img{flex:1;min-width:0}
   @media(max-width:880px){.proj-big-stack.side-by-side{flex-direction:column}}
+  /* Prism icon sheet: dark tile, two labelled sections of round icons. Sizes use container units so the
+     whole sheet scales with its width (designed at 1086px wide) */
+  .proj-icons-tile{container-type:inline-size;width:min(100%,720px);aspect-ratio:1086/1232;background:#070505;
+    border-radius:14px;padding:6.6cqw 7.3cqw 0;color:#c9c3c3;display:flex;flex-direction:column;overflow:hidden}
+  .proj-icons-tile .it-head{font-size:2.05cqw;letter-spacing:.26em;text-transform:uppercase;font-weight:600;
+    color:#bdb7b7;padding-left:1.3cqw;margin:0 0 3.4cqw}
+  .proj-icons-tile .it-head:not(:first-child){margin-top:4.6cqw}
+  .proj-icons-tile .it-grid{display:grid;grid-template-columns:repeat(5,1fr);row-gap:2.2cqw}
+  .proj-icons-tile .it-item{display:flex;flex-direction:column;align-items:center;gap:1.6cqw;min-width:0}
+  .proj-icons-tile .it-dot{width:9.3cqw;height:9.3cqw;border-radius:50%;border:1px solid rgba(255,255,255,.08);
+    display:flex;align-items:center;justify-content:center;overflow:hidden;background-clip:padding-box}
+  .proj-icons-tile .it-dot img{display:block;width:100%;height:100%}
+  .proj-icons-tile .it-dot.sm img{width:66%;height:66%}
+  .proj-icons-tile .it-dot.ui{background:#151212;border-color:rgba(255,255,255,.1)}
+  .proj-icons-tile .it-dot.ui img{width:38%;height:38%}
+  .proj-icons-tile .it-label{font-size:2.05cqw;line-height:1.1;color:#c9c3c3;text-align:center;white-space:nowrap}
   .proj-big-row{display:flex;gap:1rem;width:100%}
   .proj-big-row .proj-img{flex:1;min-width:0}
   @media(max-width:880px){.proj-big-row{flex-direction:column}}
@@ -1138,9 +1154,24 @@ function openProject(id, list){
       : `<div class="proj-img"><img src="${src}" alt="${p.title}"></div>`;
   // bigImgRowFrom: n → items before index n are stacked full-width, items from n on sit side by side in one row
   const rowFrom = Number.isInteger(p.bigImgRowFrom) ? p.bigImgRowFrom : -1;
-  document.getElementById('pBigStack').innerHTML = rowFrom >= 0
+  document.getElementById('pBigStack').innerHTML = (rowFrom >= 0
     ? bigImgs.slice(0, rowFrom).map(bigTile).join('') + `<div class="proj-big-row">${bigImgs.slice(rowFrom).map(bigTile).join('')}</div>`
-    : bigImgs.map(bigTile).join('');
+    : bigImgs.map(bigTile).join(''))
+    // bigImgIconSheet: the Prism icon set (canvas tools + interface) as a dark labelled sheet
+    + (p.bigImgIconSheet ? (()=>{
+        const I = n => `projects/prism/icons/${n}.svg`;
+        // [file, label, circle tint (null = the svg already has its own circle), small icon?]
+        const tools = [
+          ['generate','Generate','rgba(150,90,247,.30)'],['image','Image'],['colors','Colors'],['texture','Texture'],['video','Video'],
+          ['music','Music'],['genre','Genre','rgba(180,120,255,.26)'],['keywords','Keywords','rgba(90,200,210,.26)'],['text','Text'],['mood','Mood','rgba(40,200,140,.28)',1],
+          ['feeling','Feeling','rgba(255,170,40,.28)',1],['movement','Movement','rgba(120,200,255,.26)',1],['voice','Voice','rgba(255,120,180,.26)',1],['place','Place','rgba(140,220,120,.26)',1],['tags','Tags','rgba(255,210,90,.26)',1]
+        ];
+        const ui = [['ui-add','Add'],['ui-edit','Edit'],['ui-export','Export'],['ui-back','Back'],['ui-play','Play'],['ui-sound','Sound']];
+        const tool = t => `<div class="it-item"><div class="it-dot${t[3]?' sm':''}"${t[2]?` style="background:${t[2]}"`:''}><img src="${I(t[0])}" alt=""></div><div class="it-label">${t[1]}</div></div>`;
+        const uiItem = t => `<div class="it-item"><div class="it-dot ui"><img src="${I(t[0])}" alt=""></div><div class="it-label">${t[1]}</div></div>`;
+        return `<div class="proj-icons-tile"><div class="it-head">Canvas tools</div><div class="it-grid">${tools.map(tool).join('')}</div>`
+          + `<div class="it-head">Interface</div><div class="it-grid">${ui.map(uiItem).join('')}</div></div>`;
+      })() : '');
   setCaption('pBigCap', bigImgs.length ? p.bigImgCaption : '');
   const colorStripEl = document.getElementById('pColorStrip');
   const brandColors = p.brandColors || [];
@@ -1267,7 +1298,7 @@ document.addEventListener('keydown',(e)=>{
 const ALLWORKS = [
   {title:'Prism', cat:'UI / UX', year:'2024', client:'Prism', role:'Product Design', tools:'Figma, Framer', c1:'#FF1907', c2:'#000EA7', c3:'#671590', c4:'#000000', c5:'#ffffff', ang:160, img:'prism.jpg', heroVideo:'prism-flow.mp4', heroVideoPoster:'prism-flow-poster.jpg', heroCaption:'Create vision Sketch',
    img1:'prism-flow-copy.mp4', img1Caption:'Patch the Canvas', img2:'prism-flow-2.mp4', img2Caption:'Your DROP visual is ready',
-   bigImg:['prism-promo.mp4','prism.jpg','prism-frame.jpg','prism-2.jpg'], bigImgRowFrom:2, bigImgCaption:'Visual Identity',
+   bigImg:['prism-promo.mp4','prism-laptop.jpg'], bigImgCaption:'Visual Identity',
    lead:'A tool for creating visual identity for music — a prototype built as a UI/UX studio project at Bezalel in partnership with Lightricks.',
    body:['The idea: to let independent artists, with no budget, studio, or designer, turn a song into a moving visual — a vertical Spotify Canvas (9:16) that plays beneath the track, along with visuals for social media and live performances.','The conceptual core is “Album DNA”: each album gets a single, unified generative visual identity, and every song inherits its own variation from it — so all the tracks feel like one family without being identical. Living covers for every track.','The user experience is built around the metaphor of a modular synthesizer / patch cables: the user “connects cables” between different inputs — image, color, texture, mood, lyrics — into a canvas, and everything feeds into the visual.','Technically, it’s a single-file HTML application, with all media embedded as base64 and an iframe-based screen architecture.']},
   {title:'Kodo', cat:'Visual Identity \u2219 UI/UX', year:'2026', client:'KODO', role:'Brand Identity, Packaging', tools:'Figma, Illustrator', c1:'#afd3e4', c2:'#6297d8', c3:'#f09035', c4:'#e4542d', c5:'#4da34e', c6:'#ee7cb1', c7:'#f0ebe0', ang:130, img:'kodo.jpg', heroVideo:'kodo-desktop-flow.mp4', heroVideoPoster:'kodo-desktop-flow-poster.jpg', heroCaption:'The desktop building interface', img1:'kodo-flow-cropped.mp4', img1Compact:true, img1Caption:'The mobile onboarding flow', img2:'kodo.jpg', img2Caption:'The full Cyber Deck Creative Kit', img3:'kodo-hero.jpg',
