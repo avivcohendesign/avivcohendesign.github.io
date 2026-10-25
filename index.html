@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aviv Cohen — Graphic Designer</title>
-<meta name="description" content="Portfolio of Aviv Cohen — graphic and product designer specializing in branding, UI/UX and illustration.">
-<meta property="og:title" content="Aviv Cohen — Graphic Designer">
-<meta property="og:description" content="Portfolio of Aviv Cohen — graphic and product designer specializing in branding, UI/UX and illustration.">
+<title>Aviv Cohen - Graphic Designer</title>
+<meta name="description" content="Portfolio of Aviv Cohen - graphic and product designer specializing in branding, UI/UX and illustration.">
+<meta property="og:title" content="Aviv Cohen - Graphic Designer">
+<meta property="og:description" content="Portfolio of Aviv Cohen - graphic and product designer specializing in branding, UI/UX and illustration.">
 <meta property="og:image" content="aviv-photo.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -66,7 +66,7 @@
     --bg:#1D4A36;--ink:#F1F1EF;--ink-soft:#F2C6DA;--ink-faint:#F2C6DA;--line:rgba(242,198,218,.45);
     background:var(--bg)}
 
-  /* hero: an empty stage with just the title — moving the mouse leaves a trailing ribbon of
+  /* hero: an empty stage with just the title - moving the mouse leaves a trailing ribbon of
      project images behind the cursor. full-bleed, fills the whole first screen. */
   .hero-collage{position:relative;width:100%;max-width:none;margin:0;min-height:calc(100vh - 4rem);
     display:flex;align-items:center;justify-content:center;overflow:hidden}
@@ -119,7 +119,7 @@
     .hero-collage-center{padding:0 1.4rem}
   }
 
-  /* filmstrip of design/AI tool icons, scrolling on a loop — grayscale until hovered */
+  /* filmstrip of design/AI tool icons, scrolling on a loop - grayscale until hovered */
   /* frosted-glass pill floating on the pink: translucent white + blur, bright edge highlight, soft shadow */
   .works-strip-wrap{position:relative;flex:none;width:auto;height:120px;overflow:hidden;
     margin:0 1.5vw;border-radius:999px;z-index:4;display:flex;align-items:center;
@@ -145,7 +145,7 @@
     .works-strip-item{width:44px;height:44px}
   }
 
-  /* ABOUT — peeks up slightly into the first screen so it's clear there's more to scroll to */
+  /* ABOUT - peeks up slightly into the first screen so it's clear there's more to scroll to */
   #about{--bg:#F2C6DA;--ink:#1D4A36;--ink-soft:#F1F1EF;--ink-faint:#F1F1EF;--line:rgba(30,74,54,.3);
     background:var(--bg);position:relative;margin-top:-4rem;padding-bottom:3rem}
   .about-inner{padding:9rem 1.5vw 0;border-top:1px solid var(--ink);
@@ -182,7 +182,7 @@
     .about-photo{height:auto;aspect-ratio:4/5;max-width:260px}
   }
 
-  /* FAVORITE WORKS — the section is scroll-tall; the stack pins in place with
+  /* FAVORITE WORKS - the section is scroll-tall; the stack pins in place with
      position:sticky and a new card joins it for each slice of scroll progress you pass */
   #favorites{--bg:#F2C6DA;--ink:#1D4A36;--ink-soft:#F1F1EF;--ink-faint:#F1F1EF;--line:rgba(30,74,54,.3);
     background:var(--bg);height:170vh}
@@ -243,7 +243,7 @@
     .work-row{gap:1rem}
   }
 
-  /* CONTACT — footer band at the bottom of the page */
+  /* CONTACT - footer band at the bottom of the page */
   #contact{--bg:#F2C6DA;--ink:#1D4A36;--ink-soft:#F1F1EF;--ink-faint:#F1F1EF;--line:rgba(30,74,54,.3);
     background:var(--bg)}
   .contact-inner{min-height:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -274,7 +274,7 @@
   .contact-inner.in .contact-icons a{transition:opacity .5s var(--ease),transform .5s var(--ease),background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease)}
   .contact-inner.in .contact-icons a{opacity:1;transform:translateY(0) scale(1)}
   /* the delay list is positional (matches the transition-property order above): only opacity/transform
-     (the entrance animation) get staggered — background/color/border-color (the hover effect) must stay
+     (the entrance animation) get staggered - background/color/border-color (the hover effect) must stay
      at 0s, otherwise the leftover entrance delay makes hover feel unresponsive afterwards */
   .contact-inner.in .contact-icons a:nth-child(1){transition-delay:.26s,.26s,0s,0s,0s}
   .contact-inner.in .contact-icons a:nth-child(2){transition-delay:.34s,.34s,0s,0s,0s}
@@ -291,7 +291,7 @@
   /* ---------- PROJECT OVERLAY ---------- */
   .project-overlay{position:fixed;inset:0;z-index:50;background:#F1F1EF;
     overflow:hidden;display:none;
-    /* project pages are white for now — scope the ink colors to dark green so all text,
+    /* project pages are white for now - scope the ink colors to dark green so all text,
        borders and scrollbars inside stay readable regardless of the section palette */
     --ink:#1D4A36;--ink-soft:#1D4A36;--ink-faint:#1D4A36}
   .project-overlay.open{display:block;animation:viewIn .5s var(--ease) both}
@@ -320,7 +320,7 @@
   .proj-dark-accent .back:hover{color:#1D4A36;opacity:.6}
   .proj-dark-accent .next{border-top-color:rgba(30,74,54,.3)}
   .proj-dark-accent .next .lbl{color:#1D4A36;opacity:.65}
-  /* used on the rare project page with a dark background — flips text/borders/scrollbars to
+  /* used on the rare project page with a dark background - flips text/borders/scrollbars to
      a light color instead, mirroring proj-dark-accent above */
   .proj-light-accent{--ink:#F1F1EF;--ink-soft:#F1F1EF;--ink-faint:#F1F1EF}
   .proj-light-accent .proj-head h1,
@@ -385,7 +385,7 @@
     .proj-row.row-mode .proj-media{width:100%}
   }
 
-  /* two images side by side, cropped to match each other's height —
+  /* two images side by side, cropped to match each other's height -
      used when a project wants a pair of images shown at equal length */
   .proj-row.pair-mode{flex-direction:row;gap:1.4rem;align-items:stretch}
   .proj-row.pair-mode .proj-media{flex:none;width:calc(50% - .7rem);min-width:0}
@@ -397,7 +397,7 @@
     .proj-row.pair-mode .proj-media{width:100%}
   }
 
-  /* on mobile only, shrink the row images a bit instead of running full-bleed —
+  /* on mobile only, shrink the row images a bit instead of running full-bleed -
      opt-in per project via p.mobileCompactImages */
   @media(max-width:880px){
     body[data-mobile-compact-images="true"] .proj-row.row-mode{align-items:center}
@@ -413,9 +413,15 @@
     body[data-project-grid="square"] .proj-row{grid-template-columns:repeat(2,1fr) !important}
   }
 
-  /* masonry grid for images after the hero — every image keeps its own natural
+  /* masonry grid for images after the hero - every image keeps its own natural
      aspect ratio (no cropping), just tiled into neat columns like a pinboard */
   body[data-project-grid="masonry"] .proj-row{display:block !important;column-count:2;column-gap:1.2rem}
+  body[data-project-grid="masonry"][data-masonry-cols="1"] .proj-row{column-count:1}
+  /* rows / tiles hidden by JS (nothing to show) must stay hidden despite the !important display rules */
+  body[data-project-grid="masonry"] .proj-row[style*="display: none"],
+  body[data-project-grid="masonry"] .proj-row[style*="display:none"]{display:none !important}
+  body[data-project-grid="masonry"] .proj-row .proj-media[style*="display: none"],
+  body[data-project-grid="masonry"] .proj-row .proj-media[style*="display:none"]{display:none !important}
   body[data-project-grid="masonry"] .proj-row .proj-media{display:inline-block !important;width:100% !important;break-inside:avoid;margin-bottom:1.2rem;flex:none !important}
   body[data-project-grid="masonry"] .proj-row .proj-img{width:100% !important;height:auto !important;aspect-ratio:auto !important}
   body[data-project-grid="masonry"] .proj-row .proj-img img,
@@ -473,6 +479,17 @@
   .proj-right .reveal.in .proj-img img,.proj-right .reveal.in .proj-img video,
   .proj-right .reveal.in.proj-img img,.proj-right .reveal.in.proj-img video{scale:1}
   .proj-big-stack{display:flex;flex-direction:column;gap:1.6rem;width:100%}
+  /* moodboard collage: separate pictures placed on a board; hovering one lifts it above the rest */
+  .moodboard{position:relative;width:100%}
+  .moodboard img{position:absolute;display:block;height:auto;cursor:pointer;transform-origin:center;
+    transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s ease,filter .4s ease}
+  .moodboard img:hover,.moodboard img.pop{z-index:999 !important;transform:scale(1.14) rotate(var(--rot,-1.5deg));
+    box-shadow:0 22px 46px rgba(20,20,25,.34)}
+  .moodboard:hover img:not(:hover):not(.pop){filter:brightness(.8) saturate(.85)}
+  /* tall (portrait) photos in the big-image stack: keep them within the screen height, centred */
+  .proj-big-stack .proj-img.portrait{display:flex;justify-content:center}
+  .proj-big-stack .proj-img.portrait img{width:auto;max-width:100%;max-height:88vh}
+  .proj-subcap{font-family:var(--body);font-size:.9rem;color:var(--ink-soft);margin-bottom:-.9rem}
   /* bigImgRow: the images sit side by side (stacked again on phones) */
   .proj-big-stack.side-by-side{flex-direction:row;gap:1rem}
   .proj-big-stack.side-by-side .proj-img{flex:1;min-width:0}
@@ -496,7 +513,7 @@
   .proj-big-row{display:flex;gap:1rem;width:100%}
   .proj-big-row .proj-img{flex:1;min-width:0}
   @media(max-width:880px){.proj-big-row{flex-direction:column}}
-  /* a horizontal scroll of large color swatches with hex labels — the brand's selected palette */
+  /* a horizontal scroll of large color swatches with hex labels - the brand's selected palette */
   .proj-color-strip{display:none;gap:.8rem;overflow-x:auto;padding:.3rem .2rem 1rem;margin-top:1.6rem;
     scroll-snap-type:x proximity;scrollbar-width:thin;scrollbar-color:var(--ink-faint) transparent}
   .proj-color-strip:empty{display:none !important}
@@ -509,7 +526,7 @@
   @media(max-width:880px){
     .proj-color-swatch{width:110px;height:130px}
   }
-  /* a main video/image on the left with a stack of side images to its right —
+  /* a main video/image on the left with a stack of side images to its right -
      used to show something "next to" its supporting media */
   .proj-feature-row{display:flex;gap:1rem;align-items:stretch;width:100%}
   .proj-feature-left{flex:1 1 45%;min-width:0;display:flex;flex-direction:column;gap:1rem}
@@ -603,7 +620,7 @@
   .next .nm{font-family:var(--serif);font-weight:500;font-size:clamp(1rem,1.8vw,1.4rem);letter-spacing:-.02em}
 
 
-  /* magnetic titles — each letter gently lifts/scales as the cursor passes near it */
+  /* magnetic titles - each letter gently lifts/scales as the cursor passes near it */
   .magnetic-title .letter{display:inline-block;transform-origin:50% 100%;
     transition:transform .25s cubic-bezier(.2,1,.3,1);will-change:transform}
 
@@ -618,7 +635,7 @@
     width:18px;height:18px;transition:opacity .2s var(--ease),color .2s var(--ease)}
   .top-social a:hover{opacity:.65}
   .top-social svg{width:100%;height:100%}
-  /* on project pages with a light background, pink is hard to read — switch to the same
+  /* on project pages with a light background, pink is hard to read - switch to the same
      dark-green accent used for text on those pages */
   body.project-light-bg .top-social a{color:#1D4A36}
   body.project-light-bg .site-name{color:#1D4A36}
@@ -737,7 +754,7 @@
       </div>
     </section>
 
-    <!-- FAVORITE WORKS — tall scroll track; the stack stays pinned and a new card
+    <!-- FAVORITE WORKS - tall scroll track; the stack stays pinned and a new card
          joins it for each bit of scroll progress through the section -->
     <section class="section" id="favorites">
       <div class="sec-bg"></div>
@@ -851,7 +868,7 @@
     <button class="rl-close" id="rlClose" aria-label="Close">&times;</button>
     <div class="rl-scroll" id="rlScroll">
       <div class="rl-page">
-        <img src="resume-page.png" alt="Aviv Cohen — Resume">
+        <img src="resume-page.png" alt="Aviv Cohen - Resume">
         <!-- the page is an image, so the "My Portfolio" link is a transparent hotspot placed over it -->
         <a class="rl-link" href="https://avivcohendesign.github.io/" target="_blank" rel="noopener" aria-label="My Portfolio"></a>
       </div>
@@ -967,7 +984,7 @@ function setProjImg(el, src, gradient, alt, compact, cropScale){
     if(/\.(mp4|mov|webm)$/i.test(src)){
       if(compact){
         // cropScale zooms the video in and relies on the wrapper's overflow:hidden to clip
-        // the edges evenly on all sides — used to crop out stray elements peeking in at the sides
+        // the edges evenly on all sides - used to crop out stray elements peeking in at the sides
         const cropStyle = cropScale ? ` style="transform:scale(${cropScale})"` : '';
         el.innerHTML = `<div class="compact-video-wrap"><video src="${src}" autoplay muted loop playsinline${cropStyle}></video></div>`;
       } else {
@@ -1006,6 +1023,11 @@ const overlay = document.getElementById('project');
 let activeList = null;
 
 /* ---------- project pages: media glides in as you scroll to it (like the home page) ---------- */
+document.addEventListener('click',(e)=>{
+  const img = e.target.closest && e.target.closest('.moodboard img');
+  document.querySelectorAll('.moodboard img.pop').forEach(i=>{ if(i!==img) i.classList.remove('pop'); });
+  if(img && !window.matchMedia('(hover:hover)').matches) img.classList.toggle('pop');
+});
 let projRevealObs = null;
 function setupProjectReveal(){
   if(projRevealObs){ projRevealObs.disconnect(); projRevealObs = null; }
@@ -1015,7 +1037,7 @@ function setupProjectReveal(){
   const sel = [
     '#pHeroWrap','#pFeatureWrap > .proj-caption','#pFeatureMain','#pFeatureExtra','#pFeatureSide .proj-img',
     '#pRowCap','.proj-row .proj-media',
-    '#pBigWrap > .proj-caption','#pBigStack .proj-img','#pColorStrip',
+    '#pBigWrap > .proj-caption','#pBigStack .moodboard','#pBigStack .proj-img','#pColorStrip',
     '#pStripWrap','#pProcessWrap','#pPitchWrap','.archive-grid > *'
   ].join(',');
   const targets = [...right.querySelectorAll(sel)].filter(el => getComputedStyle(el).display !== 'none');
@@ -1043,10 +1065,10 @@ function openProject(id, list){
   const next = list[nextId];
   document.getElementById('project').style.background = p.pageBg || '';
   // project pages are white/light by default, so titles/captions default to the dark-accent
-  // text color — a project can set pageDark:true (with a dark pageBg) to flip that to light text
+  // text color - a project can set pageDark:true (with a dark pageBg) to flip that to light text
   document.getElementById('project').classList.toggle('proj-dark-accent', !p.pageDark);
   document.getElementById('project').classList.toggle('proj-light-accent', !!p.pageDark);
-  // pink top-bar (name + social icons) is hard to read on light project backgrounds — switch it to
+  // pink top-bar (name + social icons) is hard to read on light project backgrounds - switch it to
   // the same dark-green accent used for text on those pages
   body.classList.toggle('project-light-bg', !p.pageDark);
   const pCatEl = document.getElementById('pCat');
@@ -1166,7 +1188,7 @@ function openProject(id, list){
   }
   const pRowEl = document.getElementById('pRow');
   // always restore pg4-9 to their original row containers first, in case a previous
-  // masonry project folded them into pRow — otherwise non-masonry projects would
+  // masonry project folded them into pRow - otherwise non-masonry projects would
   // inherit a scrambled layout
   [document.getElementById('pg4'), document.getElementById('pg5'), pg6El].forEach(el=>{
     const media = el.closest('.proj-media');
@@ -1178,12 +1200,14 @@ function openProject(id, list){
   });
   if(p.masonryGrid){
     // masonry projects show all tiles (img1..img9) as ONE continuous grid instead of
-    // three separate row-of-three blocks — fold pRow2/pRow3's tiles into pRow itself
+    // three separate row-of-three blocks - fold pRow2/pRow3's tiles into pRow itself
+    // (only tiles that actually have an image - empty ones would show up as blank squares)
+    const hasOwnImg = el => { const m = (el.querySelector('.proj-img')||{}).id || ''; const n = m.replace('pg',''); return !!p['img'+n]; };
     [...pRow2El.querySelectorAll('.proj-media')].forEach(el=>{
-      if(el.style.display !== 'none') pRowEl.appendChild(el);
+      if(el.style.display !== 'none' && hasOwnImg(el)) pRowEl.appendChild(el);
     });
     [...pRow3El.querySelectorAll('.proj-media')].forEach(el=>{
-      if(el.style.display !== 'none') pRowEl.appendChild(el);
+      if(el.style.display !== 'none' && hasOwnImg(el)) pRowEl.appendChild(el);
     });
     pRow2El.style.display = 'none';
     pRow3El.style.display = 'none';
@@ -1191,17 +1215,30 @@ function openProject(id, list){
   document.getElementById('pRow').classList.toggle('row-mode', !!p.imgRow);
   document.getElementById('pRow').classList.toggle('pair-mode', !!p.imgPair);
   const bigImgs = p.bigImg ? (Array.isArray(p.bigImg) ? p.bigImg : [p.bigImg]) : [];
-  document.getElementById('pBigWrap').style.display = bigImgs.length ? '' : 'none';
+  document.getElementById('pBigWrap').style.display = (bigImgs.length || p.moodboard) ? '' : 'none';
   document.getElementById('pBigStack').classList.toggle('side-by-side', !!p.bigImgRow);
-  const bigTile = src =>
-    /\.(mp4|mov|webm)$/i.test(src)
+  // bigImgSubCaptions: optional small label above an individual image (same index as in bigImg)
+  const bigTile = (src, i) => {
+    const sub = (p.bigImgSubCaptions && p.bigImgSubCaptions[i - 0]) || '';
+    const tile = /\.(mp4|mov|webm)$/i.test(src)
       ? `<div class="proj-img"><video src="${src}" autoplay muted loop playsinline></video></div>`
-      : `<div class="proj-img"><img src="${src}" alt="${p.title}"></div>`;
+      : `<div class="proj-img"><img src="${src}" alt="${p.title}" onload="if(this.naturalHeight>this.naturalWidth)this.closest('.proj-img').classList.add('portrait')"></div>`;
+    return sub ? `<div class="proj-subcap">${sub}</div>${tile}` : tile;
+  };
   // bigImgRowFrom: n → items before index n are stacked full-width, items from n on sit side by side in one row
+  // (bigImgRowCount: only that many items go in the row, the rest stack below it)
   const rowFrom = Number.isInteger(p.bigImgRowFrom) ? p.bigImgRowFrom : -1;
+  // moodboard: a collage of separate pictures (positions are fractions of the board); each one reacts to hover
+  const moodboardHtml = p.moodboard
+    ? `<div class="proj-subcap">${p.moodboard.caption||''}</div><div class="moodboard" style="aspect-ratio:${p.moodboard.aspect}">`
+      + p.moodboard.items.map((it,k)=>`<img src="${p.moodboard.dir}${it[0]}" alt="" loading="lazy" style="left:${it[1]*100}%;top:${it[2]*100}%;width:${it[3]*100}%;z-index:${it[4]};--rot:${(k%2?1:-1)*(1+(k%3)*.6)}deg">`).join('')
+      + `</div>`
+    : '';
   document.getElementById('pBigStack').innerHTML = (rowFrom >= 0
-    ? bigImgs.slice(0, rowFrom).map(bigTile).join('') + `<div class="proj-big-row">${bigImgs.slice(rowFrom).map(bigTile).join('')}</div>`
+    ? bigImgs.slice(0, rowFrom).map(bigTile).join('') + `<div class="proj-big-row">${bigImgs.slice(rowFrom, p.bigImgRowCount ? rowFrom + p.bigImgRowCount : undefined).map(bigTile).join('')}</div>`
+      + (p.bigImgRowCount ? bigImgs.slice(rowFrom + p.bigImgRowCount).map(bigTile).join('') : '')
     : bigImgs.map(bigTile).join(''))
+    + moodboardHtml   // the moodboard comes after the big image(s), above the colour palette
     // bigImgIconSheet: the Prism icon set (canvas tools + interface) as a dark labelled sheet
     + (p.bigImgIconSheet ? (()=>{
         const I = n => `projects/prism/icons/${n}.svg`;
@@ -1281,6 +1318,7 @@ function openProject(id, list){
   } else {
     delete body.dataset.projectGrid;
   }
+  if(p.masonryColumns){ body.dataset.masonryCols = String(p.masonryColumns); } else { delete body.dataset.masonryCols; }
   if(p.mobileCompactImages){
     body.dataset.mobileCompactImages = 'true';
   } else {
@@ -1309,7 +1347,7 @@ function syncProjectHash(p){
   if(location.hash === h) return;
   try{
     if(overlay.classList.contains('open') || projectPushed){
-      history.replaceState(null,'',h); // "next project" etc. — keep a single history entry
+      history.replaceState(null,'',h); // "next project" etc. - keep a single history entry
     } else {
       history.pushState(null,'',h);
       projectPushed = true;
@@ -1340,17 +1378,17 @@ document.addEventListener('keydown',(e)=>{
 });
 
 /* ---------- MY WORKS PAGE (separate page, grid of 10) ---------- */
-const ALLWORKS = [
+const ALLWORKS_ALL = [
   {title:'Prism', cat:'UI / UX', year:'2024', client:'Prism', role:'Product Design', tools:'Figma, Framer', c1:'#FF1907', c2:'#000EA7', c3:'#671590', c4:'#000000', c5:'#ffffff', ang:160, img:'prism.jpg', heroVideo:'prism-flow.mp4', heroVideoPoster:'prism-flow-poster.jpg', heroCaption:'Create vision Sketch',
    img1:'prism-flow-copy.mp4', img1Caption:'Patch the Canvas', img2:'prism-flow-2.mp4', img2Caption:'Your DROP visual is ready',
    bigImg:['prism-promo.mp4','prism-laptop.jpg'], bigImgCaption:'Visual Identity',
-   lead:'A tool for creating visual identity for music — a prototype built as a UI/UX studio project at Bezalel in partnership with Lightricks.',
-   body:['The idea: to let independent artists, with no budget, studio, or designer, turn a song into a moving visual — a vertical Spotify Canvas (9:16) that plays beneath the track, along with visuals for social media and live performances.','The conceptual core is “Album DNA”: each album gets a single, unified generative visual identity, and every song inherits its own variation from it — so all the tracks feel like one family without being identical. Living covers for every track.','The user experience is built around the metaphor of a modular synthesizer / patch cables: the user “connects cables” between different inputs — image, color, texture, mood, lyrics — into a canvas, and everything feeds into the visual.','Technically, it’s a single-file HTML application, with all media embedded as base64 and an iframe-based screen architecture.']},
+   lead:'A tool for creating visual identity for music - a prototype built as a UI/UX studio project at Bezalel in partnership with Lightricks.',
+   body:['The idea: to let independent artists, with no budget, studio, or designer, turn a song into a moving visual - a vertical Spotify Canvas (9:16) that plays beneath the track, along with visuals for social media and live performances.','The conceptual core is “Album DNA”: each album gets a single, unified generative visual identity, and every song inherits its own variation from it - so all the tracks feel like one family without being identical. Living covers for every track.','The user experience is built around the metaphor of a modular synthesizer / patch cables: the user “connects cables” between different inputs - image, color, texture, mood, lyrics - into a canvas, and everything feeds into the visual.','Technically, it’s a single-file HTML application, with all media embedded as base64 and an iframe-based screen architecture.']},
   {title:'Kodo', cat:'Visual Identity \u2219 UI/UX', year:'2026', client:'KODO', role:'Brand Identity, Packaging', tools:'Figma, Illustrator', c1:'#afd3e4', c2:'#6297d8', c3:'#f09035', c4:'#e4542d', c5:'#4da34e', c6:'#ee7cb1', c7:'#f0ebe0', ang:130, img:'kodo.jpg', heroVideo:'kodo-desktop-flow.mp4', heroVideoPoster:'kodo-desktop-flow-poster.jpg', heroCaption:'The desktop building interface', img1:'kodo-flow-cropped.mp4', img1Compact:true, img1Caption:'The mobile onboarding flow', img2:'kodo.jpg', img2Caption:'The full Cyber Deck Creative Kit', img3:'kodo-hero.jpg',
    strip:['kodo-icon-led.png','kodo-icon-network.png','kodo-icon-screen.png','kodo-icon-button.png','kodo-icon-pi1.png','kodo-icon-pi2.png','kodo-icon-wires.png'], stripCaption:'Branding', stripLogo:'kodo-group-57.png',
    processCaption:'Behind the scenes - the process',
    btsImages:['kodo-prototype-1.jpg','kodo-prototype-2.jpg','kodo-prototype-3.jpg'],
-   /* hidden for now — rename back to processPairs to show the photo → illustration pairs again */
+   /* hidden for now - rename back to processPairs to show the photo → illustration pairs again */
    processPairsHidden:[
      {photo:'kodo-ref-1.jpg', illust:'kodo-group-43.png'},
      {photo:'kodo-ref-2.jpg', illust:'kodo-group-44.png'},
@@ -1363,11 +1401,12 @@ const ALLWORKS = [
    pitchSlides:['pitch-1.jpg','pitch-2.jpg','pitch-3.jpg','pitch-4.jpg','pitch-5.jpg','pitch-6.jpg','pitch-7.jpg','pitch-8.jpg','pitch-9.jpg','pitch-10.jpg','pitch-11.jpg','pitch-12.jpg','pitch-13.jpg','pitch-14.jpg','pitch-15.jpg','pitch-16.jpg','pitch-17.jpg','pitch-18.jpg','pitch-19.jpg','pitch-20.jpg','pitch-21.jpg'],
    lead:'Meet KODO! Where Montessori principles meet the vibecoding and cyber decks of today. Instead of raising more iPad kids, we believe the next generation will be one of creators and visionaries: with the right tools, of course.',
    body:['With KODO, kids set up their own cyber decks and build their own games to play on them, returning a sense of agency and ownership over tech that we haven\u2019t had since the days of retro arcades.','Our vision is for classrooms to be full of students swapping decks and comparing games so screens don\u2019t keep isolating us, but rather bring back creativity and community.']},
-  {title:'Milon Hai', cat:'Visual Identity \u2219 UI/UX', year:'2026', client:'Milon Hai', role:'Pattern Design, Merch', tools:'Illustrator, Photoshop', c1:'#ED0560', c2:'#FFDB5A', c3:'#2A52BE', c4:'#005F10', c5:'#F9C4D3', c6:'#EE4C01', ang:135, img:'milon-hai.jpg', heroVideo:'milon-hai-flow.mp4', heroVideoPoster:'milon-hai-flow-poster.jpg', heroVideoCompact:true, heroCaption:'app flow', img1:'milon-hai-landing-flow-v2.mp4', img1Compact:true, img1Caption:'landing page',
+  {title:'Milon Hai', cat:'Visual Identity \u2219 UI/UX \u2219 Branding', year:'2026', client:'Milon Hai', role:'Pattern Design, Merch', tools:'Illustrator, Photoshop', c1:'#ED0560', c2:'#FFDB5A', c3:'#2A52BE', c4:'#005F10', c5:'#F9C4D3', c6:'#EE4C01', ang:135, img:'milon-hai.jpg', heroVideo:'milon-hai-flow.mp4', heroVideoPoster:'milon-hai-flow-poster.jpg', heroVideoCompact:true, heroCaption:'app flow', img1:'milon-hai-landing-flow-v2.mp4', img1Compact:true, img1Caption:'landing page',
+   moodboard:{dir:'milon-hai-moodboard/', aspect:5199/3152, caption:'Mood Board', items:[["x-pavement.webp",0.1215,0.298,0.173,1],["x-lollipop.webp",0.705,0.358,0.143,2],["x-beach.webp",0.848,0.273,0.152,3],["m26.webp",0.2955,0.0387,0.2424,4],["m00.webp",0.1407,0.6471,0.2481,5],["m27.webp",0.0516,-0.0001,0.1473,6],["m19.webp",0.5401,0.0387,0.1646,7],["m22.webp",0.7728,0.5644,0.1506,8],["m21.webp",0.7078,0.0661,0.1582,9],["m11.webp",0.2218,0.4885,0.1883,10],["m23.webp",0.0615,0.6496,0.1438,11],["m02.webp",0.5988,0.4002,0.1058,12],["m24.webp",0.3668,0.8359,0.1484,13],["m28.webp",0.201,0.0589,0.1023,14],["m17.webp",0.5099,0.6175,0.1666,15],["m10.webp",0.4874,0.4269,0.1119,16],["m05.webp",0.0717,0.5029,0.1124,17],["m20.webp",0.6015,0.8234,0.123,18],["m08.webp",0.0,0.3302,0.1205,19],["m25.webp",0.3826,0.5983,0.1303,20],["m07.webp",0.281,0.4123,0.1301,21],["m06.webp",0.6764,0.71,0.096,22],["m14.webp",0.5293,0.7659,0.1236,23],["m04.webp",0.7046,0.5648,0.0907,24],["m09.webp",0.3983,0.4123,0.0883,25],["m18.webp",0.1738,0.4854,0.0784,26],["m13.webp",0.6373,0.7658,0.1201,27],["m15.webp",0.5098,0.8551,0.1144,28],["m16.webp",0.3983,0.7512,0.1254,29],["m01.webp",0.0786,0.196,0.1192,30],["m03.webp",0.7157,0.8461,0.0713,31],["m12.webp",0.6545,0.633,0.0856,32]]}, // [file, left, top, width (fractions of the board), z-index]
    bigImg:'milon-hai.jpg', bigImgCaption:'Branding',
    brandColors:['#EE4C01','#9ACDFF','#F9C4D3','#005F10','#FFDB5A','#2A52BE','#EC0760','#FBFAF6','#000000'],
    lead:'\u2018Milon Hai\u2019 is a concept app developed around a gap we identified among new immigrants in Israel: the lack of tools that teach the actual cultural context of local slang.',
-   body:['The result is an app that serves as a social and experiential platform, allowing users to \u2018collect\u2019 the Israeli street \u2014 from coffee shop slang to workplace expressions.','It goes beyond literal translations (\u2018what does it mean?\u2019), providing the full cultural context: tone, humor, and the situations in which each word is appropriately used.']},
+   body:['The result is an app that serves as a social and experiential platform, allowing users to \u2018collect\u2019 the Israeli street - from coffee shop slang to workplace expressions.','It goes beyond literal translations (\u2018what does it mean?\u2019), providing the full cultural context: tone, humor, and the situations in which each word is appropriately used.']},
   {title:'Maskit.code', cat:'Speculative Branding', year:'2024', client:'Maskit.code', role:'Brand Identity, Web Design', tools:'Figma, Illustrator', c1:'#ffffff', c2:'#1c1c1c', ang:140, pageBg:'#1D4A36', pageDark:true, siteLink:'maskit-site-final.html',
    img:'maskit-cotton.jpg', heroVideo:'maskit-code-flow.mp4', heroCaption:'The site',
    featureMain:'maskit-code-brandbook.mp4', featureMainCompact:true, featureExtra:'maskit-feature-extra.jpg',
@@ -1381,7 +1420,7 @@ const ALLWORKS = [
    img4:'digital-nomads-shot-4.png', img5:'digital-nomads-shot-5.png', img6:'digital-nomads-shot-6.png',
    strip:['digital-nomads-strip-1.png','digital-nomads-strip-2.png','digital-nomads-strip-3.png','digital-nomads-strip-4.png','digital-nomads-strip-5.png','digital-nomads-strip-6.png','digital-nomads-strip-7.png'], stripCaption:'Icons',
    lead:'This project features a series of illustrations created for an app designed for the digital nomad community. The remote work lifestyle brings freedom, but also a daily struggle with uncertainty: finding the fastest Wi-Fi, an available power outlet, and a quiet environment.',
-   body:['The goal of these illustrations was to create a visual language that conveys reliability, a sense of community, and efficiency. The illustrations guide the user throughout their experience — from the onboarding screens to the Explore section, which allows them to discover new workspaces by category — making the interface inviting and intuitive.','Through its illustrative style, the project demonstrates how the app transforms the frustrating task of finding a workspace into a simple, effortless, and community-driven experience.']},
+   body:['The goal of these illustrations was to create a visual language that conveys reliability, a sense of community, and efficiency. The illustrations guide the user throughout their experience - from the onboarding screens to the Explore section, which allows them to discover new workspaces by category - making the interface inviting and intuitive.','Through its illustrative style, the project demonstrates how the app transforms the frustrating task of finding a workspace into a simple, effortless, and community-driven experience.']},
   {title:'VOUCH', cat:'UI/UX · App Design · Digital Product', year:'2026', client:'Vouch', role:'Product Design', tools:'Figma', c1:'#93a7d7', c2:'#df5958', c3:'#e2aa91', c4:'#e7ccae', c5:'#d2a59c', ang:150, img:'vouch.jpg',
    heroVideo:'vouch-flow.mp4', heroVideoCompact:true, heroCaption:'app flow',
    rowCaption:'Screen Samples',
@@ -1395,13 +1434,12 @@ const ALLWORKS = [
    img7:'netflix-dating-shot-7.png', img8:'netflix-dating-shot-8.png', img9:'netflix-dating-shot-9.png',
    lead:'The concept was born from the desire to take “Netflix and Chill” and turn it into a meaningful dating experience. Based on the idea that our favorite movies and series tell our story better than any bio, the app uses Netflix’s famous algorithm to find matches based on shared taste.',
    body:['To capture the romantic, nostalgic essence of classic cinema, I developed a unique illustrative language for the interface. By adapting iconic movie scenes and featuring them with contemporary, diverse characters, the illustrations bridge the gap between silver-screen magic and modern-day connection.']},
-  {title:'rootea', cat:'Branding / Packaging', year:'2024', client:'rootea', role:'Brand Identity, Packaging', tools:'Illustrator, Photography', c1:'#605a5b', c2:'#a68d86', c3:'#dcd9d6', c4:'#7c5952', c5:'#5d6048', ang:125, pageBg:'#1D4A36', pageDark:true, masonryGrid:true, rowCaption:'Images from the submission', img:'rootea-detail.jpg', heroImg:'rootea-detail.jpg', heroImgWidth:'92%', img1:'rootea.jpg',
-   img2:'rootea-photo-1.jpg', img3:'rootea-photo-2.jpg',
-   img4:'rootea-photo-3.jpg', img5:'rootea-tea-bag.jpg', img6:'rootea-photo-4.jpg',
-   bigImg:['rootea-bts-frame.png', 'rootea-bts-layout.png'], bigImgCaption:'Behind the scenes — building the brand',
+  {title:'rootea', cat:'Branding / Packaging', year:'2024', client:'rootea', role:'Brand Identity, Packaging', tools:'Illustrator, Photography', c1:'#605a5b', c2:'#a68d86', c3:'#dcd9d6', c4:'#7c5952', c5:'#5d6048', ang:125, pageBg:'#1D4A36', pageDark:true, masonryGrid:true, masonryColumns:1, rowCaption:'THE PACKAGING', img:'rootea-detail.jpg', heroImg:'rootea-detail.jpg', heroImgWidth:'100%', img1:'rootea.jpg',
+   img2:'rootea-tea-bag.jpg',
+   bigImg:['rootea-bts-1.jpg', 'rootea-bts-2.jpg', 'rootea-bts-frame.png', 'rootea-bts-layout.png'], bigImgRowFrom:0, bigImgRowCount:2, bigImgCaption:'Behind the scenes - building the brand',
    lead:'‘rootea’ is a new medicinal mushroom tea brand. It aims to provide an alternative approach to managing mental health struggles, offering a departure from the traditional medication experience.',
    body:['The visual identity draws inspiration from the organic forms, unique shapes, and delicate color palettes of the medicinal mushrooms themselves.']},
-  {title:'GRUNGE', cat:'Editorial / Zine', year:'2025', client:'Grunge Zine', role:'Editorial Design, Art Direction', tools:'InDesign, Illustrator', c1:'#f83500', c2:'#f6e011', c3:'#ec0b4b', c4:'#5bcc18', c5:'#1a0f0a', ang:150, img:'grunge.jpg', heroVideo:'grunge-hero.mp4', img1:'grunge.jpg', img2:'grunge-bd-2.jpg', imgPair:true,
+  {title:'GRUNGE', hidden:true, cat:'Editorial / Zine', year:'2025', client:'Grunge Zine', role:'Editorial Design, Art Direction', tools:'InDesign, Illustrator', c1:'#f83500', c2:'#f6e011', c3:'#ec0b4b', c4:'#5bcc18', c5:'#1a0f0a', ang:150, img:'grunge.jpg', heroVideo:'grunge-hero.mp4', img1:'grunge.jpg', img2:'grunge-bd-2.jpg', imgPair:true,
    lead:'Booklet, poster, and website design centered around the ‘Grunge’ Wikipedia entry, utilizing typography to create a layered reading experience.',
    body:['The project integrates the encyclopedic definitions with imagery from the grunge scene, employing a distinct grunge aesthetic.','The poster and website extend this typographic language, serving as an invitation to the booklet’s launch event.']},
   {title:'Archive', cat:'Miscellaneous', year:'', client:'', role:'', tools:'', c1:'#8a8a92', c2:'#c9c2b0', ang:120, isArchive:true,
@@ -1413,6 +1451,8 @@ const ALLWORKS = [
    lead:'A loose collection of smaller pieces and one-offs that didn’t need a page of their own.',
    body:[]},
 ];
+// projects flagged hidden:true are kept here but not shown - delete the flag to bring one back
+const ALLWORKS = ALLWORKS_ALL.filter(p => !p.hidden);
 
 /* ---------- fix: <video> with height:auto can keep a stale/default aspect ratio
    in some browsers, leaving a gap at the bottom that shows the page background
@@ -1443,10 +1483,10 @@ if(favoritesStack){
   });
 
   // wildishandco.co.uk-style card deck: each new card lands upright and front-and-center,
-  // and every card already shown recedes one notch further into a fan behind it —
+  // and every card already shown recedes one notch further into a fan behind it -
   // driven entirely by scroll position through the (tall, pinned) section.
   // once a card is revealed it's also clickable: tap a card in the back to bring it to
-  // the front, tap the front card to open that project — a simple, tactile way to browse.
+  // the front, tap the front card to open that project - a simple, tactile way to browse.
   const favCards = [...favoritesStack.querySelectorAll('.fav-card')];
   const favSection = document.getElementById('favorites');
   let favShown = 0;
@@ -1546,7 +1586,7 @@ ALLWORKS.forEach((p,i)=>{
   });
   grid.appendChild(row);
 });
-// opened via a shared link (e.g. index.html#work-vouch) — show that project right away
+// opened via a shared link (e.g. index.html#work-vouch) - show that project right away
 if(location.hash.startsWith(WORK_HASH)) openFromHash();
 
 /* ---------- static row of the design/AI tools in my kit, one icon each ---------- */
@@ -1619,7 +1659,7 @@ function updateScrollProgress(){
 window.addEventListener('scroll', updateScrollProgress, { passive:true });
 updateScrollProgress();
 
-/* ---------- hero trail: an empty stage — moving the mouse (or dragging a finger on
+/* ---------- hero trail: an empty stage - moving the mouse (or dragging a finger on
    touch devices) leaves a ribbon of project images behind it ---------- */
 (function(){
   const layer = document.getElementById('trailLayer');
@@ -1627,7 +1667,7 @@ updateScrollProgress();
   if(!layer) return;
   if(canHover && window.innerWidth < 1000) return; // narrow desktop windows skip it
 
-  /* pull the trail images from ball-pit-images/ — drop whichever pictures you want in that
+  /* pull the trail images from ball-pit-images/ - drop whichever pictures you want in that
      folder and list their filenames below. */
   const TRAIL_FILENAMES = [
     '1.PNG', '2.png', '3.PNG', '555.png', '55555.png', '666.png', 'DSC03374.jpg', 'DSC03425.jpg',
@@ -1669,7 +1709,7 @@ updateScrollProgress();
     }
     lastX = x; lastY = y;
 
-    /* the faster/more diagonal the pointer moves, the more the image "swooshes" in — skewed
+    /* the faster/more diagonal the pointer moves, the more the image "swooshes" in - skewed
        and blurred in the direction of travel before it snaps into place */
     const angle = Math.atan2(dy, dx) * (180/Math.PI);
     const skew = Math.max(-18, Math.min(18, dx * 0.35));
@@ -1775,7 +1815,7 @@ updateScrollProgress();
     if(!ticking){ ticking = true; requestAnimationFrame(updateLetters); }
   });
 
-  // new work-titles get built after page load — re-split any that appear later
+  // new work-titles get built after page load - re-split any that appear later
   const stripObserver = new MutationObserver((mutations)=>{
     mutations.forEach(m=>{
       m.addedNodes.forEach(node=>{
