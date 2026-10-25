@@ -477,13 +477,20 @@
   /* a main video/image on the left with a stack of side images to its right —
      used to show something "next to" its supporting media */
   .proj-feature-row{display:flex;gap:1rem;align-items:stretch;width:100%}
-  .proj-feature-main{flex:1 1 45%;min-width:0}
+  .proj-feature-left{flex:1 1 45%;min-width:0;display:flex;flex-direction:column;gap:1rem}
+  .proj-feature-main{flex:none;min-width:0}
   .proj-feature-main img,.proj-feature-main video{width:100%;height:100%;object-fit:contain}
+  /* optional extra tile under the main video: fills exactly the space left in the left column */
+  .proj-feature-extra{display:none;flex:1;min-height:0;align-items:center;justify-content:center;
+    background:#F4F4F2;overflow:hidden}
+  .proj-feature-extra.show{display:flex}
+  .proj-feature-extra img{width:86%;height:auto;max-height:100%;object-fit:contain}
   .proj-feature-side{flex:1 1 55%;min-width:0;display:flex;flex-direction:column;gap:1rem}
   .proj-feature-side .proj-img{flex:1;min-width:0}
   .proj-feature-side .proj-img img,.proj-feature-side .proj-img video{width:100%;height:100%;object-fit:cover}
   @media(max-width:880px){
     .proj-feature-row{flex-direction:column}
+    .proj-feature-extra{min-height:200px}
   }
   .proj-bts-row{display:flex;gap:1rem;width:100%}
   .proj-bts-row img{flex:1;width:0;min-width:0;aspect-ratio:1;object-fit:cover;border-radius:8px}
@@ -664,7 +671,7 @@
           </div>
           <div>
             <div class="about-title magnetic-title">About</div>
-            <p class="about-text">A third-year Visual Communication student at Bezalel Academy. With a lifelong foundation in art and illustration, I&rsquo;ve developed a keen eye for visual language.</p>
+            <p class="about-text">A fourth-year Visual Communication student at Bezalel Academy. With a lifelong foundation in art and illustration, I&rsquo;ve developed a keen eye for visual language.</p>
             <p class="about-text">Now channeling that creative background into Product Design, to transform passion into functional, impactful digital experiences.</p>
           </div>
         </div>
@@ -757,7 +764,7 @@
         </div>
         <div class="proj-right">
           <div class="proj-media" id="pHeroWrap"><div class="proj-caption" id="pHeroCap"></div><div class="proj-img" id="pHero"></div></div>
-          <div class="proj-media" id="pFeatureWrap"><div class="proj-caption" id="pFeatureCap"></div><div class="proj-feature-row" id="pFeatureRow"><div class="proj-img proj-feature-main" id="pFeatureMain"></div><div class="proj-feature-side" id="pFeatureSide"></div></div></div>
+          <div class="proj-media" id="pFeatureWrap"><div class="proj-caption" id="pFeatureCap"></div><div class="proj-feature-row" id="pFeatureRow"><div class="proj-feature-left"><div class="proj-img proj-feature-main" id="pFeatureMain"></div><div class="proj-feature-extra" id="pFeatureExtra"></div></div><div class="proj-feature-side" id="pFeatureSide"></div></div></div>
           <div class="proj-caption" id="pRowCap"></div>
           <div class="proj-row" id="pRow">
             <div class="proj-media"><div class="proj-caption" id="pCap1"></div><div class="proj-img" id="pg1"></div></div>
@@ -1006,6 +1013,9 @@ function openProject(id, list){
       : `<div class="proj-img"><img src="${src}" alt="${p.title}"></div>`
   ).join('');
   setCaption('pFeatureCap', p.featureMain ? p.featureCaption : '');
+  const featureExtraEl = document.getElementById('pFeatureExtra');
+  featureExtraEl.innerHTML = (p.featureMain && p.featureExtra) ? `<img src="${p.featureExtra}" alt="${p.title}">` : '';
+  featureExtraEl.classList.toggle('show', !!(p.featureMain && p.featureExtra));
   setCaption('pRowCap', p.rowCaption);
   setProjImg(document.getElementById('pg1'), p.img1, `linear-gradient(${(p.ang+40)}deg, ${p.c2}, ${p.c1})`, p.title, p.img1Compact, p.img1CompactCrop);
   setProjImg(document.getElementById('pg2'), p.img2, `linear-gradient(${p.ang}deg, ${p.c1}, ${p.c2})`, p.title, p.img2Compact);
@@ -1108,11 +1118,11 @@ function openProject(id, list){
   const btsEl = document.getElementById('pBts');
   btsEl.innerHTML = p.btsImages ? p.btsImages.map(src=>`<img src="${src}" alt="${p.title}">`).join('') : '';
   const processEl = document.getElementById('pProcess');
-  document.getElementById('pProcessWrap').style.display = p.processPairs ? '' : 'none';
+  document.getElementById('pProcessWrap').style.display = (p.processPairs || p.btsImages) ? '' : 'none';
   processEl.innerHTML = p.processPairs ? p.processPairs.map(pair=>
     `<div class="process-pair"><img class="ref-photo" src="${pair.photo}" alt="reference"><span class="ref-arrow">&rarr;</span><img class="ref-illust" src="${pair.illust}" alt="illustration"></div>`
   ).join('') : '';
-  setCaption('pProcessCap', p.processPairs ? p.processCaption : '');
+  setCaption('pProcessCap', (p.processPairs || p.btsImages) ? p.processCaption : '');
   const pitchStripEl = document.getElementById('pPitchStrip');
   document.getElementById('pPitchWrap').style.display = p.pitchSlides ? '' : 'none';
   pitchSlides = p.pitchSlides || [];
@@ -1211,7 +1221,8 @@ const ALLWORKS = [
    strip:['kodo-icon-led.png','kodo-icon-network.png','kodo-icon-screen.png','kodo-icon-button.png','kodo-icon-pi1.png','kodo-icon-pi2.png','kodo-icon-wires.png'], stripCaption:'Branding', stripLogo:'kodo-group-57.png',
    processCaption:'Behind the scenes - the process',
    btsImages:['kodo-prototype-1.jpg','kodo-prototype-2.jpg','kodo-prototype-3.jpg'],
-   processPairs:[
+   /* hidden for now — rename back to processPairs to show the photo → illustration pairs again */
+   processPairsHidden:[
      {photo:'kodo-ref-1.jpg', illust:'kodo-group-43.png'},
      {photo:'kodo-ref-2.jpg', illust:'kodo-group-44.png'},
      {photo:'kodo-ref-3.jpg', illust:'kodo-group-45.png'},
@@ -1226,33 +1237,29 @@ const ALLWORKS = [
   {title:'Milon Hai', cat:'Visual Identity \u2219 UI/UX', year:'2026', client:'Milon Hai', role:'Pattern Design, Merch', tools:'Illustrator, Photoshop', c1:'#ED0560', c2:'#FFDB5A', c3:'#2A52BE', c4:'#005F10', c5:'#F9C4D3', c6:'#EE4C01', ang:135, img:'milon-hai.jpg', heroVideo:'milon-hai-flow.mp4', heroVideoPoster:'milon-hai-flow-poster.jpg', heroVideoCompact:true, heroCaption:'app flow', img1:'milon-hai-landing-flow-v2.mp4', img1Compact:true, img1Caption:'landing page',
    bigImg:'milon-hai.jpg', bigImgCaption:'Branding',
    brandColors:['#EE4C01','#9ACDFF','#F9C4D3','#005F10','#FFDB5A','#2A52BE','#EC0760','#FBFAF6','#000000'],
-   lead:'Milon Hai\u2019 is a concept app developed around a gap we identified among new immigrants in Israel: the lack of tools that teach the actual cultural context of local slang.',
+   lead:'\u2018Milon Hai\u2019 is a concept app developed around a gap we identified among new immigrants in Israel: the lack of tools that teach the actual cultural context of local slang.',
    body:['The result is an app that serves as a social and experiential platform, allowing users to \u2018collect\u2019 the Israeli street \u2014 from coffee shop slang to workplace expressions.','It goes beyond literal translations (\u2018what does it mean?\u2019), providing the full cultural context: tone, humor, and the situations in which each word is appropriately used.']},
   {title:'Maskit.code', cat:'Speculative Branding', year:'2024', client:'Maskit.code', role:'Brand Identity, Web Design', tools:'Figma, Illustrator', c1:'#ffffff', c2:'#1c1c1c', ang:140, pageBg:'#1D4A36', pageDark:true, siteLink:'maskit-site-final.html',
-   img:'maskit-cotton.jpg', heroVideo:'maskit-code-flow.mp4',
-   featureMain:'maskit-code-brandbook.mp4', featureMainCompact:true,
+   img:'maskit-cotton.jpg', heroVideo:'maskit-code-flow.mp4', heroCaption:'The site',
+   featureMain:'maskit-code-brandbook.mp4', featureMainCompact:true, featureExtra:'maskit-feature-extra.jpg',
    featureSide:['maskit-brandbook-1.png','maskit-brandbook-2.png','maskit-brandbook-3.png'],
    featureCaption:'The brand book',
-   img1:'maskit-code-detail.mp4', img1Compact:true, img2:'maskit-poster-1.jpg', img3:'maskit-poster-2.jpg',
-   img4:'maskit-poster-3.jpg', img5:'maskit-farm.mp4', img5Compact:true,
+   img1:'maskit-code-detail.mp4', img1Compact:true,
    lead:'The project presents a speculative future scenario in which tangibility has completely vanished, and the world exists exclusively within a digital realm.',
    body:['In this reality, the historic brand “Maskit” undergoes a transformation, serving as a marketplace for virtual assets. The historical garments no longer exist in physical form; instead, they are sold as incredibly detailed text prompts.','Through words and code, Maskit preserves the haute couture, luxury, and exclusivity that characterized the original brand.','Within the void of the virtual world, the “New Maskit” yearns for and echoes materiality. It seeks a way back to the physical world, doing so by integrating visual and conceptual elements from the realms of print, craft, and manual making, acting as a bridge that connects the digital with the human.']},
-  {title:'Digital Nomads', cat:'Digital Illustration', year:'2026', client:'Editorial', role:'Illustration', tools:'Procreate, Illustrator', c1:'#e5ebfd', c2:'#6386f7', c3:'#3d5499', c4:'#ee9d81', c5:'#c96470', ang:120, mobileCompactImages:true, img:'digital-nomads.jpg', heroImg:'digital-nomads-hero.png', heroImgWidth:'85%',
+  {title:'Digital Nomads', cat:'Digital Illustration', year:'2026', client:'Editorial', role:'Illustration', tools:'Procreate, Illustrator', c1:'#e5ebfd', c2:'#6386f7', c3:'#3d5499', c4:'#ee9d81', c5:'#c96470', ang:120, mobileCompactImages:true, img:'digital-nomads.jpg', heroImg:'digital-nomads-hero.png', heroImgWidth:'85%', rowCaption:'Screen Examples',
    img1:'digital-nomads-shot-1.png', img2:'digital-nomads-shot-2.png', img3:'digital-nomads-shot-3.png', imgRow:true,
    img4:'digital-nomads-shot-4.png', img5:'digital-nomads-shot-5.png', img6:'digital-nomads-shot-6.png',
-   strip:['digital-nomads-strip-1.png','digital-nomads-strip-2.png','digital-nomads-strip-3.png','digital-nomads-strip-4.png','digital-nomads-strip-5.png','digital-nomads-strip-6.png','digital-nomads-strip-7.png'],
+   strip:['digital-nomads-strip-1.png','digital-nomads-strip-2.png','digital-nomads-strip-3.png','digital-nomads-strip-4.png','digital-nomads-strip-5.png','digital-nomads-strip-6.png','digital-nomads-strip-7.png'], stripCaption:'Icons',
    lead:'This project features a series of illustrations created for an app designed for the digital nomad community. The remote work lifestyle brings freedom, but also a daily struggle with uncertainty: finding the fastest Wi-Fi, an available power outlet, and a quiet environment.',
    body:['The goal of these illustrations was to create a visual language that conveys reliability, a sense of community, and efficiency. The illustrations guide the user throughout their experience — from the onboarding screens to the Explore section, which allows them to discover new workspaces by category — making the interface inviting and intuitive.','Through its illustrative style, the project demonstrates how the app transforms the frustrating task of finding a workspace into a simple, effortless, and community-driven experience.']},
   {title:'VOUCH', cat:'UI/UX · App Design · Digital Product', year:'2026', client:'Vouch', role:'Product Design', tools:'Figma', c1:'#93a7d7', c2:'#df5958', c3:'#e2aa91', c4:'#e7ccae', c5:'#d2a59c', ang:150, img:'vouch.jpg',
    heroVideo:'vouch-flow.mp4', heroVideoCompact:true, heroCaption:'app flow',
-   rowCaption:'Screen’s samples',
+   rowCaption:'Screen Samples',
    img1:'vouch-shot-1.png', img2:'vouch-shot-2.png', img3:'vouch-shot-3.png', imgRow:true,
    bigImg:'vouch-watch.png', bigImgCaption:'Watch experience',
    lead:'Vouch is a UX/UI design concept for a social habit-building app, developed during an intensive one-week design sprint at UX studio at Bezalel to explore how shared accountability can overcome the limitations of individual discipline.',
    body:['By linking the progress of two partners through a “shared streak” mechanism, the app transforms habit-tracking into a social commitment, featuring a unique “Forgiveness Loop” for missed days and a peer-rating system to foster reliability.','Through user research, rapid wireframing, and a vibrant, emotional interface, Vouch merges psychological insights with intuitive interaction design, turning mundane daily routines into a meaningful and supportive social ritual.']},
-  {title:'Horizon', cat:'UI / UX', year:'2026', client:'Horizon', role:'Product Design', tools:'Figma', c1:'#5B7CFA', c2:'#0A0A14', c3:'#1C2240', c4:'#F1F1EF', c5:'#8FA0FF', ang:140, img:'horizon.jpg',
-   lead:'More details on this project coming soon.',
-   body:[]},
   {title:'Netflix Dating', cat:'Illustration / Editorial', year:'2025', client:'Netflix', role:'Illustration', tools:'Procreate, Illustrator', c1:'#e13426', c2:'#220c0b', c3:'#f7eedc', c4:'#f3d1c3', c5:'#e8867b', ang:135, img:'netflix-dating.jpg', heroImg:'netflix-dating-hero.png',
    img1:'netflix-dating-shot-1.png', img2:'netflix-dating-shot-2.png', img3:'netflix-dating-shot-3.png', imgRow:true,
    img4:'netflix-dating-shot-4.png', img5:'netflix-dating-shot-5.png', img6:'netflix-dating-shot-6.png',
@@ -1270,10 +1277,9 @@ const ALLWORKS = [
    body:['The project integrates the encyclopedic definitions with imagery from the grunge scene, employing a distinct grunge aesthetic.','The poster and website extend this typographic language, serving as an invitation to the booklet’s launch event.']},
   {title:'Archive', cat:'Miscellaneous', year:'', client:'', role:'', tools:'', c1:'#8a8a92', c2:'#c9c2b0', ang:120, isArchive:true,
    archiveImages:[
-     {title:'Untitled 01', images:['archive-1.jpg','archive-2.jpg','archive-3.jpg','archive-13.jpg']},
-     {title:'Untitled 02', images:['archive-4.jpg','archive-5.jpg','archive-6.jpg','archive-24.jpg','archive-25.jpg','archive-23.jpg']},
-     {title:'Untitled 03', longScroll:true, images:['archive-14.jpg']},
-     {title:'Untitled 04', images:['archive-15.jpg','archive-16.jpg','archive-17.jpg','archive-18.jpg','archive-19.jpg','archive-20.jpg','archive-21.jpg','archive-22.jpg']}
+     {title:'Who Murdered Grandma?', images:['archive-1.jpg','archive-2.jpg','archive-3.jpg','archive-13.jpg']},
+     {title:'Raash (Noise)', images:['archive-4.jpg','archive-5.jpg','archive-6.jpg','archive-24.jpg','archive-25.jpg','archive-23.jpg']},
+     {title:'Alice in Wonderland', images:['archive-15.jpg','archive-16.jpg','archive-17.jpg','archive-18.jpg','archive-19.jpg','archive-20.jpg','archive-21.jpg','archive-22.jpg']}
    ],
    lead:'A loose collection of smaller pieces and one-offs that didn’t need a page of their own.',
    body:[]},
