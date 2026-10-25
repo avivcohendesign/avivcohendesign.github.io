@@ -1128,7 +1128,7 @@ function openProject(id, list){
   setProjImg(document.getElementById('pg3'), p.img3, `radial-gradient(circle at 40% 30%, ${p.c2}, ${p.c1})`, p.title, p.img3Compact);
   document.getElementById('pg1').closest('.proj-media').style.display = p.img1 ? '' : 'none';
   document.getElementById('pg2').closest('.proj-media').style.display = p.img2 ? '' : 'none';
-  document.getElementById('pg3').closest('.proj-media').style.display = (p.img3 || !p.imgPair) ? '' : 'none';
+  document.getElementById('pg3').closest('.proj-media').style.display = p.img3 ? '' : 'none';
   setCaption('pCap1', p.img1Caption); setCaption('pCap2', p.img2Caption); setCaption('pCap3', p.img3Caption);
   const pRow2El = document.getElementById('pRow2');
   const pg6El = document.getElementById('pg6');
