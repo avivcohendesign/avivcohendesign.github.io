@@ -155,6 +155,10 @@
     margin-bottom:.6rem;display:block}
   .about-title{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--ink);
     font-size:clamp(2.2rem,4.6vw,3.8rem);line-height:1.05;letter-spacing:0;margin-bottom:1.4rem}
+  .about-resume{display:inline-block;margin:-.6rem 0 1.4rem;font-family:var(--body);font-size:1.02rem;
+    color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:.15rem;
+    transition:opacity .2s var(--ease),letter-spacing .25s var(--ease)}
+  .about-resume:hover{opacity:.6;letter-spacing:.02em}
   .about-text{font-family:var(--body);font-size:1.02rem;line-height:1.7;color:var(--ink);max-width:46ch}
   .about-text + .about-text{margin-top:1rem}
   .about-photo-wrap{position:relative;opacity:0;transform:translateX(-34px);
@@ -557,6 +561,25 @@
     transition:transform .3s var(--ease)}
   .proj-pitch-strip img:hover{transform:translateY(-4px)}
 
+  .resume-lightbox{position:fixed;inset:0;z-index:1200;background:rgba(20,20,24,.92);display:none;
+    flex-direction:column;align-items:center;justify-content:center;padding:1.6rem 1rem}
+  .resume-lightbox.open{display:flex;animation:viewIn .35s var(--ease) both}
+  .resume-lightbox .rl-scroll{max-height:calc(100vh - 5.5rem);max-width:100%;overflow:auto;border-radius:6px;
+    box-shadow:0 20px 60px rgba(0,0,0,.45)}
+  .resume-lightbox .rl-page{position:relative;display:block;width:max-content}
+  .resume-lightbox img{display:block;height:calc(100vh - 5.5rem);width:auto;max-width:none;background:#f2f2f2}
+  .resume-lightbox .rl-link{position:absolute;left:78.2%;top:15.6%;width:8.2%;height:1.7%;cursor:pointer}
+  .resume-lightbox .rl-close{position:absolute;top:1rem;right:1.6rem;color:#eee;font-size:2.2rem;line-height:1;
+    background:none;border:none;cursor:pointer;z-index:2;transition:opacity .2s}
+  .resume-lightbox .rl-close:hover{opacity:.6}
+  .resume-lightbox .rl-download{margin-top:.9rem;color:#eee;font-family:var(--body);font-size:.85rem;letter-spacing:.04em;
+    text-decoration:none;border-bottom:1px solid rgba(238,238,238,.5);padding-bottom:.1rem}
+  .resume-lightbox .rl-download:hover{opacity:.7}
+  @media(max-width:880px){
+    /* on phones the page fills the width and scrolls, so the text stays readable */
+    .resume-lightbox .rl-page{width:100%}
+    .resume-lightbox img{height:auto;width:100%}
+  }
   .pitch-lightbox{position:fixed;inset:0;z-index:300;background:rgba(20,20,24,.92);
     display:none;align-items:center;justify-content:center;flex-direction:column;gap:1rem}
   .pitch-lightbox.open{display:flex}
@@ -702,6 +725,7 @@
           </div>
           <div>
             <div class="about-title magnetic-title">About</div>
+            <a class="about-resume" href="Aviv_Cohen_Resume.pdf" target="_blank" rel="noopener">See my Resume &rarr;</a>
             <p class="about-text">A fourth-year Visual Communication student at Bezalel Academy. With a lifelong foundation in art and illustration, I&rsquo;ve developed a keen eye for visual language.</p>
             <p class="about-text">Now channeling that creative background into Product Design, to transform passion into functional, impactful digital experiences.</p>
           </div>
@@ -822,6 +846,19 @@
     </div>
   </div>
 
+  <!-- resume viewer: opens over the page like an image; × / Esc / click outside closes it -->
+  <div class="resume-lightbox" id="resumeLightbox" aria-hidden="true">
+    <button class="rl-close" id="rlClose" aria-label="Close">&times;</button>
+    <div class="rl-scroll" id="rlScroll">
+      <div class="rl-page">
+        <img src="resume-page.png" alt="Aviv Cohen — Resume">
+        <!-- the page is an image, so the "My Portfolio" link is a transparent hotspot placed over it -->
+        <a class="rl-link" href="https://avivcohendesign.github.io/" target="_blank" rel="noopener" aria-label="My Portfolio"></a>
+      </div>
+    </div>
+    <a class="rl-download" href="Aviv_Cohen_Resume.pdf" download>Download PDF</a>
+  </div>
+
   <div class="pitch-lightbox" id="pitchLightbox">
     <button class="pl-close" id="plClose" aria-label="Close">&times;</button>
     <button class="pl-nav pl-prev" id="plPrev" aria-label="Previous">&larr;</button>
@@ -876,6 +913,14 @@ document.querySelectorAll('nav a[data-go], [data-go].hero-collage-cta').forEach(
     if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
   });
 });
+/* resume viewer */
+const resumeBox = document.getElementById('resumeLightbox');
+function openResume(){ resumeBox.classList.add('open'); resumeBox.setAttribute('aria-hidden','false'); document.getElementById('rlScroll').scrollTop = 0; body.style.overflow='hidden'; }
+function closeResume(){ resumeBox.classList.remove('open'); resumeBox.setAttribute('aria-hidden','true'); if(!body.classList.contains('project-open')) body.style.overflow=''; }
+document.querySelector('.about-resume').addEventListener('click', (e)=>{ e.preventDefault(); openResume(); });
+document.getElementById('rlClose').addEventListener('click', closeResume);
+resumeBox.addEventListener('click', (e)=>{ if(e.target === resumeBox) closeResume(); });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && resumeBox.classList.contains('open')) closeResume(); });
 const siteNameLink = document.getElementById('siteNameLink');
 if(siteNameLink){
   siteNameLink.addEventListener('click', (e)=>{
