@@ -460,7 +460,22 @@
   .proj-strip img:hover{transform:translateY(-4px) rotate(-2deg)}
   .proj-strip-logo{display:none;width:340px;height:auto;object-fit:contain;margin:2rem auto 0}
   .proj-strip-logo.show{display:block}
+  /* scroll reveal: each block starts lowered + faded and glides up when it reaches the screen */
+  .proj-right .reveal{opacity:0;transform:translateY(56px) scale(.97);
+    transition:opacity .9s var(--ease),transform .9s var(--ease)}
+  .proj-right .reveal.in{opacity:1;transform:none}
+  .proj-right .reveal .proj-img img,.proj-right .reveal .proj-img video,
+  .proj-right .reveal.proj-img img,.proj-right .reveal.proj-img video{scale:1.08;transition:scale 1.3s var(--ease)}
+  .proj-right .reveal.in .proj-img img,.proj-right .reveal.in .proj-img video,
+  .proj-right .reveal.in.proj-img img,.proj-right .reveal.in.proj-img video{scale:1}
   .proj-big-stack{display:flex;flex-direction:column;gap:1.6rem;width:100%}
+  /* bigImgRow: the images sit side by side (stacked again on phones) */
+  .proj-big-stack.side-by-side{flex-direction:row;gap:1rem}
+  .proj-big-stack.side-by-side .proj-img{flex:1;min-width:0}
+  @media(max-width:880px){.proj-big-stack.side-by-side{flex-direction:column}}
+  .proj-big-row{display:flex;gap:1rem;width:100%}
+  .proj-big-row .proj-img{flex:1;min-width:0}
+  @media(max-width:880px){.proj-big-row{flex-direction:column}}
   /* a horizontal scroll of large color swatches with hex labels — the brand's selected palette */
   .proj-color-strip{display:none;gap:.8rem;overflow-x:auto;padding:.3rem .2rem 1rem;margin-top:1.6rem;
     scroll-snap-type:x proximity;scrollbar-width:thin;scrollbar-color:var(--ink-faint) transparent}
@@ -928,6 +943,36 @@ document.addEventListener('mouseout', e=>{
 
 const overlay = document.getElementById('project');
 let activeList = null;
+
+/* ---------- project pages: media glides in as you scroll to it (like the home page) ---------- */
+let projRevealObs = null;
+function setupProjectReveal(){
+  if(projRevealObs){ projRevealObs.disconnect(); projRevealObs = null; }
+  const right = overlay.querySelector('.proj-right');
+  if(!right || !('IntersectionObserver' in window)) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const sel = [
+    '#pHeroWrap','#pFeatureWrap > .proj-caption','#pFeatureMain','#pFeatureExtra','#pFeatureSide .proj-img',
+    '#pRowCap','.proj-row .proj-media',
+    '#pBigWrap > .proj-caption','#pBigStack .proj-img','#pColorStrip',
+    '#pStripWrap','#pProcessWrap','#pPitchWrap','.archive-grid > *'
+  ].join(',');
+  const targets = [...right.querySelectorAll(sel)].filter(el => getComputedStyle(el).display !== 'none');
+  projRevealObs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); projRevealObs.unobserve(e.target); }
+    });
+  },{rootMargin:'0px 0px -8% 0px', threshold:0});
+  targets.forEach(el=>{
+    el.classList.remove('in');
+    el.classList.add('reveal');
+    // siblings that appear together (rows, side images) come in one after another
+    const sibs = [...el.parentElement.children].filter(c => c.classList.contains('reveal') || targets.includes(c));
+    const i = Math.max(0, sibs.indexOf(el));
+    el.style.transitionDelay = Math.min(i * 90, 360) + 'ms';
+    projRevealObs.observe(el);
+  });
+}
 let currentWorkIdx = -1;
 function openProject(id, list){
   list = list || activeList;
@@ -1086,11 +1131,16 @@ function openProject(id, list){
   document.getElementById('pRow').classList.toggle('pair-mode', !!p.imgPair);
   const bigImgs = p.bigImg ? (Array.isArray(p.bigImg) ? p.bigImg : [p.bigImg]) : [];
   document.getElementById('pBigWrap').style.display = bigImgs.length ? '' : 'none';
-  document.getElementById('pBigStack').innerHTML = bigImgs.map(src =>
+  document.getElementById('pBigStack').classList.toggle('side-by-side', !!p.bigImgRow);
+  const bigTile = src =>
     /\.(mp4|mov|webm)$/i.test(src)
       ? `<div class="proj-img"><video src="${src}" autoplay muted loop playsinline></video></div>`
-      : `<div class="proj-img"><img src="${src}" alt="${p.title}"></div>`
-  ).join('');
+      : `<div class="proj-img"><img src="${src}" alt="${p.title}"></div>`;
+  // bigImgRowFrom: n → items before index n are stacked full-width, items from n on sit side by side in one row
+  const rowFrom = Number.isInteger(p.bigImgRowFrom) ? p.bigImgRowFrom : -1;
+  document.getElementById('pBigStack').innerHTML = rowFrom >= 0
+    ? bigImgs.slice(0, rowFrom).map(bigTile).join('') + `<div class="proj-big-row">${bigImgs.slice(rowFrom).map(bigTile).join('')}</div>`
+    : bigImgs.map(bigTile).join('');
   setCaption('pBigCap', bigImgs.length ? p.bigImgCaption : '');
   const colorStripEl = document.getElementById('pColorStrip');
   const brandColors = p.brandColors || [];
@@ -1140,6 +1190,7 @@ function openProject(id, list){
   overlay.classList.add('open');
   overlay.querySelector('.proj-right')?.scrollTo({top:0});
   overlay.querySelector('.proj-left-col')?.scrollTo({top:0});
+  overlay.scrollTo({top:0});
   body.classList.add('project-open');
   body.style.overflow='hidden';
   if(p.title === 'Maskit.code' || p.title === 'GRUNGE' || p.title === 'rootea'){
@@ -1159,6 +1210,7 @@ function openProject(id, list){
   } else {
     delete body.dataset.mobileCompactImages;
   }
+  setupProjectReveal(); // last, so the grid mode / layout flags above are already applied
 }
 function closeProject(){
   if(!overlay.classList.contains('open')) return;
@@ -1214,7 +1266,8 @@ document.addEventListener('keydown',(e)=>{
 /* ---------- MY WORKS PAGE (separate page, grid of 10) ---------- */
 const ALLWORKS = [
   {title:'Prism', cat:'UI / UX', year:'2024', client:'Prism', role:'Product Design', tools:'Figma, Framer', c1:'#FF1907', c2:'#000EA7', c3:'#671590', c4:'#000000', c5:'#ffffff', ang:160, img:'prism.jpg', heroVideo:'prism-flow.mp4', heroVideoPoster:'prism-flow-poster.jpg', heroCaption:'Create vision Sketch',
-   img1:'prism-flow-copy.mp4', img1Caption:'Patch the Canvas', img2:'prism-flow-2.mp4', img2Caption:'Your DROP visual is ready', img3:'prism-promo.mp4', img3Caption:'Prism, out in the world',
+   img1:'prism-flow-copy.mp4', img1Caption:'Patch the Canvas', img2:'prism-flow-2.mp4', img2Caption:'Your DROP visual is ready',
+   bigImg:['prism-promo.mp4','prism.jpg','prism-frame.jpg','prism-2.jpg'], bigImgRowFrom:2, bigImgCaption:'Visual Identity',
    lead:'A tool for creating visual identity for music — a prototype built as a UI/UX studio project at Bezalel in partnership with Lightricks.',
    body:['The idea: to let independent artists, with no budget, studio, or designer, turn a song into a moving visual — a vertical Spotify Canvas (9:16) that plays beneath the track, along with visuals for social media and live performances.','The conceptual core is “Album DNA”: each album gets a single, unified generative visual identity, and every song inherits its own variation from it — so all the tracks feel like one family without being identical. Living covers for every track.','The user experience is built around the metaphor of a modular synthesizer / patch cables: the user “connects cables” between different inputs — image, color, texture, mood, lyrics — into a canvas, and everything feeds into the visual.','Technically, it’s a single-file HTML application, with all media embedded as base64 and an iframe-based screen architecture.']},
   {title:'Kodo', cat:'Visual Identity \u2219 UI/UX', year:'2026', client:'KODO', role:'Brand Identity, Packaging', tools:'Figma, Illustrator', c1:'#afd3e4', c2:'#6297d8', c3:'#f09035', c4:'#e4542d', c5:'#4da34e', c6:'#ee7cb1', c7:'#f0ebe0', ang:130, img:'kodo.jpg', heroVideo:'kodo-desktop-flow.mp4', heroVideoPoster:'kodo-desktop-flow-poster.jpg', heroCaption:'The desktop building interface', img1:'kodo-flow-cropped.mp4', img1Compact:true, img1Caption:'The mobile onboarding flow', img2:'kodo.jpg', img2Caption:'The full Cyber Deck Creative Kit', img3:'kodo-hero.jpg',
