@@ -468,6 +468,10 @@
     border-radius:18px;padding:.9rem;scroll-snap-align:start;
     transition:transform .3s var(--ease)}
   .proj-strip img:hover{transform:translateY(-4px) rotate(-2deg)}
+  #pStripWrap.social{background:transparent;padding:0}
+  .proj-strip.social{display:grid !important;grid-template-columns:repeat(2,minmax(0,250px));justify-content:center;gap:1.6rem;overflow:visible;padding:0;margin-top:0}
+  .proj-strip.social img{width:100%;height:auto;padding:0;border-radius:34px;box-shadow:0 0 0 6px #111,0 14px 36px rgba(0,0,0,.35);background:none}
+  .proj-strip.social img:hover{transform:none}
   .proj-strip-logo{display:none;width:340px;height:auto;object-fit:contain;margin:2rem auto 0}
   .proj-strip-logo.show{display:block}
   /* scroll reveal: each block starts lowered + faded and glides up when it reaches the screen */
@@ -742,7 +746,7 @@
           </div>
           <div>
             <div class="about-title magnetic-title">About</div>
-            <a class="about-resume" href="Aviv_Cohen_Resume.pdf?v=3" target="_blank" rel="noopener">See my Resume &rarr;</a>
+            <a class="about-resume" href="Aviv_Cohen_Resume.pdf?v=4" target="_blank" rel="noopener">See my Resume &rarr;</a>
             <p class="about-text">A fourth-year Visual Communication student at Bezalel Academy. With a lifelong foundation in art and illustration, I&rsquo;ve developed a keen eye for visual language.</p>
             <p class="about-text">Now channeling that creative background into Product Design, to transform passion into functional, impactful digital experiences.</p>
           </div>
@@ -868,12 +872,12 @@
     <button class="rl-close" id="rlClose" aria-label="Close">&times;</button>
     <div class="rl-scroll" id="rlScroll">
       <div class="rl-page">
-        <img src="resume-page.png?v=3" alt="Aviv Cohen - Resume">
+        <img src="resume-page.png?v=4" alt="Aviv Cohen - Resume">
         <!-- the page is an image, so the "My Portfolio" link is a transparent hotspot placed over it -->
         <a class="rl-link" href="https://avivcohendesign.github.io/" target="_blank" rel="noopener" aria-label="My Portfolio"></a>
       </div>
     </div>
-    <a class="rl-download" href="Aviv_Cohen_Resume.pdf?v=3" download>Download PDF</a>
+    <a class="rl-download" href="Aviv_Cohen_Resume.pdf?v=4" download>Download PDF</a>
   </div>
 
   <div class="pitch-lightbox" id="pitchLightbox">
@@ -1119,7 +1123,8 @@ function openProject(id, list){
     heroEl.classList.remove('grad');
     heroEl.style.background = 'none';
     const heroVideoStyle = p.heroVideoCompact ? ' style="max-height:72vh;width:auto;margin:0 auto"' : '';
-    heroEl.innerHTML = `<video src="${p.heroVideo}" poster="${p.heroVideoPoster||p.img||''}" autoplay muted loop playsinline${heroVideoStyle}></video>`;
+    heroEl.innerHTML = `<video src="${p.heroVideo}" poster="${p.heroVideoPoster||p.img||''}" autoplay muted loop playsinline${heroVideoStyle}></video>`
+      + (p.heroVideo2 ? `<video src="${p.heroVideo2}" autoplay muted loop playsinline style="display:block;width:100%;aspect-ratio:auto;margin-top:1.2rem"></video>` : '');
   } else if(p.video){
     heroEl.classList.remove('grad');
     heroEl.style.background = 'none';
@@ -1268,6 +1273,8 @@ function openProject(id, list){
   const stripEl = document.getElementById('pStrip');
   document.getElementById('pStripWrap').style.display = p.strip ? '' : 'none';
   stripEl.style.display = p.strip ? 'flex' : 'none';
+  stripEl.classList.toggle('social', !!p.stripSocial);
+  document.getElementById('pStripWrap').classList.toggle('social', !!p.stripSocial);
   stripEl.innerHTML = p.strip ? p.strip.map(src=>`<img src="${src}" alt="${p.title}">`).join('') : '';
   setCaption('pStripCap', p.strip ? p.stripCaption : '');
   const stripLogoEl = document.getElementById('pStripLogo');
@@ -1408,7 +1415,7 @@ const ALLWORKS_ALL = [
    lead:'\u2018Milon Hai\u2019 is a concept app developed around a gap we identified among new immigrants in Israel: the lack of tools that teach the actual cultural context of local slang.',
    body:['The result is an app that serves as a social and experiential platform, allowing users to \u2018collect\u2019 the Israeli street - from coffee shop slang to workplace expressions.','It goes beyond literal translations (\u2018what does it mean?\u2019), providing the full cultural context: tone, humor, and the situations in which each word is appropriately used.']},
   {title:'Maskit.code', cat:'Speculative Branding', year:'2024', client:'Maskit.code', role:'Brand Identity, Web Design', tools:'Figma, Illustrator', c1:'#ffffff', c2:'#1c1c1c', ang:140, pageBg:'#1D4A36', pageDark:true, siteLink:'maskit-site-final.html',
-   img:'maskit-cotton.jpg', heroVideo:'maskit-code-flow.mp4', heroCaption:'The site',
+   img:'maskit-cotton.jpg', heroVideo:'maskit-code-flow.mp4', heroVideo2:'maskit-code-site-2.mp4', heroCaption:'The site',
    featureMain:'maskit-code-brandbook.mp4', featureMainCompact:true, featureExtra:'maskit-feature-extra.jpg',
    featureSide:['maskit-brandbook-1.png','maskit-brandbook-2.png','maskit-brandbook-3.png'],
    featureCaption:'The brand book',
@@ -1436,6 +1443,7 @@ const ALLWORKS_ALL = [
    body:['To capture the romantic, nostalgic essence of classic cinema, I developed a unique illustrative language for the interface. By adapting iconic movie scenes and featuring them with contemporary, diverse characters, the illustrations bridge the gap between silver-screen magic and modern-day connection.']},
   {title:'rootea', cat:'Branding / Packaging', year:'2024', client:'rootea', role:'Brand Identity, Packaging', tools:'Illustrator, Photography', c1:'#605a5b', c2:'#a68d86', c3:'#dcd9d6', c4:'#7c5952', c5:'#5d6048', ang:125, pageBg:'#1D4A36', pageDark:true, masonryGrid:true, masonryColumns:1, rowCaption:'THE PACKAGING', img:'rootea-detail.jpg', heroImg:'rootea-detail.jpg', heroImgWidth:'100%', img1:'rootea.jpg',
    img2:'rootea-tea-bag.jpg',
+   strip:['rootea-social-1.jpg','rootea-social-2.jpg'], stripCaption:'Social', stripSocial:true,
    bigImg:['rootea-bts-1.jpg', 'rootea-bts-2.jpg', 'rootea-bts-frame.png', 'rootea-bts-layout.png'], bigImgRowFrom:0, bigImgRowCount:2, bigImgCaption:'Behind the scenes - building the brand',
    lead:'‘rootea’ is a new medicinal mushroom tea brand. It aims to provide an alternative approach to managing mental health struggles, offering a departure from the traditional medication experience.',
    body:['The visual identity draws inspiration from the organic forms, unique shapes, and delicate color palettes of the medicinal mushrooms themselves.']},
